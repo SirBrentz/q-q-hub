@@ -399,39 +399,21 @@ function IntakeScreen({ onComplete }) {
         {showGate ? (
           <div key="gate" className="fade-in">
             {answers[q.id] === "no-account" ? (
-              /* ── NO ACCOUNT: Full signup walkthrough ── */
+              /* ── NO ACCOUNT: Simple guidance ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
-                <div style={{ padding: "22px 24px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text }}>You'll need a Qualiphy account first</div>
-                  <p style={{ fontSize: 13, color: C.textMuted, margin: "4px 0 0", lineHeight: 1.5 }}>
-                    The plugin connects to Qualiphy's provider network and pharmacy system. Creating an account is free — no signup fees, no monthly charges.
+                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>You'll need a Qualiphy account first</div>
+                  <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
+                    Create a free account to get your API key. The signup walks you through everything — once you're done, come back and click continue below.
                   </p>
                 </div>
-                <div style={{ padding: "20px 24px", background: "#fff" }}>
-                  <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.04em" }}>How to register</div>
-                  {[
-                    { n: "1", t: "Create your login", d: "Go to app.qualiphy.me → enter email & password → click Signup" },
-                    { n: "2", t: "Fill in clinic details", d: "Practice name, address, admin contact, and medical director info" },
-                    { n: "3", t: "Sign the agreement", d: "Digital signature — no contracts, pay-as-you-go terms" },
-                    { n: "4", t: "Add a payment method", d: "Card on file for completed consultations only. No upfront charges." },
-                    { n: "5", t: "Get your API key", d: "Settings → API Key → Copy. That's what you'll paste into the plugin." },
-                  ].map((s, i) => (
-                    <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < 4 ? 12 : 0 }}>
-                      <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(91,80,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>{s.n}</div>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{s.t}</div>
-                        <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5, marginTop: 1 }}>{s.d}</div>
-                      </div>
-                    </div>
-                  ))}
-                  <div style={{ marginTop: 20, display: "flex", gap: 10, flexWrap: "wrap" }}>
-                    <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "11px 22px", borderRadius: 8, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-                      Create Account ↗
-                    </a>
-                    <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "11px 22px", borderRadius: 8, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-                      Or book a demo first
-                    </a>
-                  </div>
+                <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
+                  <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
+                    Create Account ↗
+                  </a>
+                  <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 22px", borderRadius: 10, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
+                    Not sure yet? Book a demo
+                  </a>
                 </div>
               </div>
             ) : (
