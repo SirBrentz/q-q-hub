@@ -14,7 +14,7 @@
   html, body, #root { height: 100%; }
   body {
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #fafaf9; color: #1c1917;
+    background: var(--surface, #f7f8fc); color: var(--text, #1e293b);
     -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
   }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -66,7 +66,7 @@ const { useState, useEffect, useRef, useCallback } = React;
    ═══════════════════════════════════════════════════════════════════════════ */
 const C = {
   bg: "#f7f8fc", bgWhite: "#ffffff", bgMuted: "#f5f3f0", bgDark: "#1c1917",
-  border: "#e7e5e4", borderFocus: "#3d2b64",
+  border: "#e7e5e4", borderFocus: "#5b50ff",
   text: "#0f1729", textBody: "#44403c", textMuted: "#78716c", textDim: "#a8a29e",
   accent: "#5b50ff", accentLight: "rgba(91,80,255,.06)", accentMid: "#7b73ff",
   green: "#059669", greenLight: "#d1fae5",
