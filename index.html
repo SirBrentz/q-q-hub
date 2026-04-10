@@ -67,7 +67,7 @@
   <div class="q-proof-divider"></div>
   <div class="q-proof-stat animate-in"><strong><span class="q-counter" data-target="350" data-suffix="+">0</span></strong><span>Licensed providers</span></div>
   <div class="q-proof-divider"></div>
-  <div class="q-proof-stat animate-in"><strong style="font-size:1.5rem">7/365</strong><span>Provider availability</span></div>
+  <div class="q-proof-stat animate-in"><strong>7/365</strong><span>Provider availability</span></div>
   <div class="q-proof-divider"></div>
   <div class="q-proof-stat animate-in"><strong><span class="q-counter" data-target="27.99" data-prefix="$" data-decimals="2">$0</span></strong><span>Per consultation</span></div>
 </div></div></section>
@@ -80,109 +80,115 @@
 
 <!-- INTERACTIVE DEMO — tabbed mockups -->
 <section class="section q-demo"><div class="wrap">
-  <div class="section-header animate-in"><div class="badge">See it in action</div><h2>Inside the WordPress admin</h2><p>An interactive preview of the Quidget plugin dashboard — built from the actual plugin interface.</p></div>
-  <div class="animate-in" style="max-width:900px;margin:0 auto;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-xl)">
-    <!-- WP Admin Chrome -->
-    <div style="display:flex;min-height:420px;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px">
-      <!-- WP Sidebar -->
-      <div style="width:180px;background:#1d2327;color:#f0f0f1;flex-shrink:0;padding:12px 0">
-        <div style="padding:10px 16px 16px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">Q</div><span style="font-size:13px;font-weight:600;color:#fff">Qualiphy</span></div>
-        <div id="mockNav" style="display:flex;flex-direction:column;gap:1px">
-          <button onclick="showMock('dash')" class="mn mn--active" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:#f0f0f1;background:rgba(255,255,255,.07);border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Dashboard</button>
-          <button onclick="showMock('exams')" class="mn" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:rgba(240,240,241,.6);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Consultations</button>
-          <button onclick="showMock('settings')" class="mn" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:rgba(240,240,241,.6);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Settings</button>
+  <div class="section-header animate-in"><div class="badge">See it in action</div><h2>Inside the WordPress admin</h2><p>An interactive look at how the Quidget plugin appears in your WordPress dashboard.</p></div>
+  <div class="animate-in" id="mockFrame" style="max-width:920px;margin:0 auto;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-xl)">
+    <div style="display:flex;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px">
+      <!-- Sidebar -->
+      <div style="width:190px;background:#1d2327;color:#f0f0f1;flex-shrink:0;padding:10px 0">
+        <div style="padding:10px 14px 14px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">Q</div><span style="font-size:13px;font-weight:600;color:#fff">Qualiphy</span><span style="margin-left:auto;padding:2px 6px;border-radius:3px;background:rgba(61,43,100,.4);color:#CFC9FF;font-size:9px;font-weight:600">v1.1</span></div>
+        <div id="mockNav" style="display:flex;flex-direction:column">
+          <button onclick="showMock('dash')" class="mn mn--active" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:#f0f0f1;background:rgba(255,255,255,.07);border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.6;flex-shrink:0"><path d="M4 15v-3h2v3H4zm4 0V5h2v10H8zm4 0V8h2v7h-2z"/></svg>Dashboard</button>
+          <button onclick="showMock('exams')" class="mn" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:rgba(240,240,241,.55);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.5;flex-shrink:0"><path d="M2 3h16v2H2V3zm0 4h16v2H2V7zm0 4h12v2H2v-2zm0 4h16v2H2v-2z"/></svg>Consultations</button>
+          <button onclick="showMock('pharm')" class="mn" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:rgba(240,240,241,.55);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.5;flex-shrink:0"><path d="M1 3.5l.5-1h17l.5 1v1l-.5 1H15v10.5l-.5.5h-9l-.5-.5V5.5H1.5L1 4.5v-1zm5 2V15h8V5.5H6z"/></svg>Pharmacies</button>
+          <button onclick="showMock('settings')" class="mn" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:rgba(240,240,241,.55);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.5;flex-shrink:0"><path d="M18 16V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h13c.55 0 1-.45 1-1zM8 11h1c.55 0 1 .45 1 1s-.45 1-1 1H8c-.55 0-1-.45-1-1s.45-1 1-1zm-2-1V8c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v2c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1z"/></svg>Settings</button>
         </div>
-        <div style="margin:12px 16px;height:1px;background:rgba(255,255,255,.06)"></div>
-        <div style="padding:4px 16px;font-size:11px;color:rgba(240,240,241,.25)">Pharmacies</div>
       </div>
-      <!-- Content Area -->
-      <div style="flex:1;overflow:hidden">
-        <!-- Header -->
-        <div style="padding:10px 20px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between">
-          <span id="mockTitle" style="font-size:14px;font-weight:600;color:#1d2327">Dashboard</span>
-          <div style="display:flex;gap:6px"><span style="padding:3px 8px;border-radius:4px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">LIVE</span><span style="font-size:12px;color:#646970">v1.1.0</span></div>
+      <!-- Content -->
+      <div style="flex:1;display:flex;flex-direction:column;min-width:0">
+        <div style="padding:8px 18px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between">
+          <span id="mockTitle" style="font-size:13px;font-weight:600;color:#1d2327">Dashboard</span>
+          <div style="display:flex;gap:6px;align-items:center"><span style="padding:2px 8px;border-radius:4px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">LIVE</span><span style="font-size:11px;color:#3d2b64;cursor:pointer">Help</span><span style="font-size:11px;color:#3d2b64;cursor:pointer">Support</span></div>
         </div>
-        <!-- Mock Views -->
-        <div style="padding:20px;overflow-y:auto;max-height:400px">
+        <!-- Views -->
+        <div id="mockContent" style="padding:16px 18px;background:#f0f0f1">
           <!-- Dashboard -->
           <div id="mock-dash">
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:#3d2b64">4</div><div style="font-size:10px;color:#646970">Linked Exams</div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:#3d2b64">12</div><div style="font-size:10px;color:#646970">Available</div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:#3d2b64">3</div><div style="font-size:10px;color:#646970">Pharmacies</div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;text-align:center"><div style="font-size:18px;font-weight:700;color:#3d2b64">38</div><div style="font-size:10px;color:#646970">States Served</div></div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:700;color:#3d2b64">4</div><div style="font-size:9px;color:#646970;margin-top:1px">Linked Exams</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:700;color:#3d2b64">12</div><div style="font-size:9px;color:#646970;margin-top:1px">Available</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:700;color:#3d2b64">3</div><div style="font-size:9px;color:#646970;margin-top:1px">Pharmacies</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:700;color:#3d2b64">38</div><div style="font-size:9px;color:#646970;margin-top:1px">States Served</div></div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px">
-                <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:4px">Welcome to Quidget</div>
-                <div style="font-size:11px;color:#646970;line-height:1.5;margin-bottom:12px">Your telehealth consultations are connected. Use the links below to manage your setup.</div>
-                <div style="display:flex;flex-direction:column;gap:6px">
-                  <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:11px;font-weight:500;cursor:pointer">→ View Consultations</span>
-                  <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:11px;font-weight:500;cursor:pointer">→ Plugin Settings</span>
-                  <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:11px;font-weight:500;cursor:pointer">→ Import Consultations</span>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px">
+                <div style="font-size:12px;font-weight:600;color:#1d2327;margin-bottom:8px">Quick Links</div>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <span style="padding:5px 10px;border-radius:5px;background:rgba(61,43,100,.04);color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 20 20" fill="#3d2b64"><path d="M2 3h16v2H2V3zm0 4h16v2H2V7zm0 4h12v2H2v-2z"/></svg>View Consultations</span>
+                  <span style="padding:5px 10px;border-radius:5px;background:rgba(61,43,100,.04);color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 20 20" fill="#3d2b64"><path d="M18 16V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h13c.55 0 1-.45 1-1z"/></svg>Plugin Settings</span>
+                  <span style="padding:5px 10px;border-radius:5px;background:rgba(61,43,100,.04);color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 20 20" fill="#3d2b64"><path d="M12.5 14.5V12h-5v2.5L3 10l4.5-4.5V8h5V5.5L17 10l-4.5 4.5z"/></svg>Import Consultations</span>
                 </div>
               </div>
-              <a href="https://www.youtube.com/watch?v=zLabf5xrUQA" target="_blank" rel="noopener" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;text-decoration:none;display:block;cursor:pointer">
-                <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#3d2b64 0%,#6e54a7 100%);display:flex;align-items:center;justify-content:center;position:relative">
-                  <div style="width:40px;height:40px;background:rgba(255,255,255,.95);border-radius:50%;display:flex;align-items:center;justify-content:center"><div style="width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:14px solid #3d2b64;margin-left:3px"></div></div>
-                </div>
-                <div style="padding:10px 14px"><div style="font-size:11px;font-weight:600;color:#1d2327">Getting Started Tutorial</div><div style="font-size:10px;color:#646970">Watch the full walkthrough</div></div>
-              </a>
+              <div id="videoThumb" onclick="playVideo()" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;cursor:pointer">
+                <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#3d2b64,#6e54a7);display:flex;align-items:center;justify-content:center;position:relative"><div style="width:36px;height:36px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #3d2b64;margin-left:2px"></div></div></div>
+                <div style="padding:8px 12px"><div style="font-size:10px;font-weight:600;color:#1d2327">Getting Started Tutorial</div><div style="font-size:9px;color:#646970">Watch the walkthrough</div></div>
+              </div>
             </div>
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:600;color:#1d2327">Recent Activity</span><span style="font-size:10px;color:#646970">Last 7 days</span></div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0f0f1"><div><span style="font-size:11px;color:#1d2327;font-weight:500">Order #1042</span><span style="font-size:10px;color:#646970;margin-left:8px">Sarah J. — Semaglutide 3-Mo</span></div><span style="padding:2px 8px;border-radius:10px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">Completed</span></div>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid #f0f0f1"><div><span style="font-size:11px;color:#1d2327;font-weight:500">Order #1041</span><span style="font-size:10px;color:#646970;margin-left:8px">Mark R. — Botox GFE</span></div><span style="padding:2px 8px;border-radius:10px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">Completed</span></div>
-                <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0"><div><span style="font-size:11px;color:#1d2327;font-weight:500">Order #1040</span><span style="font-size:10px;color:#646970;margin-left:8px">Amy L. — Tirzepatide 1-Mo</span></div><span style="padding:2px 8px;border-radius:10px;background:#fff3cd;color:#856404;font-size:9px;font-weight:600">In Progress</span></div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;font-weight:600;color:#1d2327">Recent Orders</span><span style="font-size:9px;color:#3d2b64;cursor:pointer">View all →</span></div>
+              <div style="font-size:10px;color:#646970">
+                <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f1"><span><strong style="color:#1d2327">#1042</strong> Sarah J. — Semaglutide 3-Mo</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:8px;font-weight:600">Completed</span></div>
+                <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f1"><span><strong style="color:#1d2327">#1041</strong> Mark R. — Botox GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:8px;font-weight:600">Completed</span></div>
+                <div style="display:flex;justify-content:space-between;padding:5px 0"><span><strong style="color:#1d2327">#1040</strong> Amy L. — Tirzepatide</span><span style="padding:1px 6px;border-radius:8px;background:#fff3cd;color:#856404;font-size:8px;font-weight:600">In Progress</span></div>
               </div>
             </div>
           </div>
           <!-- Consultations -->
           <div id="mock-exams" style="display:none">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-size:14px;font-weight:600;color:#1d2327">Manage Consultations</span><div style="display:flex;gap:6px"><span style="padding:5px 12px;border-radius:4px;border:1px solid #3d2b64;color:#3d2b64;font-size:11px;font-weight:500;cursor:pointer">↻ Refresh</span></div></div>
-            <div style="display:flex;gap:6px;margin-bottom:14px"><span style="padding:4px 10px;border-radius:4px;background:#3d2b64;color:#fff;font-size:11px;font-weight:500">All (12)</span><span style="padding:4px 10px;border-radius:4px;background:#f0f0f1;color:#50575e;font-size:11px;cursor:pointer">Weight Loss</span><span style="padding:4px 10px;border-radius:4px;background:#f0f0f1;color:#50575e;font-size:11px;cursor:pointer">Aesthetics</span><span style="padding:4px 10px;border-radius:4px;background:#f0f0f1;color:#50575e;font-size:11px;cursor:pointer">Men's Health</span></div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:600;color:#1d2327">Semaglutide — 3 Month</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:10px;color:#646970;margin-bottom:6px">Weight Loss · $27.99 cost · You charge: <strong style="color:#1d2327">$349</strong></div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:#28a745;font-weight:500">✓ Linked</span><span style="font-size:10px;color:#3d2b64;cursor:pointer;font-weight:500">Edit →</span></div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:600;color:#1d2327">Botox Good Faith Exam</span><span style="padding:2px 8px;border-radius:10px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">GFE</span></div><div style="font-size:10px;color:#646970;margin-bottom:6px">Aesthetics · $27.99 cost · You charge: <strong style="color:#1d2327">$75</strong></div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:#28a745;font-weight:500">✓ Linked</span><span style="font-size:10px;color:#3d2b64;cursor:pointer;font-weight:500">Edit →</span></div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:600;color:#1d2327">Tirzepatide — Monthly</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:10px;color:#646970;margin-bottom:6px">Weight Loss · $27.99 cost · You charge: <strong style="color:#1d2327">$299</strong></div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:#28a745;font-weight:500">✓ Linked</span><span style="font-size:10px;color:#3d2b64;cursor:pointer;font-weight:500">Edit →</span></div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;border-style:dashed;opacity:.7"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:600;color:#1d2327">Testosterone — HRT</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:10px;color:#646970;margin-bottom:6px">Men's Health · $27.99 cost</div><div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:10px;color:#a4424b;font-weight:500">Not linked</span><span style="padding:3px 10px;border-radius:4px;background:#3d2b64;color:#fff;font-size:10px;font-weight:500;cursor:pointer">Import →</span></div></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;font-weight:600;color:#1d2327">Manage Consultations</span><span style="padding:4px 10px;border-radius:4px;border:1px solid #3d2b64;color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer">↻ Refresh</span></div>
+            <div style="display:flex;gap:4px;margin-bottom:10px"><span style="padding:3px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:10px;font-weight:500">All (12)</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Weight Loss</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Aesthetics</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Men's Health</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Wellness</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Semaglutide 3-Mo</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$349</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Botox GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">GFE</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$75</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Tirzepatide 1-Mo</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$299</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Filler GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">GFE</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$75</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-style:dashed;opacity:.65"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Testosterone HRT</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost</div><div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:#a4424b">Not linked</span><span style="padding:2px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:8px;font-weight:500;cursor:pointer">Import</span></div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-style:dashed;opacity:.65"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Hair Loss Rx</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost</div><div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:#a4424b">Not linked</span><span style="padding:2px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:8px;font-weight:500;cursor:pointer">Import</span></div></div>
+            </div>
+          </div>
+          <!-- Pharmacies -->
+          <div id="mock-pharm" style="display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;font-weight:600;color:#1d2327">Pharmacy Routing</span><span style="font-size:10px;color:#646970">Synced from Qualiphy</span></div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden">
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr;padding:8px 12px;background:#f9f9f9;border-bottom:1px solid #ddd;font-size:9px;font-weight:600;color:#646970;text-transform:uppercase;letter-spacing:.04em"><span>Pharmacy</span><span>Exams</span><span>States</span></div>
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid #f0f0f1;font-size:11px;color:#1d2327"><span style="font-weight:500">Belmar Pharmacy</span><span style="color:#646970">4 exams</span><span style="color:#646970">48 states</span></div>
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr;padding:10px 12px;border-bottom:1px solid #f0f0f1;font-size:11px;color:#1d2327"><span style="font-weight:500">Empower Pharmacy</span><span style="color:#646970">3 exams</span><span style="color:#646970">45 states</span></div>
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr;padding:10px 12px;font-size:11px;color:#1d2327"><span style="font-weight:500">Olympia Pharmacy</span><span style="color:#646970">2 exams</span><span style="color:#646970">38 states</span></div>
+            </div>
+            <div style="margin-top:10px;padding:12px;background:#fff;border:1px solid #ddd;border-radius:8px">
+              <div style="font-size:11px;font-weight:600;color:#1d2327;margin-bottom:6px">How pharmacy routing works</div>
+              <div style="font-size:10px;color:#646970;line-height:1.5">When a patient completes a consultation, the plugin routes the prescription to the correct pharmacy based on the patient's state and exam type. Pharmacies are assigned per exam during the import wizard.</div>
             </div>
           </div>
           <!-- Settings -->
           <div id="mock-settings" style="display:none">
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px;margin-bottom:10px">
-              <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:12px">General Settings</div>
-              <div style="display:flex;flex-direction:column;gap:10px">
-                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:12px;font-weight:500;color:#1d2327">Auto Send Exams</span><br><span style="font-size:10px;color:#646970">Send invite on payment confirmation</span></span><div style="width:34px;height:18px;background:#3d2b64;border-radius:9px;position:relative"><div style="width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
-                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:12px;font-weight:500;color:#1d2327">Auto Launch Exams</span><br><span style="font-size:10px;color:#646970">Show popup on thank-you page</span></span><div style="width:34px;height:18px;background:#3d2b64;border-radius:9px;position:relative"><div style="width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
-                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:12px;font-weight:500;color:#1d2327">Auto Refund Deferred</span><br><span style="font-size:10px;color:#646970">Refund minus return fee automatically</span></span><div style="width:34px;height:18px;background:#3d2b64;border-radius:9px;position:relative"><div style="width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px">
+                <div style="font-size:12px;font-weight:600;color:#1d2327;margin-bottom:10px">General</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:11px;color:#1d2327">Auto Send Exams</span><div style="width:30px;height:16px;background:#3d2b64;border-radius:8px;position:relative"><div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+                  <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:11px;color:#1d2327">Auto Launch Exams</span><div style="width:30px;height:16px;background:#3d2b64;border-radius:8px;position:relative"><div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+                  <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:11px;color:#1d2327">Auto Refund Deferred</span><div style="width:30px;height:16px;background:#3d2b64;border-radius:8px;position:relative"><div style="width:12px;height:12px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+                  <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span style="font-size:11px;color:#1d2327">Launch Mode</span><span style="padding:3px 8px;border:1px solid #ddd;border-radius:4px;font-size:10px;color:#1d2327">Popup ▾</span></label>
+                </div>
+              </div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px">
+                <div style="font-size:12px;font-weight:600;color:#1d2327;margin-bottom:10px">Branding</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div style="width:32px;height:32px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:8px;font-weight:700">LOGO</div><div><div style="font-size:10px;color:#1d2327;font-weight:500">Light Logo</div><div style="font-size:9px;color:#646970">Uploaded ✓</div></div></div>
+                <div style="display:flex;gap:6px;align-items:center;margin-bottom:8px"><span style="font-size:10px;color:#646970">Accent:</span><div style="width:14px;height:14px;background:#3d2b64;border-radius:3px;border:1px solid #ddd"></div><span style="font-size:10px;color:#1d2327">#3d2b64</span></div>
+                <div style="margin-top:6px"><span style="font-size:10px;color:#646970">Return Fee:</span> <span style="font-size:10px;color:#1d2327;font-weight:500">$30.00</span></div>
+                <div><span style="font-size:10px;color:#646970">Margin:</span> <span style="font-size:10px;color:#1d2327;font-weight:500">10%</span></div>
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px">
-                <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:10px">Pricing</div>
-                <div style="margin-bottom:8px"><div style="font-size:10px;color:#646970;margin-bottom:3px">Return Fee</div><div style="padding:7px 10px;border:1px solid #ddd;border-radius:4px;font-size:12px;color:#1d2327">$30.00</div></div>
-                <div><div style="font-size:10px;color:#646970;margin-bottom:3px">Default Margin</div><div style="padding:7px 10px;border:1px solid #ddd;border-radius:4px;font-size:12px;color:#1d2327">10%</div></div>
-              </div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px">
-                <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:10px">Branding</div>
-                <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><div style="width:40px;height:40px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">Logo</div><div><div style="font-size:11px;color:#1d2327;font-weight:500">Light Logo</div><div style="font-size:10px;color:#646970">PNG uploaded</div></div></div>
-                <div style="display:flex;gap:6px;align-items:center"><div style="font-size:10px;color:#646970">Accent:</div><div style="width:16px;height:16px;background:#3d2b64;border-radius:4px;border:1px solid #ddd"></div><span style="font-size:10px;color:#1d2327">#3d2b64</span></div>
-              </div>
-            </div>
-            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:18px">
-              <div style="font-size:13px;font-weight:600;color:#1d2327;margin-bottom:8px">Service Area</div>
-              <div style="font-size:11px;color:#646970;margin-bottom:8px">38 of 48 states selected</div>
-              <div style="display:flex;flex-wrap:wrap;gap:3px">
-                <span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">CA</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">NY</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">TX</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">FL</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">IL</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">PA</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">OH</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">GA</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">NC</span><span style="padding:2px 6px;border-radius:3px;background:#d4edda;color:#155724;font-size:9px">MI</span><span style="font-size:9px;color:#646970;padding:2px 4px">+28 more</span>
-              </div>
+            <div style="margin-top:8px;background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-size:12px;font-weight:600;color:#1d2327">Service Area</span><span style="font-size:9px;color:#646970">38 of 48 states</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:3px"><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">CA</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">NY</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">TX</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">FL</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">IL</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">PA</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">OH</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">GA</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">NC</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">MI</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">NJ</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">VA</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">WA</span><span style="padding:2px 5px;border-radius:3px;background:#d4edda;color:#155724;font-size:8px">AZ</span><span style="font-size:8px;color:#646970;padding:2px 3px">+24 more</span></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <p style="text-align:center;font-size:12px;color:var(--text-lt);margin-top:14px">This is a visual preview for reference only — not the actual plugin. <a href="get-started/" style="color:var(--indigo)">Get started</a> to see the real thing.</p>
 </div></section>
 
 <!-- FEATURES -->
@@ -327,10 +333,18 @@ document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<di
 
 // ─── Mockup tab switching ───
 window.showMock=function(id){
-  ['dash','exams','settings'].forEach(function(v){document.getElementById('mock-'+v).style.display=v===id?'block':'none'});
-  document.querySelectorAll('.mn').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,241,.6)';b.classList.remove('mn--active')});
-  event.target.style.background='rgba(255,255,255,.07)';event.target.style.color='#f0f0f1';
-  document.getElementById('mockTitle').textContent={dash:'Dashboard',exams:'Consultations',settings:'Settings'}[id];
+  ['dash','exams','pharm','settings'].forEach(function(v){var e=document.getElementById('mock-'+v);if(e)e.style.display=v===id?'block':'none'});
+  document.querySelectorAll('.mn').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,241,.55)'});
+  if(event&&event.target){event.target.style.background='rgba(255,255,255,.07)';event.target.style.color='#f0f0f1'}
+  document.getElementById('mockTitle').textContent={dash:'Dashboard',exams:'Consultations',pharm:'Pharmacies',settings:'Settings'}[id]||'';
+};
+window.playVideo=function(){
+  var c=document.getElementById('mockContent');
+  c.innerHTML='<div style="position:relative;padding-bottom:56.25%;height:0"><iframe src="https://www.youtube.com/embed/zLabf5xrUQA?autoplay=1&rel=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:6px" allow="autoplay;encrypted-media" allowfullscreen></iframe></div><div style="text-align:center;margin-top:10px"><button onclick="exitVideo()" style="padding:4px 14px;border-radius:4px;border:1px solid #ddd;background:#fff;color:#1d2327;font-size:11px;cursor:pointer;font-family:inherit">← Back to Dashboard</button></div>';
+  document.getElementById('mockTitle').textContent='Getting Started Tutorial';
+};
+window.exitVideo=function(){
+  location.reload();
 };
 
 // ─── Animated counters ───
