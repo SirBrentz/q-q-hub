@@ -11,65 +11,36 @@
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/quidget.css">
   <style>
-    .hc-hero{padding:130px 0 64px;background:var(--navy);color:#fff;text-align:center}
-    .hc-hero h1{color:#fff;margin-bottom:10px}
-    .hc-hero p{color:rgba(255,255,255,.5);margin:0 auto 28px}
-    .hc-search{max-width:480px;margin:0 auto;position:relative}
-    .hc-search input{width:100%;padding:14px 20px 14px 44px;border-radius:var(--r-lg);border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#fff;font-family:var(--font-b);font-size:15px;outline:none;transition:all .2s}
-    .hc-search input::placeholder{color:rgba(255,255,255,.3)}
-    .hc-search input:focus{border-color:rgba(91,80,255,.5);background:rgba(255,255,255,.1)}
-    .hc-search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.3);width:18px;height:18px}
-    .hc-wrap{max-width:720px;margin:0 auto;padding:0 var(--gutter)}
-
-    /* Level 1: Category tiles */
-    .hc-cats{padding:48px 0 0;display:flex;flex-direction:column;gap:1px;background:var(--border-lt);border:1px solid var(--border-lt);border-radius:var(--r-lg);overflow:hidden}
-    .hc-cat{display:flex;align-items:center;gap:16px;padding:20px 24px;background:var(--white);cursor:pointer;border:none;width:100%;text-align:left;font-family:inherit;transition:background .15s}
-    .hc-cat:hover{background:var(--surface)}
-    .hc-cat-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-    .hc-cat-dot--0{background:var(--indigo)}
-    .hc-cat-dot--1{background:var(--emerald)}
-    .hc-cat-dot--2{background:var(--amber)}
-    .hc-cat-dot--3{background:#2563eb}
-    .hc-cat-text{flex:1}
-    .hc-cat-title{font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--navy)}
-    .hc-cat-desc{font-size:13px;color:var(--text-lt);margin-top:1px}
-    .hc-cat-arrow{color:var(--text-lt);flex-shrink:0;transition:transform .15s}
-    .hc-cat:hover .hc-cat-arrow{transform:translateX(2px);color:var(--navy)}
-
-    /* Level 2: Article list */
-    .hc-breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text-lt);margin:40px 0 20px}
-    .hc-breadcrumb a{color:var(--indigo);font-weight:500;text-decoration:none;cursor:pointer}
-    .hc-breadcrumb a:hover{text-decoration:underline}
-    .hc-section-title{font-size:1.25rem;margin-bottom:4px}
-    .hc-section-desc{font-size:14px;color:var(--text-lt);margin-bottom:24px}
-    .hc-list{display:flex;flex-direction:column;gap:1px;background:var(--border-lt);border:1px solid var(--border-lt);border-radius:var(--r-lg);overflow:hidden}
-    .hc-list-item{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:var(--white);cursor:pointer;border:none;width:100%;text-align:left;font-family:var(--font-h);font-size:14px;font-weight:500;color:var(--navy);transition:background .15s}
-    .hc-list-item:hover{background:var(--surface);color:var(--indigo)}
-    .hc-list-item svg{color:var(--text-lt);flex-shrink:0;width:16px;height:16px;transition:transform .15s}
-    .hc-list-item:hover svg{transform:translateX(2px);color:var(--indigo)}
-
-    /* Level 3: Article detail */
-    .hc-article-title{font-size:1.2rem;margin-bottom:16px}
-    .hc-article-body{font-size:14px;color:var(--text-mid);line-height:1.75}
-    .hc-article-body code{font-size:12px;background:var(--surface-alt);padding:2px 6px;border-radius:4px}
-    .hc-article-body strong{color:var(--navy)}
-    .hc-article-body a{color:var(--indigo);font-weight:500}
-    .hc-cause{padding:10px 0 10px 14px;border-left:2px solid var(--amber-bg);margin:10px 0}
-    .hc-cause-title{font-size:13px;font-weight:600;color:var(--amber)}
-    .hc-cause-fix{font-size:13px;color:var(--text-mid);line-height:1.6;margin-top:2px}
-    .hc-next-prev{display:flex;justify-content:space-between;margin-top:32px;padding-top:20px;border-top:1px solid var(--border-lt)}
-    .hc-next-prev a{font-family:var(--font-h);font-size:13px;font-weight:600;color:var(--indigo);cursor:pointer;text-decoration:none}
-    .hc-next-prev a:hover{text-decoration:underline}
-
-    /* Contact */
-    .hc-contact{margin:48px 0 0;padding:24px 28px;background:var(--surface);border:1px solid var(--border-lt);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .hc-contact h3{font-size:15px;margin-bottom:2px}
+    .hc{display:flex;min-height:calc(100vh - 68px);padding-top:68px}
+    .hc-side{width:240px;flex-shrink:0;border-right:1px solid var(--border-lt);padding:32px 20px;position:sticky;top:68px;height:calc(100vh - 68px);overflow-y:auto}
+    .hc-side-title{font-family:var(--font-h);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-lt);margin:0 0 12px 12px}
+    .hc-side-group{margin-bottom:20px}
+    .hc-side-label{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--navy);padding:8px 12px;display:block}
+    .hc-side a{display:block;font-size:13px;color:var(--text-mid);padding:5px 12px;border-radius:var(--r-sm);transition:all .15s;line-height:1.4}
+    .hc-side a:hover{color:var(--navy);background:var(--surface)}
+    .hc-side a.active{color:var(--indigo);background:rgba(91,80,255,.06);font-weight:500}
+    .hc-main{flex:1;max-width:720px;padding:40px 48px 80px}
+    .hc-main h1{font-size:1.5rem;margin-bottom:6px}
+    .hc-main>p:first-of-type{color:var(--text-lt);margin-bottom:32px}
+    .hc-section{margin-bottom:48px}
+    .hc-section-title{font-size:1.15rem;padding-bottom:12px;border-bottom:1px solid var(--border-lt);margin-bottom:20px}
+    .hc-item{margin-bottom:24px}
+    .hc-item h3{font-family:var(--font-h);font-size:14px;font-weight:600;color:var(--navy);margin:0 0 6px}
+    .hc-item p{font-size:14px;color:var(--text-mid);line-height:1.7;margin:0}
+    .hc-item code{font-size:12px;background:var(--surface-alt);padding:2px 6px;border-radius:4px}
+    .hc-item a{color:var(--indigo);font-weight:500}
+    .hc-cause{padding:8px 0 8px 14px;border-left:2px solid var(--amber-bg);margin:8px 0}
+    .hc-cause strong{font-size:13px;font-weight:600;color:var(--amber);display:block}
+    .hc-cause span{font-size:13px;color:var(--text-mid);line-height:1.6}
+    .hc-contact{margin-top:48px;padding:24px;background:var(--surface);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .hc-contact h3{font-size:15px;margin:0 0 2px}
     .hc-contact p{font-size:13px;color:var(--text-mid);margin:0}
-
-    /* Search results */
-    .hc-search-cat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--indigo);margin-bottom:2px}
-
-    @media(max-width:768px){.hc-contact{flex-direction:column;text-align:center}}
+    @media(max-width:768px){
+      .hc{flex-direction:column}
+      .hc-side{width:100%;position:relative;top:0;height:auto;border-right:none;border-bottom:1px solid var(--border-lt);padding:20px}
+      .hc-main{padding:24px 20px 60px}
+      .hc-contact{flex-direction:column;text-align:center}
+    }
   </style>
 </head>
 <body>
@@ -84,163 +55,244 @@
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
 
-<section class="hc-hero"><div class="wrap">
-  <h1>Help Center</h1>
-  <p>Find answers about the Quidget plugin.</p>
-  <div class="hc-search">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
-    <input type="text" id="hcSearch" placeholder="Search articles..." autocomplete="off">
-  </div>
-</div></section>
-
-<div class="hc-wrap">
-  <div id="app"></div>
-  <div class="hc-contact">
-    <div><h3>Still need help?</h3><p>support@qualiphy.me · 7 days a week, 6AM–7PM PST</p></div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <a href="mailto:support@qualiphy.me" class="btn btn-primary btn-sm">Email Support</a>
-      <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Book a Call</a>
+<div class="hc">
+  <aside class="hc-side">
+    <div class="hc-side-title">Help Center</div>
+    <div class="hc-side-group">
+      <div class="hc-side-label">Setup</div>
+      <a href="#requirements">Requirements</a>
+      <a href="#install">Installing the plugin</a>
+      <a href="#wizard">Setup wizard</a>
+      <a href="#api-key">Finding your API key</a>
+      <a href="#subscriptions">Subscriptions</a>
+      <a href="#payment">Payment gateway</a>
     </div>
-  </div>
+    <div class="hc-side-group">
+      <div class="hc-side-label">Settings</div>
+      <a href="#auto-send">Auto Send & Launch</a>
+      <a href="#launch-mode">Popup vs Redirect</a>
+      <a href="#refunds">Refunds & Return Fee</a>
+      <a href="#pricing">Price Margin</a>
+      <a href="#checkout">Checkout fields</a>
+      <a href="#service-area">Service area</a>
+      <a href="#branding">Branding</a>
+      <a href="#language">Language & text</a>
+      <a href="#access">Clinical Access</a>
+      <a href="#emails">Email notifications</a>
+    </div>
+    <div class="hc-side-group">
+      <div class="hc-side-label">Troubleshooting</div>
+      <a href="#ts-invite">Invite not sending</a>
+      <a href="#ts-login">Login error</a>
+      <a href="#ts-popup">Popup not appearing</a>
+      <a href="#ts-area">Area error</a>
+      <a href="#ts-rx">Prescription issue</a>
+      <a href="#ts-wp67">WP 6.7 notice</a>
+    </div>
+    <div class="hc-side-group">
+      <div class="hc-side-label">FAQ</div>
+      <a href="#faq-checkout">Skip checkout?</a>
+      <a href="#faq-rename">Rename products?</a>
+      <a href="#faq-states">State coverage</a>
+      <a href="#faq-cart">Multiple in cart?</a>
+      <a href="#faq-reset">Reset plugin</a>
+      <a href="#faq-sandbox">Sandbox vs Live</a>
+    </div>
+  </aside>
+
+  <main class="hc-main">
+    <h1>Help Center</h1>
+    <p>Documentation and support for the Quidget WooCommerce plugin.</p>
+
+    <!-- SETUP -->
+    <div class="hc-section" id="setup">
+      <h2 class="hc-section-title">Setup & Installation</h2>
+
+      <div class="hc-item" id="requirements">
+        <h3>System requirements</h3>
+        <p>WordPress 5.0+, WooCommerce 4.0+, PHP 7.2+, SSL certificate (HTTPS), a publicly accessible site, and an active Qualiphy account with API key.</p>
+      </div>
+
+      <div class="hc-item" id="install">
+        <h3>Installing the plugin</h3>
+        <p>In your WordPress admin, go to <strong>Plugins → Add New → Upload Plugin</strong>. Upload the <code>qualiphy.zip</code> file, click <strong>Install Now</strong>, then <strong>Activate</strong>. The setup wizard launches automatically.</p>
+      </div>
+
+      <div class="hc-item" id="wizard">
+        <h3>Setup wizard</h3>
+        <p>The wizard walks you through: accepting terms, verifying requirements (SSL, WooCommerce), uploading your branding, connecting your API key, selecting your service area, importing consultations as WooCommerce products, and configuring settings.</p>
+      </div>
+
+      <div class="hc-item" id="api-key">
+        <h3>Finding your API key</h3>
+        <p>Log in at <a href="https://app.qualiphy.me" target="_blank">app.qualiphy.me</a>, click <strong>Settings</strong> in the left sidebar. Your API key is at the top under "API Key (Default Clinic)" — click <strong>Copy</strong>. No account yet? <a href="https://app.qualiphy.me/signup" target="_blank">Sign up free</a>.</p>
+      </div>
+
+      <div class="hc-item" id="subscriptions">
+        <h3>Do I need WooCommerce Subscriptions?</h3>
+        <p>Only for recurring monthly consultations (like weight loss refills). One-time consultations and GFE exams work without it.</p>
+      </div>
+
+      <div class="hc-item" id="payment">
+        <h3>Payment gateway</h3>
+        <p>Required for paid consultations. Stripe, PayPal, or similar must be active in <strong>WooCommerce → Settings → Payments</strong>. Free consultations work without a gateway.</p>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="hc-section" id="settings">
+      <h2 class="hc-section-title">Settings & Configuration</h2>
+
+      <div class="hc-item" id="auto-send">
+        <h3>Auto Send & Auto Launch</h3>
+        <p><strong>Auto Send</strong> (default: enabled) sends exam invites automatically on checkout. <strong>Auto Launch</strong> (default: enabled) shows the exam modal or redirect on the thank-you page. Disable either to use manual triggers instead.</p>
+      </div>
+
+      <div class="hc-item" id="launch-mode">
+        <h3>Popup vs Redirect</h3>
+        <p><strong>Popup</strong> shows a modal with meeting link, QR code, and dismiss option. <strong>Redirect</strong> counts down then sends the patient to the meeting URL. Configure under <code>Qualiphy → Settings → General</code>.</p>
+      </div>
+
+      <div class="hc-item" id="refunds">
+        <h3>Auto Refund & Return Fee</h3>
+        <p>Deferred consultations auto-refund the order total minus a return fee (default $30). The fee is overridable per product. Per-item fees are summed across Qualiphy line items at checkout.</p>
+      </div>
+
+      <div class="hc-item" id="pricing">
+        <h3>Default Price Margin</h3>
+        <p>Auto-fills patient-facing price during import. Default 10% — if Qualiphy cost is $28, patient price fills to $30.80. Adjust before importing.</p>
+      </div>
+
+      <div class="hc-item" id="checkout">
+        <h3>Checkout fields</h3>
+        <p>Gender, Date of Birth, and Phone are added automatically when a Qualiphy product is in the cart. Guest checkout is disabled — accounts are created automatically. Age restrictions: Rx requires 18+, GFE requires 13+.</p>
+      </div>
+
+      <div class="hc-item" id="service-area">
+        <h3>Service area</h3>
+        <p>48 states + D.C. (Alabama and Mississippi excluded). Configure under <code>Qualiphy → Settings → Service Area</code>. A WooCommerce shipping zone is created automatically.</p>
+      </div>
+
+      <div class="hc-item" id="branding">
+        <h3>Branding</h3>
+        <p>Upload light and dark logo variants and set accent colors under <code>Qualiphy → Settings → Branding</code>. These appear on the exam launch modal and patient emails. PNG with transparent background recommended.</p>
+      </div>
+
+      <div class="hc-item" id="language">
+        <h3>Language & text customization</h3>
+        <p>All patient-facing text is editable: button labels, modal copy, questionnaire text, dose labels, and disclaimers. Found under <code>Qualiphy → Settings → Language</code>.</p>
+      </div>
+
+      <div class="hc-item" id="access">
+        <h3>Clinical Access controls</h3>
+        <p>Only users with clinical access can view patient order details. The setup admin gets access automatically. Non-clinical users see "Patient Order Access Required." Manage in Settings.</p>
+      </div>
+
+      <div class="hc-item" id="emails">
+        <h3>Email notifications</h3>
+        <p>Admin emails for invite failures include error details and retry instructions. Patient emails are sent automatically. Configure under <code>Qualiphy → Settings → Emails</code>.</p>
+      </div>
+    </div>
+
+    <!-- TROUBLESHOOTING -->
+    <div class="hc-section" id="troubleshooting">
+      <h2 class="hc-section-title">Troubleshooting</h2>
+
+      <div class="hc-item" id="ts-invite">
+        <h3>Exam invite never sends after checkout</h3>
+        <div class="hc-cause"><strong>No payment gateway</strong><span>Invites fire on payment confirmation. Check WooCommerce → Settings → Payments.</span></div>
+        <div class="hc-cause"><strong>Caching</strong><span>Exclude /checkout/ and /my-account/ from your cache plugin.</span></div>
+        <div class="hc-cause"><strong>Free exam misconfigured</strong><span>Free consultations must use "Free Instant Checkout" during import.</span></div>
+      </div>
+
+      <div class="hc-item" id="ts-login">
+        <h3>"Please log in to view this order"</h3>
+        <div class="hc-cause"><strong>Account creation disabled</strong><span>WooCommerce → Settings → Accounts → enable account creation during checkout.</span></div>
+        <div class="hc-cause"><strong>Cache</strong><span>Clear your entire site cache after installing the plugin.</span></div>
+      </div>
+
+      <div class="hc-item" id="ts-popup">
+        <h3>Exam popup doesn't appear</h3>
+        <div class="hc-cause"><strong>Auto-launch disabled</strong><span>Enable Auto Launch Exams in Qualiphy → Settings.</span></div>
+        <div class="hc-cause"><strong>Missing meeting URL</strong><span>Check the order's Qualiphy section for error details.</span></div>
+      </div>
+
+      <div class="hc-item" id="ts-area">
+        <h3>"Not available in your area"</h3>
+        <div class="hc-cause"><strong>Service area</strong><span>Check states under Qualiphy → Settings → Service Area.</span></div>
+        <div class="hc-cause"><strong>Shipping zone deleted</strong><span>Re-save service area to regenerate the WooCommerce zone.</span></div>
+      </div>
+
+      <div class="hc-item" id="ts-rx">
+        <h3>Prescription not created after approval</h3>
+        <div class="hc-cause"><strong>Pharmacy routing</strong><span>Verify pharmacy assigned for the patient's state under Qualiphy → Pharmacies.</span></div>
+        <div class="hc-cause"><strong>Blocked webhook</strong><span>Check if a security plugin is blocking incoming POST requests.</span></div>
+      </div>
+
+      <div class="hc-item" id="ts-wp67">
+        <h3>WP 6.7+ translation notice</h3>
+        <p>Known issue, fixed in v1.1.0. Update the plugin. The notice is cosmetic and doesn't affect functionality.</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="hc-section" id="faq">
+      <h2 class="hc-section-title">FAQ</h2>
+
+      <div class="hc-item" id="faq-checkout">
+        <h3>Why can't patients skip checkout?</h3>
+        <p>Checkout collects required patient data (name, gender, DOB, phone, state). The plugin auto-redirects and auto-creates accounts. For staff use, create a direct link: <code>yoursite.com/checkout/?add-to-cart=PRODUCT_ID</code></p>
+      </div>
+
+      <div class="hc-item" id="faq-rename">
+        <h3>Can I rename products after importing?</h3>
+        <p>Yes. The Qualiphy link is stored as metadata, not tied to the product title. Rename freely.</p>
+      </div>
+
+      <div class="hc-item" id="faq-states">
+        <h3>Which states does Qualiphy cover?</h3>
+        <p>48 states + D.C. Alabama and Mississippi are currently excluded.</p>
+      </div>
+
+      <div class="hc-item" id="faq-cart">
+        <h3>Can I have multiple consultations in one cart?</h3>
+        <p>One Rx consultation per cart (for proper exam delivery). Multiple GFE exams are allowed in a single session.</p>
+      </div>
+
+      <div class="hc-item" id="faq-reset">
+        <h3>How do I reset the plugin?</h3>
+        <p>Go to Plugins → Uninstall Qualiphy → reactivate. This returns you to the setup wizard. Your Qualiphy account data is unaffected.</p>
+      </div>
+
+      <div class="hc-item" id="faq-sandbox">
+        <h3>Sandbox vs Live mode</h3>
+        <p><strong>Sandbox</strong> simulates the system without real charges — use it during setup and testing. <strong>Live</strong> processes actual patient exams. Switch to Live after running a successful test order.</p>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="hc-contact">
+      <div><h3>Still need help?</h3><p>support@qualiphy.me · 7 days a week, 6AM–7PM PST</p></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a href="mailto:support@qualiphy.me" class="btn btn-primary btn-sm">Email Support</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Book a Call</a>
+      </div>
+    </div>
+  </main>
 </div>
-<div style="height:80px"></div>
-
-<footer class="footer"><div class="wrap">
-  <div class="footer-trust-strip"><span>HIPAA Compliant</span><span class="ft-sep">&middot;</span><span>LegitScript Certified</span><span class="ft-sep">&middot;</span><span>350+ Providers</span><span class="ft-sep">&middot;</span><span>48 States + D.C.</span></div>
-  <div class="footer-grid">
-    <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
-      <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span><strong>4.9</strong> &middot; 5,000+ reviews</span></a>
-      <div class="footer-contact-info"><a href="mailto:support@qualiphy.me">support@qualiphy.me</a><span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span></div>
-    </div>
-    <div><div class="footer-heading">Product</div><a href="../" class="footer-link">Overview</a><a href="../get-started/" class="footer-link">Get Started</a><a href="./" class="footer-link">Help Center</a><a href="../changelog/" class="footer-link">Changelog</a></div>
-    <div><div class="footer-heading">Qualiphy</div><a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a><a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a><a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a></div>
-    <div><div class="footer-heading">Resources</div><a href="./" class="footer-link">Help Center</a><a href="../get-started/" class="footer-link">Setup Guide</a><a href="../changelog/" class="footer-link">Changelog</a></div>
-  </div>
-  <div class="footer-bottom"><span>&copy; 2026 Qualiphy PC. All rights reserved.</span><div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy</a><a href="https://qualiphy.me/terms">Terms</a></div><div class="footer-socials"><a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div></div>
-</div></footer>
 
 <script>
-var CATS=[
-  {id:"setup",title:"Setup & Installation",desc:"Getting started, requirements, and the setup wizard",articles:[
-    {id:"s1",q:"System requirements",a:"WordPress 5.0+, WooCommerce 4.0+, PHP 7.2+, SSL certificate (HTTPS), a publicly accessible site, and an active Qualiphy account with API key."},
-    {id:"s2",q:"How to install the plugin",a:"Go to <strong>Plugins → Add New → Upload Plugin</strong> in your WordPress admin. Upload the <code>qualiphy.zip</code> file, click <strong>Install Now</strong>, then <strong>Activate</strong>. The setup wizard launches automatically."},
-    {id:"s3",q:"What does the setup wizard do?",a:"Walks you through: accepting terms, verifying requirements (SSL, WooCommerce), uploading your branding, connecting your API key, selecting your service area, importing consultations as WooCommerce products, and configuring settings."},
-    {id:"s4",q:"How to get your API key",a:"Log in at <a href='https://app.qualiphy.me' target='_blank'>app.qualiphy.me</a>, click <strong>Settings</strong> in the left sidebar. Your API key is at the top under \"API Key (Default Clinic)\" — click <strong>Copy</strong>. No account? <a href='https://app.qualiphy.me/signup' target='_blank'>Sign up free</a>."},
-    {id:"s5",q:"Do I need WooCommerce Subscriptions?",a:"Only for recurring monthly consultations (like weight loss refills). One-time consultations and GFE exams work without it."},
-    {id:"s6",q:"Payment gateway required?",a:"Yes, for paid consultations. Stripe, PayPal, or similar must be active in <strong>WooCommerce → Settings → Payments</strong>. Free consultations work without a gateway."},
-  ]},
-  {id:"settings",title:"Settings & Configuration",desc:"General, checkout, pricing, branding, and more",articles:[
-    {id:"c1",q:"Auto Send Exams",a:"<strong>Default: Enabled.</strong> Automatically sends exam invites when checkout completes. Disable to manually trigger from the order page."},
-    {id:"c2",q:"Auto Launch Exams",a:"<strong>Default: Enabled.</strong> Shows the exam launch modal or redirect on the thank-you page. When disabled, patients get the link via email only."},
-    {id:"c3",q:"Popup vs Redirect mode",a:"<strong>Popup</strong> shows a modal with meeting link, QR code, and dismiss option. <strong>Redirect</strong> counts down then sends patient to meeting URL. Configure under <code>Qualiphy → Settings → General</code>."},
-    {id:"c4",q:"Auto Refund & Return Fee",a:"Deferred consultations auto-refund order total minus return fee (default $30). Overridable per product. Per-item fees summed across Qualiphy line items."},
-    {id:"c5",q:"Default Price Margin",a:"Auto-fills patient-facing price during import. Default 10% — if Qualiphy cost is $28, patient price fills to $30.80."},
-    {id:"c6",q:"Checkout fields",a:"Gender, Date of Birth, and Phone added automatically when a Qualiphy product is in the cart. Guest checkout disabled — accounts created automatically."},
-    {id:"c7",q:"Age restrictions",a:"Rx consultations require 18+. Non-Rx (GFE) require 13+. Validated from DOB at checkout."},
-    {id:"c8",q:"Service area",a:"48 states + D.C. (Alabama and Mississippi excluded). Configure under <code>Qualiphy → Settings → Service Area</code>."},
-    {id:"c9",q:"Branding",a:"Upload light/dark logos and set accent colors under <code>Qualiphy → Settings → Branding</code>. Appears on exam launch modal and patient emails."},
-    {id:"c10",q:"Language & text",a:"All patient-facing text is editable: button labels, modal copy, questionnaire text, dose labels. Under <code>Qualiphy → Settings → Language</code>."},
-    {id:"c11",q:"Clinical Access",a:"Only users with clinical access can view patient order details. Setup admin gets access automatically. Manage in Settings."},
-    {id:"c12",q:"Email notifications",a:"Admin emails for invite failures with error details. Patient emails are automatic. Configure under <code>Qualiphy → Settings → Emails</code>."},
-  ]},
-  {id:"trouble",title:"Troubleshooting",desc:"Common issues and how to fix them",articles:[
-    {id:"t1",q:"Exam invite never sends after checkout",a:"<div class='hc-cause'><div class='hc-cause-title'>No payment gateway</div><div class='hc-cause-fix'>Invites fire on payment confirmation. Check WooCommerce → Settings → Payments.</div></div><div class='hc-cause'><div class='hc-cause-title'>Caching</div><div class='hc-cause-fix'>Exclude /checkout/ and /my-account/ from your cache plugin.</div></div><div class='hc-cause'><div class='hc-cause-title'>Free exam</div><div class='hc-cause-fix'>Must use \"Free Instant Checkout\" during import.</div></div>"},
-    {id:"t2",q:"'Please log in to view this order'",a:"<div class='hc-cause'><div class='hc-cause-title'>Account creation disabled</div><div class='hc-cause-fix'>WooCommerce → Settings → Accounts → enable account creation during checkout.</div></div><div class='hc-cause'><div class='hc-cause-title'>Cache</div><div class='hc-cause-fix'>Clear your entire site cache after installing.</div></div>"},
-    {id:"t3",q:"Exam popup doesn't appear",a:"<div class='hc-cause'><div class='hc-cause-title'>Auto-launch disabled</div><div class='hc-cause-fix'>Enable Auto Launch Exams in Qualiphy → Settings.</div></div><div class='hc-cause'><div class='hc-cause-title'>Missing meeting URL</div><div class='hc-cause-fix'>Check the order's Qualiphy section for error details.</div></div>"},
-    {id:"t4",q:"'Not available in your area'",a:"<div class='hc-cause'><div class='hc-cause-title'>Service area</div><div class='hc-cause-fix'>Check states under Qualiphy → Settings → Service Area.</div></div><div class='hc-cause'><div class='hc-cause-title'>Shipping zone</div><div class='hc-cause-fix'>Re-save service area to regenerate the zone.</div></div>"},
-    {id:"t5",q:"Prescription not created after approval",a:"<div class='hc-cause'><div class='hc-cause-title'>Pharmacy routing</div><div class='hc-cause-fix'>Verify pharmacy assigned for patient's state under Qualiphy → Pharmacies.</div></div><div class='hc-cause'><div class='hc-cause-title'>Blocked webhook</div><div class='hc-cause-fix'>Check if a security plugin is blocking incoming POST requests.</div></div>"},
-    {id:"t6",q:"WP 6.7+ translation notice",a:"Known issue, fixed in v1.1.0. Update the plugin. The notice is cosmetic only."},
-  ]},
-  {id:"faq",title:"Common Questions",desc:"Frequently asked questions",articles:[
-    {id:"f1",q:"Why can't patients skip checkout?",a:"Checkout collects required patient data (name, gender, DOB, phone, state). The plugin auto-redirects and auto-creates accounts. For staff use: <code>yoursite.com/checkout/?add-to-cart=PRODUCT_ID</code>"},
-    {id:"f2",q:"Can I rename products after importing?",a:"Yes. The Qualiphy link is metadata, not tied to the title. Rename freely."},
-    {id:"f3",q:"Which states does Qualiphy cover?",a:"48 states + D.C. Alabama and Mississippi excluded."},
-    {id:"f4",q:"Multiple consultations in one cart?",a:"One Rx consultation per cart. Multiple GFE exams allowed in a single session."},
-    {id:"f5",q:"How do subscriptions work?",a:"Requires WooCommerce Subscriptions. Products imported as subscriptions auto-send new exam invites on renewal."},
-    {id:"f6",q:"How do I reset the plugin?",a:"Plugin page → Uninstall → reactivate. Returns to setup wizard. Qualiphy account data unaffected."},
-    {id:"f7",q:"Sandbox vs Live mode",a:"<strong>Sandbox</strong> simulates without real charges — use for testing. <strong>Live</strong> processes real exams. Switch after a test order."},
-  ]},
-];
-
-// Flatten for search
-var ALL=[];CATS.forEach(function(c,ci){c.articles.forEach(function(a){ALL.push({cat:c.title,catIdx:ci,catId:c.id,id:a.id,q:a.q,a:a.a,search:(a.q+' '+a.a).toLowerCase().replace(/<[^>]+>/g,'')})})});
-
-var app=document.getElementById('app');
-var chevronSVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>';
-
-// ── RENDER FUNCTIONS ──
-function showHome(){
-  window.scrollTo({top:0,behavior:'smooth'});
-  app.innerHTML='<div class="hc-cats">'+CATS.map(function(c,i){
-    return '<button class="hc-cat" data-cat="'+i+'">'+
-      '<div class="hc-cat-dot hc-cat-dot--'+i+'"></div>'+
-      '<div class="hc-cat-text"><div class="hc-cat-title">'+c.title+'</div><div class="hc-cat-desc">'+c.articles.length+' articles · '+c.desc+'</div></div>'+
-      '<span class="hc-cat-arrow">'+chevronSVG+'</span></button>';
-  }).join('')+'</div>';
-  app.querySelectorAll('.hc-cat').forEach(function(btn){
-    btn.addEventListener('click',function(){showCategory(+btn.getAttribute('data-cat'))});
-  });
-}
-
-function showCategory(ci){
-  var c=CATS[ci];
-  window.scrollTo({top:0,behavior:'smooth'});
-  app.innerHTML=
-    '<div class="hc-breadcrumb"><a onclick="showHome()">Help Center</a> <span>›</span> <span>'+c.title+'</span></div>'+
-    '<h2 class="hc-section-title">'+c.title+'</h2>'+
-    '<div class="hc-section-desc">'+c.desc+'</div>'+
-    '<div class="hc-list">'+c.articles.map(function(a,ai){
-      return '<button class="hc-list-item" data-ci="'+ci+'" data-ai="'+ai+'">'+
-        '<span>'+a.q+'</span>'+chevronSVG+'</button>';
-    }).join('')+'</div>';
-  app.querySelectorAll('.hc-list-item').forEach(function(btn){
-    btn.addEventListener('click',function(){showArticle(+btn.getAttribute('data-ci'),+btn.getAttribute('data-ai'))});
-  });
-}
-
-function showArticle(ci,ai){
-  var c=CATS[ci],a=c.articles[ai];
-  var prev=ai>0?c.articles[ai-1]:null;
-  var next=ai<c.articles.length-1?c.articles[ai+1]:null;
-  window.scrollTo({top:0,behavior:'smooth'});
-  app.innerHTML=
-    '<div class="hc-breadcrumb"><a onclick="showHome()">Help Center</a> <span>›</span> <a onclick="showCategory('+ci+')">'+c.title+'</a> <span>›</span> <span>'+a.q+'</span></div>'+
-    '<h2 class="hc-article-title">'+a.q+'</h2>'+
-    '<div class="hc-article-body">'+a.a+'</div>'+
-    '<div class="hc-next-prev">'+
-      (prev?'<a onclick="showArticle('+ci+','+(ai-1)+')">← '+prev.q+'</a>':'<span></span>')+
-      (next?'<a onclick="showArticle('+ci+','+(ai+1)+')">'+next.q+' →</a>':'<span></span>')+
-    '</div>';
-}
-
-function showSearch(results,query){
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(!results.length){
-    app.innerHTML='<div class="hc-breadcrumb"><a onclick="showHome()">Help Center</a> <span>›</span> <span>Search</span></div>'+
-      '<h2 class="hc-section-title">No results for "'+query+'"</h2>'+
-      '<p style="color:var(--text-lt)">Try different keywords or <a href="mailto:support@qualiphy.me" style="color:var(--indigo)">contact support</a>.</p>';
-    return;
-  }
-  app.innerHTML='<div class="hc-breadcrumb"><a onclick="showHome();document.getElementById(\'hcSearch\').value=\'\'">Help Center</a> <span>›</span> <span>'+results.length+' result'+(results.length===1?'':'s')+'</span></div>'+
-    '<h2 class="hc-section-title">Results for "'+query+'"</h2>'+
-    '<div class="hc-list">'+results.map(function(r){
-      return '<button class="hc-list-item" data-ci="'+r.catIdx+'" data-ai="'+CATS[r.catIdx].articles.findIndex(function(a){return a.id===r.id})+'">'+
-        '<div><div class="hc-search-cat">'+r.cat+'</div><span>'+r.q+'</span></div>'+chevronSVG+'</button>';
-    }).join('')+'</div>';
-  app.querySelectorAll('.hc-list-item').forEach(function(btn){
-    btn.addEventListener('click',function(){showArticle(+btn.getAttribute('data-ci'),+btn.getAttribute('data-ai'))});
-  });
-}
-
-// ── SEARCH ──
-document.getElementById('hcSearch').addEventListener('input',function(){
-  var q=this.value.toLowerCase().trim();
-  if(!q){showHome();return}
-  showSearch(ALL.filter(function(a){return a.search.indexOf(q)!==-1}),this.value);
-});
-
-// ── INIT ──
-showHome();
+// Sidebar active state on scroll
+var links=document.querySelectorAll('.hc-side a');
+var sections=[];
+links.forEach(function(a){var t=document.querySelector(a.getAttribute('href'));if(t)sections.push({el:t,link:a})});
+window.addEventListener('scroll',function(){
+  var y=window.scrollY+100;
+  var active=null;
+  sections.forEach(function(s){if(s.el.offsetTop<=y)active=s});
+  links.forEach(function(a){a.classList.remove('active')});
+  if(active)active.link.classList.add('active');
+},{passive:true});
 </script>
 <script src="../assets/js/main.js" defer></script>
 </body>
