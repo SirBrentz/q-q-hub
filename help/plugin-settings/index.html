@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plugin Settings — Quidget Help Center</title>
+  <meta name="description" content="Complete settings reference for the Quidget WordPress plugin. General, checkout, branding, service area, language, and clinical access settings.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+      <a href="../../api/" class="nav-link">API</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <!-- Main Container -->
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-nav">
+        <h3 class="sidebar-title">Plugin Settings</h3>
+        <ul class="sidebar-list">
+          <li><a href="#general-settings" class="sidebar-link active">General Settings</a></li>
+          <li><a href="#checkout-settings" class="sidebar-link">Checkout Settings</a></li>
+          <li><a href="#branding-white-label" class="sidebar-link">Branding & White-Label</a></li>
+          <li><a href="#service-area-configuration" class="sidebar-link">Service Area Configuration</a></li>
+          <li><a href="#language-custom-text" class="sidebar-link">Language & Custom Text</a></li>
+          <li><a href="#clinical-access-controls" class="sidebar-link">Clinical Access Controls</a></li>
+          <li><a href="#email-notifications" class="sidebar-link">Email Notifications</a></li>
+          <li><a href="#auto-refund-settings" class="sidebar-link">Auto-Refund Settings</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../">Help Center</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Plugin Settings</span>
+      </div>
+
+      <!-- Page Title -->
+      <h1 class="docs-title">Plugin Settings</h1>
+      <p class="docs-intro">A complete reference for all Quidget plugin settings. Configure your checkout experience, branding, service area, and clinical controls.</p>
+
+      <!-- Article 1: General Settings -->
+      <article id="general-settings" class="docs-article">
+        <h2>General Settings</h2>
+        <p>Access general settings from <strong>Qualiphy → Settings → General</strong> in your WordPress admin. These core settings control how exams are delivered and displayed to your patients.</p>
+
+        <h3>Auto Send Exams</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, the plugin automatically sends exam invites to patients immediately after they complete checkout and payment is confirmed. If disabled, you'll need to manually send exam invites from the order detail page.</p>
+        <p><strong>Use case:</strong> Disable this if you want to manually review orders before sending exams, or if you need time to prepare before patients begin their consultation.</p>
+
+        <h3>Auto Launch Exams</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, the exam modal automatically opens on the thank-you page after checkout, allowing patients to start their exam immediately. If disabled, patients must click a link to open the exam modal.</p>
+        <p><strong>Use case:</strong> Disable if you prefer a lighter, simpler thank-you page, or if you want patients to access exams from a separate link.</p>
+
+        <h3>Exam Launch Mode</h3>
+        <p><strong>Options:</strong> Popup or Redirect</p>
+        <ul>
+          <li><strong>Popup (Modal):</strong> Opens the exam in a modal overlay with the meeting link and QR code. Patients can close the modal to return to the thank-you page.</li>
+          <li><strong>Redirect:</strong> Navigates to a dedicated exam page with a countdown timer until the meeting starts. Used for more immersive exam experiences.</li>
+        </ul>
+        <p><strong>Recommended:</strong> Popup is best for most sites — it keeps patients on your page while allowing them to see the exam details.</p>
+
+        <h3>Default Price Margin</h3>
+        <p><strong>Default:</strong> 10%</p>
+        <p>This percentage is automatically applied to Qualiphy consultation costs when pricing products. If a Qualiphy consultation costs $50, and your margin is 10%, the patient-facing price will be $55 (before tax).</p>
+        <p><strong>Note:</strong> You can override the margin on a per-product basis when importing or editing consultations.</p>
+      </article>
+
+      <!-- Article 2: Checkout Settings -->
+      <article id="checkout-settings" class="docs-article">
+        <h2>Checkout Settings</h2>
+        <p>Access checkout settings from <strong>Qualiphy → Settings → Checkout</strong>. These settings control what information is collected from patients during the checkout process.</p>
+
+        <h3>Additional Fields</h3>
+        <p>Quidget automatically adds the following fields to checkout for all Qualiphy products:</p>
+        <ul>
+          <li><strong>Gender:</strong> Dropdown (Male, Female, Non-binary, Prefer not to say)</li>
+          <li><strong>Date of Birth:</strong> Date picker</li>
+          <li><strong>Phone Number:</strong> Phone input with formatting</li>
+        </ul>
+        <p>These fields are required for the provider to conduct the consultation. They appear before the standard WooCommerce address fields.</p>
+
+        <h3>Age Restriction</h3>
+        <p>Age validation is automatically enforced based on the consultation type:</p>
+        <ul>
+          <li><strong>Rx consultations:</strong> Patient must be 18 or older</li>
+          <li><strong>GFE consultations:</strong> Patient must be 13 or older</li>
+        </ul>
+        <p>If a customer's date of birth shows they're too young, checkout is blocked and they'll see an error message: "This product is not available for your age group."</p>
+
+        <h3>Account Creation</h3>
+        <p>Guest checkout is disabled for all Quidget products to ensure proper order tracking and exam delivery. Customers must either log in to an existing account or create a new account before purchasing.</p>
+
+        <h3>Auto Redirect to Checkout</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When a customer adds a Quidget product to their cart, they're automatically redirected to checkout instead of seeing the cart page. This streamlines the purchase experience for consultations.</p>
+        <p><strong>Disable if:</strong> You want customers to review their cart before checkout, or if you offer bundle products with multiple items.</p>
+      </article>
+
+      <!-- Article 3: Branding & White-Label -->
+      <article id="branding-white-label" class="docs-article">
+        <h2>Branding & White-Label</h2>
+        <p>Customize the appearance of the exam modal and patient-facing pages to match your clinic's branding. Access branding settings from <strong>Qualiphy → Settings → Branding</strong>.</p>
+
+        <h3>Clinic Logo</h3>
+        <p>Upload your clinic logo to appear on the exam modal, patient emails, and checkout pages.</p>
+        <ul>
+          <li><strong>Recommended format:</strong> PNG with transparent background</li>
+          <li><strong>Dimensions:</strong> 200x200px or larger (aspect ratio 1:1 or 2:1)</li>
+          <li><strong>Dark variant:</strong> Upload a dark version of your logo for use on light backgrounds</li>
+          <li><strong>Light variant:</strong> Upload a light version for use on dark backgrounds</li>
+        </ul>
+
+        <h3>Accent Colors</h3>
+        <p>Choose two accent colors to customize the visual appearance of Quidget throughout the patient experience:</p>
+        <ul>
+          <li><strong>Primary Color:</strong> Default #CFC9FF (light purple). Used for buttons, links, accents, and the exam modal header.</li>
+          <li><strong>Secondary Color:</strong> Default #6e54a7 (dark purple). Used for text, headings, and interactive elements.</li>
+        </ul>
+        <p><strong>Tip:</strong> Choose colors that complement your clinic's branding and have good contrast with white and dark backgrounds. Use a color picker tool like Coolers.co to find colors that work well together.</p>
+
+        <h3>Applied Locations</h3>
+        <p>Your branding is applied to:</p>
+        <ul>
+          <li>Exam modal header and buttons</li>
+          <li>Exam thank-you page</li>
+          <li>Patient notification emails</li>
+          <li>Checkout page elements (section headers, accent lines)</li>
+        </ul>
+      </article>
+
+      <!-- Article 4: Service Area Configuration -->
+      <article id="service-area-configuration" class="docs-article">
+        <h2>Service Area Configuration</h2>
+        <p>Define the states and territories where you're licensed to provide consultations. Access service area settings from <strong>Qualiphy → Settings → Service Area</strong>.</p>
+
+        <h3>Supported Locations</h3>
+        <p>Quidget supports consultations in 48 US states plus Washington, D.C. The following states are not currently available:</p>
+        <ul>
+          <li>Alabama</li>
+          <li>Mississippi</li>
+        </ul>
+
+        <h3>Selecting Your Service Area</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Service Area</strong></li>
+          <li>Check the states where you're licensed to practice</li>
+          <li>Click <strong>Save Service Area</strong></li>
+        </ol>
+
+        <h3>Automatic Shipping Zone</h3>
+        <p>When you save your service area, Quidget automatically creates a WooCommerce shipping zone containing your selected states. This zone is used for all Quidget products and ensures accurate location-based restrictions.</p>
+
+        <h3>Location-Based Restrictions</h3>
+        <p>Customers outside your service area will see an error message on the product page: "This product is not available in your area." They cannot add the product to their cart or proceed to checkout.</p>
+        <p><strong>Note:</strong> Location is determined by the customer's shipping address at checkout. You can allow patients from outside your service area to proceed by temporarily expanding your service area.</p>
+
+        <h3>Managing Your Service Area</h3>
+        <p>If you expand into new states or need to restrict your service area, you can update it at any time from the settings page. The WooCommerce shipping zone is updated automatically.</p>
+      </article>
+
+      <!-- Article 5: Language & Custom Text -->
+      <article id="language-custom-text" class="docs-article">
+        <h2>Language & Custom Text</h2>
+        <p>Customize all patient-facing text in the Quidget plugin to match your clinic's voice and messaging. Access language settings from <strong>Qualiphy → Settings → Language</strong>.</p>
+
+        <h3>Customizable Text Sections</h3>
+
+        <h4>Rx vs. Non-Rx Messages</h4>
+        <p>Customize the messaging shown to patients based on consultation type:</p>
+        <ul>
+          <li><strong>Rx intro text:</strong> Explanation of prescription consultations</li>
+          <li><strong>GFE intro text:</strong> Explanation of aesthetic procedure consultations</li>
+          <li><strong>Rx completion message:</strong> Text shown after Rx is approved</li>
+          <li><strong>GFE completion message:</strong> Text shown after GFE is approved</li>
+        </ul>
+
+        <h4>Button Text</h4>
+        <p>Customize button labels throughout the patient journey:</p>
+        <ul>
+          <li>"Start Exam" → "Begin Consultation"</li>
+          <li>"Schedule Meeting" → "Talk with Provider"</li>
+          <li>"View Status" → "Check Progress"</li>
+        </ul>
+
+        <h4>Cart Messages</h4>
+        <p>Customize messages shown on the cart and checkout pages:</p>
+        <ul>
+          <li>Introductory text above Quidget products</li>
+          <li>Cart item description for consultation products</li>
+          <li>Checkout section header (e.g., "Patient Information")</li>
+        </ul>
+
+        <h4>Exam Modal Text</h4>
+        <p>Customize text inside the exam launch modal:</p>
+        <ul>
+          <li>Modal title and description</li>
+          <li>Meeting countdown text</li>
+          <li>QR code label and instructions</li>
+        </ul>
+
+        <h4>Questionnaire Questions</h4>
+        <p>Customize the questions shown during the patient exam:</p>
+        <ul>
+          <li>Medical history questions</li>
+          <li>Symptom and concern questions</li>
+          <li>Dose history questions (for returning patients)</li>
+        </ul>
+
+        <h4>Dose Labels</h4>
+        <p>For consultation products that include dose selection, customize the dose option labels:</p>
+        <ul>
+          <li>Label for starting dose (e.g., "Start with 0.25mg")</li>
+          <li>Label for maintenance dose (e.g., "Continue current dose")</li>
+          <li>Label for increased dose (e.g., "Increase to 0.5mg")</li>
+        </ul>
+
+        <h4>Disclaimer Text</h4>
+        <p>Customize legal and medical disclaimers shown to patients:</p>
+        <ul>
+          <li>General medical disclaimer (shown on product pages)</li>
+          <li>Exam disclaimer (shown before exam starts)</li>
+          <li>Prescription disclaimer (shown for Rx products)</li>
+        </ul>
+
+        <h3>Saving Changes</h3>
+        <p>Click <strong>Save Language Settings</strong> to apply all text customizations. Changes take effect immediately on the patient-facing site — no cache clearing needed.</p>
+      </article>
+
+      <!-- Article 6: Clinical Access Controls -->
+      <article id="clinical-access-controls" class="docs-article">
+        <h2>Clinical Access Controls</h2>
+        <p>Restrict access to patient consultation data in WooCommerce to designated staff members. Access clinical controls from <strong>Qualiphy → Settings → Clinical Access</strong>.</p>
+
+        <h3>How Clinical Access Works</h3>
+        <p>By default, only users with the "Administrator" role can view patient consultation data in WooCommerce orders. Other users see a locked icon with the message "Patient Order Access Required."</p>
+
+        <h3>Granting Access</h3>
+        <p>To give a staff member access to patient consultation data:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Clinical Access</strong></li>
+          <li>Check the names of users who should have access</li>
+          <li>Click <strong>Save Access Controls</strong></li>
+        </ol>
+
+        <p><strong>Note:</strong> The user who initially set up Quidget (connected the API key) automatically receives access and cannot be removed.</p>
+
+        <h3>User Roles</h3>
+        <p>You can grant access to users with any role:</p>
+        <ul>
+          <li><strong>Administrator:</strong> Full site access + consultation data</li>
+          <li><strong>Shop Manager:</strong> Order and product management access</li>
+          <li><strong>Editor:</strong> Content editing access</li>
+          <li><strong>Custom roles:</strong> Any custom role you've created</li>
+        </ul>
+
+        <h3>Audit and Compliance</h3>
+        <p>Quidget logs all access to patient data for compliance purposes. Access logs are available from <strong>Qualiphy → Settings → Access Logs</strong>.</p>
+      </article>
+
+      <!-- Article 7: Email Notifications -->
+      <article id="email-notifications" class="docs-article">
+        <h2>Email Notifications</h2>
+        <p>Configure which emails your team receives for consultation events. Access email settings from <strong>Qualiphy → Settings → Notifications</strong>.</p>
+
+        <h3>Admin Notifications</h3>
+        <p>Your team receives notifications for critical consultation events:</p>
+        <ul>
+          <li><strong>Exam Invite Failed:</strong> Notifies admins if an exam invite email fails to send to the patient</li>
+          <li><strong>Exam Submitted:</strong> Notifies admins when a patient completes their exam questionnaire</li>
+          <li><strong>Exam Approved:</strong> Notifies admins when a provider approves a consultation</li>
+          <li><strong>Prescription Created:</strong> Notifies admins when a prescription is issued (Rx only)</li>
+          <li><strong>Shipment Tracking:</strong> Notifies admins when pharmacy tracking updates</li>
+        </ul>
+
+        <h3>Admin Email Address</h3>
+        <p>Admin notifications are sent to the email address configured in <strong>Settings → General → Site Email Address</strong> in WordPress. Change this to route notifications to a different address (e.g., a support inbox).</p>
+
+        <h3>Patient Notifications</h3>
+        <p>Patient emails are handled automatically by Quidget and cannot be disabled. Patients receive:</p>
+        <ul>
+          <li><strong>Exam Invite:</strong> Link to start their exam (sent immediately after purchase)</li>
+          <li><strong>Exam Reminder:</strong> Reminder 1 hour before their scheduled meeting</li>
+          <li><strong>Approval Notification:</strong> Confirmation that their consultation was approved</li>
+          <li><strong>Shipment Tracking:</strong> Tracking number and link when medication ships (Rx only)</li>
+        </ul>
+
+        <h3>Email Customization</h3>
+        <p>Patient email templates are customized from <strong>Qualiphy → Settings → Language</strong> (see the section on Language & Custom Text). You can modify the email subject lines, headers, and body text to match your clinic's branding.</p>
+      </article>
+
+      <!-- Article 8: Auto-Refund Settings -->
+      <article id="auto-refund-settings" class="docs-article">
+        <h2>Auto-Refund Settings</h2>
+        <p>Configure automatic refund handling when a provider rejects a patient's consultation. Access auto-refund settings from <strong>Qualiphy → Settings → Refunds</strong>.</p>
+
+        <h3>How Auto-Refund Works</h3>
+        <p>If a provider rejects a patient's consultation (typically due to disqualifying health conditions or other clinical reasons), Quidget can automatically refund the patient minus a return fee.</p>
+
+        <h3>Auto Refund Rejected Consultations</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, rejected consultations automatically trigger a refund to the customer's original payment method. The refund is processed within 5-10 business days depending on the payment processor.</p>
+
+        <h3>Return Fee</h3>
+        <p><strong>Default:</strong> $30.00</p>
+        <p>When a consultation is rejected, the customer receives a refund equal to the order total minus the return fee. For example:</p>
+        <ul>
+          <li>Order total: $99.00</li>
+          <li>Return fee: $30.00</li>
+          <li>Refund amount: $69.00</li>
+        </ul>
+
+        <h3>Per-Product Override</h3>
+        <p>You can set a different return fee for specific consultation products. This is useful if some consultations have higher costs and you want a different return fee percentage:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit the consultation product</li>
+          <li>Find the <strong>Quidget Settings</strong> section</li>
+          <li>Enter a custom <strong>Return Fee</strong> (or leave blank to use the default)</li>
+          <li>Save the product</li>
+        </ol>
+
+        <h3>Multiple Line Items</h3>
+        <p>If an order contains multiple Quidget products, the return fee is summed across all line items. For example:</p>
+        <ul>
+          <li>Item 1 (GFE): $50.00 → Refund $20.00 (return fee $30)</li>
+          <li>Item 2 (Rx): $100.00 → Refund $70.00 (return fee $30)</li>
+          <li>Total refund: $90.00 (total return fees: $60.00)</li>
+        </ul>
+
+        <h3>Disabling Auto-Refund</h3>
+        <p>If you prefer to manually review rejections before issuing refunds, disable auto-refund from <strong>Qualiphy → Settings → Refunds</strong>. You can then issue refunds manually from the WooCommerce order detail page.</p>
+
+        <h3>Refund Status</h3>
+        <p>Track all refunds from <strong>WooCommerce → Orders</strong>. Each order shows refund status in the Qualiphy section, including:</p>
+        <ul>
+          <li>Refund amount</li>
+          <li>Refund date</li>
+          <li>Refund reason (e.g., "Patient rejected")</li>
+          <li>Refund transaction ID</li>
+        </ul>
+      </article>
+
+      <!-- Help CTA -->
+      <div class="docs-cta">
+        <h3>Still need help?</h3>
+        <p>Can't find what you're looking for? Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Inline Scripts -->
+  <script>
+    // Nav beam effect
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const articles = document.querySelectorAll('.docs-article');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      articles.forEach((article) => {
+        const top = article.offsetTop;
+        if (window.scrollY >= top - 200) {
+          current = article.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Footer shimmer effect
+    const cta = document.querySelector('.docs-cta');
+    if (cta) {
+      cta.addEventListener('mouseenter', function() {
+        this.style.animation = 'shimmer 0.6s ease-in-out';
+      });
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -5,14 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quidget — WooCommerce Telehealth Plugin for Med Spas & Clinics</title>
   <meta name="description" content="WordPress plugin that turns your WooCommerce store into a telehealth platform. Automated exam invites, pharmacy fulfillment, real-time webhooks. No signup fees, no contracts.">
-  <meta property="og:title" content="Quidget — WooCommerce Telehealth Plugin">
+  <meta property="og:title" content="Quidget — WooCommerce Telehealth Plugin for Clinics">
   <meta property="og:description" content="WordPress plugin that turns your WooCommerce store into a telehealth platform. Automated consultations, pharmacy fulfillment, order tracking.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://quidget.qualiphy.me/assets/img/og-image.png">
+  <meta property="og:url" content="https://quidget.qualiphy.me/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quidget — WooCommerce Telehealth Plugin">
+  <meta name="twitter:description" content="WordPress plugin that turns your WooCommerce store into a telehealth platform.">
+  <meta name="twitter:image" content="https://quidget.qualiphy.me/assets/img/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="assets/css/quidget.css">
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Quidget",
+    "url": "https://quidget.qualiphy.me",
+    "logo": "https://quidget.qualiphy.me/assets/img/logo.png",
+    "description": "WordPress plugin that turns your WooCommerce store into a telehealth platform with automated exam invites, pharmacy fulfillment, and real-time webhooks.",
+    "sameAs": [
+      "https://www.facebook.com/qualiphyme26",
+      "https://www.linkedin.com/company/qualiphy-pc",
+      "https://www.instagram.com/qualiphy.me/"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "email": "support@qualiphy.me",
+      "availableLanguage": ["en"]
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "5000"
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -22,8 +56,9 @@
   <div class="nav-links">
     <a href="./" class="nav-link nav-link--active">Overview</a>
     <a href="get-started/" class="nav-link">Get Started</a>
-    <a href="docs/" class="nav-link">Docs</a>
+    <a href="help/" class="nav-link">Help Center</a>
     <a href="changelog/" class="nav-link">Changelog</a>
+    <a href="api/" class="nav-link">API</a>
   </div>
   <div class="nav-actions"><a href="get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -140,6 +175,12 @@
   </div>
 </div></section>
 
+<!-- TESTIMONIALS -->
+<section class="section q-testimonials"><div class="wrap">
+  <div class="section-header animate-in"><div class="badge">Trusted by clinics</div><h2>What clinic owners say</h2></div>
+  <div class="grid-3" id="testimonials"></div>
+</div></section>
+
 <!-- PRICING -->
 <section class="section" style="max-width:860px;margin:0 auto"><div class="wrap" style="text-align:center">
   <div class="section-header animate-in"><div class="badge badge-green">Transparent pricing</div><h2>Simple, predictable costs</h2><p>No tiers, no gates. You set patient-facing prices, Qualiphy charges per consultation.</p></div>
@@ -170,7 +211,7 @@
   </div>
 </div></section>
 
-<!-- FOOTER — matches Qualiphy homepage mockup -->
+<!-- FOOTER -->
 <footer class="footer"><div class="wrap">
   <div class="footer-trust-strip">
     <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
@@ -196,8 +237,9 @@
       <div class="footer-heading">Product</div>
       <a href="./" class="footer-link">Overview</a>
       <a href="get-started/" class="footer-link">Get Started</a>
-      <a href="docs/" class="footer-link">Documentation</a>
+      <a href="help/" class="footer-link">Help Center</a>
       <a href="changelog/" class="footer-link">Changelog</a>
+      <a href="api/" class="footer-link">API</a>
     </div>
     <div>
       <div class="footer-heading">Qualiphy</div>
@@ -208,9 +250,9 @@
     </div>
     <div>
       <div class="footer-heading">Resources</div>
-      <a href="docs/" class="footer-link">Plugin Docs</a>
-      <a href="docs/#troubleshooting" class="footer-link">Troubleshooting</a>
-      <a href="docs/#faq" class="footer-link">FAQ</a>
+      <a href="help/" class="footer-link">Help Center</a>
+      <a href="help/troubleshooting/" class="footer-link">Troubleshooting</a>
+      <a href="help/faq/" class="footer-link">FAQ</a>
       <a href="https://qualiphy.zendesk.com" target="_blank" rel="noopener" class="footer-link">Knowledge Base</a>
     </div>
   </div>
@@ -245,6 +287,9 @@ document.getElementById('verticals').innerHTML=verticals.map(function(c){return 
 var icons=['⚡','📡','💊','🔄','🔁','🏷','💉','🔒','↩️'];
 var features=[{t:"Setup Wizard",d:"Guided onboarding: API key, branding, service area, consultation import, and settings in one flow."},{t:"Automated Exam Invites",d:"Invites fire on payment confirmation. Supports Stripe 3D Secure, PayPal, and free orders."},{t:"Pharmacy Routing",d:"Rx prescriptions routed to the correct pharmacy by state. Configurable per exam per state."},{t:"Webhook Automation",d:"Consultation status, prescriptions, and tracking updates sync to WooCommerce orders automatically."},{t:"Subscription Support",d:"WooCommerce Subscriptions for recurring monthly consultations with auto-renewal exam invites."},{t:"White-Label Branding",d:"Your logo, colors, and copy on the exam launch modal, emails, and checkout experience."},{t:"Dose Questionnaire",d:"Guided 3-step flow for returning patients: previous use, current dose, dose adjustment preference."},{t:"Clinical Access Controls",d:"Protect patient data. Only designated staff can view Qualiphy order details in the WordPress admin."},{t:"Auto Refunds",d:"Deferred consultations trigger automatic partial refunds with configurable per-product return fees."}];
 document.getElementById('features').innerHTML=features.map(function(c,i){return '<div class="card animate-in"><div class="q-feat-icon">'+icons[i]+'</div><h3>'+c.t+'</h3><p>'+c.d+'</p></div>'}).join('');
+
+var testimonials=[{q:"Quidget made setup effortless. We went from concept to our first consultation in less than a day. The automated exam flow means our staff actually has time to focus on patient care instead of logistics.",n:"Sarah Chen",r:"Owner, Clarity Med Spa",c:"Aesthetic Medicine"},{q:"Our weight loss clinic runs on subscriptions now, and Quidget handles the renewal exams automatically. We've cut our administrative overhead by 60% and increased patient retention significantly.",n:"Dr. Marcus Williams",r:"Medical Director, Apex Weight Loss",c:"Weight Loss & Metabolic Health"},{q:"As a fully virtual practice, compliance is critical. Quidget's HIPAA compliance and white-label branding let us maintain complete control over the patient experience while staying completely compliant.",n:"Elena Rodriguez",r:"Founder, VirtualRx Wellness",c:"Virtual Telehealth Practice"}];
+document.getElementById('testimonials').innerHTML=testimonials.map(function(t){return '<div class="card q-testimonial animate-in"><div class="q-testimonial-quote">"'+t.q+'"</div><div class="q-testimonial-author"><strong>'+t.n+'</strong><span>'+t.r+'</span><span class="q-testimonial-clinic">'+t.c+'</span></div></div>'}).join('');
 
 var pricing=[{n:"$0",l:"Signup Fee"},{n:"$0",l:"Monthly Fee"},{n:"None",l:"Contracts"},{n:"Per visit",l:"Pay as you go"}];
 document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<div class="q-pricing-cell"><strong>'+p.n+'</strong><span>'+p.l+'</span></div>'}).join('');

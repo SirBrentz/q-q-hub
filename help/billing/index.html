@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing & Pricing — Quidget Help Center</title>
+  <meta name="description" content="Understanding Quidget costs, price margins, refund logic, and return fee configuration for your WooCommerce store.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+      <a href="../../api/" class="nav-link">API</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <!-- Main Container -->
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-nav">
+        <h3 class="sidebar-title">Billing & Pricing</h3>
+        <ul class="sidebar-list">
+          <li><a href="#how-pricing-works" class="sidebar-link active">How Pricing Works</a></li>
+          <li><a href="#setting-price-margins" class="sidebar-link">Setting Price Margins</a></li>
+          <li><a href="#refund-logic-return-fees" class="sidebar-link">Refund Logic & Return Fees</a></li>
+          <li><a href="#understanding-your-costs" class="sidebar-link">Understanding Your Costs</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../">Help Center</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Billing & Pricing</span>
+      </div>
+
+      <!-- Page Title -->
+      <h1 class="docs-title">Billing & Pricing</h1>
+      <p class="docs-intro">Learn how Quidget pricing works, how to set competitive margins, configure refund logic, and understand your consultation costs.</p>
+
+      <!-- Article 1: How Pricing Works -->
+      <article id="how-pricing-works" class="docs-article">
+        <h2>How Pricing Works</h2>
+        <p>Quidget uses a simple, transparent per-consultation pricing model with no hidden fees, contracts, or monthly minimums. You only pay when a consultation actually occurs.</p>
+
+        <h3>The Pricing Model</h3>
+        <p>Here's how the pricing structure works:</p>
+        <ul>
+          <li><strong>Base Cost:</strong> Qualiphy charges a per-consultation cost (default $27.99, may vary by exam type)</li>
+          <li><strong>Patient-Facing Price:</strong> You set the price customers see on your WooCommerce store</li>
+          <li><strong>Your Margin:</strong> The difference between what you charge and what Qualiphy charges is your profit</li>
+          <li><strong>No Other Fees:</strong> No setup fees, no monthly subscription to Quidget, no transaction fees beyond the per-consultation cost</li>
+        </ul>
+
+        <h3>Example Pricing Breakdown</h3>
+        <p>Let's say a consultation exam costs Qualiphy $27.99 to deliver. You want a healthy margin, so you decide to charge customers $49.99:</p>
+        <ul>
+          <li>Customer pays: $49.99</li>
+          <li>Qualiphy cost: $27.99</li>
+          <li><strong>Your margin: $22.00 per consultation (44%)</strong></li>
+        </ul>
+
+        <h3>Per-Consultation Costs by Type</h3>
+        <p>Different consultation types may have different costs. For example:</p>
+        <ul>
+          <li><strong>GFE (General Free Exam):</strong> Lower cost, typically $22.00</li>
+          <li><strong>Rx (Prescription):</strong> Higher cost, typically $27.99-$35.00</li>
+          <li><strong>Specialty Exams:</strong> May vary depending on provider and complexity</li>
+        </ul>
+        <p>Check your specific exam types in <strong>Qualiphy → Consultations</strong> to see the exact base cost for each type.</p>
+
+        <h3>No Upfront or Recurring Charges</h3>
+        <p>Unlike other platforms, Quidget doesn't charge you for:</p>
+        <ul>
+          <li>Monthly subscription or platform fees</li>
+          <li>Setup or activation fees</li>
+          <li>API usage or integration fees</li>
+          <li>Inactive merchant accounts</li>
+        </ul>
+        <p>You're only charged when a consultation is successfully completed and the exam is approved or deferred. Rejected consultations are not charged.</p>
+
+        <h3>Payment & Billing Cycle</h3>
+        <p>Consultation costs are automatically deducted from your Qualiphy account balance. You can set up automatic recurring payments in your Qualiphy account to maintain a positive balance. Your billing history is always available at <strong>Qualiphy (clinic dashboard) → Settings → Billing → Invoice History</strong>.</p>
+      </article>
+
+      <!-- Article 2: Setting Price Margins -->
+      <article id="setting-price-margins" class="docs-article">
+        <h2>Setting Price Margins</h2>
+        <p>Your profit on each consultation is determined by the gap between the Qualiphy base cost and the price you set for customers. Quidget makes it easy to manage these margins.</p>
+
+        <h3>Default Price Margin Setting</h3>
+        <p>Quidget includes a configurable default price margin that auto-fills when you create or import products. By default, this is set to <strong>10%</strong>, which means the suggested customer price is the Qualiphy cost plus 10%.</p>
+        <p>To adjust this setting:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Find the <strong>Default Price Margin</strong> field</li>
+          <li>Enter your desired margin percentage (e.g., 15, 25, 50)</li>
+          <li>Click <strong>Save Changes</strong></li>
+        </ol>
+        <p>This margin percentage will be used when you import new consultations or create new products.</p>
+
+        <h3>Pricing During Consultation Import</h3>
+        <p>When you import a consultation type from Qualiphy into WooCommerce, the pricing step shows you:</p>
+        <ul>
+          <li><strong>Qualiphy Cost:</strong> The base cost for this consultation type (e.g., $27.99)</li>
+          <li><strong>Your Margin %:</strong> The default margin percentage applied (e.g., 10%)</li>
+          <li><strong>Suggested Price:</strong> The calculated customer price (e.g., $30.79)</li>
+        </ul>
+
+        <h4>Example Pricing Calculation</h4>
+        <p>During import, you see:</p>
+        <ul>
+          <li>Qualiphy Cost: $27.99</li>
+          <li>Margin: 10%</li>
+          <li>Calculation: $27.99 × 1.10 = $30.79 (suggested price)</li>
+        </ul>
+
+        <h3>Overriding the Suggested Price</h3>
+        <p>The suggested price is just a starting point — you can set any price you want:</p>
+        <ul>
+          <li>You can charge less than the suggested price (lower margin)</li>
+          <li>You can charge more for competitive positioning (higher margin)</li>
+          <li>Different pricing for different consultation types is fully supported</li>
+        </ul>
+        <p>For example, you might charge $39.99 instead of the suggested $30.79 to build in more margin for marketing and operational costs.</p>
+
+        <h3>Editing Prices After Import</h3>
+        <p>After importing a consultation product, you can edit the price at any time:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Find your consultation product</li>
+          <li>In the <strong>Product Data</strong> section, edit the <strong>Regular Price</strong></li>
+          <li>Click <strong>Update</strong> to save</li>
+        </ol>
+        <p>Price changes take effect immediately for new orders. Existing orders are unaffected.</p>
+
+        <h3>Viewing Your Margins</h3>
+        <p>To see the margin on any product:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit the consultation product</li>
+          <li>Look at the <strong>Qualiphy</strong> section, which shows:
+            <ul>
+              <li>Consultation Type (and its base cost)</li>
+              <li>Your Set Price</li>
+              <li>Profit per consultation</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Competitive Pricing Tips</h3>
+        <p>When deciding on pricing:</p>
+        <ul>
+          <li><strong>Research competitors:</strong> Check what other telehealth platforms charge for similar consultations</li>
+          <li><strong>Consider market positioning:</strong> Premium branding may support higher prices; value positioning may require lower prices</li>
+          <li><strong>Factor in overhead:</strong> Include marketing, support, payment processing, and operational costs in your margin calculation</li>
+          <li><strong>Test and adjust:</strong> You can change prices anytime to optimize conversion and profitability</li>
+          <li><strong>Promotional pricing:</strong> Use WooCommerce's sale pricing feature to run discounts without changing the base price</li>
+        </ul>
+      </article>
+
+      <!-- Article 3: Refund Logic & Return Fees -->
+      <article id="refund-logic-return-fees" class="docs-article">
+        <h2>Refund Logic & Return Fees</h2>
+        <p>Quidget automatically handles refunds for deferred or rejected consultations while protecting your business with configurable return fees.</p>
+
+        <h3>Auto Refund on Rejection & Deferral</h3>
+        <p>By default, when a consultation is rejected or deferred, Quidget issues an automatic partial refund to the customer. This setting is called <strong>Auto Refund Rejected</strong> and is enabled by default.</p>
+
+        <h3>How Refunds Are Calculated</h3>
+        <p>When a refund is issued, the calculation is:</p>
+        <p><strong>Refund Amount = Order Total − Return Fee</strong></p>
+        <p>This allows you to keep a portion of the payment to cover costs (provider review time, administrative overhead, etc.) while refunding most of the consultation fee.</p>
+
+        <h4>Example Refund Scenario</h4>
+        <ul>
+          <li>Customer purchases a consultation for $49.99</li>
+          <li>Provider reviews and defers the consultation</li>
+          <li>Return fee: $30.00 (configured)</li>
+          <li><strong>Refund to customer: $49.99 − $30.00 = $19.99</strong></li>
+          <li><strong>Amount retained by you: $30.00</strong></li>
+        </ul>
+
+        <h3>What is a Return Fee?</h3>
+        <p>A return fee is the amount Quidget retains from a consultation order when a refund is issued for a rejection or deferral. This covers:</p>
+        <ul>
+          <li>Provider time spent reviewing the consultation</li>
+          <li>Pharmacy/system administration costs</li>
+          <li>Payment processing costs incurred</li>
+          <li>Customer service for handling the deferral or rejection</li>
+        </ul>
+
+        <h3>Configuring Return Fees</h3>
+        <p>Return fees are configured on a per-product basis. Different consultation types can have different return fees.</p>
+        <p>To set a return fee:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit your consultation product</li>
+          <li>In the <strong>Qualiphy</strong> section, set the <strong>Return Fee</strong> amount (default $30.00)</li>
+          <li>Click <strong>Update</strong> to save</li>
+        </ol>
+
+        <h4>Return Fee Examples</h4>
+        <ul>
+          <li><strong>Basic consultations:</strong> $20.00 return fee</li>
+          <li><strong>Standard consultations:</strong> $30.00 return fee (default)</li>
+          <li><strong>Premium/complex consultations:</strong> $50.00 return fee</li>
+        </ul>
+
+        <h3>Multiple Items in an Order</h3>
+        <p>When a customer orders multiple consultation products, return fees are summed:</p>
+        <ul>
+          <li>Customer orders 2 consultations at $49.99 each = $99.98 total</li>
+          <li>Each has a $30.00 return fee</li>
+          <li>Consultation 1 deferred: Refund $49.99 − $30.00 = $19.99</li>
+          <li>Consultation 2 deferred: Refund $49.99 − $30.00 = $19.99</li>
+          <li><strong>Total refunded: $39.98 | Total retained: $60.00</strong></li>
+        </ul>
+
+        <h3>Disabling Auto Refunds</h3>
+        <p>If you prefer to handle refunds manually (not recommended), you can disable auto-refunds:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Subscriptions</strong> (for subscriptions) or <strong>General</strong> (for all orders)</li>
+          <li>Toggle <strong>Auto Refund Rejected</strong> to OFF</li>
+          <li>Click <strong>Save Changes</strong></li>
+        </ol>
+        <p>When disabled, you'll need to manually refund deferred/rejected consultations in WooCommerce.</p>
+
+        <h3>Manual Refund Overrides</h3>
+        <p>Even with auto-refunds enabled, you can manually adjust or override any refund:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Orders</strong></li>
+          <li>Find the order with the deferred consultation</li>
+          <li>In the <strong>Order Details</strong> section, click <strong>Refund</strong></li>
+          <li>Enter the custom refund amount and reason</li>
+          <li>Click <strong>Refund $XX.XX</strong> to process</li>
+        </ol>
+
+        <h3>Refund Processing & Timing</h3>
+        <p>Refunds are processed immediately to the original payment method:</p>
+        <ul>
+          <li><strong>Credit/Debit Cards:</strong> Refund appears within 2-5 business days</li>
+          <li><strong>PayPal:</strong> Refund appears within 1-2 business days</li>
+          <li><strong>Bank Transfers:</strong> Refund may take longer depending on your bank</li>
+        </ul>
+        <p>The customer receives an email notification when the refund is processed, and you can see refund history in the order details.</p>
+      </article>
+
+      <!-- Article 4: Understanding Your Costs -->
+      <article id="understanding-your-costs" class="docs-article">
+        <h2>Understanding Your Costs</h2>
+        <p>Clarity on what you pay helps you forecast profitability and plan your pricing strategy. Quidget keeps costs transparent.</p>
+
+        <h3>When You're Charged</h3>
+        <p>You are charged for a consultation in these scenarios:</p>
+        <ul>
+          <li><strong>Exam Submitted:</strong> Patient completes the exam questionnaire and submits it for review</li>
+          <li><strong>Provider Review:</strong> When the provider begins reviewing (or has reviewed) the exam</li>
+        </ul>
+
+        <p>You are <strong>NOT</strong> charged for:</p>
+        <ul>
+          <li>Exam invites sent but not completed</li>
+          <li>Exams that are rejected by the provider</li>
+          <li>Exams that are deferred (deferral charges are reapplied only when the exam is re-submitted)</li>
+        </ul>
+
+        <h3>Viewing Your Consultation Costs</h3>
+        <p>At every step, you can see the cost breakdown:</p>
+
+        <h4>During Product Import</h4>
+        <p>When importing a consultation, you see the cost in the pricing step. This is the per-consultation charge you'll incur when a patient purchases.</p>
+
+        <h4>On the WooCommerce Product Page</h4>
+        <p>Edit any consultation product to see:</p>
+        <ul>
+          <li><strong>Consultation Type:</strong> The Qualiphy exam type</li>
+          <li><strong>Qualiphy Cost:</strong> What you'll pay per consultation</li>
+          <li><strong>Your Price:</strong> What you're charging customers</li>
+          <li><strong>Profit Per Sale:</strong> Your margin at a glance</li>
+        </ul>
+
+        <h4>In Your Qualiphy Clinic Dashboard</h4>
+        <p>View detailed cost breakdowns anytime:</p>
+        <ol>
+          <li>Log into your Qualiphy clinic account at <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → Billing → Invoice History</strong></li>
+          <li>View all past consultations and their costs</li>
+          <li>Download invoices for accounting/tax purposes</li>
+        </ol>
+
+        <h3>Cost Management Tips</h3>
+        <ul>
+          <li><strong>Monitor margins:</strong> Regularly review your pricing vs. costs to ensure healthy margins</li>
+          <li><strong>Track conversion:</strong> Use WooCommerce analytics to see conversion rates by product price</li>
+          <li><strong>Plan for deferred/rejected:</strong> Budget for the return fees you'll retain on deferred exams</li>
+          <li><strong>Factor in payment processing:</strong> Your payment gateway (Stripe, PayPal) also charges a fee (~2.9% + $0.30), which comes from your margin</li>
+          <li><strong>Review quarterly:</strong> Check your Qualiphy invoices quarterly to forecast annual costs and profitability</li>
+        </ul>
+
+        <h3>Payment Methods & Recurring Billing</h3>
+        <p>Set up automatic recurring payments in your Qualiphy account to ensure consultation charges never exceed your balance:</p>
+        <ol>
+          <li>Log into <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → Billing → Payment Methods</strong></li>
+          <li>Add your credit card or bank account</li>
+          <li>Enable <strong>Automatic Recurring Payment</strong> to top up your balance automatically</li>
+        </ol>
+
+        <h3>Contact Support for Custom Pricing</h3>
+        <p>If you're operating at scale or have specific pricing needs, reach out to <strong>support@qualiphy.me</strong> to discuss custom consultation rates or volume discounts.</p>
+      </article>
+
+      <!-- Help CTA -->
+      <div class="docs-cta">
+        <h3>Still need help?</h3>
+        <p>Can't find what you're looking for? Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Inline Scripts -->
+  <script>
+    // Nav beam effect
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const articles = document.querySelectorAll('.docs-article');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      articles.forEach((article) => {
+        const top = article.offsetTop;
+        if (window.scrollY >= top - 200) {
+          current = article.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Footer shimmer effect
+    const cta = document.querySelector('.docs-cta');
+    if (cta) {
+      cta.addEventListener('mouseenter', function() {
+        this.style.animation = 'shimmer 0.6s ease-in-out';
+      });
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

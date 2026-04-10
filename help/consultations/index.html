@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultations & Exams — Quidget Help Center</title>
+  <meta name="description" content="Understanding exam types, the import wizard, GFE vs Rx consultations, and the consultation lifecycle in Quidget.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+      <a href="../../api/" class="nav-link">API</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <!-- Main Container -->
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-nav">
+        <h3 class="sidebar-title">Consultations & Exams</h3>
+        <ul class="sidebar-list">
+          <li><a href="#understanding-exam-types" class="sidebar-link active">Understanding Exam Types</a></li>
+          <li><a href="#gfe-vs-rx-consultations" class="sidebar-link">GFE vs Rx Consultations</a></li>
+          <li><a href="#using-the-import-wizard" class="sidebar-link">Using the Import Wizard</a></li>
+          <li><a href="#consultation-lifecycle" class="sidebar-link">The Consultation Lifecycle</a></li>
+          <li><a href="#resending-exam-invites" class="sidebar-link">Resending Exam Invites</a></li>
+          <li><a href="#dose-questionnaire" class="sidebar-link">Dose Questionnaire</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../">Help Center</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Consultations & Exams</span>
+      </div>
+
+      <!-- Page Title -->
+      <h1 class="docs-title">Consultations & Exams</h1>
+      <p class="docs-intro">Learn about the different types of consultations Quidget supports, how to import products, and understand the full exam lifecycle.</p>
+
+      <!-- Article 1: Understanding Exam Types -->
+      <article id="understanding-exam-types" class="docs-article">
+        <h2>Understanding Exam Types</h2>
+        <p>Quidget supports two primary consultation types, each with a unique workflow and outcome. Your consultation type determines how the patient interacts with the provider and what happens after their exam is approved.</p>
+
+        <h3>GFE (General Fitness Exam)</h3>
+        <p><strong>Internal designation:</strong> <code>rx_type 1</code></p>
+        <p>GFE consultations are used for aesthetic procedures and non-prescription services where the provider's role is to clear the patient for treatment. The provider reviews the patient's health information and either approves or denies the procedure.</p>
+
+        <p><strong>Example use cases:</strong></p>
+        <ul>
+          <li>Botox and filler clearances</li>
+          <li>Laser treatment consultations</li>
+          <li>Skin care procedure approvals</li>
+          <li>Aesthetic assessment consultations</li>
+        </ul>
+
+        <p><strong>What happens after approval:</strong></p>
+        <ul>
+          <li>The patient receives an approval email from your clinic</li>
+          <li>The WooCommerce order automatically completes</li>
+          <li>The patient can schedule their procedure with your clinic's booking system</li>
+          <li>No pharmacy or fulfillment is involved</li>
+        </ul>
+
+        <h3>Rx (Prescription Consultation)</h3>
+        <p><strong>Internal designation:</strong> <code>rx_type 2</code></p>
+        <p>Rx consultations are used for medication-based treatments where the provider issues a prescription. The prescription then routes to your configured pharmacy for fulfillment and shipment to the patient.</p>
+
+        <p><strong>Example use cases:</strong></p>
+        <ul>
+          <li>GLP-1 prescriptions (Ozempic, Semaglutide, etc.)</li>
+          <li>Testosterone replacement therapy</li>
+          <li>Hormone prescriptions</li>
+          <li>Topical medication prescriptions</li>
+        </ul>
+
+        <p><strong>What happens after approval:</strong></p>
+        <ul>
+          <li>A prescription is automatically created in your clinic's system</li>
+          <li>The prescription is routed to the appropriate pharmacy based on the patient's state</li>
+          <li>The pharmacy prepares and ships the medication</li>
+          <li>Tracking information is synced back to the patient's order</li>
+          <li>The WooCommerce order updates through the fulfillment lifecycle</li>
+        </ul>
+
+        <h3>Choosing the Right Type</h3>
+        <p>When creating or importing a consultation product, you'll select either GFE or Rx. This choice affects:</p>
+        <ul>
+          <li>The patient questionnaire shown during the exam</li>
+          <li>What information the provider sees and decides on</li>
+          <li>The post-approval workflow (approval vs. prescription creation)</li>
+          <li>Pharmacy routing and fulfillment tracking</li>
+          <li>The email messages shown to patients</li>
+        </ul>
+      </article>
+
+      <!-- Article 2: GFE vs Rx Consultations -->
+      <article id="gfe-vs-rx-consultations" class="docs-article">
+        <h2>GFE vs Rx Consultations</h2>
+        <p>Understanding the differences between GFE and Rx workflows will help you set up the right products for your clinic and provide the best experience for your patients.</p>
+
+        <h3>Feature Comparison</h3>
+
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>GFE</th>
+              <th>Rx</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Purpose</td>
+              <td>Provider clearance for procedures</td>
+              <td>Prescription issuance for medications</td>
+            </tr>
+            <tr>
+              <td>Checkout flow</td>
+              <td>Simple (name, DOB, health info)</td>
+              <td>Extended (includes pharmacy selection)</td>
+            </tr>
+            <tr>
+              <td>Questionnaire</td>
+              <td>Focused on procedure eligibility</td>
+              <td>Includes dosing history & preferences</td>
+            </tr>
+            <tr>
+              <td>Provider decides</td>
+              <td>Approved or Rejected</td>
+              <td>Approved (prescribe) or Rejected</td>
+            </tr>
+            <tr>
+              <td>After approval</td>
+              <td>Order completes immediately</td>
+              <td>Prescription created, routed to pharmacy</td>
+            </tr>
+            <tr>
+              <td>Fulfillment</td>
+              <td>None (patient books procedure)</td>
+              <td>Pharmacy ships medication to patient</td>
+            </tr>
+            <tr>
+              <td>Tracking</td>
+              <td>N/A</td>
+              <td>Pharmacy shipment tracking</td>
+            </tr>
+            <tr>
+              <td>Age restriction</td>
+              <td>13+ (customizable)</td>
+              <td>18+ (required by law)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>GFE Workflow in Detail</h3>
+        <ol>
+          <li><strong>Patient purchases:</strong> Selects GFE product, completes checkout</li>
+          <li><strong>Exam invite sent:</strong> Patient receives link to complete health questionnaire</li>
+          <li><strong>Patient submits exam:</strong> Answers questions about their health and procedure goals</li>
+          <li><strong>Provider reviews:</strong> Looks at patient info, decides to approve or reject</li>
+          <li><strong>Patient approved:</strong> Receives approval email, can proceed with booking procedure</li>
+        </ol>
+
+        <h3>Rx Workflow in Detail</h3>
+        <ol>
+          <li><strong>Patient purchases:</strong> Selects Rx product, completes checkout (includes address for shipment)</li>
+          <li><strong>Exam invite sent:</strong> Patient receives link to complete health questionnaire + dosing questions</li>
+          <li><strong>Patient submits exam:</strong> Answers medical history and indicates dose preferences</li>
+          <li><strong>Provider reviews:</strong> Evaluates patient eligibility and chooses appropriate dose</li>
+          <li><strong>Prescription created:</strong> Provider issues prescription with selected dose</li>
+          <li><strong>Routed to pharmacy:</strong> Prescription sent to pharmacy based on patient's state</li>
+          <li><strong>Pharmacy ships:</strong> Medication prepared and shipped with tracking</li>
+          <li><strong>Order updates:</strong> Patient sees tracking, order completes on delivery</li>
+        </ol>
+
+        <h3>When to Use Each Type</h3>
+        <p><strong>Use GFE when:</strong></p>
+        <ul>
+          <li>You're approving patients for a procedure or treatment</li>
+          <li>No medication or prescription is involved</li>
+          <li>The consultation is a standalone appointment (not medication fulfillment)</li>
+          <li>You want a faster checkout and simpler workflow</li>
+        </ul>
+
+        <p><strong>Use Rx when:</strong></p>
+        <ul>
+          <li>You're issuing a medication prescription</li>
+          <li>You need to track fulfillment and shipment</li>
+          <li>Patients need to select a dose or medication option</li>
+          <li>You're routing prescriptions to a pharmacy</li>
+        </ul>
+      </article>
+
+      <!-- Article 3: Using the Import Wizard -->
+      <article id="using-the-import-wizard" class="docs-article">
+        <h2>Using the Import Wizard</h2>
+        <p>The import wizard helps you quickly create WooCommerce products for your consultations, complete with Quidget configuration, pricing, and pharmacy routing. Access it from <strong>Qualiphy → Consultations → Import</strong>.</p>
+
+        <h3>Step 1: Product Type</h3>
+        <p>Choose whether this is a GFE or Rx consultation:</p>
+        <ul>
+          <li><strong>GFE (General Fitness Exam):</strong> For provider clearance (procedures, assessments)</li>
+          <li><strong>Rx (Prescription):</strong> For medication prescriptions</li>
+        </ul>
+
+        <h3>Step 2: Free or Paid</h3>
+        <p>Decide if this consultation is free or paid:</p>
+        <ul>
+          <li><strong>Free:</strong> No charge to the patient (useful for initial consultations or screening)</li>
+          <li><strong>Paid:</strong> Patient pays a consultation fee (you'll set the price in a later step)</li>
+        </ul>
+
+        <h3>Step 3: Pharmacy (Rx Only)</h3>
+        <p>If you selected Rx, choose the pharmacy or pharmacies that will fulfill prescriptions:</p>
+        <ul>
+          <li>Select one or more pharmacies from your list</li>
+          <li>You can route to different pharmacies based on patient state in a later step</li>
+          <li>If you don't have pharmacies configured yet, you'll need to set them up in <strong>Qualiphy → Pharmacies</strong></li>
+        </ul>
+
+        <h3>Step 4: Product Variants (Optional)</h3>
+        <p>For Rx consultations with multiple medication options, create variants for each option:</p>
+        <ul>
+          <li><strong>Add variant:</strong> Give each option a name (e.g., "GLP-1 - Starter Kit")</li>
+          <li><strong>Description:</strong> Brief explanation of the variant (e.g., "Weeks 1-4 dosing")</li>
+          <li><strong>You can skip this:</strong> If you only have one medication option, leave blank</li>
+        </ul>
+
+        <h3>Step 5: Pricing</h3>
+        <p>Set the patient-facing price for this consultation. The wizard shows you:</p>
+        <ul>
+          <li><strong>Qualiphy cost:</strong> What Qualiphy charges you for this consultation type</li>
+          <li><strong>Your margin:</strong> Your default margin % (from settings)</li>
+          <li><strong>Patient price:</strong> Auto-calculated based on cost + margin (you can override)</li>
+        </ul>
+
+        <p><strong>Example:</strong></p>
+        <ul>
+          <li>Qualiphy cost: $50</li>
+          <li>Your margin: 10% ($5)</li>
+          <li>Default price: $55 (customizable)</li>
+        </ul>
+
+        <h3>Step 6: Review and Create</h3>
+        <p>Review all your choices:</p>
+        <ul>
+          <li>Consultation type and pricing</li>
+          <li>Pharmacy routing (Rx only)</li>
+          <li>Any variants you created</li>
+        </ul>
+
+        <p>Click <strong>Create Product</strong> to finish. Quidget will:</p>
+        <ul>
+          <li>Create a new WooCommerce product</li>
+          <li>Configure all Quidget settings (exam type, pricing, etc.)</li>
+          <li>Add the product to your store immediately</li>
+        </ul>
+
+        <h3>Creating Products Manually</h3>
+        <p>If you prefer to create products manually instead of using the wizard, you can still do so. Just go to <strong>WooCommerce → Products → Add New</strong> and look for the <strong>Quidget Settings</strong> section in the product editor.</p>
+
+        <h3>Editing After Import</h3>
+        <p>After creating a product via the import wizard, you can edit any aspect of it:</p>
+        <ul>
+          <li>Click the product to open the editor</li>
+          <li>Change the price, description, images, etc.</li>
+          <li>Update Quidget settings (exam type, pharmacy routing, etc.)</li>
+          <li>Save your changes</li>
+        </ul>
+      </article>
+
+      <!-- Article 4: The Consultation Lifecycle -->
+      <article id="consultation-lifecycle" class="docs-article">
+        <h2>The Consultation Lifecycle</h2>
+        <p>Understanding the full lifecycle of a consultation will help you track orders, troubleshoot issues, and provide better support to your patients.</p>
+
+        <h3>Complete GFE Lifecycle</h3>
+
+        <ol>
+          <li><strong>Order Created</strong>
+            <ul>
+              <li>Patient adds GFE product to cart</li>
+              <li>Completes checkout with personal info (name, DOB, phone, address)</li>
+              <li>Payment processed successfully</li>
+            </ul>
+          </li>
+          <li><strong>Exam Invite Sent</strong>
+            <ul>
+              <li>Immediately after payment, exam invite email is sent to patient</li>
+              <li>Email contains link to start the health questionnaire</li>
+            </ul>
+          </li>
+          <li><strong>Exam Submitted</strong>
+            <ul>
+              <li>Patient completes the questionnaire</li>
+              <li>System confirms receipt and shows thank you message</li>
+              <li>Order status updates to "Exam Submitted"</li>
+            </ul>
+          </li>
+          <li><strong>Provider Review</strong>
+            <ul>
+              <li>Your medical team logs into Qualiphy to review the exam</li>
+              <li>Provider reviews patient health info and makes a clinical decision</li>
+            </ul>
+          </li>
+          <li><strong>Approved / Rejected Decision</strong>
+            <ul>
+              <li><strong>If approved:</strong> Order automatically completes, patient receives approval email</li>
+              <li><strong>If rejected:</strong> Patient notified, auto-refund triggered (if enabled)</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Complete Rx Lifecycle</h3>
+
+        <ol>
+          <li><strong>Order Created</strong>
+            <ul>
+              <li>Patient adds Rx product to cart</li>
+              <li>Completes checkout with personal info + shipping address</li>
+              <li>Payment processed</li>
+            </ul>
+          </li>
+          <li><strong>Exam Invite Sent</strong>
+            <ul>
+              <li>Exam invite email sent immediately after payment</li>
+              <li>Email includes link to health questionnaire + dose preferences</li>
+            </ul>
+          </li>
+          <li><strong>Exam Submitted</strong>
+            <ul>
+              <li>Patient completes questionnaire including medical history and dose preferences</li>
+              <li>Order status updates to "Exam Submitted"</li>
+            </ul>
+          </li>
+          <li><strong>Provider Review</strong>
+            <ul>
+              <li>Provider reviews exam in Qualiphy</li>
+              <li>Makes clinical decision: approve and select dose, or reject</li>
+            </ul>
+          </li>
+          <li><strong>Prescription Created</strong>
+            <ul>
+              <li>If approved: prescription created with selected dose</li>
+              <li>Order status updates to "Prescription Pending"</li>
+            </ul>
+          </li>
+          <li><strong>Routed to Pharmacy</strong>
+            <ul>
+              <li>Prescription automatically sent to configured pharmacy based on patient state</li>
+              <li>Order status updates to "Prescription Routed"</li>
+            </ul>
+          </li>
+          <li><strong>Pharmacy Fulfillment</strong>
+            <ul>
+              <li>Pharmacy confirms receipt and begins preparation</li>
+              <li>Medication shipped with tracking number</li>
+              <li>Order status updates to "Shipped"</li>
+            </ul>
+          </li>
+          <li><strong>In Transit</strong>
+            <ul>
+              <li>Patient can track shipment via order page</li>
+              <li>Patient receives tracking email with carrier link</li>
+            </ul>
+          </li>
+          <li><strong>Order Complete</strong>
+            <ul>
+              <li>Medication delivered to patient</li>
+              <li>Order status updates to "Completed"</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Checking Status in WooCommerce</h3>
+        <p>To view the status of any consultation, go to <strong>WooCommerce → Orders</strong> and click on the order. The <strong>Qualiphy</strong> section shows:</p>
+        <ul>
+          <li>Current exam status (Submitted, Approved, Rejected)</li>
+          <li>Consultation type (GFE or Rx)</li>
+          <li>Prescription status (if Rx)</li>
+          <li>Pharmacy routing info (if Rx)</li>
+          <li>Tracking number (if Rx with shipment)</li>
+        </ul>
+
+        <h3>Using Webhooks for Real-Time Updates</h3>
+        <p>As exams move through the lifecycle, Quidget receives webhook notifications from Qualiphy. These updates are processed automatically, and your WooCommerce orders stay in sync with your clinic's systems. No manual intervention needed.</p>
+
+        <p><strong>Note:</strong> If webhooks are blocked by a security plugin, updates may be delayed. See the <a href="../pharmacy/">Pharmacy & Fulfillment</a> section for troubleshooting webhook issues.</p>
+      </article>
+
+      <!-- Article 5: Resending Exam Invites -->
+      <article id="resending-exam-invites" class="docs-article">
+        <h2>Resending Exam Invites</h2>
+        <p>If a patient didn't receive their exam invite, or if they lost the link, you can easily resend the invite from the WooCommerce order page.</p>
+
+        <h3>Resending via WooCommerce</h3>
+        <ol>
+          <li>Go to <strong>WooCommerce → Orders</strong></li>
+          <li>Find and click the order</li>
+          <li>In the <strong>Qualiphy</strong> section, look for <strong>Order Actions</strong></li>
+          <li>Click <strong>Resend Consultation Link Email</strong></li>
+          <li>A confirmation message will appear when the email is sent</li>
+        </ol>
+
+        <h3>Resending via Qualiphy</h3>
+        <p>You can also resend invites directly from your Qualiphy clinic dashboard:</p>
+        <ol>
+          <li>Log in to <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Consultations → Pending Exams</strong></li>
+          <li>Find the patient's exam</li>
+          <li>Click <strong>Resend Invite Email</strong></li>
+        </ol>
+
+        <h3>When Patients Don't Receive Invites</h3>
+        <p>If a patient says they didn't receive their exam invite, check:</p>
+        <ul>
+          <li><strong>Email address:</strong> Verify the email address they provided at checkout is correct</li>
+          <li><strong>Spam folder:</strong> Have them check spam, promotions, and other email tabs</li>
+          <li><strong>Email provider:</strong> Some corporate email systems may block automatic emails — contact their IT</li>
+          <li><strong>Auto-send setting:</strong> Verify "Auto Send Exams" is enabled in <strong>Qualiphy → Settings → General</strong></li>
+        </ul>
+
+        <h3>Troubleshooting Failed Sends</h3>
+        <p>If an exam invite fails to send, you'll receive an admin notification (if email notifications are enabled). Common reasons for failure:</p>
+        <ul>
+          <li><strong>Invalid email address:</strong> Typo or malformed email — have patient verify their address</li>
+          <li><strong>Email service issue:</strong> Temporary outage — try resending in a few minutes</li>
+          <li><strong>API key not connected:</strong> Verify your Qualiphy API key is still valid in <strong>Qualiphy → Settings → General</strong></li>
+        </ul>
+
+        <p>If issues persist, contact support at <strong>support@qualiphy.me</strong> with the order ID and patient email address.</p>
+      </article>
+
+      <!-- Article 6: Dose Questionnaire -->
+      <article id="dose-questionnaire" class="docs-article">
+        <h2>Dose Questionnaire</h2>
+        <p>For returning patients on medication-based consultations (Rx only), Quidget includes a guided dose questionnaire. This three-step flow helps patients communicate their preferences for medication adjustments.</p>
+
+        <h3>When It Appears</h3>
+        <p>The dose questionnaire appears during the exam for patients who:</p>
+        <ul>
+          <li>Are purchasing an Rx consultation product</li>
+          <li>Have previously completed a consultation with your clinic (indicated by their history in Qualiphy)</li>
+          <li>Selected that they've used the medication before</li>
+        </ul>
+
+        <h3>The Three Steps</h3>
+
+        <h4>Step 1: Previous Use</h4>
+        <p>The system asks: "Have you used this medication before?" This helps the provider understand if the patient is new to the medication or continuing therapy.</p>
+        <ul>
+          <li><strong>Yes:</strong> Patient has used this medication in the past</li>
+          <li><strong>No:</strong> Patient is new to this medication</li>
+        </ul>
+
+        <h4>Step 2: Current Dose</h4>
+        <p>If the patient selected "Yes" to previous use, they're asked to enter their current dose. This is a text input that accepts:</p>
+        <ul>
+          <li>Numeric values (e.g., "0.25")</li>
+          <li>Units (e.g., "0.25mg", "2.4ml")</li>
+          <li>Frequency (e.g., "weekly", "daily")</li>
+        </ul>
+
+        <h4>Step 3: Dose Adjustment Preference</h4>
+        <p>The final question asks: "What dose adjustment would you like?" The options are:</p>
+        <ul>
+          <li><strong>Continue current dose:</strong> Patient wants the same dose as before</li>
+          <li><strong>Increase dose:</strong> Patient wants a higher dose</li>
+          <li><strong>Decrease dose:</strong> Patient wants a lower dose</li>
+          <li><strong>Let provider decide:</strong> Patient trusts the provider to choose</li>
+        </ul>
+
+        <h3>Dose Bottles Display</h3>
+        <p>During the questionnaire, the UI displays visual "dose bottles" that change color based on the patient's selection:</p>
+        <ul>
+          <li><strong>Green bottle:</strong> Current dose / continuing dose</li>
+          <li><strong>Yellow bottle:</strong> Increased dose</li>
+          <li><strong>Red bottle:</strong> Decreased dose</li>
+        </ul>
+
+        <p>The bottle colors are customizable in <strong>Qualiphy → Settings → Language</strong> under the "Dose Bottle Colors" section.</p>
+
+        <h3>Customizing Dose Questions and Labels</h3>
+        <p>You can customize all dose questionnaire text from <strong>Qualiphy → Settings → Language</strong>:</p>
+        <ul>
+          <li><strong>Section heading:</strong> "Dose Preferences" or your custom text</li>
+          <li><strong>Previous use question:</strong> Change the wording if needed</li>
+          <li><strong>Current dose label:</strong> "Current Dose", "Weekly Dose", or custom</li>
+          <li><strong>Adjustment options:</strong> Customize each label (e.g., "Keep my dose", "Go higher", etc.)</li>
+          <li><strong>Bottle colors:</strong> Set custom colors for each dose option</li>
+        </ul>
+
+        <h3>Provider View</h3>
+        <p>When your medical team reviews an exam in Qualiphy, they can see the patient's dose history and preference. This information helps the provider make an informed clinical decision about what dose to prescribe.</p>
+
+        <p><strong>Note:</strong> The provider's decision always takes precedence over the patient's preference for safety and clinical reasons.</p>
+      </article>
+
+      <!-- Help CTA -->
+      <div class="docs-cta">
+        <h3>Still need help?</h3>
+        <p>Can't find what you're looking for? Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Inline Scripts -->
+  <script>
+    // Nav beam effect
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const articles = document.querySelectorAll('.docs-article');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      articles.forEach((article) => {
+        const top = article.offsetTop;
+        if (window.scrollY >= top - 200) {
+          current = article.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Footer shimmer effect
+    const cta = document.querySelector('.docs-cta');
+    if (cta) {
+      cta.addEventListener('mouseenter', function() {
+        this.style.animation = 'shimmer 0.6s ease-in-out';
+      });
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pharmacy & Fulfillment — Quidget Help Center</title>
+  <meta name="description" content="Pharmacy routing, state rules, shipment tracking, and Rx fulfillment flow in the Quidget WordPress plugin.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+      <a href="../../api/" class="nav-link">API</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <!-- Main Container -->
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-nav">
+        <h3 class="sidebar-title">Pharmacy & Fulfillment</h3>
+        <ul class="sidebar-list">
+          <li><a href="#how-pharmacy-routing-works" class="sidebar-link active">How Pharmacy Routing Works</a></li>
+          <li><a href="#configuring-state-rules" class="sidebar-link">Configuring State Rules</a></li>
+          <li><a href="#shipment-tracking" class="sidebar-link">Shipment Tracking</a></li>
+          <li><a href="#troubleshooting-pharmacy-issues" class="sidebar-link">Troubleshooting Pharmacy Issues</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../">Help Center</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Pharmacy & Fulfillment</span>
+      </div>
+
+      <!-- Page Title -->
+      <h1 class="docs-title">Pharmacy & Fulfillment</h1>
+      <p class="docs-intro">Learn how prescriptions are routed to pharmacies, how to configure state-based rules, and how shipment tracking works in Quidget.</p>
+
+      <!-- Article 1: How Pharmacy Routing Works -->
+      <article id="how-pharmacy-routing-works" class="docs-article">
+        <h2>How Pharmacy Routing Works</h2>
+        <p>Pharmacy routing is the system that automatically sends approved prescriptions to the correct pharmacy based on the patient's location. Understanding this system helps you ensure patients receive their medications efficiently.</p>
+
+        <h3>The Routing Table</h3>
+        <p>Access the pharmacy routing table from <strong>Qualiphy → Pharmacies</strong> in your WordPress admin. This table maps each exam type (consultation product) to pharmacy locations by state.</p>
+
+        <p><strong>Example routing table:</strong></p>
+        <table class="docs-table">
+          <thead>
+            <tr>
+              <th>Exam Type</th>
+              <th>State</th>
+              <th>Pharmacy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>GLP-1 Starter</td>
+              <td>California</td>
+              <td>PharmaCare West</td>
+            </tr>
+            <tr>
+              <td>GLP-1 Starter</td>
+              <td>Texas</td>
+              <td>MediDirect Central</td>
+            </tr>
+            <tr>
+              <td>GLP-1 Starter</td>
+              <td>Florida</td>
+              <td>FastRx South</td>
+            </tr>
+            <tr>
+              <td>Testosterone</td>
+              <td>California</td>
+              <td>PharmaCare West</td>
+            </tr>
+            <tr>
+              <td>Testosterone</td>
+              <td>All other states</td>
+              <td>MediDirect Central (default)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>The Routing Process</h3>
+        <ol>
+          <li><strong>Patient checks out:</strong> Enters their shipping address (state is recorded)</li>
+          <li><strong>Provider approves consultation:</strong> Creates a prescription in Qualiphy</li>
+          <li><strong>Prescription routed:</strong> System looks up the patient's state and exam type in the routing table</li>
+          <li><strong>Correct pharmacy identified:</strong> The prescription is sent to the appropriate pharmacy</li>
+          <li><strong>Pharmacy fulfills:</strong> Medication is prepared and shipped with tracking</li>
+          <li><strong>Tracking synced:</strong> Shipment tracking is sent back to your WooCommerce order</li>
+        </ol>
+
+        <h3>Default Fallback</h3>
+        <p>If a state doesn't have a specific pharmacy assignment, the prescription is routed to your default pharmacy. You can set a default pharmacy in the routing table by assigning a pharmacy to "All other states" or "Default."</p>
+
+        <p><strong>Example:</strong> If you have specific pharmacies for California and Texas, but no assignment for Nevada, Nevada prescriptions will be routed to your default pharmacy.</p>
+
+        <h3>Multiple Exam Types</h3>
+        <p>You can assign different pharmacies to different consultation products. For example:</p>
+        <ul>
+          <li><strong>GLP-1 consultations:</strong> Route to PharmaCare West (specialty GLP-1 fulfillment)</li>
+          <li><strong>Testosterone consultations:</strong> Route to MediDirect Central (hormone specialty)</li>
+        </ul>
+
+        <p>This allows you to use specialized pharmacies for different medication types while managing everything in one system.</p>
+
+        <h3>Changing Pharmacy Assignments</h3>
+        <p>If you need to change pharmacy routing (e.g., switch to a new pharmacy or add coverage for a new state):</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Edit the routing table by clicking on an assignment</li>
+          <li>Select a new pharmacy from the dropdown</li>
+          <li>Save your changes</li>
+          <li>Future prescriptions will use the new routing immediately</li>
+        </ol>
+
+        <p><strong>Note:</strong> Changing routing doesn't affect prescriptions that have already been sent to a pharmacy. Only new prescriptions use the updated routing.</p>
+      </article>
+
+      <!-- Article 2: Configuring State Rules -->
+      <article id="configuring-state-rules" class="docs-article">
+        <h2>Configuring State Rules</h2>
+        <p>State rules allow you to control exactly which pharmacy handles prescriptions in each state. This gives you fine-grained control over fulfillment and allows you to work with multiple specialized pharmacy partners.</p>
+
+        <h3>Understanding State Rules</h3>
+        <p>A state rule is a simple assignment: "For this exam type in this state, use this pharmacy." You can create as many rules as you need.</p>
+
+        <p><strong>Example rules:</strong></p>
+        <ul>
+          <li>GLP-1 in California → PharmaCare West</li>
+          <li>GLP-1 in Texas → MediDirect Central</li>
+          <li>GLP-1 in all other states → MediDirect Central (default)</li>
+        </ul>
+
+        <h3>Adding a State Rule</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Click <strong>Add New Rule</strong> (or select an exam type to add rules for it)</li>
+          <li>Choose the <strong>Exam Type</strong> (consultation product) from the dropdown</li>
+          <li>Select the <strong>State</strong> from the list (or select "All other states" for a default)</li>
+          <li>Choose the <strong>Pharmacy</strong> to route to</li>
+          <li>Click <strong>Save Rule</strong></li>
+        </ol>
+
+        <h3>Editing a State Rule</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Find the rule you want to edit in the routing table</li>
+          <li>Click the rule to expand it</li>
+          <li>Change the pharmacy assignment</li>
+          <li>Click <strong>Save</strong></li>
+        </ol>
+
+        <h3>Deleting a State Rule</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Find the rule to delete</li>
+          <li>Click the <strong>Delete</strong> button (trash icon)</li>
+          <li>Confirm the deletion</li>
+        </ol>
+
+        <p><strong>Note:</strong> If you delete a rule, prescriptions from that state will be routed to the default pharmacy (if one is configured). Make sure to set up a default before removing specific state rules.</p>
+
+        <h3>Best Practices for State Rules</h3>
+        <ul>
+          <li><strong>Always set a default:</strong> Configure a "default" rule (assign to "All other states") so prescriptions from unconfigured states still get routed</li>
+          <li><strong>Review regularly:</strong> Periodically check your routing table to ensure it matches your current pharmacy partnerships</li>
+          <li><strong>Test with one rule:</strong> Start simple with one pharmacy, then add state-specific rules as needed</li>
+          <li><strong>Document your pharmacies:</strong> Keep notes on why each pharmacy is assigned to each region (e.g., faster shipping, specialty expertise)</li>
+        </ul>
+
+        <h3>Common Configurations</h3>
+
+        <h4>Simple Setup (One Pharmacy)</h4>
+        <p>Easiest option for clinics with one pharmacy partner:</p>
+        <ul>
+          <li>Create one default rule: GLP-1 → MyPharmacy (all states)</li>
+          <li>All prescriptions route to MyPharmacy regardless of state</li>
+        </ul>
+
+        <h4>Regional Setup (Multiple Pharmacies)</h4>
+        <p>Good for clinics with regional pharmacy partnerships:</p>
+        <ul>
+          <li>GLP-1 in West states (CA, OR, WA) → PharmaCare West</li>
+          <li>GLP-1 in Central states (TX, OK, NM) → MediDirect Central</li>
+          <li>GLP-1 in all other states → NationalRx (default)</li>
+        </ul>
+
+        <h4>Medication-Based Setup (Different Pharmacies per Drug)</h4>
+        <p>For clinics with specialized pharmacy partners for different medications:</p>
+        <ul>
+          <li>GLP-1 products → PharmaCare West (GLP-1 specialty)</li>
+          <li>Testosterone products → HormoneRx (hormone specialty)</li>
+          <li>Topical products → DermPharmacy (dermatology specialty)</li>
+        </ul>
+      </article>
+
+      <!-- Article 3: Shipment Tracking -->
+      <article id="shipment-tracking" class="docs-article">
+        <h2>Shipment Tracking</h2>
+        <p>Once a prescription is routed to a pharmacy and fulfilled, Quidget automatically syncs shipment tracking information to your WooCommerce orders. Patients can track their medication deliveries directly from their account.</p>
+
+        <h3>How Tracking Works</h3>
+        <ol>
+          <li><strong>Pharmacy ships:</strong> Pharmacy processes and ships the prescription with a carrier (USPS, FedEx, UPS, etc.)</li>
+          <li><strong>Tracking number generated:</strong> Pharmacy gets a tracking number from the carrier</li>
+          <li><strong>Webhook received:</strong> Quidget receives the tracking number via a Qualiphy webhook</li>
+          <li><strong>Order updated:</strong> Tracking number is added to the WooCommerce order</li>
+          <li><strong>Patient notified:</strong> Patient receives an email with the tracking number and carrier link</li>
+        </ol>
+
+        <h3>Viewing Tracking in WooCommerce</h3>
+        <p>To see shipment tracking for an Rx order:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Orders</strong></li>
+          <li>Click the order to open the detail page</li>
+          <li>Scroll to the <strong>Qualiphy</strong> section</li>
+          <li>Look for <strong>Shipment Tracking</strong></li>
+          <li>You'll see:</li>
+          <ul>
+            <li>Carrier name (USPS, FedEx, UPS, etc.)</li>
+            <li>Tracking number</li>
+            <li>Link to track shipment</li>
+          </ul>
+        </ol>
+
+        <h3>Viewing Tracking as a Patient</h3>
+        <p>Patients can track their shipments from their account:</p>
+        <ol>
+          <li>Patient logs in to their account on your site</li>
+          <li>Goes to <strong>My Account → Orders</strong></li>
+          <li>Clicks the order to view details</li>
+          <li>Finds the <strong>Shipment Tracking</strong> section</li>
+          <li>Clicks the tracking number to view real-time tracking on the carrier's website</li>
+        </ol>
+
+        <h3>WooCommerce Shipment Tracking Integration</h3>
+        <p>Quidget integrates with the popular <strong>WooCommerce Shipment Tracking</strong> plugin (if installed). When tracking information syncs, it's automatically added to the order in Shipment Tracking format, making it visible in standard WooCommerce reports and order lists.</p>
+
+        <h3>When Tracking Updates Are Delayed</h3>
+        <p>Tracking information typically appears within minutes of shipment. If tracking is delayed:</p>
+        <ul>
+          <li><strong>Wait 24 hours:</strong> Pharmacy systems and carriers may have a 24-hour sync delay</li>
+          <li><strong>Contact the pharmacy:</strong> The pharmacy may not have uploaded tracking to their system yet</li>
+          <li><strong>Check webhooks:</strong> If tracking still isn't appearing, there may be a webhook issue (see troubleshooting below)</li>
+        </ul>
+
+        <h3>Tracking Information in Emails</h3>
+        <p>When tracking updates, patients automatically receive an email containing:</p>
+        <ul>
+          <li>Confirmation that their medication has shipped</li>
+          <li>Carrier name</li>
+          <li>Tracking number</li>
+          <li>Direct link to track the shipment</li>
+          <li>Estimated delivery date (from carrier)</li>
+        </ul>
+
+        <p>You can customize this email message in <strong>Qualiphy → Settings → Language</strong> under "Shipment Notification Email."</p>
+
+        <h3>Multiple Shipments</h3>
+        <p>If an order contains multiple items, the pharmacy may ship them separately. In this case:</p>
+        <ul>
+          <li>Each shipment gets its own tracking number</li>
+          <li>The order shows multiple tracking entries</li>
+          <li>Patients receive separate tracking emails for each shipment</li>
+        </ul>
+      </article>
+
+      <!-- Article 4: Troubleshooting Pharmacy Issues -->
+      <article id="troubleshooting-pharmacy-issues" class="docs-article">
+        <h2>Troubleshooting Pharmacy Issues</h2>
+        <p>If you encounter problems with pharmacy routing, prescription creation, or shipment tracking, use this guide to diagnose and resolve the issue.</p>
+
+        <h3>Issue: Prescription Not Created After Approval</h3>
+        <p><strong>Symptom:</strong> Provider approves an Rx consultation, but no prescription appears in Qualiphy or the pharmacy system.</p>
+
+        <h4>Diagnosis</h4>
+        <ul>
+          <li>Check the patient's state in the order</li>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Look for a routing rule for that exam type and state</li>
+        </ul>
+
+        <h4>Solution</h4>
+        <p><strong>If no route found:</strong> Add a routing rule for that exam type and state.</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong></li>
+          <li>Click <strong>Add New Rule</strong></li>
+          <li>Select the exam type and state</li>
+          <li>Choose a pharmacy</li>
+          <li>Save and retry the approval</li>
+        </ol>
+
+        <p><strong>If route exists:</strong> The issue may be with your API key or pharmacy configuration. Contact support with the order ID and exam type.</p>
+
+        <h3>Issue: Wrong Pharmacy Selected</h3>
+        <p><strong>Symptom:</strong> Prescription was routed to the wrong pharmacy for a patient's state.</p>
+
+        <h4>Diagnosis</h4>
+        <ul>
+          <li>Check the order for the patient's state</li>
+          <li>Go to <strong>Qualiphy → Pharmacies</strong> and find the routing rule for that state</li>
+          <li>Verify the rule points to the correct pharmacy</li>
+        </ul>
+
+        <h4>Solution</h4>
+        <ol>
+          <li>Edit the incorrect routing rule</li>
+          <li>Change the pharmacy to the correct one</li>
+          <li>For future prescriptions, the new routing applies automatically</li>
+          <li>For already-shipped prescriptions, contact the pharmacy to see if rerouting is possible</li>
+        </ol>
+
+        <h3>Issue: Webhook Blocked / Tracking Not Updating</h3>
+        <p><strong>Symptom:</strong> Prescription is approved and sent to the pharmacy, but tracking information doesn't appear in WooCommerce orders for days.</p>
+
+        <h4>Diagnosis</h4>
+        <p>Webhooks are HTTP POST requests that Qualiphy sends to your site when events occur (approval, shipment, etc.). If your site has security plugins blocking these requests, updates won't be received.</p>
+
+        <h4>Check Your Security Plugins</h4>
+        <p>Common plugins that may block webhooks:</p>
+        <ul>
+          <li>Wordfence Security</li>
+          <li>Sucuri Security</li>
+          <li>iThemes Security</li>
+          <li>Firewall plugins</li>
+          <li>Rate limiting plugins</li>
+        </ul>
+
+        <h4>Solution</h4>
+        <ol>
+          <li>Log in to your WordPress admin</li>
+          <li>Check any security plugins you have installed</li>
+          <li>Look for logs or blocked requests sections</li>
+          <li>Search for POST requests to <code>wp-json/quidget/v1/webhooks/prescription-update</code></li>
+          <li>If found, whitelist this webhook endpoint in your security plugin settings</li>
+        </ol>
+
+        <p><strong>Webhook endpoint to whitelist:</strong></p>
+        <pre><code>POST /wp-json/quidget/v1/webhooks/prescription-update</code></pre>
+
+        <p>If you're not sure how to whitelist webhooks in your security plugin, contact support with your plugin name and we'll provide specific instructions.</p>
+
+        <h3>Issue: Pharmacy Not Showing in Routing Table</h3>
+        <p><strong>Symptom:</strong> When trying to create a new routing rule, your pharmacy doesn't appear in the pharmacy dropdown.</p>
+
+        <h4>Solution</h4>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Verify your Qualiphy API key is still valid (should show a green checkmark)</li>
+          <li>If the checkmark is red, reconnect your API key</li>
+          <li>Go back to <strong>Qualiphy → Pharmacies</strong> and refresh the page</li>
+          <li>The pharmacy list should now populate</li>
+        </ol>
+
+        <p>If the pharmacy still doesn't appear, contact support — it may need to be added to your Qualiphy clinic account first.</p>
+
+        <h3>Issue: Tracking Number Not Received from Pharmacy</h3>
+        <p><strong>Symptom:</strong> Order shows "Shipped" status, but no tracking number appears in WooCommerce.</p>
+
+        <h4>Diagnosis</h4>
+        <p>The pharmacy may not have uploaded tracking to their system yet, or there may be a webhook issue.</p>
+
+        <h4>Solution</h4>
+        <ol>
+          <li>Wait 24 hours (pharmacies and carriers have delays)</li>
+          <li>Check WooCommerce → Orders to see if tracking appeared</li>
+          <li>If still missing after 24 hours, contact your pharmacy directly for the tracking number</li>
+          <li>You can manually add tracking using the WooCommerce Shipment Tracking plugin</li>
+        </ol>
+
+        <h3>Issue: Patient Received Wrong Medication</h3>
+        <p><strong>What to do:</strong></p>
+        <ol>
+          <li>Contact the pharmacy immediately with the order and tracking details</li>
+          <li>The pharmacy can initiate a return and send the correct medication</li>
+          <li>Document the issue in the order notes for your records</li>
+          <li>Consider issuing a courtesy credit or refund if appropriate</li>
+        </ol>
+
+        <p>Medication errors should be reported to your pharmacy partner immediately. Quidget routing is only responsible for sending the prescription to the correct pharmacy — the pharmacy is responsible for dispensing the correct medication.</p>
+
+        <h3>Getting More Help</h3>
+        <p>If you've tried the above solutions and still have issues, contact support:</p>
+        <ul>
+          <li><strong>Email:</strong> support@qualiphy.me</li>
+          <li><strong>Include:</strong> Order ID, exam type, patient state, and a description of the issue</li>
+          <li><strong>For webhook issues:</strong> Include your security plugin names and any error messages from your logs</li>
+        </ul>
+      </article>
+
+      <!-- Help CTA -->
+      <div class="docs-cta">
+        <h3>Still need help?</h3>
+        <p>Can't find what you're looking for? Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Inline Scripts -->
+  <script>
+    // Nav beam effect
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const articles = document.querySelectorAll('.docs-article');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      articles.forEach((article) => {
+        const top = article.offsetTop;
+        if (window.scrollY >= top - 200) {
+          current = article.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Footer shimmer effect
+    const cta = document.querySelector('.docs-cta');
+    if (cta) {
+      cta.addEventListener('mouseenter', function() {
+        this.style.animation = 'shimmer 0.6s ease-in-out';
+      });
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

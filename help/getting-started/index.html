@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — Quidget Help Center</title>
+  <meta name="description" content="How to install, activate, and configure the Quidget WooCommerce telehealth plugin for your WordPress site.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+      <a href="../../api/" class="nav-link">API</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <!-- Main Container -->
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-nav">
+        <h3 class="sidebar-title">Getting Started</h3>
+        <ul class="sidebar-list">
+          <li><a href="#installing-the-plugin" class="sidebar-link active">Installing the Plugin</a></li>
+          <li><a href="#activating-your-license" class="sidebar-link">Activating Your License</a></li>
+          <li><a href="#connecting-your-api-key" class="sidebar-link">Connecting Your Qualiphy API Key</a></li>
+          <li><a href="#running-the-setup-wizard" class="sidebar-link">Running the Setup Wizard</a></li>
+          <li><a href="#your-first-consultation" class="sidebar-link">Your First Consultation</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        <a href="../">Help Center</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">Getting Started</span>
+      </div>
+
+      <!-- Page Title -->
+      <h1 class="docs-title">Getting Started</h1>
+      <p class="docs-intro">Everything you need to know to install, activate, and configure the Quidget plugin on your WordPress site.</p>
+
+      <!-- Article 1: Installing the Plugin -->
+      <article id="installing-the-plugin" class="docs-article">
+        <h2>Installing the Plugin</h2>
+        <p>Quidget integrates seamlessly with WordPress and WooCommerce. Before installing, make sure your site meets the following requirements:</p>
+
+        <h3>Requirements</h3>
+        <ul>
+          <li><strong>WordPress 6.0+</strong> (we recommend the latest version)</li>
+          <li><strong>WooCommerce 8.0+</strong> (required for product and order management)</li>
+          <li><strong>PHP 7.4+</strong> (PHP 8.0+ recommended for better performance)</li>
+        </ul>
+
+        <h3>Installation Method 1: Upload via WordPress Admin</h3>
+        <ol>
+          <li>Log in to your WordPress admin dashboard</li>
+          <li>Navigate to <strong>Plugins → Add New</strong></li>
+          <li>Click the <strong>Upload Plugin</strong> button at the top</li>
+          <li>Select the Quidget plugin ZIP file from your computer</li>
+          <li>Click <strong>Install Now</strong> and wait for the installation to complete</li>
+          <li>Click <strong>Activate Plugin</strong> to enable Quidget on your site</li>
+        </ol>
+
+        <h3>Installation Method 2: WordPress Plugin Directory</h3>
+        <ol>
+          <li>In your WordPress admin, go to <strong>Plugins → Add New</strong></li>
+          <li>Search for <strong>"Quidget"</strong> in the search box</li>
+          <li>Click <strong>Install Now</strong> on the Quidget plugin result</li>
+          <li>Once installed, click <strong>Activate Plugin</strong></li>
+        </ol>
+
+        <p>After activation, you'll see the Quidget menu appear in your WordPress admin sidebar. You're ready to move on to the next steps!</p>
+      </article>
+
+      <!-- Article 2: Activating Your License -->
+      <article id="activating-your-license" class="docs-article">
+        <h2>Activating Your License</h2>
+        <p>Quidget is a free plugin to install and activate — no license key required. Billing is handled per-consultation through your Qualiphy account, so you only pay when patients complete consultations.</p>
+
+        <h3>How Licensing Works</h3>
+        <p>The plugin automatically activates upon installation. There's no separate license activation step or license key to enter. Instead, Quidget connects to your Qualiphy account via API key (see the next section), and consultations are billed directly to your Qualiphy account on a per-use basis.</p>
+
+        <h3>Billing Information</h3>
+        <p>Consultation charges appear in your Qualiphy account under <strong>Settings → Billing → Invoice History</strong>. Each consultation is itemized with the consultation type, patient information, and cost. You can download invoices and set up automated payments through your Qualiphy account dashboard.</p>
+
+        <p><strong>Next:</strong> Connect your Qualiphy API key to start linking consultations to your clinic.</p>
+      </article>
+
+      <!-- Article 3: Connecting Your Qualiphy API Key -->
+      <article id="connecting-your-api-key" class="docs-article">
+        <h2>Connecting Your Qualiphy API Key</h2>
+        <p>The Quidget plugin communicates with your Qualiphy clinic account through an API key. This connection ensures that exams are routed correctly and consultation data syncs automatically.</p>
+
+        <h3>Step 1: Get Your API Key from Qualiphy</h3>
+        <ol>
+          <li>Log in to your Qualiphy clinic account at <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → API</strong></li>
+          <li>Copy your API key (it's a long alphanumeric string)</li>
+          <li>Keep this key safe — treat it like a password</li>
+        </ol>
+
+        <h3>Step 2: Enter the API Key in Quidget</h3>
+        <ol>
+          <li>In your WordPress admin, go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Paste your Qualiphy API key into the <strong>API Key</strong> field</li>
+          <li>Click <strong>Verify & Save</strong></li>
+        </ol>
+
+        <h3>Verification Success</h3>
+        <p>If the connection is successful, you'll see a green checkmark next to your API key field and a confirmation message. Your plugin is now connected to your Qualiphy clinic.</p>
+
+        <h3>Don't Have a Qualiphy Account?</h3>
+        <p>If you don't yet have a Qualiphy account, sign up for free at <strong>app.qualiphy.me/signup</strong>. You'll create your clinic profile and be given an API key immediately.</p>
+
+        <p><strong>Next:</strong> Run the setup wizard to configure your branding and service area.</p>
+      </article>
+
+      <!-- Article 4: Running the Setup Wizard -->
+      <article id="running-the-setup-wizard" class="docs-article">
+        <h2>Running the Setup Wizard</h2>
+        <p>The Quidget setup wizard launches automatically after you successfully connect your Qualiphy API key. It guides you through the essential configuration steps to get your store ready for consultations.</p>
+
+        <h3>Step 1: Branding</h3>
+        <p>Upload your clinic logo and choose accent colors. These will appear on the exam modal, checkout pages, and patient emails:</p>
+        <ul>
+          <li><strong>Clinic Logo:</strong> PNG with transparent background recommended (light and dark variants)</li>
+          <li><strong>Primary Color:</strong> Default is #CFC9FF (light purple) — used for buttons and accents</li>
+          <li><strong>Secondary Color:</strong> Default is #6e54a7 (dark purple) — used for text and highlights</li>
+        </ul>
+
+        <h3>Step 2: Service Area</h3>
+        <p>Select the states where you're licensed to provide consultations. Quidget supports 48 states plus Washington, D.C. (Alabama and Mississippi are not currently available). The plugin automatically creates a WooCommerce shipping zone for your service area, and customers outside your area will see "not available in your area."</p>
+
+        <h3>Step 3: Import Consultations</h3>
+        <p>Choose to either create new products for your consultations or link to existing WooCommerce products. The wizard will help you set pricing, exam type (GFE or Rx), and pharmacy routing if applicable.</p>
+
+        <h3>Step 4: Review</h3>
+        <p>Review all your settings before finalizing. You can edit anything after completing the wizard from the Qualiphy settings pages.</p>
+
+        <h3>Re-running the Wizard</h3>
+        <p>Need to re-run the setup wizard? Go to <strong>Qualiphy → Settings → General</strong> and click <strong>Run Setup Wizard</strong> at the bottom of the page. This won't overwrite existing settings — you can choose to update them selectively.</p>
+
+        <p><strong>Next:</strong> Create your first test consultation to verify everything is working.</p>
+      </article>
+
+      <!-- Article 5: Your First Consultation -->
+      <article id="your-first-consultation" class="docs-article">
+        <h2>Your First Consultation</h2>
+        <p>Now that Quidget is installed and configured, it's time to test the full flow end-to-end. Creating a test consultation ensures that exam invites are sent correctly and the order lifecycle works as expected.</p>
+
+        <h3>Step 1: Create a Test Order</h3>
+        <ol>
+          <li>Go to your Quidget storefront (the public WordPress site)</li>
+          <li>Add a consultation product to your cart</li>
+          <li>Proceed to checkout</li>
+          <li>Fill in patient information: name, email, DOB, and any other required fields</li>
+          <li>Complete payment (use Stripe test cards if in test mode)</li>
+        </ol>
+
+        <h3>Step 2: Check the Exam Invite</h3>
+        <p>Within seconds of payment, an exam invite email will be sent to the email address entered at checkout. Open your email (check spam/promotions if needed) and verify that:</p>
+        <ul>
+          <li>The invite contains your clinic logo and branding colors</li>
+          <li>The invite includes a link to start the exam</li>
+          <li>The email is from your clinic's email address</li>
+        </ul>
+
+        <h3>Step 3: Complete the Exam Flow</h3>
+        <ol>
+          <li>Click the exam invite link</li>
+          <li>Complete the exam questionnaire (demographic info, medical history, etc.)</li>
+          <li>You'll see a "Exam Submitted" confirmation and a meeting link for the provider consultation</li>
+        </ol>
+
+        <h3>Step 4: Check the Order in WooCommerce</h3>
+        <ol>
+          <li>Go to <strong>WooCommerce → Orders</strong> in your WordPress admin</li>
+          <li>Find the test order you just created</li>
+          <li>Check the <strong>Qualiphy</strong> section on the order detail page</li>
+          <li>Verify that the exam status shows the current state (e.g., "Submitted", "Pending Approval")</li>
+        </ol>
+
+        <h3>Troubleshooting</h3>
+        <ul>
+          <li><strong>Exam invite not received:</strong> Check spam folders, or verify the email address at checkout</li>
+          <li><strong>Order not showing Qualiphy data:</strong> Refresh the page, or check that your API key is still connected</li>
+          <li><strong>Exam modal not opening:</strong> Clear browser cache, or check that JavaScript is enabled</li>
+        </ul>
+
+        <p>Congratulations! You've successfully set up Quidget and completed a test consultation. You're ready to launch to patients. For help with settings, see the <a href="../plugin-settings/">Plugin Settings</a> guide.</p>
+      </article>
+
+      <!-- Help CTA -->
+      <div class="docs-cta">
+        <h3>Still need help?</h3>
+        <p>Can't find what you're looking for? Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>.</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Inline Scripts -->
+  <script>
+    // Nav beam effect
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const articles = document.querySelectorAll('.docs-article');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      articles.forEach((article) => {
+        const top = article.offsetTop;
+        if (window.scrollY >= top - 200) {
+          current = article.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+
+    // Footer shimmer effect
+    const cta = document.querySelector('.docs-cta');
+    if (cta) {
+      cta.addEventListener('mouseenter', function() {
+        this.style.animation = 'shimmer 0.6s ease-in-out';
+      });
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>
