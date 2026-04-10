@@ -79,15 +79,24 @@ const C = {
    ═══════════════════════════════════════════════════════════════════════════ */
 const QUESTIONS = [
   {
-    id: "apiReady",
-    q: "Do you have your Qualiphy API key ready?",
-    hint: "Your API key connects the plugin to Qualiphy's provider network. You'll need a Qualiphy account to get one.",
+    id: "hasAccount",
+    q: "Do you have a Qualiphy account?",
+    hint: "Qualiphy powers the provider network and pharmacy fulfillment behind this plugin. You'll need an account before getting started.",
     options: [
-      { value: "ready", label: "Yes, I have my API key", desc: "Copied and ready to paste" },
-      { value: "have-account", label: "I have an account but need to find my key" },
-      { value: "no-account", label: "I don't have a Qualiphy account yet" },
+      { value: "yes", label: "Yes, I have an account" },
+      { value: "no", label: "No, I need to set one up" },
     ],
-    blocking: ["have-account", "no-account"],
+    blocking: ["no"],
+  },
+  {
+    id: "hasApiKey",
+    q: "Do you have your API key ready?",
+    hint: "Your API key is what connects the plugin to your Qualiphy account. You can find it in your Qualiphy dashboard under Settings.",
+    options: [
+      { value: "yes", label: "Yes, I have it copied" },
+      { value: "no", label: "Not yet, I need to grab it" },
+    ],
+    blocking: ["no"],
   },
   {
     id: "hasWoo",
@@ -395,16 +404,16 @@ function IntakeScreen({ onComplete }) {
           ))}
         </div>
 
-        {/* API Key Gate — blocks until they have their key */}
+        {/* Blocking gate — context changes based on which question we're on */}
         {showGate ? (
           <div key="gate" className="fade-in">
-            {answers[q.id] === "no-account" ? (
-              /* ── NO ACCOUNT: Simple guidance ── */
+            {q.id === "hasAccount" ? (
+              /* ── NO ACCOUNT ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
                 <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>You'll need a Qualiphy account first</div>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>Let's get you set up</div>
                   <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
-                    Create a free account to get your API key. The signup walks you through everything — once you're done, come back and click continue below.
+                    Create a free Qualiphy account — no signup fees, no monthly charges. The registration process walks you through everything. Once you're done, come back here and continue.
                   </p>
                 </div>
                 <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
@@ -416,52 +425,41 @@ function IntakeScreen({ onComplete }) {
                   </a>
                 </div>
               </div>
-            ) : (
-              /* ── HAS ACCOUNT: Just needs to find their key ── */
+            ) : q.id === "hasApiKey" ? (
+              /* ── NEEDS API KEY ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
-                <div style={{ padding: "22px 24px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text }}>How to find your API key</div>
-                  <p style={{ fontSize: 13, color: C.textMuted, margin: "4px 0 0", lineHeight: 1.5 }}>
-                    It's in your Qualiphy dashboard — takes about 30 seconds.
+                <div style={{ padding: "24px 24px 16px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>How to find your API key</div>
+                  <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
+                    It takes about 30 seconds. Open your Qualiphy dashboard and follow these steps:
                   </p>
                 </div>
                 <div style={{ padding: "20px 24px", background: "#fff" }}>
                   {[
-                    { n: "1", t: "Log in at app.qualiphy.me", d: "Use the email and password you signed up with" },
-                    { n: "2", t: "Click Settings in the sidebar", d: "It's near the bottom of the left navigation menu" },
-                    { n: "3", t: "Find your API key", d: "At the top of the Settings page you'll see \"API Key (Default Clinic)\" with your key displayed in a purple field" },
-                    { n: "4", t: "Click the Copy button", d: "Right below the key. Then come back here — you'll paste it into the plugin setup wizard." },
+                    { n: "1", t: "Log in at app.qualiphy.me" },
+                    { n: "2", t: "Click Settings in the left sidebar" },
+                    { n: "3", t: "Your API key is at the top — click Copy" },
                   ].map((s, i) => (
-                    <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < 3 ? 12 : 0 }}>
-                      <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(91,80,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>{s.n}</div>
-                      <div>
-                        <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{s.t}</div>
-                        <div style={{ fontSize: 12, color: C.textMuted, lineHeight: 1.5, marginTop: 1 }}>{s.d}</div>
-                      </div>
+                    <div key={i} style={{ display: "flex", gap: 12, marginBottom: 10 }}>
+                      <div style={{ width: 24, height: 24, borderRadius: "50%", flexShrink: 0, background: "rgba(91,80,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>{s.n}</div>
+                      <div style={{ fontSize: 14, color: C.text, lineHeight: 1.5, paddingTop: 2 }}>{s.t}</div>
                     </div>
                   ))}
-                  <div style={{ marginTop: 16, padding: 14, background: "rgba(217,119,6,.06)", borderRadius: 8, fontSize: 13, color: C.textBody, lineHeight: 1.5 }}>
-                    <strong style={{ color: "#d97706" }}>Multi-location?</strong> Each clinic location has its own API key. Use the key for the location this WordPress site serves.
-                  </div>
-                  <div style={{ marginTop: 16 }}>
+                  <div style={{ marginTop: 12 }}>
                     <a href="https://app.qualiphy.me" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "11px 22px", borderRadius: 8, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-                      Open Qualiphy Dashboard ↗
+                      Open Dashboard ↗
                     </a>
                   </div>
                 </div>
               </div>
-            )}
+            ) : null}
 
-            {/* Continue button — always visible */}
-            <div style={{ marginTop: 20, padding: "18px 20px", borderRadius: 10, background: C.bgMuted, textAlign: "center" }}>
-              <p style={{ fontSize: 13, color: C.textMuted, margin: "0 0 10px" }}>
-                Have your API key copied and ready?
-              </p>
-              <Btn onClick={passGate}>I have my API key — continue →</Btn>
+            {/* Continue */}
+            <div style={{ marginTop: 20, padding: "16px 20px", borderRadius: 10, background: C.bgMuted, textAlign: "center" }}>
+              <Btn onClick={passGate}>{q.id === "hasAccount" ? "I've created my account — continue →" : "I have my API key — continue →"}</Btn>
             </div>
-
-            <div style={{ marginTop: 16 }}>
-              <Btn variant="ghost" onClick={goBack} small>← Back to question</Btn>
+            <div style={{ marginTop: 14 }}>
+              <Btn variant="ghost" onClick={goBack} small>← Back</Btn>
             </div>
           </div>
         ) : (
@@ -517,7 +515,7 @@ function GuideScreen({ answers, onRestart }) {
   const needsSubs = answers.hasSubscriptions === "yes";
   const hasProds  = answers.hasProducts === "yes";
   const needsWoo  = answers.hasWoo === "no";
-  const apiState  = answers.apiReady; // always "ready" by the time they reach the guide
+  const apiState  = answers.hasApiKey; // always "yes" by the time they reach the guide
 
   const scrollTop = useCallback(() => {
     if (contentRef.current) contentRef.current.scrollTop = 0;
