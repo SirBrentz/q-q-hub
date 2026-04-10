@@ -4,20 +4,28 @@
    =========================================================== */
 
 /* ─── Nav overrides for dark Quidget nav ─── */
-.nav .nav-link {
-  color: rgba(255,255,255,.6);
+.nav .nav-links .nav-link {
+  color: rgba(255,255,255,.65);
+  font-weight: 500;
 }
-.nav .nav-link:hover {
+.nav .nav-links .nav-link:hover {
   color: #fff;
-  background: rgba(255,255,255,.08);
+  background: rgba(255,255,255,.1);
 }
-.nav .nav-link--active {
+.nav .nav-links .nav-link--active,
+.nav .nav-links .nav-link--active:hover {
   color: #fff;
-  background: rgba(91,80,255,.35);
+  background: rgba(91,80,255,.4);
   font-weight: 600;
 }
-.nav .logo { color: #fff; }
+.nav .nav-inner .logo { color: #fff; }
 .nav .hamburger span { background: #fff; }
+.nav .nav-actions .btn-primary {
+  background: var(--indigo);
+}
+.nav .nav-actions .btn-primary:hover {
+  background: var(--indigo-hover);
+}
 
 /* ─── Scroll-reveal animations ─── */
 .animate-in {
