@@ -451,30 +451,14 @@
   border-color: rgba(91,80,255,.15);
 }
 .q-demo-frame {
-  max-width: 800px; margin: 0 auto;
-  background: var(--surface); border: 1px solid var(--border-lt);
+  max-width: 900px; margin: 0 auto;
   border-radius: var(--r-xl); overflow: hidden;
-  box-shadow: var(--sh-lg);
 }
-.q-demo-titlebar {
-  display: flex; align-items: center; gap: 8px;
-  padding: 14px 20px; background: var(--white);
-  border-bottom: 1px solid var(--border-lt);
-}
-.q-demo-dot {
-  width: 10px; height: 10px; border-radius: 50%;
-}
-.q-demo-dot--r { background: #ff5f57; }
-.q-demo-dot--y { background: #ffbd2e; }
-.q-demo-dot--g { background: #28c840; }
-.q-demo-url {
-  flex: 1; margin-left: 8px; padding: 6px 14px;
-  background: var(--surface); border-radius: var(--r-full);
-  font-size: 12px; color: var(--text-lt); font-family: var(--font-b);
-}
-.q-demo-content {
-  padding: 28px 32px 32px; min-height: 340px;
-  animation: q-demo-in 0.35s ease;
+.q-demo-panel { display: none; animation: q-demo-in 0.35s ease; }
+.q-demo-panel--active { display: block; }
+.q-demo-panel img {
+  width: 100%; height: auto; display: block;
+  border-radius: var(--r-lg);
 }
 @keyframes q-demo-in {
   from { opacity: 0; transform: translateY(8px); }
