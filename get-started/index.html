@@ -81,7 +81,7 @@ const QUESTIONS = [
   {
     id: "apiReady",
     q: "Do you have your Qualiphy API key ready?",
-    hint: "Your API key connects the plugin to Qualiphy's provider network. You'll need a Qualiphy clinic account to get one.",
+    hint: "Your API key connects the plugin to Qualiphy's provider network. You'll need a Qualiphy account to get one.",
     options: [
       { value: "ready", label: "Yes, I have my API key", desc: "Copied and ready to paste" },
       { value: "have-account", label: "I have an account but need to find my key" },
@@ -446,7 +446,7 @@ function IntakeScreen({ onComplete }) {
                 </div>
                 <div style={{ padding: "20px 24px", background: "#fff" }}>
                   {[
-                    { n: "1", t: "Log in to app.qualiphy.me", d: "Use the email and password from your Qualiphy clinic account" },
+                    { n: "1", t: "Log in to app.qualiphy.me", d: "Use the email and password from your Qualiphy account" },
                     { n: "2", t: "Open Settings", d: "In the left sidebar, click Settings" },
                     { n: "3", t: "Find API Key", d: "Under your clinic name (e.g. 'Default Clinic'), you'll see the API Key field" },
                     { n: "4", t: "Copy the key", d: "Click Copy — it's a long string of characters. You'll paste this into the WordPress plugin." },
@@ -650,7 +650,7 @@ function GuideScreen({ answers, onRestart }) {
         You confirmed you have your API key — paste it in and the plugin verifies the connection automatically.
       </Callout>
       <Card>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>In the setup wizard</h4>
+        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>In the Quidget plugin setup wizard</h4>
         <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 10 }}>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Paste your API key into the field</li>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Click <strong>Verify & Continue</strong></li>
@@ -743,13 +743,6 @@ function GuideScreen({ answers, onRestart }) {
         <Callout type="tip">
           Repeat for each consultation. The grid checkmark tells you which ones already have products.
         </Callout>
-
-        <Card style={{ marginTop: 4, background: C.accentLight, border: `1px solid ${C.accentMid}` }}>
-          <h4 style={{ margin: "0 0 8px", fontSize: 14, color: C.accent }}>Prefer a hands-off setup?</h4>
-          <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-            Our team can handle the full configuration for you — consultations, pricing, pharmacy routing, and settings. <a href="mailto:support@qualiphy.me?subject=Implementation%20Inquiry" style={{ color: C.accent, fontWeight: 600 }}>Reach out to learn more</a>.
-          </p>
-        </Card>
 
         <Card style={{ marginTop: 4 }}>
           <h4 style={{ margin: "0 0 8px", fontSize: 14 }}>Working with a developer?</h4>
