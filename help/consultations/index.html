@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultations & Exams — Quidget Help Center</title>
+  <meta name="description" content="Complete guide to Quidget consultations and exams. GFE vs Rx, syncing, import wizard, consultation lifecycle, dose questionnaire.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <!-- Header with breadcrumb + title + article nav pills -->
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Consultations & Exams</span>
+        </div>
+        <h1 class="hc-category-title">Consultations & Exams</h1>
+        <p class="hc-category-desc">Learn how Quidget processes consultations, manages different exam types, and delivers patient exams.</p>
+        <div class="hc-article-count">7 articles in this section</div>
+</div>
+    </div>
+
+    <!-- Article content -->
+    <div class="hc-body">
+      <div class="hc-accordion is-open" id="understanding-exam-types">
+        <button class="hc-accordion-trigger" aria-expanded="true">
+          <span class="hc-accordion-num">1</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Understanding Exam Types</span>
+            <span class="hc-accordion-summary">Overview of Good Faith Exams, Rx consultations, and more</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Quidget supports two consultation types from Qualiphy: GFE (General Fitness Examination) and Rx (Prescription). Each has different workflows, outcomes, and patient experience.</p>
+
+        <h3>GFE Consultations (rx_type = 1)</h3>
+        <p>GFE consultations are for non-prescription services where the provider issues clearance or approval without a prescription:</p>
+        <ul>
+          <li><strong>Examples:</strong> Botox clearance, filler approval, laser clearance, wellness assessments</li>
+          <li><strong>Provider Outcome:</strong> Approval or deferral (no prescription issued)</li>
+          <li><strong>Patient Receives:</strong> Clearance to proceed with the service from an aesthetics provider</li>
+          <li><strong>Order Status After Approval:</strong> Order marked complete—no additional fulfillment steps</li>
+          <li><strong>Pharmacy Involved:</strong> No—GFE consultations don't route through pharmacies</li>
+        </ul>
+
+        <h3>Rx Consultations (rx_type = 2)</h3>
+        <p>Rx consultations involve prescription medications that are filled and shipped by a partner pharmacy:</p>
+        <ul>
+          <li><strong>Examples:</strong> GLP-1 medications (Ozempic, Wegovy), testosterone therapy, HRT, other prescriptions</li>
+          <li><strong>Provider Outcome:</strong> Prescription issued (or rejection if patient doesn't qualify)</li>
+          <li><strong>Patient Receives:</strong> Prescription that's automatically routed to a partner pharmacy for fulfillment</li>
+          <li><strong>Pharmacy Routing:</strong> After approval, prescription is routed to the correct pharmacy based on patient state and consultation type</li>
+          <li><strong>Tracking:</strong> Patient receives pharmacy notifications, shipping tracking, and can monitor delivery from WooCommerce order</li>
+          <li><strong>Order Status After Shipment:</strong> Order marked complete once pharmacy ships the medication</li>
+        </ul>
+
+        <h3>Cart Limits for Rx</h3>
+        <p>Only one Rx consultation product can be in the cart at a time. If a customer adds an Rx product when another Rx product is already in their cart, the previous Rx product is removed. This prevents complex prescriptions and billing issues.</p>
+
+        <h3>Checking the Exam Type</h3>
+        <p>You can see the exam type (GFE or Rx) in:</p>
+        <ul>
+          <li>Qualiphy clinic dashboard under Consultations list</li>
+          <li>WooCommerce product page (when viewing consultation product)</li>
+          <li>Order detail page under the Qualiphy section</li>
+        </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="gfe-vs-rx-consultations">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">2</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">GFE vs Rx Consultations</span>
+            <span class="hc-accordion-summary">Key differences between GFE and prescription consultations</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Here's a detailed comparison of how GFE and Rx consultations flow through Quidget:</p>
+
+        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+          <tr style="background-color: #f5f5f5;">
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><strong>Aspect</strong></th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><strong>GFE</strong></th>
+            <th style="border: 1px solid #ddd; padding: 12px; text-align: left;"><strong>Rx</strong></th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Examples</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Botox, fillers, laser clearance</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">GLP-1, testosterone, HRT</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Checkout Flow</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Patient info → Payment</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Patient info → Dose selection → Payment</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Exam Invite</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Sent immediately after payment</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Sent immediately after payment</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Provider Reviews</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Exam questionnaire, approves/defers</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Exam + dose history, approves/defers</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>After Approval</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Order marked Complete, patient approved</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Prescription created → Routed to pharmacy</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Fulfillment</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">No fulfillment (clearance only)</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Pharmacy fulfills, ships medication</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Pharmacy Involved</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">No</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Yes (required)</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Tracking</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">N/A</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Shipment tracking synced to order</td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 12px;"><strong>Cart Limit</strong></td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Multiple GFE products allowed</td>
+            <td style="border: 1px solid #ddd; padding: 12px;">Only 1 Rx product per order</td>
+          </tr>
+        </table>
+
+        <h3>Key Workflow Differences</h3>
+
+        <h4>GFE Workflow</h4>
+        <ol>
+          <li>Patient purchases consultation → Exam invite sent</li>
+          <li>Patient completes exam → Provider reviews</li>
+          <li>Provider approves → Order marked Complete</li>
+          <li>Patient receives clearance notification</li>
+        </ol>
+
+        <h4>Rx Workflow</h4>
+        <ol>
+          <li>Patient purchases consultation (selects dose) → Exam invite sent</li>
+          <li>Patient completes exam → Provider reviews</li>
+          <li>Provider approves → Prescription created</li>
+          <li>Prescription routed to pharmacy → Pharmacy fulfills</li>
+          <li>Pharmacy ships medication → Tracking updated to order</li>
+          <li>Order marked Complete when shipped</li>
+        </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="syncing-consultations">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">3</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Syncing Consultations</span>
+            <span class="hc-accordion-summary">How consultation data syncs between WooCommerce and Qualiphy</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Consultations are synced from your Qualiphy clinic account to your WordPress site. Syncing fetches the latest consultation list, types, pricing, and pharmacy data.</p>
+
+        <h3>Manual Sync</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Consultations</strong> in your WordPress admin</li>
+          <li>Click the <strong>Refresh Consultations</strong> button at the top</li>
+          <li>Quidget fetches the latest consultations from the Qualiphy API (<code>/exam_list</code> endpoint)</li>
+          <li>New consultations are added, updated consultations are refreshed</li>
+          <li>You'll see a confirmation message with the number of consultations synced</li>
+        </ol>
+
+        <h3>Sync Cooldown</h3>
+        <p>There's a 5-minute cooldown between manual syncs. This prevents excessive API calls and ensures data stability. You can sync again after 5 minutes have passed.</p>
+
+        <h3>Auto-Deactivation</h3>
+        <p>During a sync, any consultations that are no longer in the Qualiphy API response are automatically deactivated. This keeps your list clean if you archive or delete consultations in Qualiphy.</p>
+
+        <h3>Hidden Consultations</h3>
+        <p>These consultations are filtered out during sync and don't appear in Quidget (even though they exist in Qualiphy):</p>
+        <ul>
+          <li>Test Exam (internal test consultation)</li>
+          <li>PBM Example Pharmacy (example pharmacy data)</li>
+        </ul>
+
+        <h3>Auto Sync on Webhook</h3>
+        <p>In addition to manual syncs, consultations are automatically refreshed when Qualiphy sends webhook updates about exam status, prescriptions, or pharmacy changes.</p>
+
+        <h3>Pharmacy Data Syncing</h3>
+        <p>When you sync consultations, pharmacy routing data is also synced. This includes which pharmacies serve which states for each consultation type. See <a href="../pharmacy/">Pharmacy & Fulfillment</a> for details on configuring pharmacy routing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="using-the-import-wizard">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">4</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Using the Import Wizard</span>
+            <span class="hc-accordion-summary">Step-by-step guide to importing consultation products</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>The Import Wizard converts Qualiphy consultations into WooCommerce products. Use this wizard to create patient-facing products with pricing, variants (doses), and fulfillment settings.</p>
+
+        <h3>Accessing the Wizard</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Consultations</strong></li>
+          <li>Click on a consultation in the list</li>
+          <li>Click <strong>Import to WooCommerce</strong> button</li>
+          <li>The wizard opens with that consultation pre-selected</li>
+        </ol>
+
+        <h3>Step 1: Select Consultation</h3>
+        <p>Choose which Qualiphy consultation to import. Only one consultation per product. If you need multiple consultations as one product, you'll need to create it manually.</p>
+
+        <h3>Step 2: Categories</h3>
+        <p>Select WooCommerce product categories for this consultation (e.g., "Telehealth", "Dermatology", "Weight Loss"). This helps organize products in your store.</p>
+
+        <h3>Step 3: Product Type</h3>
+        <p>Choose between creating a new product or linking to an existing WooCommerce product. Most of the time you'll create a new product.</p>
+
+        <h3>Step 4: Free Checkout Option</h3>
+        <p>Decide if this consultation is free or paid. Free consultations skip payment and go directly to exam delivery. Paid consultations require payment before the exam is sent.</p>
+
+        <h3>Step 5: Pharmacy Selection</h3>
+        <p>For Rx consultations only. Choose how pharmacies are assigned:</p>
+        <ul>
+          <li><strong>Manual Selection:</strong> Customer selects their preferred pharmacy at checkout</li>
+          <li><strong>Auto-Route:</strong> Quidget automatically selects the pharmacy based on the patient's state</li>
+        </ul>
+
+        <h3>Step 6: Selection Type</h3>
+        <p>For dose-based consultations (GLP-1, HRT, etc.), choose how doses are presented:</p>
+        <ul>
+          <li><strong>Standard:</strong> Customer selects their dose/strength at checkout</li>
+          <li><strong>Provider Select:</strong> Provider chooses the dose after reviewing the exam (patient doesn't select)</li>
+        </ul>
+
+        <h3>Step 7: Variants</h3>
+        <p>Create WooCommerce product variants for each available dose/strength. For each variant, configure:</p>
+        <ul>
+          <li><strong>Dose/Strength Name:</strong> Display name (e.g., "0.5mg", "2mg")</li>
+          <li><strong>SKU:</strong> Stock keeping unit (e.g., "glp1-05mg", "glp1-2mg")</li>
+          <li><strong>Qualiphy Dose ID:</strong> Links this variant to the Qualiphy consultation dose</li>
+        </ul>
+
+        <h3>Step 8: Pricing</h3>
+        <p>Set prices for each variant and configure per-product margins:</p>
+        <ul>
+          <li><strong>Price:</strong> Customer-facing price</li>
+          <li><strong>Cost:</strong> What Qualiphy/pharmacy charges (used to calculate margin)</li>
+          <li><strong>Return Fee:</strong> Fee charged to patient if exam is rejected/deferred</li>
+          <li><strong>Sign-up Fee:</strong> One-time fee if this is a subscription product</li>
+        </ul>
+
+        <h3>Step 9: Summary</h3>
+        <p>Review all settings before creating the product. Go back to edit anything before confirming.</p>
+
+        <h3>Step 10: Create or Link</h3>
+        <p>Create the new WooCommerce product with all configured settings, or link to an existing product.</p>
+
+        <h3>Step 11: Success</h3>
+        <p>Product created! It's now available in your WooCommerce store and shows as a Quidget consultation product. Customers can purchase it immediately.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="the-consultation-lifecycle">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">5</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">The Consultation Lifecycle</span>
+            <span class="hc-accordion-summary">From patient purchase to provider approval and fulfillment</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Here's the complete flow from purchase to completion for a patient consultation:</p>
+
+        <h3>Phase 1: Purchase & Checkout</h3>
+        <ol>
+          <li><strong>Customer adds product to cart:</strong> Patient selects consultation type and optional dose</li>
+          <li><strong>Checkout:</strong> Quidget collects patient data:
+            <ul>
+              <li>Gender</li>
+              <li>Date of Birth (age validation enforced)</li>
+              <li>Phone Number</li>
+              <li>Email address</li>
+              <li>State (checked against service area)</li>
+              <li>Custom fields (if configured)</li>
+            </ul>
+          </li>
+          <li><strong>Payment:</strong> Customer completes payment (or skipped if free consultation)</li>
+          <li><strong>Order Created:</strong> WooCommerce order is created, marked as pending</li>
+        </ol>
+
+        <h3>Phase 2: Exam Invite</h3>
+        <ol>
+          <li><strong>Webhook Triggered:</strong> Payment confirmation triggers the exam invite process</li>
+          <li><strong>API Call to Qualiphy:</strong> Quidget calls the Qualiphy API with patient data:
+            <ul>
+              <li>patient_exam_id (unique ID for this patient's exam)</li>
+              <li>exam_id (consultation ID)</li>
+              <li>Patient demographics (name, email, DOB, phone)</li>
+              <li>Dose info (if applicable)</li>
+            </ul>
+          </li>
+          <li><strong>Exam Invite Email:</strong> Patient receives email with link to start exam (branded with clinic colors and logo)</li>
+          <li><strong>Popup or Redirect:</strong> If auto-launch is enabled, exam modal opens on thank-you page showing exam details and meeting link</li>
+        </ol>
+
+        <h3>Phase 3: Patient Completes Exam</h3>
+        <ol>
+          <li><strong>Patient clicks exam link:</strong> Taken to Qualiphy exam platform</li>
+          <li><strong>Questionnaire:</strong> Patient fills out medical history, exam questions, dose preference (for Rx)</li>
+          <li><strong>Exam Submission:</strong> Exam marked as "submitted" in the system</li>
+          <li><strong>Patient notified:</strong> Patient sees confirmation and meeting link for provider consultation</li>
+        </ol>
+
+        <h3>Phase 4: Provider Review</h3>
+        <ol>
+          <li><strong>Provider accesses exam:</strong> In Qualiphy clinic dashboard, provider reviews patient exam and questionnaire</li>
+          <li><strong>Video Consultation (optional):</strong> Provider conducts video consultation with patient (meeting link scheduled)</li>
+          <li><strong>Provider Decision:</strong> Provider approves, defers, or rejects the exam</li>
+        </ol>
+
+        <h3>Phase 5: Exam Approved (GFE)</h3>
+        <ol>
+          <li><strong>Webhook Update:</strong> Qualiphy sends "exam_approved" webhook to Quidget</li>
+          <li><strong>Order Updated:</strong> WooCommerce order status set to Completed</li>
+          <li><strong>Order Notes:</strong> "Exam approved by Dr. [Name]" note added to order</li>
+          <li><strong>Patient Notified:</strong> Approval notification email sent to patient</li>
+          <li><strong>Fulfillment Complete:</strong> No additional steps—GFE consultations end here</li>
+        </ol>
+
+        <h3>Phase 5: Exam Approved (Rx)</h3>
+        <ol>
+          <li><strong>Webhook Update:</strong> Qualiphy sends "exam_approved" webhook with prescription details</li>
+          <li><strong>Order Updated:</strong> WooCommerce order status set to Processing</li>
+          <li><strong>Prescription Created:</strong> Prescription details extracted and stored in order</li>
+          <li><strong>Pharmacy Routing:</strong> Prescription routed to correct pharmacy based on patient state and consultation type</li>
+          <li><strong>Pharmacy Notified:</strong> Pharmacy receives prescription and begins fulfillment</li>
+          <li><strong>Patient Notified:</strong> Approval notification email sent with pharmacy contact info</li>
+        </ol>
+
+        <h3>Phase 6: Pharmacy Fulfillment (Rx Only)</h3>
+        <ol>
+          <li><strong>Pharmacy Ships:</strong> Pharmacy fulfills prescription and ships medication to patient</li>
+          <li><strong>Tracking Update:</strong> Qualiphy sends webhook with tracking number</li>
+          <li><strong>Order Updated:</strong> Quidget adds tracking number to order:
+            <ul>
+              <li>If WooCommerce Shipment Tracking plugin installed: Adds tracking to plugin</li>
+              <li>If WooCommerce 10.2+: Uses WooCommerce Order Fulfillment feature</li>
+              <li>Otherwise: Adds tracking as order note</li>
+            </ul>
+          </li>
+          <li><strong>Order Status:</strong> Marked as Completed once shipped</li>
+          <li><strong>Patient Receives:</strong> Medication delivery + tracking info in email and order page</li>
+        </ol>
+
+        <h3>Phase 7: Exam Rejected or Deferred</h3>
+        <ol>
+          <li><strong>Webhook Update:</strong> Qualiphy sends "exam_rejected" or "exam_deferred" webhook</li>
+          <li><strong>Order Status:</strong> Set to Cancelled or Failed</li>
+          <li><strong>Auto Refund:</strong> If enabled, payment automatically refunded to original payment method</li>
+          <li><strong>Patient Notified:</strong> Rejection notification email sent</li>
+          <li><strong>Order Notes:</strong> Rejection reason added to order history</li>
+          <li><strong>Patient Options:</strong> Can resubmit, contact support, or request refund</li>
+        </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="resending-exam-invites">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">6</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Resending Exam Invites</span>
+            <span class="hc-accordion-summary">How to resend exam invitations to patients</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>If a patient didn't receive their exam invite or the link expired, you can resend it manually from the order page.</p>
+
+        <h3>How to Resend</h3>
+        <ol>
+          <li>Go to <strong>WooCommerce → Orders</strong></li>
+          <li>Click on the patient's order</li>
+          <li>In the <strong>Qualiphy Consultation</strong> section, find the action dropdown</li>
+          <li>Select <strong>"Send Exam Invite"</strong> or <strong>"Resend Consultation Link Email"</strong></li>
+          <li>Click submit or confirm</li>
+          <li>Email is resent to the patient immediately</li>
+        </ol>
+
+        <h3>When to Resend</h3>
+        <ul>
+          <li>Patient didn't receive the initial invite</li>
+          <li>Patient lost the invite link</li>
+          <li>Exam invite email bounced or was marked as spam</li>
+          <li>Patient needs a reminder to complete their exam</li>
+        </ul>
+
+        <h3>What Gets Sent</h3>
+        <p>The resent email is identical to the original invite, containing:</p>
+        <ul>
+          <li>Clinic branding (logo, accent colors)</li>
+          <li>Patient's name and consultation type</li>
+          <li>Link to start the exam</li>
+          <li>Clinic contact info</li>
+        </ul>
+
+        <h3>Frequency Limit</h3>
+        <p>You can resend exam invites as many times as needed—there's no limit. However, avoid excessive resending to prevent patient confusion.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="the-dose-questionnaire">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">7</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">The Dose Questionnaire</span>
+            <span class="hc-accordion-summary">Configure and customize the dose selection questionnaire</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>The dose questionnaire is a 3-step guided form that helps returning patients select their preferred medication dose and adjustment preference. It appears during checkout for consultations that support variable dosing.</p>
+
+        <h3>When It Appears</h3>
+        <p>The questionnaire is shown for:</p>
+        <ul>
+          <li>Rx consultations with dose/strength variations (GLP-1, HRT, testosterone, etc.)</li>
+          <li>Only when enabled in product settings (enabled by default)</li>
+          <li>If the consultation type supports dose selection</li>
+        </ul>
+
+        <h3>The Three Steps</h3>
+
+        <h4>Step 1: Medication Experience</h4>
+        <p><strong>Question:</strong> "Have you taken this medication before?"</p>
+        <p><strong>Options:</strong></p>
+        <ul>
+          <li>Yes</li>
+          <li>No</li>
+          <li>Not Sure</li>
+        </ul>
+        <p>This helps the provider assess whether the patient is experienced with the medication.</p>
+
+        <h4>Step 2: Current Dose</h4>
+        <p><strong>Question:</strong> "What is your current dose?"</p>
+        <p><strong>Options:</strong> Dropdown of available dose/strength variants (e.g., 0.5mg, 1mg, 2mg, 3mg, etc.)</p>
+        <p>Patient selects their current dose or "Not taking it yet" if new to the medication.</p>
+
+        <h4>Step 3: Dose Adjustment Preference</h4>
+        <p><strong>Question:</strong> "What is your dose adjustment preference?"</p>
+        <p><strong>Options:</strong> Three colored buttons representing:</p>
+        <ul>
+          <li><strong>Stay:</strong> Keep current dose the same (shown with purple bottle icon)</li>
+          <li><strong>Increase:</strong> Increase the dose (shown with green bottle icon)</li>
+          <li><strong>Decrease:</strong> Decrease the dose (shown with orange bottle icon)</li>
+        </ul>
+        <p>Patient indicates their preference. The provider will consider this when determining the approved dose.</p>
+
+        <h3>Customization</h3>
+        <p>All questionnaire text is customizable in <strong>Qualiphy → Settings → Language</strong>:</p>
+        <ul>
+          <li>Step titles and question text</li>
+          <li>Dose option labels (Stay, Increase, Decrease)</li>
+          <li>Button colors and bottle icons</li>
+          <li>Disclaimer text</li>
+        </ul>
+
+        <h3>Disabling the Questionnaire</h3>
+        <p>To disable the questionnaire:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Products</strong></li>
+          <li>Uncheck <strong>"Enable Questionnaire by Default"</strong></li>
+          <li>Or disable per-product in the product edit page</li>
+        </ol>
+
+        <h3>Flow After Questionnaire</h3>
+        <ol>
+          <li>Patient completes questionnaire</li>
+          <li>Responses saved to order</li>
+          <li>If <strong>"Questionnaire Redirect to Checkout"</strong> is enabled, proceeds directly to checkout</li>
+          <li>If disabled, shows review/summary page before checkout</li>
+          <li>Patient completes payment</li>
+          <li>Exam invite sent with questionnaire data included (provider sees patient's dose preference)</li>
+        </ol>
+
+        <h3>Provider Access</h3>
+        <p>When the provider reviews the exam in Qualiphy, they see the patient's questionnaire responses including:</p>
+        <ul>
+          <li>Whether they've taken the medication before</li>
+          <li>Current/previous dose</li>
+          <li>Requested dose adjustment (stay, increase, or decrease)</li>
+        </ul>
+        <p>The provider uses this information to determine the appropriate approved dose.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../pharmacy/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Pharmacy & Fulfillment
+          </a>
+          <a href="../plugin-settings/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Plugin Settings
+          </a>
+          <a href="../troubleshooting/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Troubleshooting
+          </a>
+          <a href="../getting-started/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Getting Started
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+          <span><strong>4.9</strong> &middot; 5,000+ reviews</span>
+        </a>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM&ndash;7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      </div>
+    </div>
+  </div></footer>
+
+  <script>
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+
+    // Accordion logic
+    document.querySelectorAll('.hc-accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.hc-accordion');
+        const isOpen = accordion.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.hc-accordion.is-open').forEach(a => {
+          a.classList.remove('is-open');
+          a.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          accordion.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          setTimeout(() => {
+            accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      });
+    });
+
+    // Open first accordion by default
+    const first = document.querySelector('.hc-accordion');
+    if (first) {
+      first.classList.add('is-open');
+      first.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'true');
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plugin Settings — Quidget Help Center</title>
+  <meta name="description" content="Complete settings reference for the Quidget WordPress plugin. General, checkout, branding, service area, language, clinical access, and email settings.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav (MUST BE EXACTLY THIS) -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <!-- Header with breadcrumb + title + article nav pills -->
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Plugin Settings</span>
+        </div>
+        <h1 class="hc-category-title">Plugin Settings</h1>
+        <p class="hc-category-desc">A complete reference for all Quidget plugin settings. Access settings from <strong>Qualiphy → Settings</strong> in your WordPress admin.</p>
+        <div class="hc-article-count">10 articles in this section</div>
+</div>
+    </div>
+
+    <!-- Article content -->
+    <div class="hc-body">
+      <div class="hc-accordion is-open" id="general-settings">
+        <button class="hc-accordion-trigger" aria-expanded="true">
+          <span class="hc-accordion-num">1</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">General Settings</span>
+            <span class="hc-accordion-summary">API connection, environment mode, and core plugin configuration</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Access general settings from <strong>Qualiphy → Settings → General</strong>. These core settings control plugin behavior and API connectivity.</p>
+
+        <h3>Enable Qualiphy</h3>
+        <p><strong>Default:</strong> Enabled (checked)</p>
+        <p>Master toggle for the Quidget plugin. When disabled, all Qualiphy consultation products are hidden from customers and the plugin stops processing exams and orders. Use this to temporarily disable the plugin without deactivating it.</p>
+
+        <h3>Qualiphy API Key</h3>
+        <p>Your encrypted Qualiphy API key for clinic authentication. This key is encrypted using AES-256-CBC encryption and is required for all API calls to sync consultations, send exam invites, and process webhooks. See <a href="../getting-started/#connecting-your-api-key">Connecting Your Qualiphy API Key</a> for setup instructions.</p>
+
+        <h3>Advanced Settings</h3>
+        <p><strong>Default:</strong> Disabled (unchecked)</p>
+        <p>Enable to access advanced configuration options for developers and experienced users (webhook URL configuration, debug logging, custom field mappings, etc.).</p>
+
+        <h3>Disable SSL Monitoring</h3>
+        <p><strong>Default:</strong> Disabled (unchecked)</p>
+        <p>Disables SSL certificate verification when making API requests to Qualiphy. Only enable this in development environments or if you encounter SSL certificate errors. Never enable in production.</p>
+
+        <h3>Hide Custom Pharmacy Consultations</h3>
+        <p><strong>Default:</strong> Disabled (unchecked)</p>
+        <p>When enabled, consultations from custom pharmacy partners (outside the standard Qualiphy network) are not synced or displayed. Use this if you want to limit consultations to Qualiphy's verified pharmacy network.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="checkout-settings">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">2</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Checkout Settings</span>
+            <span class="hc-accordion-summary">Configure checkout behavior, auto-refunds, and return fees</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Access checkout settings from <strong>Qualiphy → Settings → Checkout</strong>. These control the customer checkout experience and patient data collection.</p>
+
+        <h3>Auto Launch Exams</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, the exam modal automatically opens on the order thank-you page after payment is completed. Patients can immediately begin their exam without needing to click a link. Disable to show a simpler thank-you page with a manual "Start Exam" button.</p>
+
+        <h3>Exam Launch Mode</h3>
+        <p><strong>Options:</strong> Popup or Redirect</p>
+        <ul>
+          <li><strong>Popup (Modal):</strong> Opens the exam in a modal dialog overlaid on the thank-you page. Patients see the exam details and can close the modal to return to your site.</li>
+          <li><strong>Redirect:</strong> Redirects the patient to a dedicated exam page with a countdown timer until the video consultation begins. More immersive experience.</li>
+        </ul>
+        <p><strong>Recommended:</strong> Popup mode for most sites—it keeps patients engaged with your brand while showing exam details.</p>
+
+        <h3>Force Redirect on Popup</h3>
+        <p><strong>Default:</strong> Disabled | <strong>Range:</strong> 0-10 seconds</p>
+        <p>When enabled with a time value, the exam modal automatically redirects to the full exam page after the specified seconds. Only applies when Exam Launch Mode is set to Popup. Use 0 to disable auto-redirect.</p>
+
+        <h3>Checkout Redirect Delay</h3>
+        <p><strong>Default:</strong> 3 seconds | <strong>Range:</strong> 1-10 seconds</p>
+        <p>Delay before redirecting to the exam page when Exam Launch Mode is Redirect. Allows time for the thank-you message to display. Higher values give customers more time to see the order confirmation.</p>
+
+        <h3>Auto Send Exams</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, exam invites are automatically sent to patients immediately after payment is confirmed. Disable if you want to manually review orders before sending exams (useful for fraud prevention or high-value consultations).</p>
+
+        <h3>Auto Refund Rejected</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, if a provider rejects an exam, the patient's payment is automatically refunded to their original payment method. Disable to manually process refunds on rejected exams.</p>
+
+        <h3>Exam Price Retained</h3>
+        <p><strong>Default:</strong> $30.00</p>
+        <p>The exam fee that Quidget retains when a patient is approved. This amount is deducted from the total consultation fee and kept by your clinic. The remainder is routed to Qualiphy and the pharmacy partner. You can override this per-product during import wizard or product settings.</p>
+
+        <h3>Show Exam Refund Message</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, checkout displays a message explaining the refund policy if an exam is rejected. Helps set patient expectations about potential refunds.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="branding-white-label">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">3</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Branding & White-Label</span>
+            <span class="hc-accordion-summary">Customize colors, logos, and white-label the patient experience</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Customize all patient-facing elements to match your clinic's branding. Access from <strong>Qualiphy → Settings → Branding</strong>.</p>
+
+        <h3>Light Background Logo</h3>
+        <p>Your clinic logo for use on light backgrounds (exam modal, checkout). Upload as PNG with transparent background. Recommended dimensions: 200x200px or larger.</p>
+
+        <h3>Dark Background Logo</h3>
+        <p>Dark version of your logo for use on dark backgrounds (patient emails, thank-you page). Upload as PNG with transparent background.</p>
+
+        <h3>Primary Accent Color</h3>
+        <p><strong>Default:</strong> #CFC9FF (light purple)</p>
+        <p>Used for buttons, links, highlights, and the exam modal header. Choose a color that complements your brand and has good contrast on white backgrounds. Click the color picker to select.</p>
+
+        <h3>Secondary Accent Color</h3>
+        <p><strong>Default:</strong> #6e54a7 (dark purple)</p>
+        <p>Used for text, headings, and secondary UI elements. Should have strong contrast with light backgrounds. Choose a color that pairs well with your primary color.</p>
+
+        <h3>Applied Locations</h3>
+        <p>Your branding is applied to:</p>
+        <ul>
+          <li>Exam modal header, buttons, and accents</li>
+          <li>Checkout page (section headers, accent lines, buttons)</li>
+          <li>Patient thank-you page</li>
+          <li>Exam invite emails</li>
+          <li>Prescription/fulfillment notification emails</li>
+        </ul>
+
+        <h3>Color Picker Tips</h3>
+        <ul>
+          <li>Test colors on both light and dark backgrounds to ensure readability</li>
+          <li>Use a contrast checker tool (like WebAIM) to verify WCAG AA compliance for accessibility</li>
+          <li>Consider your brand guidelines when selecting colors</li>
+          <li>Light colors work better as primary (for backgrounds), dark colors as secondary (for text)</li>
+        </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="questionnaire-style">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">4</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Questionnaire Style</span>
+            <span class="hc-accordion-summary">Style the patient questionnaire to match your brand</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Customize the appearance of the dose questionnaire that patients fill out. Access from <strong>Qualiphy → Settings → Questionnaire</strong>.</p>
+
+        <h3>Understanding the Dose Questionnaire</h3>
+        <p>The dose questionnaire is a 3-step guided form for returning patients to select their preferred dose/strength and adjustment preference. It appears during checkout for consultation types that support variable dosing (e.g., GLP-1 medications, HRT).</p>
+
+        <h3>Bottle Colors Configuration</h3>
+        <p>The questionnaire uses colored bottle SVGs to represent dose adjustment preferences. You can customize each bottle's appearance:</p>
+
+        <h4>Stay (No Change)</h4>
+        <ul>
+          <li><strong>Fill Color:</strong> Background color of the bottle icon (default #ede9f3 — light purple)</li>
+          <li><strong>Stroke Color:</strong> Outline of the bottle (default #7c6aa0 — medium purple)</li>
+        </ul>
+
+        <h4>Increase Dose</h4>
+        <ul>
+          <li><strong>Fill Color:</strong> Background color (default #e8f5e9 — light green)</li>
+          <li><strong>Stroke Color:</strong> Outline (default #66bb6a — medium green)</li>
+        </ul>
+
+        <h4>Decrease Dose</h4>
+        <ul>
+          <li><strong>Fill Color:</strong> Background color (default #fff3e0 — light orange)</li>
+          <li><strong>Stroke Color:</strong> Outline (default #ffa726 — medium orange)</li>
+        </ul>
+
+        <h3>Live Preview</h3>
+        <p>As you adjust colors, the questionnaire preview updates in real-time, showing how the bottles will appear to patients. This lets you verify your color selections before saving.</p>
+
+        <h3>Best Practices</h3>
+        <ul>
+          <li>Use colors that are clearly distinct from each other (Stay, Increase, Decrease should be visually different)</li>
+          <li>Ensure sufficient contrast between fill and stroke colors</li>
+          <li>Use colors that align with common associations (green for increase, orange for decrease, purple for neutral)</li>
+          <li>Test on different devices and screen sizes</li>
+        </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="service-area-configuration">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">5</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Service Area Configuration</span>
+            <span class="hc-accordion-summary">Set which states and regions your practice serves</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Define the geographic region where you can legally provide consultations. Access from <strong>Qualiphy → Settings → Service Area</strong>.</p>
+
+        <h3>Available States</h3>
+        <p>You can select from 48 US states plus Washington, D.C. (50 jurisdictions total). Alabama and Mississippi are not currently supported by the Qualiphy network.</p>
+
+        <h3>Selecting Your Service Area</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Service Area</strong></li>
+          <li>Check the boxes for all states where you're licensed to provide consultations</li>
+          <li>Click <strong>Save Service Area</strong></li>
+        </ol>
+
+        <h3>Automatic Shipping Zone Creation</h3>
+        <p>When you save your service area, Quidget automatically:</p>
+        <ul>
+          <li>Creates a WooCommerce shipping zone called <strong>"Qualiphy Service Area"</strong> covering all selected states</li>
+          <li>Adds free shipping to this zone (consultations don't need physical shipping)</li>
+          <li>Creates a <strong>"Qualiphy Consultation"</strong> shipping class for all consultation products</li>
+        </ul>
+
+        <h3>Protecting Your Shipping Zone</h3>
+        <p>The shipping zone is protected and will auto-recreate if deleted. This ensures customers in your service area always see accurate shipping (free shipping, available to proceed to checkout).</p>
+
+        <h3>Outside Service Area</h3>
+        <p>Customers attempting to purchase from outside your service area will see:</p>
+        <blockquote>"This product is not available in your area"</blockquote>
+        <p>This message prevents orders from customers you're not licensed to serve.</p>
+
+        <h3>Updating Service Area</h3>
+        <p>If you add new licenses or lose licensure in a state, update your service area selection and save. The shipping zone updates automatically.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="language-custom-text">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">6</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Language & Custom Text</span>
+            <span class="hc-accordion-summary">Customize button labels, messages, and text strings</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Customize all patient-facing text throughout the consultation flow. Access from <strong>Qualiphy → Settings → Language</strong>.</p>
+
+        <h3>Product Description Text</h3>
+        <p>Customize how consultation types are described to customers:</p>
+        <ul>
+          <li><strong>Rx Product Description:</strong> Text shown on prescription consultations (e.g., "Get a prescription from a provider")</li>
+          <li><strong>Non-Rx (GFE) Product Description:</strong> Text shown on aesthetic/clearance consultations (e.g., "Get provider approval")</li>
+        </ul>
+
+        <h3>Checkout Messages</h3>
+        <ul>
+          <li><strong>No Shipping Available Message:</strong> Message shown when a customer is outside your service area</li>
+          <li><strong>Refund Disclaimer:</strong> Explanation of when and how refunds are processed if an exam is rejected</li>
+        </ul>
+
+        <h3>Button Labels</h3>
+        <ul>
+          <li><strong>Begin Consultation:</strong> Label on the main CTA button to start an exam (default "Begin Consultation")</li>
+          <li><strong>Get Started Now:</strong> Alternative or secondary button label</li>
+        </ul>
+
+        <h3>Exam Launch Modal Text</h3>
+        <p>Customize the modal that displays when an exam is ready to launch:</p>
+        <ul>
+          <li><strong>Modal Heading:</strong> Title of the exam modal (e.g., "Your consultation is ready")</li>
+          <li><strong>Modal Description:</strong> Instructions explaining what to do next</li>
+          <li><strong>Launch Button Text:</strong> Text on the main launch button</li>
+          <li><strong>Audio/Video Note:</strong> Disclaimer about camera and microphone requirements</li>
+          <li><strong>QR Code Heading:</strong> Label for the QR code section (mobile access)</li>
+          <li><strong>QR Code Description:</strong> Instructions for scanning the code</li>
+          <li><strong>Email Note:</strong> Message about the exam invite being sent to email</li>
+          <li><strong>Dismiss Text:</strong> Label on the close/dismiss button</li>
+        </ul>
+
+        <h3>Questionnaire Text</h3>
+        <p>Customize the dose questionnaire flow:</p>
+        <ul>
+          <li><strong>Step 1 Title:</strong> "Have you taken this medication before?" prompt</li>
+          <li><strong>Step 2 Title:</strong> "What is your current dose?" prompt</li>
+          <li><strong>Step 3 Title:</strong> "Dose adjustment preference" prompt</li>
+        </ul>
+
+        <h3>Dose Option Labels</h3>
+        <ul>
+          <li><strong>Stay Dose Label:</strong> Label for "no change" option (e.g., "Stay at current dose")</li>
+          <li><strong>Increase Dose Label:</strong> Label for "increase" option (e.g., "Increase dose")</li>
+          <li><strong>Decrease Dose Label:</strong> Label for "decrease" option (e.g., "Decrease dose")</li>
+          <li><strong>Questionnaire Disclaimer:</strong> Legal/informational disclaimer shown in the questionnaire</li>
+        </ul>
+
+        <h3>Patient Request Consultation</h3>
+        <p>Messages shown during the consultation request/booking flow:</p>
+        <ul>
+          <li><strong>Request Consultation Message:</strong> Instructions for patients to request a new consultation</li>
+          <li><strong>Consultation Request Confirmation:</strong> Confirmation message after request is submitted</li>
+        </ul>
+
+        <h3>Translation & Localization</h3>
+        <p>All text fields support full HTML formatting (bold, links, etc.) for clarity. Consider your audience when customizing language—clear, jargon-free explanations work best for patient education.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="clinical-access-controls">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">7</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Clinical Access Controls</span>
+            <span class="hc-accordion-summary">Manage provider access levels and clinical permissions</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Restrict access to patient consultation data to authorized clinical users. Access from <strong>Qualiphy → Settings → Clinical Access</strong>.</p>
+
+        <h3>Why Clinical Access Control Matters</h3>
+        <p>Patient consultation data is sensitive medical information. Clinical access controls ensure only authorized providers and staff can view patient exams, medical history, and order details.</p>
+
+        <h3>Eligible Roles</h3>
+        <p>Only users with these WordPress roles can access patient consultation data:</p>
+        <ul>
+          <li><strong>Administrator:</strong> Full access (typically site owner/manager)</li>
+          <li><strong>Shop Manager:</strong> Full access (WooCommerce role for store operators)</li>
+          <li><strong>Editor:</strong> Full access (content management role)</li>
+          <li><strong>Author:</strong> Full access (contributor role)</li>
+        </ul>
+        <p>All other roles (Subscriber, Customer, Contributor, custom roles) are restricted and cannot view patient consultation data.</p>
+
+        <h3>Initial Access Setup</h3>
+        <p>During the setup wizard, the admin user who runs the wizard automatically receives full clinical access. No additional configuration is needed for this user.</p>
+
+        <h3>Non-Clinical Users</h3>
+        <p>Users without clinical access see the message:</p>
+        <blockquote>"Patient Order Access Required. You don't have permission to view patient consultation data."</blockquote>
+
+        <h3>Hiding Qualiphy Orders</h3>
+        <p>Non-clinical users can toggle <strong>"Hide Qualiphy Orders"</strong> in the WooCommerce Orders list to filter out consultation orders from their view. This declutters their order management if they handle other product types.</p>
+
+        <h3>Order Notes & History</h3>
+        <p>Clinical users see exam status updates in the order notes and timeline (e.g., "Exam submitted", "Approved by Dr. Smith", "Prescription created", "Shipped"). Non-clinical users don't see these notes.</p>
+
+        <h3>Auditing & Compliance</h3>
+        <p>All access to patient data is logged in the order activity timeline. You can review who accessed patient orders and when by viewing the order detail page.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="email-notifications">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">8</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Email Notifications</span>
+            <span class="hc-accordion-summary">Configure automated email alerts and notification triggers</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Configure which admin staff members receive email notifications about exam status and errors. Access from <strong>Qualiphy → Settings → Email Notifications</strong>.</p>
+
+        <h3>Notification Recipients</h3>
+        <p>Add email addresses of team members who should receive admin notifications. You can add multiple recipients—each will receive the same notification emails.</p>
+
+        <h3>Notifications Sent</h3>
+        <p>Admin email notifications are sent for:</p>
+        <ul>
+          <li><strong>Exam Invite Failures:</strong> When an exam invite email fails to send to a patient (connection error, invalid email, etc.)</li>
+          <li><strong>Exam Status Updates:</strong> When a provider approves, defers, or rejects an exam</li>
+          <li><strong>Webhook Errors:</strong> When Qualiphy tries to send an update but your site doesn't acknowledge it</li>
+          <li><strong>API Connection Issues:</strong> When the plugin can't reach the Qualiphy API (may indicate downtime or firewall issues)</li>
+        </ul>
+
+        <h3>Adding Recipients</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Email Notifications</strong></li>
+          <li>In the recipients section, enter a name and email address</li>
+          <li>Click <strong>Add Recipient</strong></li>
+          <li>Click <strong>Save Settings</strong></li>
+        </ol>
+
+        <h3>Auto-Populate During Setup</h3>
+        <p>During the setup wizard, the admin user's email is automatically added as a notification recipient. You can add or remove recipients at any time.</p>
+
+        <h3>Email Frequency</h3>
+        <p>Notifications are sent in real-time as events occur (not batched or delayed). This ensures you're aware of issues immediately.</p>
+
+        <h3>Unsubscribe</h3>
+        <p>To remove a recipient from notifications, delete their entry from the recipients list and save settings.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="redirect-settings">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">9</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Redirect Settings</span>
+            <span class="hc-accordion-summary">Set up post-checkout and post-exam redirect URLs</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Configure where patients are redirected after an exam is completed (approved, rejected, etc.). Access from <strong>Qualiphy → Settings → Redirects</strong>.</p>
+
+        <h3>Overview</h3>
+        <p>Four redirect pages can be customized based on exam outcomes. Each can point to an existing page, a new page created by the wizard, or a custom URL.</p>
+
+        <h3>Approved Exam Redirect</h3>
+        <p>Where the patient goes after the provider approves their exam:</p>
+        <ul>
+          <li><strong>For Rx consultations:</strong> Typically a "Prescription Submitted" page explaining next steps (pharmacy will contact them)</li>
+          <li><strong>For GFE consultations:</strong> Typically a "You're Approved" page with clearance confirmation</li>
+        </ul>
+
+        <h3>Rejected Exam Redirect</h3>
+        <p>Where the patient goes if the provider rejects or defers their exam. Usually a page explaining the rejection reason and options (resubmit, contact support, request refund).</p>
+
+        <h3>Not Available Redirect</h3>
+        <p>Where the patient goes if they're outside your service area. Usually a page saying consultations aren't available in their location with information about service area expansion.</p>
+
+        <h3>Missed Exam Redirect</h3>
+        <p>Where the patient goes if they don't show up for their scheduled video consultation. Usually a page offering to reschedule or try again.</p>
+
+        <h3>Setting Up Redirects</h3>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Redirects</strong></li>
+          <li>For each redirect type, select a page or enter a custom URL</li>
+          <li>You can use internal pages (select from dropdown) or external URLs (enter full URL including <strong>https://</strong>)</li>
+          <li>Click <strong>Save Redirects</strong></li>
+        </ol>
+
+        <h3>Default Pages</h3>
+        <p>During setup wizard, default pages are created for each redirect. You can edit these pages to customize messaging or redirect to different pages later.</p>
+
+        <h3>Custom Redirects</h3>
+        <p>To redirect to an external site or a page on another domain, enter the full URL (e.g., <strong>https://example.com/approved</strong>).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="product-settings">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">10</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Product Settings</span>
+            <span class="hc-accordion-summary">Default pricing margins, sync behavior, and product display options</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Configure defaults for all Quidget consultation products. Access from <strong>Qualiphy → Settings → Products</strong>. Individual products can override these defaults.</p>
+
+        <h3>Default Price Margin</h3>
+        <p><strong>Default:</strong> 10% (Range: 0-500%)</p>
+        <p>Default profit margin applied to Qualiphy consultation costs when creating products. If a Qualiphy consultation costs $50 and margin is 10%, the customer price is $55. Can be overridden per-product during import or product editing.</p>
+
+        <h3>Hide View Cart Link</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, the "View Cart" link is hidden after adding a consultation product to cart. Streamlines the purchase experience by pushing customers directly to checkout.</p>
+
+        <h3>Show Branding</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, clinic logo and accent colors are displayed on consultation product images, thank-you pages, and checkout. Disable to show minimal branding.</p>
+
+        <h3>Enable Questionnaire by Default</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, the dose questionnaire is shown to all customers (if the consultation type supports it). Disable to hide the questionnaire by default (can still enable per-product).</p>
+
+        <h3>Questionnaire Redirect to Checkout</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, after patients complete the dose questionnaire, they're immediately redirected to checkout. Disable to show a review/summary page before checkout.</p>
+
+        <h3>Auto Redirect to Checkout</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, adding a consultation product to cart automatically redirects to checkout (skipping the cart page). Disable if you want customers to review their cart or add multiple products.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../getting-started/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Getting Started
+          </a>
+          <a href="../troubleshooting/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Troubleshooting
+          </a>
+          <a href="../consultations/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Consultations
+          </a>
+          <a href="../pharmacy/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Pharmacy
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+          <span><strong>4.9</strong> &middot; 5,000+ reviews</span>
+        </a>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM&ndash;7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      </div>
+    </div>
+  </div></footer>
+
+  <script>
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+
+    // Accordion logic
+    document.querySelectorAll('.hc-accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.hc-accordion');
+        const isOpen = accordion.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.hc-accordion.is-open').forEach(a => {
+          a.classList.remove('is-open');
+          a.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          accordion.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          setTimeout(() => {
+            accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      });
+    });
+
+    // Open first accordion by default
+    const first = document.querySelector('.hc-accordion');
+    if (first) {
+      first.classList.add('is-open');
+      first.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'true');
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

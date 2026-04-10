@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscriptions & Renewals — Quidget Help Center</title>
+  <meta name="description" content="Setting up recurring consultations, renewal behavior, and deferral actions with WooCommerce Subscriptions and Quidget.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav (MUST BE EXACTLY THIS) -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Subscriptions & Renewals</span>
+        </div>
+        <h1 class="hc-category-title">Subscriptions & Renewals</h1>
+        <p class="hc-category-desc">Learn how to set up recurring consultations, manage renewal workflows, and configure deferral handling with WooCommerce Subscriptions and Quidget.</p>
+        <div class="hc-article-count">4 articles in this section</div>
+</div>
+    </div>
+
+    <div class="hc-body">
+      <div class="hc-accordion is-open" id="setting-up-subscriptions">
+        <button class="hc-accordion-trigger" aria-expanded="true">
+          <span class="hc-accordion-num">1</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Setting Up Subscriptions</span>
+            <span class="hc-accordion-summary">Enable recurring consultations with WooCommerce Subscriptions</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Quidget integrates with WooCommerce Subscriptions to enable recurring consultations. This is ideal for ongoing patient care like medication refills, routine check-ups, or continuous monitoring.</p>
+
+        <h3>Prerequisites</h3>
+        <p>Before you can set up subscriptions, you'll need to install and activate the <strong>WooCommerce Subscriptions</strong> extension. This is a paid add-on available from WooCommerce.com and is required for all subscription functionality.</p>
+
+        <h3>Creating a Subscription Product</h3>
+        <p>Once WooCommerce Subscriptions is installed, you can set up recurring consultation products:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products → Add New</strong></li>
+          <li>Enter the product title (e.g., "Monthly Medication Refill Consultation")</li>
+          <li>In the <strong>Product Data</strong> section, select <strong>Subscription</strong> as the product type</li>
+          <li>Configure the subscription details:
+            <ul>
+              <li><strong>Billing Period:</strong> Choose monthly, quarterly, yearly, etc.</li>
+              <li><strong>Set the billing period</strong> during product creation</li>
+            </ul>
+          </li>
+          <li>You can add a <strong>sign-up fee</strong> during the pricing step if needed</li>
+          <li>Link to a Qualiphy consultation and publish the product</li>
+        </ol>
+
+        <h3>Importing via Consultation Wizard</h3>
+        <p>You can also create subscription products during the Quidget setup wizard. When importing a consultation type, choose "Subscription" as the product type, set the billing period, and complete the import.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="subscription-settings">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">2</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Subscription Settings</span>
+            <span class="hc-accordion-summary">Configure renewal intervals, retry logic, and subscription behavior</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Quidget provides three key subscription settings to control exam delivery and renewal behavior. All settings are found in <strong>Qualiphy → Settings → Subscriptions</strong> (advanced tab).</p>
+
+        <h3>Send Exam on Activation</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When a customer purchases a subscription, this setting controls whether an exam invite is automatically sent when the subscription begins. With this enabled (recommended), the patient receives their initial exam immediately upon subscription start.</p>
+
+        <h3>Send Exam on Renewal</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, a new exam invite is automatically sent to the patient each time the subscription renews (each billing cycle). This ensures the provider reviews the patient before each renewal. Disable this only if you want manual control over renewal exams.</p>
+
+        <h3>Subscription Deferral Action</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>This setting determines what happens when a provider defers a renewal exam. Two options are available:</p>
+        <ul>
+          <li><strong>Cancelled:</strong> The subscription ends immediately when a deferral occurs</li>
+          <li><strong>On Hold:</strong> The subscription pauses until you manually reactivate it</li>
+        </ul>
+        <p>Auto-refund can also be configured to issue partial refunds when deferrals occur, protecting patients from being charged for unapproved renewals.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="renewal-behavior">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">3</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Renewal Behavior</span>
+            <span class="hc-accordion-summary">How automatic renewals trigger new consultations</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>When a subscription renews, Quidget automatically handles the exam workflow. Understanding how renewals work helps you manage patient expectations and provider workflows.</p>
+
+        <h3>What Happens During Renewal</h3>
+        <p>When a subscription renews and "Send Exam on Renewal" is enabled:</p>
+        <ol>
+          <li><strong>Payment Processed:</strong> WooCommerce Subscriptions charges the customer on the scheduled renewal date</li>
+          <li><strong>Exam Invite Sent:</strong> Quidget automatically sends a new exam invite to the patient's email address</li>
+          <li><strong>Patient Information Reused:</strong> The exam uses the same patient demographic information from the original subscription order</li>
+          <li><strong>Provider Reviews:</strong> Your clinic provider reviews the patient during the renewal exam</li>
+          <li><strong>Provider Decision:</strong> The provider approves, defers, or rejects the renewal consultation
+            <ul>
+              <li><strong>Approved:</strong> The prescription is renewed or treatment continues, and the pharmacy (if applicable) fulfills it</li>
+              <li><strong>Deferred:</strong> The renewal is held pending review</li>
+              <li><strong>Rejected:</strong> The consultation is declined; the patient is notified</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Patient Experience During Renewal</h3>
+        <p>From the patient's perspective:</p>
+        <ul>
+          <li>They receive an exam invite email at each renewal date</li>
+          <li>They complete a quick follow-up questionnaire</li>
+          <li>They wait for provider approval</li>
+          <li>Once approved, the new prescription/treatment is available</li>
+        </ul>
+
+        <p>This creates a consistent, compliant workflow where each renewal is independently reviewed by a provider.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="handling-deferrals">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">4</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Handling Deferrals</span>
+            <span class="hc-accordion-summary">What happens when a subscription renewal is deferred</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>A deferral occurs when a provider reviews a renewal consultation and decides to hold the decision rather than approve or reject it immediately. Quidget provides flexible options for managing deferrals automatically.</p>
+
+        <h3>What is a Deferral?</h3>
+        <p>When a provider defers a consultation, they're saying "I need more information or time before I can approve this renewal." This might happen if the patient's medical history has changed, lab results are needed, or further investigation is required.</p>
+
+        <h3>Deferral Status Options</h3>
+        <p>When a consultation is deferred, Quidget can automatically trigger one of two actions:</p>
+
+        <h4>Cancelled (Default)</h4>
+        <p>The subscription is ended immediately when a deferral occurs:</p>
+        <ul>
+          <li>No further renewal charges</li>
+          <li>Patient must contact support or resubscribe to continue</li>
+          <li>Provides a hard stop to allow for medical review</li>
+        </ul>
+
+        <h4>On Hold</h4>
+        <p>The subscription is paused when a deferral occurs:</p>
+        <ul>
+          <li>No further renewal charges until reactivated</li>
+          <li>The subscription retains all settings and history</li>
+          <li>You can manually reactivate the subscription in WooCommerce when ready</li>
+          <li>Patient is notified that their subscription is on hold</li>
+        </ul>
+
+        <h3>Configuring Deferral Behavior</h3>
+        <p>To set your deferral action preference:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Subscriptions</strong></li>
+          <li>Under <strong>Subscription Deferral Action</strong>, select either <strong>Cancelled</strong> or <strong>On Hold</strong></li>
+          <li>Click <strong>Save Changes</strong></li>
+        </ol>
+
+        <h3>Auto-Refund on Deferral</h3>
+        <p>Quidget can optionally issue automatic partial refunds when a deferral occurs. This protects patients from being charged for a consultation that wasn't approved:</p>
+        <ul>
+          <li><strong>Auto Refund Rejected:</strong> When enabled (default), a refund is issued for deferred renewals</li>
+          <li><strong>Refund Amount:</strong> Total order amount minus the configured return fee</li>
+          <li><strong>Return Fee:</strong> Default is $30.00 per order, configurable per product in WooCommerce</li>
+        </ul>
+
+        <h4>Example Deferral Refund Scenario</h4>
+        <p>A patient's monthly subscription renews at $49.99. During the renewal exam, the provider defers the consultation. With auto-refund enabled and a $30 return fee:</p>
+        <ul>
+          <li>Original renewal charge: $49.99</li>
+          <li>Return fee retained: $30.00</li>
+          <li>Refund issued to patient: $19.99</li>
+        </ul>
+
+        <h3>Configuring Return Fees</h3>
+        <p>Return fees are set per product and apply when deferrals trigger auto-refunds:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit your subscription product</li>
+          <li>In the <strong>Qualiphy</strong> section, set the <strong>Return Fee</strong> (default $30.00)</li>
+          <li>Click <strong>Update</strong></li>
+        </ol>
+        <p>If a customer orders multiple products with return fees, the fees are summed.</p>
+
+        <h3>Clinical Access Control</h3>
+        <p>Deferral Status is tied to Clinical Access settings. Depending on your configuration, the visibility and status of deferred consultations may be controlled through the Clinical Access feature to ensure proper workflow management.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../billing/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Billing & Pricing
+          </a>
+          <a href="../troubleshooting/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Troubleshooting
+          </a>
+          <a href="../../get-started/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+          <span><strong>4.9</strong> &middot; 5,000+ reviews</span>
+        </a>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM&ndash;7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      </div>
+    </div>
+  </div></footer>
+
+  <script>
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+
+    // Accordion logic
+    document.querySelectorAll('.hc-accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.hc-accordion');
+        const isOpen = accordion.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.hc-accordion.is-open').forEach(a => {
+          a.classList.remove('is-open');
+          a.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          accordion.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          setTimeout(() => {
+            accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      });
+    });
+
+    // Open first accordion by default
+    const first = document.querySelector('.hc-accordion');
+    if (first) {
+      first.classList.add('is-open');
+      first.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'true');
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

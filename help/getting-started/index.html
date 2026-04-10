@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — Quidget Help Center</title>
+  <meta name="description" content="How to install, activate, and configure the Quidget WooCommerce telehealth plugin for your WordPress site. System requirements, setup wizard, and first consultation.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav (MUST BE EXACTLY THIS) -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <!-- Header with breadcrumb + title + article nav pills -->
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Getting Started</span>
+        </div>
+        <h1 class="hc-category-title">Getting Started</h1>
+        <p class="hc-category-desc">Everything you need to know to install, activate, and configure the Quidget plugin on your WordPress site.</p>
+        <div class="hc-article-count">5 articles in this section</div>
+</div>
+    </div>
+
+    <!-- Article content -->
+    <div class="hc-body">
+      <div class="hc-accordion is-open" id="system-requirements">
+        <button class="hc-accordion-trigger" aria-expanded="true">
+          <span class="hc-accordion-num">1</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">System Requirements</span>
+            <span class="hc-accordion-summary">WordPress version, WooCommerce, PHP, and hosting requirements</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Before installing Quidget, ensure your WordPress site meets these minimum requirements:</p>
+
+        <h3>Core Requirements</h3>
+        <ul>
+          <li><strong>WordPress 5.0+</strong> (WordPress 6.0+ recommended for best compatibility)</li>
+          <li><strong>WooCommerce 5.0+</strong> (WooCommerce 6.0+ recommended)</li>
+          <li><strong>PHP 7.4+</strong> (PHP 8.0 or higher recommended for optimal performance)</li>
+        </ul>
+
+        <h3>Additional Requirements</h3>
+        <ul>
+          <li><strong>SSL Certificate:</strong> Your site must be served over HTTPS (SSL/TLS). This is required by the Qualiphy API and essential for patient security.</li>
+          <li><strong>Public Accessibility:</strong> Your site must be publicly accessible on the internet. Webhooks from Qualiphy need to reach your server to sync exam status, prescription updates, and pharmacy fulfillment data.</li>
+          <li><strong>Qualiphy Account:</strong> You need an active Qualiphy clinic account with API access. Sign up at <strong>app.qualiphy.me</strong> if you haven't already.</li>
+        </ul>
+
+        <h3>Payment Processing</h3>
+        <ul>
+          <li><strong>WooPayments:</strong> Recommended for processing consultation fees. WooPayments integrates directly with WooCommerce and handles patient payments for consultations.</li>
+          <li><strong>Other Payment Gateways:</strong> Quidget supports any WooCommerce payment gateway (Stripe, Square, etc.). You only need one to process consultation purchases.</li>
+          <li><strong>Free Consultations:</strong> You can offer free consultations without a payment gateway—patients will be able to complete checkout and access exams without payment.</li>
+        </ul>
+
+        <h3>Optional but Recommended</h3>
+        <ul>
+          <li><strong>WooCommerce Subscriptions:</strong> Required only if you offer recurring or subscription-based consultations. Not needed for one-time consultations.</li>
+          <li><strong>WooCommerce Shipment Tracking:</strong> Optional plugin that displays pharmacy shipment tracking info in patient order emails and accounts.</li>
+        </ul>
+
+        <h3>Server Configuration</h3>
+        <p>Your server should allow:</p>
+        <ul>
+          <li>Outgoing HTTPS requests to <strong>api.qualiphy.me</strong> (for API calls)</li>
+          <li>Inbound POST requests from <strong>api.qualiphy.me</strong> (for webhooks)</li>
+          <li>PHP functions: <code>curl_exec()</code>, <code>json_encode()</code>, <code>json_decode()</code></li>
+        </ul>
+        <p>If you use a security plugin (Wordfence, Sucuri), you may need to whitelist Qualiphy's webhook URL. See <a href="../troubleshooting/">Troubleshooting</a> for more details.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="installing-the-plugin">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">2</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Installing the Plugin</span>
+            <span class="hc-accordion-summary">How to download, install, and activate the Quidget plugin</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>Quidget installs like any standard WordPress plugin. You can install it via the WordPress admin dashboard.</p>
+
+        <h3>Installation Steps</h3>
+        <ol>
+          <li>Log in to your WordPress admin dashboard</li>
+          <li>Navigate to <strong>Plugins → Add New</strong></li>
+          <li>Click <strong>Upload Plugin</strong> at the top of the page</li>
+          <li>Select the Quidget plugin ZIP file from your computer</li>
+          <li>Click <strong>Install Now</strong> and wait for installation to complete</li>
+          <li>Click <strong>Activate Plugin</strong> to enable Quidget on your site</li>
+        </ol>
+
+        <h3>What Happens After Activation</h3>
+        <p>Once activated, Quidget will:</p>
+        <ul>
+          <li>Add a <strong>Qualiphy</strong> menu to your WordPress admin sidebar</li>
+          <li>Auto-detect your WooCommerce installation</li>
+          <li>Display a setup wizard notice at the top of your admin dashboard</li>
+          <li>Create database tables for storing consultation and pharmacy data</li>
+        </ul>
+
+        <h3>Verify Installation</h3>
+        <p>To verify successful installation:</p>
+        <ol>
+          <li>Look for the <strong>Qualiphy</strong> menu in your admin sidebar</li>
+          <li>Click on <strong>Qualiphy → Settings → General</strong></li>
+          <li>You should see plugin settings fields. If the page loads without errors, installation is complete.</li>
+        </ol>
+
+        <p>You're ready to move to the next step: connecting your Qualiphy API key.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="connecting-your-api-key">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">3</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Connecting Your Qualiphy API Key</span>
+            <span class="hc-accordion-summary">Connect your WordPress site to your Qualiphy account</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>The Quidget plugin communicates with your Qualiphy clinic account through an API key. This secure connection ensures that patient exams are routed correctly, consultation data syncs, and webhooks are processed properly.</p>
+
+        <h3>Step 1: Find Your API Key in Qualiphy</h3>
+        <ol>
+          <li>Log in to your Qualiphy clinic dashboard at <strong>app.qualiphy.me</strong></li>
+          <li>Navigate to <strong>Settings → API Settings</strong></li>
+          <li>Look for your <strong>API Key</strong> (a long alphanumeric string)</li>
+          <li>Copy the entire key to your clipboard</li>
+        </ol>
+
+        <h3>Step 2: Enter Your API Key in Quidget</h3>
+        <ol>
+          <li>In your WordPress admin, go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Find the <strong>Qualiphy API Key</strong> field</li>
+          <li>Paste your API key into the field</li>
+          <li>Click <strong>Verify & Save</strong></li>
+        </ol>
+
+        <h3>Verification and Security</h3>
+        <p>When you save your API key:</p>
+        <ul>
+          <li><strong>Verification:</strong> Quidget will test the connection to the Qualiphy API. This ensures your key is valid and your site can reach Qualiphy's servers.</li>
+          <li><strong>Encryption:</strong> Your API key is encrypted using AES-256-CBC encryption before being stored in your database. It is never transmitted unencrypted and never exposed in logs.</li>
+          <li><strong>Success Indicator:</strong> If verification succeeds, you'll see a <strong>green checkmark</strong> next to the API key field and a confirmation message.</li>
+        </ul>
+
+        <h3>If Verification Fails</h3>
+        <p>If you see an error message:</p>
+        <ul>
+          <li><strong>Check the key:</strong> Ensure you've copied the entire API key correctly with no extra spaces</li>
+          <li><strong>Check connectivity:</strong> Verify that your site can make outbound HTTPS requests to <strong>api.qualiphy.me</strong></li>
+          <li><strong>Check your Qualiphy account:</strong> Log into your Qualiphy dashboard to confirm your clinic account is active</li>
+          <li><strong>Server configuration:</strong> If you use a firewall or security plugin, ensure it allows outbound requests to Qualiphy's API</li>
+        </ul>
+
+        <p>Once your API key is verified, you're ready to run the setup wizard.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="running-the-setup-wizard">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">4</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Running the Setup Wizard</span>
+            <span class="hc-accordion-summary">Walk through the one-time setup wizard after activation</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>After connecting your API key, the Quidget setup wizard will guide you through 11 configuration steps to prepare your store for consultations.</p>
+
+        <h3>Step 1: Welcome & Terms</h3>
+        <p>A welcome screen introducing the setup process and key configuration steps ahead.</p>
+
+        <h3>Step 2: Requirements Check</h3>
+        <p>Quidget verifies that your WordPress environment meets all system requirements (WordPress version, WooCommerce version, PHP version, SSL, API connectivity).</p>
+
+        <h3>Step 3: Branding</h3>
+        <p>Configure your clinic's visual identity:</p>
+        <ul>
+          <li><strong>Light Background Logo:</strong> Your clinic logo for use on light backgrounds (PNG recommended)</li>
+          <li><strong>Dark Background Logo:</strong> Dark version of your logo for use on dark backgrounds</li>
+          <li><strong>Primary Accent Color:</strong> Default #CFC9FF (light purple). Used for buttons, links, and highlights in the exam modal</li>
+          <li><strong>Secondary Accent Color:</strong> Default #6e54a7 (dark purple). Used for text and secondary UI elements</li>
+        </ul>
+        <p>These colors and logos appear throughout the patient experience: exam modal, thank-you pages, emails, and checkout.</p>
+
+        <h3>Step 4: Environment Selection</h3>
+        <p>Choose your Qualiphy environment:</p>
+        <ul>
+          <li><strong>Live:</strong> Production environment. Patients are billed for real consultations.</li>
+          <li><strong>Sandbox:</strong> Test environment. Useful for testing the plugin before going live. Exams are processed but not billed.</li>
+        </ul>
+
+        <h3>Step 5: Custom Fields Setup</h3>
+        <p>Configure additional patient information fields to collect at checkout (beyond the standard WooCommerce fields). These may include custom medical history questions, preferences, or clinic-specific requirements.</p>
+
+        <h3>Step 6: Database Tables</h3>
+        <p>Quidget creates database tables to store consultation data, pharmacy routing rules, and exam status. This step initializes those tables.</p>
+
+        <h3>Step 7: API Key Connection</h3>
+        <p>Confirmation that your API key has been successfully verified and connected.</p>
+
+        <h3>Step 8: Service Area Configuration</h3>
+        <p>Select the US states where you're licensed to provide consultations:</p>
+        <ul>
+          <li>48 states plus Washington, D.C. are available</li>
+          <li>Alabama and Mississippi are not currently supported</li>
+          <li>Your selection automatically creates a WooCommerce shipping zone for these states</li>
+          <li>Patients outside your service area will see "This product is not available in your area"</li>
+        </ul>
+
+        <h3>Step 9: Import Consultations</h3>
+        <p>The wizard syncs your Qualiphy consultations and offers to create WooCommerce products for them. You can:</p>
+        <ul>
+          <li>Create new products for each consultation</li>
+          <li>Link to existing WooCommerce products</li>
+          <li>Set pricing (with your configured margin applied)</li>
+          <li>Configure exam type (GFE or Rx) and pharmacy routing if applicable</li>
+        </ul>
+
+        <h3>Step 10: Configure Settings</h3>
+        <p>Review and adjust key settings like auto-launch exams, exam launch mode (popup vs redirect), checkout behavior, and language/text customization.</p>
+
+        <h3>Step 11: Complete</h3>
+        <p>Setup wizard is complete. You're now ready to accept patient orders and deliver consultations.</p>
+
+        <h3>Re-running the Wizard</h3>
+        <p>You can re-run the setup wizard at any time by going to <strong>Qualiphy → Settings → General</strong> and clicking <strong>Run Setup Wizard</strong>. This won't overwrite existing settings—you can selectively update them as needed.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-accordion" id="your-first-consultation">
+        <button class="hc-accordion-trigger" aria-expanded="false">
+          <span class="hc-accordion-num">5</span>
+          <span class="hc-accordion-text">
+            <span class="hc-accordion-title">Your First Consultation</span>
+            <span class="hc-accordion-summary">Import a consultation product and test the patient flow</span>
+          </span>
+          <svg class="hc-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </button>
+        <div class="hc-accordion-content">
+          <div class="hc-accordion-inner">
+
+        <p>After completing the setup wizard, it's time to test the full consultation flow end-to-end. This ensures that exams are sent correctly, order lifecycle works as expected, and everything is ready for real patients.</p>
+
+        <h3>Step 1: Access Your Storefront</h3>
+        <ol>
+          <li>Navigate to your WordPress site's public storefront (not the admin)</li>
+          <li>Find a consultation product you created during setup</li>
+          <li>Click to view the product page</li>
+        </ol>
+
+        <h3>Step 2: Place a Test Order</h3>
+        <ol>
+          <li>Click <strong>Add to Cart</strong> on the consultation product</li>
+          <li>Proceed to checkout (you'll be redirected automatically if auto-redirect is enabled)</li>
+          <li>Fill in the required patient information:
+            <ul>
+              <li>Gender (Male, Female, Non-binary, Prefer not to say)</li>
+              <li>Date of Birth</li>
+              <li>Phone Number</li>
+              <li>Email address (use one you have access to)</li>
+              <li>State (must be in your service area)</li>
+            </ul>
+          </li>
+          <li>Choose your payment method and complete payment
+            <ul>
+              <li>If in sandbox mode, use test credit card: <code>4242 4242 4242 4242</code>, any future expiry, any CVC</li>
+              <li>If live, use a real payment method</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Step 3: Verify the Exam Invite</h3>
+        <p>Within seconds of completing payment, an exam invite email will be sent to the address provided at checkout:</p>
+        <ol>
+          <li>Check your inbox (including spam/promotions folders)</li>
+          <li>Open the exam invite email and verify:
+            <ul>
+              <li>Your clinic logo and branding colors appear in the email</li>
+              <li>The email contains a link or button to start the exam</li>
+              <li>The patient's name and consultation type are correct</li>
+            </ul>
+          </li>
+          <li>Click the exam invite link to proceed</li>
+        </ol>
+
+        <h3>Step 4: Complete the Exam</h3>
+        <ol>
+          <li>You'll be directed to the exam platform (hosted by Qualiphy)</li>
+          <li>Fill out the patient questionnaire:
+            <ul>
+              <li>Demographic information</li>
+              <li>Medical history and health conditions</li>
+              <li>Current medications</li>
+              <li>Consultation-specific questions (dose preference, etc.)</li>
+            </ul>
+          </li>
+          <li>Submit the questionnaire</li>
+          <li>You'll see a confirmation message with the provider's meeting link (for video consultation with a provider)</li>
+        </ol>
+
+        <h3>Step 5: Check Your Order in WordPress</h3>
+        <ol>
+          <li>Go back to your WordPress admin</li>
+          <li>Navigate to <strong>WooCommerce → Orders</strong></li>
+          <li>Find the test order you just created (look for your email or name)</li>
+          <li>Click to open the order detail page</li>
+          <li>Scroll to the <strong>Qualiphy Consultation</strong> section and verify:
+            <ul>
+              <li>Exam status is displayed (e.g., "Submitted", "Pending Review", "Approved")</li>
+              <li>Patient information matches what you entered at checkout</li>
+              <li>Consultation type is correct (GFE or Rx)</li>
+              <li>Provider name appears (if assigned)</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h3>Step 6: What Happens Next</h3>
+        <p>In a real scenario, the provider would:</p>
+        <ul>
+          <li>Review the patient's exam responses</li>
+          <li>Conduct a video consultation with the patient</li>
+          <li>Approve the exam (or defer if more information is needed)</li>
+          <li>For Rx consultations: Issue a prescription that gets routed to the patient's pharmacy</li>
+          <li>For GFE consultations: Complete the order (the patient receives clearance without a prescription)</li>
+        </ul>
+        <p>In your test, you can simulate this by going to the Qualiphy app and approving the exam from the provider dashboard.</p>
+
+        <h3>Troubleshooting</h3>
+        <ul>
+          <li><strong>Exam invite not received:</strong> Check spam folders. If still not found, verify the email address you entered at checkout is correct, and check that your site can send emails properly.</li>
+          <li><strong>Order not showing Qualiphy data:</strong> Refresh the page. If still blank, verify your API key is connected by checking <strong>Qualiphy → Settings → General</strong>.</li>
+          <li><strong>Exam modal not opening or exam link not working:</strong> Clear your browser cache and cookies. Ensure JavaScript is enabled in your browser.</li>
+          <li><strong>Payment declined:</strong> If using test mode, use the test card provided above. If live, check your payment gateway settings.</li>
+        </ul>
+
+        <p><strong>Success!</strong> If you've completed all steps, your Quidget installation is working correctly. You're ready to launch to patients. Explore the <a href="../plugin-settings/">Plugin Settings</a> guide to customize additional features like questionnaires, pharmacy routing, and patient communications.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../plugin-settings/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Plugin Settings
+          </a>
+          <a href="../troubleshooting/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Troubleshooting
+          </a>
+          <a href="../consultations/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Consultations
+          </a>
+          <a href="../billing/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Billing & Payments
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
+          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
+          <span><strong>4.9</strong> &middot; 5,000+ reviews</span>
+        </a>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM&ndash;7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+      </div>
+    </div>
+  </div></footer>
+
+  <script>
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+
+    // Accordion logic
+    document.querySelectorAll('.hc-accordion-trigger').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accordion = btn.closest('.hc-accordion');
+        const isOpen = accordion.classList.contains('is-open');
+
+        // Close all
+        document.querySelectorAll('.hc-accordion.is-open').forEach(a => {
+          a.classList.remove('is-open');
+          a.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked (if it was closed)
+        if (!isOpen) {
+          accordion.classList.add('is-open');
+          btn.setAttribute('aria-expanded', 'true');
+          setTimeout(() => {
+            accordion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 100);
+        }
+      });
+    });
+
+    // Open first accordion by default
+    const first = document.querySelector('.hc-accordion');
+    if (first) {
+      first.classList.add('is-open');
+      first.querySelector('.hc-accordion-trigger').setAttribute('aria-expanded', 'true');
+    }
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>
