@@ -91,10 +91,9 @@ const QUESTIONS = [
   },
   {
     id: "hasWoo",
-    q: "Is WooCommerce installed on your WordPress site?",
-    hint: "WooCommerce is the free plugin that adds product pages, checkout, and payments to WordPress.",
+    q: "Do you already have WooCommerce installed on your WordPress site?",
     options: [
-      { value: "yes", label: "Yes, it's installed and active" },
+      { value: "yes", label: "Yes, it's active" },
       { value: "no", label: "Not yet" },
     ],
   },
@@ -104,27 +103,27 @@ const QUESTIONS = [
     hint: "This determines how the plugin handles pharmacy routing and order flow.",
     options: [
       { value: "rx", label: "Rx Consultations", desc: "Prescriptions with pharmacy fulfillment" },
-      { value: "gfe", label: "Good Faith Exams", desc: "Provider clearance for in-clinic treatments" },
+      { value: "gfe", label: "Good Faith Exams", desc: "Provider clearance for treatments" },
       { value: "both", label: "Both", desc: "Rx consultations and Good Faith Exams" },
     ],
   },
   {
     id: "hasSubscriptions",
-    q: "Will patients need recurring consultations?",
-    hint: "For example, monthly weight loss medication refills. You can always add this later if you're unsure.",
+    q: "Will patients need recurring consultations (e.g. monthly refills)?",
+    hint: "This requires the WooCommerce Subscriptions extension.",
     options: [
-      { value: "yes", label: "Yes, we'll offer monthly plans" },
-      { value: "no", label: "No, one-time consultations only" },
+      { value: "yes", label: "Yes" },
+      { value: "no", label: "No" },
       { value: "unsure", label: "Not sure yet" },
     ],
   },
   {
     id: "hasProducts",
-    q: "Do you already have products in your store you want to connect?",
-    hint: "The plugin can create new products automatically, or link consultations to products you've already built.",
+    q: "Do you already have WooCommerce products you want to link to Qualiphy consultations?",
+    hint: "The plugin can create new products for you or link to existing ones.",
     options: [
-      { value: "yes", label: "Yes, link to existing products" },
-      { value: "no", label: "No, create new ones for me" },
+      { value: "yes", label: "Yes, I have existing products" },
+      { value: "no", label: "No, I'll create new ones" },
     ],
   },
 ];
@@ -439,17 +438,17 @@ function IntakeScreen({ onComplete }) {
               /* ── HAS ACCOUNT: Just needs to find their key ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
                 <div style={{ padding: "22px 24px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text }}>Here's where to find your API key</div>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text }}>How to find your API key</div>
                   <p style={{ fontSize: 13, color: C.textMuted, margin: "4px 0 0", lineHeight: 1.5 }}>
-                    Log in to your Qualiphy dashboard and follow these steps. Keep this tab open — you'll paste the key here in the plugin setup.
+                    It's in your Qualiphy dashboard — takes about 30 seconds.
                   </p>
                 </div>
                 <div style={{ padding: "20px 24px", background: "#fff" }}>
                   {[
-                    { n: "1", t: "Log in to app.qualiphy.me", d: "Use the email and password from your Qualiphy account" },
-                    { n: "2", t: "Open Settings", d: "In the left sidebar, click Settings" },
-                    { n: "3", t: "Find API Key", d: "Under your clinic name (e.g. 'Default Clinic'), you'll see the API Key field" },
-                    { n: "4", t: "Copy the key", d: "Click Copy — it's a long string of characters. You'll paste this into the WordPress plugin." },
+                    { n: "1", t: "Log in at app.qualiphy.me", d: "Use the email and password you signed up with" },
+                    { n: "2", t: "Click Settings in the sidebar", d: "It's near the bottom of the left navigation menu" },
+                    { n: "3", t: "Find your API key", d: "At the top of the Settings page you'll see \"API Key (Default Clinic)\" with your key displayed in a purple field" },
+                    { n: "4", t: "Click the Copy button", d: "Right below the key. Then come back here — you'll paste it into the plugin setup wizard." },
                   ].map((s, i) => (
                     <div key={i} style={{ display: "flex", gap: 12, marginBottom: i < 3 ? 12 : 0 }}>
                       <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(91,80,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>{s.n}</div>
