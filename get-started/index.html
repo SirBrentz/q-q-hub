@@ -79,10 +79,30 @@ const C = {
    ═══════════════════════════════════════════════════════════════════════════ */
 const QUESTIONS = [
   {
-    id: "hasWoo",
-    q: "Do you already have WooCommerce installed on your WordPress site?",
+    id: "hasAccount",
+    q: "Do you have a Qualiphy clinic account?",
+    hint: "Qualiphy is the telehealth platform that powers the provider network, consultations, and pharmacy fulfillment behind this plugin.",
     options: [
-      { value: "yes", label: "Yes, it's active" },
+      { value: "yes", label: "Yes, I have a Qualiphy account", desc: "I can log in at app.qualiphy.me" },
+      { value: "no", label: "No, I need to create one" },
+    ],
+    blocking: "no",
+  },
+  {
+    id: "hasApiKey",
+    q: "Do you have your API key handy?",
+    hint: "It connects your WordPress site to Qualiphy. Found in your dashboard under Settings → API Key. Don't worry if you're not sure — we'll show you exactly where to find it.",
+    options: [
+      { value: "yes", label: "Yes, I have it copied" },
+      { value: "no", label: "No, I'll need to find it" },
+    ],
+  },
+  {
+    id: "hasWoo",
+    q: "Is WooCommerce installed on your WordPress site?",
+    hint: "WooCommerce is the free plugin that adds product pages, checkout, and payments to WordPress.",
+    options: [
+      { value: "yes", label: "Yes, it's installed and active" },
       { value: "no", label: "Not yet" },
     ],
   },
@@ -92,37 +112,27 @@ const QUESTIONS = [
     hint: "This determines how the plugin handles pharmacy routing and order flow.",
     options: [
       { value: "rx", label: "Rx Consultations", desc: "Prescriptions with pharmacy fulfillment" },
-      { value: "gfe", label: "Good Faith Exams", desc: "Provider clearance for treatments" },
+      { value: "gfe", label: "Good Faith Exams", desc: "Provider clearance for in-clinic treatments" },
       { value: "both", label: "Both", desc: "Rx consultations and Good Faith Exams" },
     ],
   },
   {
     id: "hasSubscriptions",
-    q: "Will patients need recurring consultations (e.g. monthly refills)?",
-    hint: "This requires the WooCommerce Subscriptions extension.",
+    q: "Will patients need recurring consultations?",
+    hint: "For example, monthly weight loss medication refills. You can always add this later if you're unsure.",
     options: [
-      { value: "yes", label: "Yes" },
-      { value: "no", label: "No" },
+      { value: "yes", label: "Yes, we'll offer monthly plans" },
+      { value: "no", label: "No, one-time consultations only" },
       { value: "unsure", label: "Not sure yet" },
     ],
   },
   {
     id: "hasProducts",
-    q: "Do you already have WooCommerce products you want to link to Qualiphy consultations?",
-    hint: "The plugin can create new products for you or link to existing ones.",
+    q: "Do you already have products in your store you want to connect?",
+    hint: "The plugin can create new products automatically, or link consultations to products you've already built.",
     options: [
-      { value: "yes", label: "Yes, I have existing products" },
-      { value: "no", label: "No, I'll create new ones" },
-    ],
-  },
-  {
-    id: "hasApiKey",
-    q: "Where are you with your Qualiphy account?",
-    hint: "The plugin needs an API key from your Qualiphy clinic dashboard to connect.",
-    options: [
-      { value: "ready", label: "I have my API key ready", desc: "Copied from my Qualiphy dashboard" },
-      { value: "have-account", label: "I have an account but need to find my key", desc: "I have a Qualiphy login" },
-      { value: "no-account", label: "I don't have a Qualiphy account yet", desc: "I need to sign up first" },
+      { value: "yes", label: "Yes, link to existing products" },
+      { value: "no", label: "No, create new ones for me" },
     ],
   },
 ];
@@ -330,18 +340,36 @@ function TroubleshootItem({ symptom, causes }) {
 function IntakeScreen({ onComplete }) {
   const [answers, setAnswers] = useState({});
   const [currentQ, setCurrentQ] = useState(0);
+  const [showGate, setShowGate] = useState(false);
 
   const q = QUESTIONS[currentQ];
   const allDone = Object.keys(answers).length === QUESTIONS.length;
 
   const answer = (val) => {
     setAnswers(prev => ({ ...prev, [q.id]: val }));
+    // Check if this answer triggers a blocking gate
+    if (q.blocking && q.blocking === val) {
+      setShowGate(true);
+      return; // don't advance
+    }
     if (currentQ < QUESTIONS.length - 1) {
       setTimeout(() => setCurrentQ(currentQ + 1), 150);
     }
   };
 
-  const goBack = () => { if (currentQ > 0) setCurrentQ(currentQ - 1); };
+  const passGate = () => {
+    // User confirmed they've registered — update answer and advance
+    setAnswers(prev => ({ ...prev, [q.id]: "yes" }));
+    setShowGate(false);
+    if (currentQ < QUESTIONS.length - 1) {
+      setTimeout(() => setCurrentQ(currentQ + 1), 150);
+    }
+  };
+
+  const goBack = () => {
+    if (showGate) { setShowGate(false); return; }
+    if (currentQ > 0) setCurrentQ(currentQ - 1);
+  };
 
   return (
     <div style={{
@@ -371,37 +399,115 @@ function IntakeScreen({ onComplete }) {
           ))}
         </div>
 
-        {/* Question */}
-        <div key={currentQ} className="fade-in">
-          <p style={{ fontSize: 11, color: C.textDim, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 8px" }}>
-            Question {currentQ + 1} of {QUESTIONS.length}
-          </p>
-          <h2 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 6px", lineHeight: 1.35 }}>
-            {q.q}
-          </h2>
-          {q.hint && (
-            <p style={{ fontSize: 13, color: C.textMuted, margin: "0 0 20px", lineHeight: 1.5 }}>{q.hint}</p>
-          )}
-          {!q.hint && <div style={{ height: 14 }} />}
+        {/* Registration Gate — shows when user doesn't have an account */}
+        {showGate ? (
+          <div key="gate" className="fade-in">
+            <div style={{
+              padding: 28, borderRadius: 12,
+              background: `linear-gradient(135deg, rgba(91,80,255,.03) 0%, rgba(91,80,255,.08) 100%)`,
+              border: "1px solid rgba(91,80,255,.12)",
+            }}>
+              <div style={{ fontSize: 18, fontWeight: 700, color: C.text, marginBottom: 8 }}>
+                Let's get you set up with Qualiphy first
+              </div>
+              <p style={{ fontSize: 14, color: C.textMuted, lineHeight: 1.6, margin: "0 0 20px" }}>
+                The plugin connects your WordPress store to Qualiphy's provider network and pharmacy infrastructure. You'll need a free clinic account before installing.
+              </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {q.options.map(opt => (
-              <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
-                {opt.label}
-              </OptionBtn>
-            ))}
+              {/* Option A — Sign up */}
+              <div style={{
+                padding: 18, background: "#fff", borderRadius: 10,
+                border: "1px solid " + C.border, marginBottom: 10,
+              }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>
+                  Create your free account
+                </div>
+                <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.5, margin: "0 0 12px" }}>
+                  Takes about 2 minutes. You'll set up your clinic name, location, and service types.
+                </p>
+                <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener"
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
+                    padding: "10px 20px", borderRadius: 8,
+                    background: C.accent, color: "#fff",
+                    fontFamily: "inherit", fontSize: 14, fontWeight: 600,
+                    textDecoration: "none",
+                  }}>
+                  Open Qualiphy Signup ↗
+                </a>
+              </div>
+
+              {/* Option B — Demo */}
+              <div style={{
+                padding: 18, background: "#fff", borderRadius: 10,
+                border: "1px solid " + C.border,
+              }}>
+                <div style={{ fontSize: 14, fontWeight: 700, color: C.text, marginBottom: 4 }}>
+                  Not sure yet? Talk to our team
+                </div>
+                <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.5, margin: "0 0 12px" }}>
+                  Book a free 30-minute demo. We'll walk you through the platform and can set up your account during the call.
+                </p>
+                <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener"
+                  style={{
+                    fontSize: 14, fontWeight: 600, color: C.accent,
+                    textDecoration: "none",
+                  }}>
+                  Schedule a Demo →
+                </a>
+              </div>
+            </div>
+
+            {/* Continue button */}
+            <div style={{
+              marginTop: 20, padding: "16px 20px", borderRadius: 10,
+              background: C.bgMuted, textAlign: "center",
+            }}>
+              <p style={{ fontSize: 13, color: C.textMuted, margin: "0 0 10px" }}>
+                Already created your account?
+              </p>
+              <Btn onClick={passGate}>I've registered — continue →</Btn>
+            </div>
+
+            <div style={{ marginTop: 16 }}>
+              <Btn variant="ghost" onClick={goBack} small>← Back</Btn>
+            </div>
           </div>
-        </div>
+        ) : (
+          /* Normal question */
+          <>
+            <div key={currentQ} className="fade-in">
+              <p style={{ fontSize: 11, color: C.textDim, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", margin: "0 0 8px" }}>
+                Question {currentQ + 1} of {QUESTIONS.length}
+              </p>
+              <h2 style={{ fontSize: 18, fontWeight: 700, color: C.text, margin: "0 0 6px", lineHeight: 1.35 }}>
+                {q.q}
+              </h2>
+              {q.hint && (
+                <p style={{ fontSize: 13, color: C.textMuted, margin: "0 0 20px", lineHeight: 1.5 }}>{q.hint}</p>
+              )}
+              {!q.hint && <div style={{ height: 14 }} />}
 
-        {/* Nav */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 28 }}>
-          <Btn variant="ghost" onClick={goBack} disabled={currentQ === 0} small>← Back</Btn>
-          {allDone ? (
-            <Btn onClick={() => onComplete(answers)}>Show my setup guide →</Btn>
-          ) : currentQ < QUESTIONS.length - 1 && answers[q.id] ? (
-            <Btn variant="secondary" onClick={() => setCurrentQ(currentQ + 1)} small>Next →</Btn>
-          ) : null}
-        </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {q.options.map(opt => (
+                  <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
+                    {opt.label}
+                  </OptionBtn>
+                ))}
+              </div>
+            </div>
+
+            {/* Nav */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 28 }}>
+              <Btn variant="ghost" onClick={goBack} disabled={currentQ === 0} small>← Back</Btn>
+              {allDone ? (
+                <Btn onClick={() => onComplete(answers)}>Show my setup guide →</Btn>
+              ) : currentQ < QUESTIONS.length - 1 && answers[q.id] ? (
+                <Btn variant="secondary" onClick={() => setCurrentQ(currentQ + 1)} small>Next →</Btn>
+              ) : null}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -420,7 +526,7 @@ function GuideScreen({ answers, onRestart }) {
   const needsSubs = answers.hasSubscriptions === "yes";
   const hasProds  = answers.hasProducts === "yes";
   const needsWoo  = answers.hasWoo === "no";
-  const apiState  = answers.hasApiKey; // "ready", "have-account", or "no-account"
+  const apiState  = answers.hasApiKey; // "yes" or "no"
 
   const scrollTop = useCallback(() => {
     if (contentRef.current) contentRef.current.scrollTop = 0;
@@ -526,56 +632,28 @@ function GuideScreen({ answers, onRestart }) {
     </>
   )});
 
-  // 4 — API Key (with account state handling)
-  if (apiState === "no-account") {
-    steps.push({ id: "signup", title: "Create Your Qualiphy Account", render: () => (
-      <>
-        <p>Before installing the plugin, you need a Qualiphy clinic account. This is where your provider network, exam types, and API credentials live.</p>
-        <Card>
-          <h4 style={{ margin: "0 0 12px", fontSize: 15 }}>Two ways to get started</h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-            <div style={{ padding: 16, background: C.accentLight, borderRadius: 8 }}>
-              <div style={{ fontSize: 14, fontWeight: 600, color: C.text, marginBottom: 4 }}>Option A — Sign up directly</div>
-              <div style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6 }}>
-                Go to <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>app.qualiphy.me/signup</a> and create your clinic account. Once verified, navigate to <strong>Settings → API Key</strong> to get your key.
-              </div>
-            </div>
-            <div style={{ padding: 16, background: "rgba(5,150,105,.04)", borderRadius: 8 }}>
-              <div style={{ fontSize: 14, fontWeight: 600, color: C.text, marginBottom: 4 }}>Option B — Book a demo first</div>
-              <div style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6 }}>
-                Not sure if Qualiphy is right for your clinic? <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>Schedule a 30-minute demo</a> with our team. They'll walk you through the platform and set up your account during the call.
-              </div>
-            </div>
-          </div>
-        </Card>
-        <Callout type="info">
-          Once you have your account, come back to this guide. Your API key will be in <strong>Clinic Settings</strong> in the Qualiphy dashboard.
-        </Callout>
-      </>
-    )});
-  }
-
+  // 4 — Connect API Key
   steps.push({ id: "connect", title: "Connect API Key", render: () => (
     <>
-      <p>This links your WordPress store to the Qualiphy platform. Your API key authenticates all communication between the plugin and Qualiphy's servers.</p>
-      {apiState === "have-account" ? (
+      <p>This links your WordPress store to the Qualiphy platform. Your API key authenticates all communication between the plugin and Qualiphy's provider and pharmacy network.</p>
+      {apiState === "no" ? (
         <Card style={{ marginBottom: 14 }}>
           <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>How to find your API key</h4>
           <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 8 }}>
             <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Log in to <a href="https://app.qualiphy.me" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>app.qualiphy.me</a></li>
             <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>In the left sidebar, click <strong>Settings</strong></li>
             <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Find <strong>API Key</strong> under your default clinic</li>
-            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Click <strong>Copy</strong> — then paste it below</li>
+            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Click <strong>Copy</strong> — then paste it into the wizard</li>
           </ol>
-          <Callout type="warning" style={{ marginTop: 12 }}>
-            If you have multiple clinic locations, each one has its own API key. Use the key for the location this WordPress site serves.
+          <Callout type="info" style={{ marginTop: 12 }}>
+            Multi-location? Each location has its own API key. Use the one for the location this WordPress site will serve.
           </Callout>
         </Card>
-      ) : apiState === "ready" ? (
+      ) : (
         <Callout type="success">
           You have your API key ready — paste it in and the plugin verifies it automatically.
         </Callout>
-      ) : null}
+      )}
       <Card>
         <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>In the setup wizard</h4>
         <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 10 }}>
