@@ -117,11 +117,12 @@ const QUESTIONS = [
   },
   {
     id: "hasApiKey",
-    q: "Do you have your Qualiphy API key?",
-    hint: "Your API key is in the Qualiphy dashboard under Clinic Settings.",
+    q: "Where are you with your Qualiphy account?",
+    hint: "The plugin needs an API key from your Qualiphy clinic dashboard to connect.",
     options: [
-      { value: "yes", label: "Yes, I have it" },
-      { value: "no", label: "No, I need to get it" },
+      { value: "ready", label: "I have my API key ready", desc: "Copied from my Qualiphy dashboard" },
+      { value: "have-account", label: "I have an account but need to find my key", desc: "I have a Qualiphy login" },
+      { value: "no-account", label: "I don't have a Qualiphy account yet", desc: "I need to sign up first" },
     ],
   },
 ];
@@ -419,7 +420,7 @@ function GuideScreen({ answers, onRestart }) {
   const needsSubs = answers.hasSubscriptions === "yes";
   const hasProds  = answers.hasProducts === "yes";
   const needsWoo  = answers.hasWoo === "no";
-  const needsKey  = answers.hasApiKey === "no";
+  const apiState  = answers.hasApiKey; // "ready", "have-account", or "no-account"
 
   const scrollTop = useCallback(() => {
     if (contentRef.current) contentRef.current.scrollTop = 0;
@@ -525,20 +526,58 @@ function GuideScreen({ answers, onRestart }) {
     </>
   )});
 
-  // 4 — API Key
+  // 4 — API Key (with account state handling)
+  if (apiState === "no-account") {
+    steps.push({ id: "signup", title: "Create Your Qualiphy Account", render: () => (
+      <>
+        <p>Before installing the plugin, you need a Qualiphy clinic account. This is where your provider network, exam types, and API credentials live.</p>
+        <Card>
+          <h4 style={{ margin: "0 0 12px", fontSize: 15 }}>Two ways to get started</h4>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ padding: 16, background: C.accentLight, borderRadius: 8 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: C.text, marginBottom: 4 }}>Option A — Sign up directly</div>
+              <div style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6 }}>
+                Go to <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>app.qualiphy.me/signup</a> and create your clinic account. Once verified, navigate to <strong>Settings → API Key</strong> to get your key.
+              </div>
+            </div>
+            <div style={{ padding: 16, background: "rgba(5,150,105,.04)", borderRadius: 8 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: C.text, marginBottom: 4 }}>Option B — Book a demo first</div>
+              <div style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6 }}>
+                Not sure if Qualiphy is right for your clinic? <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>Schedule a 30-minute demo</a> with our team. They'll walk you through the platform and set up your account during the call.
+              </div>
+            </div>
+          </div>
+        </Card>
+        <Callout type="info">
+          Once you have your account, come back to this guide. Your API key will be in <strong>Clinic Settings</strong> in the Qualiphy dashboard.
+        </Callout>
+      </>
+    )});
+  }
+
   steps.push({ id: "connect", title: "Connect API Key", render: () => (
     <>
       <p>This links your WordPress store to the Qualiphy platform. Your API key authenticates all communication between the plugin and Qualiphy's servers.</p>
-      {needsKey ? (
-        <Callout type="warning">
-          <strong>You need your API key before this step.</strong> Log in to <strong>app.qualiphy.me</strong>, go to <strong>Clinic Settings</strong>, and copy your API key. If you have multiple locations, each one has its own key — use the key for the location this site serves.
-        </Callout>
-      ) : (
+      {apiState === "have-account" ? (
+        <Card style={{ marginBottom: 14 }}>
+          <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>How to find your API key</h4>
+          <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 8 }}>
+            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Log in to <a href="https://app.qualiphy.me" target="_blank" rel="noopener" style={{ color: C.accent, fontWeight: 600 }}>app.qualiphy.me</a></li>
+            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>In the left sidebar, click <strong>Settings</strong></li>
+            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Find <strong>API Key</strong> under your default clinic</li>
+            <li style={{ fontSize: 13, lineHeight: 1.6, color: C.textBody }}>Click <strong>Copy</strong> — then paste it below</li>
+          </ol>
+          <Callout type="warning" style={{ marginTop: 12 }}>
+            If you have multiple clinic locations, each one has its own API key. Use the key for the location this WordPress site serves.
+          </Callout>
+        </Card>
+      ) : apiState === "ready" ? (
         <Callout type="success">
           You have your API key ready — paste it in and the plugin verifies it automatically.
         </Callout>
-      )}
-      <Card style={{ marginTop: 12 }}>
+      ) : null}
+      <Card>
+        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>In the setup wizard</h4>
         <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 10 }}>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Paste your API key into the field</li>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Click <strong>Verify & Continue</strong></li>

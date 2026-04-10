@@ -3,887 +3,283 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Center — Quidget WooCommerce Telehealth Plugin</title>
-  <meta name="description" content="Find answers about the Quidget WordPress plugin. Setup guides, settings reference, troubleshooting, and support for your WooCommerce telehealth integration.">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Help Center — Quidget WooCommerce Telehealth Plugin">
-  <meta property="og:description" content="Find answers about the Quidget WordPress plugin. Setup guides, settings reference, troubleshooting, and support for your WooCommerce telehealth integration.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="../assets/images/og-image.png">
-
-  <!-- Stylesheets -->
+  <title>Help Center — Quidget WooCommerce Plugin</title>
+  <meta name="description" content="Quidget help center. Browse setup guides, settings reference, troubleshooting, and FAQ for the WooCommerce telehealth plugin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@0,400;0,500;0,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
   <link rel="stylesheet" href="../assets/css/quidget.css">
   <style>
-    /* =====================================================
-       HELP CENTER SPECIFIC STYLES
-       ===================================================== */
-
-    /* Hero Section */
-    .q-help-hero {
-      position: relative;
-      background: linear-gradient(135deg, #0f1729 0%, #1a2540 100%);
-      color: #fff;
-      padding: 100px 0 80px;
-      overflow: hidden;
-    }
-
-    .q-help-hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(91, 80, 255, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .q-help-hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .q-help-hero-content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .q-help-hero .badge {
-      background: rgba(255, 255, 255, 0.15);
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 24px;
-      display: inline-flex;
-    }
-
-    .q-help-hero h1 {
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .q-help-hero p {
-      color: rgba(255, 255, 255, 0.75);
-      font-size: 1.1rem;
-      margin-bottom: 48px;
-    }
-
-    /* Search Bar */
-    .q-search-container {
-      margin-bottom: 32px;
-    }
-
-    .q-search-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      background: #fff;
-      border-radius: 12px;
-      padding: 0 20px;
-      height: 52px;
-      box-shadow: 0 4px 16px rgba(15, 23, 41, 0.12);
-      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .q-search-wrapper:focus-within {
-      box-shadow: 0 8px 32px rgba(91, 80, 255, 0.25);
-    }
-
-    .q-search-icon {
-      width: 20px;
-      height: 20px;
-      color: #7a849b;
-      flex-shrink: 0;
-      margin-right: 12px;
-    }
-
-    .q-search-input {
-      flex: 1;
-      border: none;
-      background: none;
-      font-size: 15px;
-      color: #1e293b;
-      outline: none;
-      font-family: var(--font-b);
-    }
-
-    .q-search-input::placeholder {
-      color: #a0a8b8;
-    }
-
-    /* Popular Links Pills */
-    .q-popular-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 24px;
-    }
-
-    .q-popular-pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 8px 16px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 20px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 150ms cubic-bezier(0.16, 1, 0.3, 1);
-      text-decoration: none;
-      font-family: var(--font-h);
-    }
-
-    .q-popular-pill:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-    }
-
-    /* Categories Grid */
-    .q-help-categories {
-      padding: 80px 0;
-      background: #fff;
-    }
-
-    .q-categories-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-
-    .q-category-card {
-      background: #fff;
-      border: 1.5px solid #edf0f7;
-      border-radius: 16px;
-      padding: 32px;
-      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .q-category-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--indigo);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .q-category-card:hover {
-      border-color: #dfe3ed;
-      box-shadow: 0 4px 16px rgba(15, 23, 41, 0.08);
-      transform: translateY(-4px);
-    }
-
-    .q-category-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .q-category-card.hidden {
-      display: none;
-    }
-
-    .q-category-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      flex-shrink: 0;
-    }
-
-    .q-category-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 2;
-    }
-
-    /* Category color variants */
-    .q-category-card[data-category="getting-started"] .q-category-icon {
-      background: rgba(91, 80, 255, 0.08);
-    }
-
-    .q-category-card[data-category="getting-started"] .q-category-icon svg {
-      color: #5b50ff;
-      stroke: #5b50ff;
-    }
-
-    .q-category-card[data-category="plugin-settings"] .q-category-icon {
-      background: rgba(110, 84, 167, 0.08);
-    }
-
-    .q-category-card[data-category="plugin-settings"] .q-category-icon svg {
-      color: #6e54a7;
-      stroke: #6e54a7;
-    }
-
-    .q-category-card[data-category="consultations"] .q-category-icon {
-      background: rgba(61, 43, 100, 0.08);
-    }
-
-    .q-category-card[data-category="consultations"] .q-category-icon svg {
-      color: #3d2b64;
-      stroke: #3d2b64;
-    }
-
-    .q-category-card[data-category="pharmacy"] .q-category-icon {
-      background: rgba(139, 92, 246, 0.08);
-    }
-
-    .q-category-card[data-category="pharmacy"] .q-category-icon svg {
-      color: #8b5cf6;
-      stroke: #8b5cf6;
-    }
-
-    .q-category-card[data-category="subscriptions"] .q-category-icon {
-      background: rgba(91, 80, 255, 0.08);
-    }
-
-    .q-category-card[data-category="subscriptions"] .q-category-icon svg {
-      color: #5b50ff;
-      stroke: #5b50ff;
-    }
-
-    .q-category-card[data-category="billing"] .q-category-icon {
-      background: rgba(110, 84, 167, 0.08);
-    }
-
-    .q-category-card[data-category="billing"] .q-category-icon svg {
-      color: #6e54a7;
-      stroke: #6e54a7;
-    }
-
-    .q-category-card[data-category="troubleshooting"] .q-category-icon {
-      background: rgba(61, 43, 100, 0.08);
-    }
-
-    .q-category-card[data-category="troubleshooting"] .q-category-icon svg {
-      color: #3d2b64;
-      stroke: #3d2b64;
-    }
-
-    .q-category-title {
-      font-family: var(--font-h);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #0f1729;
-      margin-bottom: 12px;
-    }
-
-    .q-category-desc {
-      font-size: 14px;
-      color: #7a849b;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .q-category-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 16px;
-      border-top: 1px solid #edf0f7;
-    }
-
-    .q-category-count {
-      font-size: 13px;
-      font-weight: 600;
-      color: #5b50ff;
-      font-family: var(--font-h);
-    }
-
-    .q-category-link {
-      font-family: var(--font-h);
-      font-size: 13px;
-      font-weight: 600;
-      color: #5b50ff;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 250ms cubic-bezier(0.16, 1, 0.3, 1);
-      text-decoration: none;
-    }
-
-    .q-category-link:hover {
-      gap: 10px;
-    }
-
-    .q-category-link svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    /* Contact Support Section */
-    .q-support-section {
-      padding: 80px 0;
-      background: #f7f8fc;
-    }
-
-    .q-support-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .q-support-header h2 {
-      margin-bottom: 12px;
-    }
-
-    .q-support-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .q-support-card {
-      background: #fff;
-      border: 1.5px solid #edf0f7;
-      border-radius: 16px;
-      padding: 32px;
-      text-align: center;
-      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .q-support-card:hover {
-      border-color: #dfe3ed;
-      box-shadow: 0 4px 16px rgba(15, 23, 41, 0.08);
-      transform: translateY(-4px);
-    }
-
-    .q-support-icon {
-      width: 48px;
-      height: 48px;
-      margin: 0 auto 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      flex-shrink: 0;
-    }
-
-    .q-support-icon svg {
-      width: 24px;
-      height: 24px;
-      stroke-width: 2;
-    }
-
-    .q-support-card:nth-child(1) .q-support-icon {
-      background: rgba(91, 80, 255, 0.08);
-    }
-
-    .q-support-card:nth-child(1) .q-support-icon svg {
-      color: #5b50ff;
-      stroke: #5b50ff;
-    }
-
-    .q-support-card:nth-child(2) .q-support-icon {
-      background: rgba(110, 84, 167, 0.08);
-    }
-
-    .q-support-card:nth-child(2) .q-support-icon svg {
-      color: #6e54a7;
-      stroke: #6e54a7;
-    }
-
-    .q-support-card:nth-child(3) .q-support-icon {
-      background: rgba(61, 43, 100, 0.08);
-    }
-
-    .q-support-card:nth-child(3) .q-support-icon svg {
-      color: #3d2b64;
-      stroke: #3d2b64;
-    }
-
-    .q-support-card h3 {
-      margin-bottom: 8px;
-      font-size: 1.1rem;
-    }
-
-    .q-support-card .q-contact-link {
-      font-family: var(--font-h);
-      font-weight: 600;
-      color: #5b50ff;
-      font-size: 15px;
-      text-decoration: none;
-      transition: color 150ms;
-    }
-
-    .q-support-card .q-contact-link:hover {
-      color: #7b73ff;
-    }
-
-    .q-support-hours {
-      font-size: 13px;
-      color: #7a849b;
-      margin-top: 12px;
-    }
-
-    /* No Results Message */
-    .q-no-results {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 60px 20px;
-      color: #7a849b;
-    }
-
-    .q-no-results h3 {
-      color: #1e293b;
-      margin-bottom: 8px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .q-help-hero {
-        padding: 70px 0 60px;
-      }
-
-      .q-help-hero h1 {
-        font-size: 2rem;
-      }
-
-      .q-help-hero p {
-        font-size: 1rem;
-        margin-bottom: 32px;
-      }
-
-      .q-search-wrapper {
-        height: 48px;
-      }
-
-      .q-popular-links {
-        gap: 8px;
-        margin-top: 16px;
-      }
-
-      .q-popular-pill {
-        font-size: 12px;
-        padding: 6px 14px;
-      }
-
-      .q-help-categories,
-      .q-support-section {
-        padding: 60px 0;
-      }
-
-      .q-categories-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .q-support-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .q-category-card {
-        padding: 24px;
-      }
-
-      .q-support-card {
-        padding: 24px;
-      }
+    .help-hero { padding: 120px 0 56px; background: var(--navy); color: #fff; text-align: center; }
+    .help-hero h1 { color: #fff; margin-bottom: 10px; }
+    .help-hero p { color: rgba(255,255,255,.55); margin: 0 auto 28px; }
+    .help-search {
+      max-width: 480px; margin: 0 auto; position: relative;
+    }
+    .help-search input {
+      width: 100%; padding: 14px 20px 14px 44px;
+      border-radius: var(--r-full); border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06); color: #fff;
+      font-family: var(--font-b); font-size: 15px;
+      outline: none; transition: all 200ms;
+    }
+    .help-search input::placeholder { color: rgba(255,255,255,.35); }
+    .help-search input:focus { border-color: rgba(91,80,255,.5); background: rgba(255,255,255,.1); }
+    .help-search-icon {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      color: rgba(255,255,255,.35); font-size: 18px;
+    }
+    .help-cats {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+      max-width: 900px; margin: -40px auto 0; position: relative; z-index: 2;
+      padding: 0 var(--gutter);
+    }
+    .help-cat {
+      background: var(--white); border: 1px solid var(--border-lt);
+      border-radius: var(--r-lg); overflow: hidden;
+      transition: all var(--dur) var(--ease);
+    }
+    .help-cat:hover { border-color: var(--border); box-shadow: var(--sh-md); }
+    .help-cat-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 24px 28px; cursor: pointer;
+      border: none; background: none; width: 100%; text-align: left;
+      font-family: inherit;
+    }
+    .help-cat-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .help-cat-icon--setup { background: rgba(91,80,255,.08); color: var(--indigo); }
+    .help-cat-icon--settings { background: rgba(5,150,105,.08); color: var(--emerald); }
+    .help-cat-icon--trouble { background: rgba(217,119,6,.08); color: var(--amber); }
+    .help-cat-icon--faq { background: rgba(37,99,235,.08); color: #2563eb; }
+    .help-cat-info { flex: 1; }
+    .help-cat-title {
+      font-family: var(--font-h); font-size: 16px; font-weight: 700;
+      color: var(--navy); margin-bottom: 2px;
+    }
+    .help-cat-desc { font-size: 13px; color: var(--text-lt); }
+    .help-cat-count {
+      font-family: var(--font-h); font-size: 12px; font-weight: 600;
+      color: var(--text-lt); background: var(--surface);
+      padding: 4px 10px; border-radius: var(--r-full);
+    }
+    .help-cat-chevron {
+      font-size: 18px; color: var(--text-lt);
+      transition: transform .25s var(--ease); margin-left: 8px;
+    }
+    .help-cat.open .help-cat-chevron { transform: rotate(180deg); }
+    .help-cat-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s var(--ease);
+    }
+    .help-cat.open .help-cat-body { max-height: 2000px; }
+    .help-cat-articles { padding: 0 28px 24px; }
+    .help-article {
+      border: 1px solid var(--border-lt); border-radius: var(--r);
+      margin-bottom: 6px; overflow: hidden;
+    }
+    .help-article-q {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; cursor: pointer; background: var(--white);
+      border: none; width: 100%; text-align: left;
+      font-family: var(--font-h); font-size: 14px; font-weight: 600;
+      color: var(--navy); transition: background 150ms;
+    }
+    .help-article-q:hover { background: var(--surface); }
+    .help-article-toggle {
+      font-size: 16px; color: var(--text-lt);
+      transition: transform .2s var(--ease); flex-shrink: 0; margin-left: 12px;
+    }
+    .help-article.open .help-article-toggle { transform: rotate(45deg); }
+    .help-article-body {
+      display: none; padding: 0 18px 16px;
+      font-size: 13px; color: var(--text-mid); line-height: 1.7;
+    }
+    .help-article.open .help-article-body { display: block; }
+    .help-article-body code {
+      font-size: 12px; background: var(--surface-alt);
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .help-article-body strong { color: var(--navy); }
+    .help-sub {
+      padding-left: 14px; border-left: 2px solid var(--amber-bg);
+      margin: 10px 0;
+    }
+    .help-sub-title { font-size: 13px; font-weight: 600; color: var(--amber); }
+    .help-sub-fix { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-top: 2px; }
+    .help-contact {
+      max-width: 900px; margin: 48px auto 0; padding: 0 var(--gutter);
+    }
+    .help-contact-card {
+      padding: 28px 32px; background: rgba(91,80,255,.04);
+      border: 1px solid rgba(91,80,255,.08); border-radius: var(--r-lg);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .help-contact-card h3 { font-size: 16px; margin-bottom: 4px; }
+    .help-contact-card p { font-size: 13px; color: var(--text-mid); margin: 0; }
+    @media(max-width:768px) {
+      .help-cats { grid-template-columns: 1fr; margin-top: -28px; }
+      .help-contact-card { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
+<nav class="nav"><div class="nav-inner">
+  <a href="../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+  <div class="nav-links">
+    <a href="../" class="nav-link">Overview</a>
+    <a href="../get-started/" class="nav-link">Get Started</a>
+    <a href="./" class="nav-link nav-link--active">Help Center</a>
+    <a href="../changelog/" class="nav-link">Changelog</a>
+  </div>
+  <div class="nav-actions"><a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="../" class="logo">
-        <div class="logo-mark">Q</div>Quidget
-      </a>
-      <div class="nav-links">
-        <a href="../" class="nav-link">Overview</a>
-        <a href="../get-started/" class="nav-link">Get Started</a>
-        <a href="./" class="nav-link nav-link--active">Help Center</a>
-        <a href="../changelog/" class="nav-link">Changelog</a>
-      </div>
-      <div class="nav-actions">
-        <a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a>
-      </div>
-      <button class="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+<!-- Hero with search -->
+<section class="help-hero">
+  <div class="wrap">
+    <div class="badge badge-white" style="margin-bottom:16px">Help Center</div>
+    <h1>How can we help?</h1>
+    <p>Browse topics below or search for what you need.</p>
+    <div class="help-search">
+      <span class="help-search-icon">🔍</span>
+      <input type="text" id="helpSearch" placeholder="Search articles..." autocomplete="off">
     </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="q-help-hero">
-    <div class="wrap q-help-hero-content">
-      <span class="badge">Help Center</span>
-      <h1>How can we help?</h1>
-      <p>Find answers to common questions about the Quidget WordPress plugin.</p>
+<!-- Category cards -->
+<div class="help-cats" id="helpCats"></div>
 
-      <!-- Search Bar -->
-      <div class="q-search-container">
-        <div class="q-search-wrapper">
-          <svg class="q-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.5 5.5a7.5 7.5 0 0010.5 10.5Z"/>
-          </svg>
-          <input
-            type="text"
-            id="searchInput"
-            class="q-search-input"
-            placeholder="Search for articles, settings, troubleshooting..."
-            aria-label="Search help articles"
-          >
-        </div>
-        <div class="q-popular-links">
-          <a href="#getting-started" class="q-popular-pill">Setup Wizard</a>
-          <a href="#consultations" class="q-popular-pill">Exam Invites</a>
-          <a href="#pharmacy" class="q-popular-pill">Pharmacy Routing</a>
-          <a href="#billing" class="q-popular-pill">Auto Refunds</a>
-          <a href="#subscriptions" class="q-popular-pill">Subscriptions</a>
-          <a href="#plugin-settings" class="q-popular-pill">Service Area</a>
-        </div>
-      </div>
+<!-- Contact CTA -->
+<div class="help-contact">
+  <div class="help-contact-card">
+    <div>
+      <h3>Can't find what you need?</h3>
+      <p>Our support team is available 7 days a week, 6AM–7PM PST.</p>
     </div>
-  </section>
-
-  <!-- Categories Grid -->
-  <section class="q-help-categories">
-    <div class="wrap">
-      <div class="q-categories-grid" id="categoriesGrid">
-        <!-- Getting Started -->
-        <div class="q-category-card animate-in" data-category="getting-started" data-searchable="getting started installation activation setup wizard api key connect first consultation initial setup plugin install">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12.488 2.539A11.986 11.986 0 0127 13.5c0 6.627-5.373 12-12 12s-12-5.373-12-12c0-6.627 5.373-12 12-12zm0 0c-.465-.315-1.248-.75-2.988-.75C6.255 1.789 2.966 5.256 2.966 9.5c0 4.244 3.289 7.711 8.534 7.711 1.74 0 2.523-.435 2.988-.75m0 0V2.539" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m3-3H9" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Getting Started</h3>
-          <p class="q-category-desc">Install the plugin, connect your Qualiphy API key, run the setup wizard, and launch your first consultation.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">5 articles</span>
-            <a href="./getting-started/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Plugin Settings -->
-        <div class="q-category-card animate-in" data-category="plugin-settings" data-searchable="plugin settings general settings checkout branding service area language customization clinical access config configuration">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.592c.55 0 1.02.398 1.11.94m0 0a.213.213 0 00.205.02l2.36-1.001A1.5 1.5 0 0119.5 6.5v.002M9.594 3.94a.213.213 0 00.205.02l2.36-1.001A1.5 1.5 0 0115 6.5v.002m0 0h7.5a1.5 1.5 0 011.5 1.5v9a1.5 1.5 0 01-1.5 1.5h-7.5a1.5 1.5 0 01-1.5-1.5v-9a1.5 1.5 0 011.5-1.5zm0 0V5.25A2.25 2.25 0 016.75 3h2.25A2.25 2.25 0 0111.25 5.25" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Plugin Settings</h3>
-          <p class="q-category-desc">General settings, checkout behavior, branding, service area, language customization, and clinical access.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">10 articles</span>
-            <a href="./plugin-settings/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Consultations & Exams -->
-        <div class="q-category-card animate-in" data-category="consultations" data-searchable="consultations exams exam types import wizard gfe rx consultation lifecycle patient requests video camera telehealth">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 111.06 1.06L16.81 11.75a.75.75 0 01-1.06-1.06z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5H4.5A2.25 2.25 0 002.25 6.75v10.5A2.25 2.25 0 004.5 19.5h15A2.25 2.25 0 0021.75 17.25V6.75A2.25 2.25 0 0019.5 4.5z" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Consultations & Exams</h3>
-          <p class="q-category-desc">Exam types, the import wizard, GFE vs Rx flows, the consultation lifecycle, and patient requests.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">7 articles</span>
-            <a href="./consultations/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Pharmacy & Fulfillment -->
-        <div class="q-category-card animate-in" data-category="pharmacy" data-searchable="pharmacy fulfillment pharmacy routing state shipment tracking rx fulfillment sync deep sync prescription box package">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m0 0c-3.556 0-6.75-1.847-6.75-4.125" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Pharmacy & Fulfillment</h3>
-          <p class="q-category-desc">Pharmacy routing by state, sync vs deep sync, shipment tracking, and Rx fulfillment.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">5 articles</span>
-            <a href="./pharmacy/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Subscriptions & Renewals -->
-        <div class="q-category-card animate-in" data-category="subscriptions" data-searchable="subscriptions renewals woocommerce subscriptions renewal exam invites deferral handling recurring">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-5.972m0 0V6.003m0 7.971v5.972m19.015-4.971c0 1.657-.895 3.09-2.225 3.86m0 0c-.74.464-1.637.718-2.605.718-2.222 0-4.025-1.506-4.804-3.528m0 0a5.994 5.994 0 002.604-3.86m0 0c.894-.464 1.636-.718 2.605-.718 2.222 0 4.025 1.506 4.804 3.528" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Subscriptions & Renewals</h3>
-          <p class="q-category-desc">WooCommerce Subscriptions setup, renewal exam invites, and deferral handling.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">4 articles</span>
-            <a href="./subscriptions/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Billing & Pricing -->
-        <div class="q-category-card animate-in" data-category="billing" data-searchable="billing pricing per-consultation costs price margins auto-refunds return fees pricing model payment">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h15c.621 0 1.125.504 1.125 1.125v15c0 .621-.504 1.125-1.125 1.125h-15a1.125 1.125 0 01-1.125-1.125V4.875z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v5.25m0 0l-3-3m3 3l3-3" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Billing & Pricing</h3>
-          <p class="q-category-desc">Per-consultation costs, price margins, auto-refunds, return fees, and the pricing model.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">5 articles</span>
-            <a href="./billing/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Troubleshooting -->
-        <div class="q-category-card animate-in" data-category="troubleshooting" data-searchable="troubleshooting common issues exam invites checkout popups shipping zones webhooks error messages step-by-step fixes">
-          <div class="q-category-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21.02a2.652 2.652 0 0 0 3.74 0l2.83-2.83a2.666 2.666 0 0 0 0-3.74l-5.83-5.83m-1.41-1.41L3.75 7.5a2.666 2.666 0 0 0 0 3.74l2.83 2.83c1.02 1.02 2.72 1.02 3.74 0l5.83-5.83" />
-            </svg>
-          </div>
-          <h3 class="q-category-title">Troubleshooting</h3>
-          <p class="q-category-desc">Common issues with exam invites, checkout, popups, shipping zones, and webhooks.</p>
-          <div class="q-category-meta">
-            <span class="q-category-count">6 articles</span>
-            <a href="./troubleshooting/" class="q-category-link">
-              Browse
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="mailto:support@qualiphy.me" class="btn btn-primary btn-sm">Email Support</a>
+      <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Book a Call</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <!-- Contact Support Section -->
-  <section class="q-support-section">
-    <div class="wrap">
-      <div class="q-support-header">
-        <h2>Still need help?</h2>
-      </div>
-      <div class="q-support-grid">
-        <div class="q-support-card">
-          <div class="q-support-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 00-1.07-1.901l-5.25-3.029a2.25 2.25 0 00-2.36 0L3.32 5.849a2.25 2.25 0 00-1.07 1.9V6.75" />
-            </svg>
-          </div>
-          <h3>Email Support</h3>
-          <a href="mailto:support@qualiphy.me" class="q-contact-link">support@qualiphy.me</a>
-          <p class="q-support-hours">7 days a week, 6AM-7PM PST<br>365 days a year</p>
-        </div>
-        <div class="q-support-card">
-          <div class="q-support-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-            </svg>
-          </div>
-          <h3>Phone Support</h3>
-          <a href="tel:+14243209958" class="q-contact-link">(424) 320-9958</a>
-          <p class="q-support-hours">7 days a week, 6AM-7PM PST<br>365 days a year</p>
-        </div>
-      </div>
+<!-- Spacer before footer -->
+<div style="height:80px"></div>
+
+<!-- Footer -->
+<footer class="footer"><div class="wrap">
+  <div class="footer-trust-strip"><span>HIPAA Compliant</span><span class="ft-sep">&middot;</span><span>LegitScript Certified</span><span class="ft-sep">&middot;</span><span>350+ Providers</span><span class="ft-sep">&middot;</span><span>48 States + D.C.</span></div>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+      <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span><strong>4.9</strong> &middot; 5,000+ reviews</span></a>
+      <div class="footer-contact-info"><a href="mailto:support@qualiphy.me">support@qualiphy.me</a><span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span></div>
     </div>
-  </section>
+    <div><div class="footer-heading">Product</div><a href="../" class="footer-link">Overview</a><a href="../get-started/" class="footer-link">Get Started</a><a href="./" class="footer-link">Help Center</a><a href="../changelog/" class="footer-link">Changelog</a></div>
+    <div><div class="footer-heading">Qualiphy</div><a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a><a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a><a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a></div>
+    <div><div class="footer-heading">Resources</div><a href="./" class="footer-link">Help Center</a><a href="../get-started/" class="footer-link">Setup Guide</a><a href="../changelog/" class="footer-link">Changelog</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Qualiphy PC. All rights reserved.</span><div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy</a><a href="https://qualiphy.me/terms">Terms</a></div><div class="footer-socials"><a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div></div>
+</div></footer>
 
-  <!-- Footer -->
-  <footer class="footer"><div class="wrap">
-    <div class="footer-trust-strip">
-      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
-      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
-      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
-      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
-      <span>7/365 Availability</span>
-    </div>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
-        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
-        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
-          <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
-          <span><strong>4.9</strong> &middot; 5,000+ reviews</span>
-        </a>
-        <div class="footer-contact-info">
-          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
-          <span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span>
-        </div>
-      </div>
-      <div>
-        <div class="footer-heading">Product</div>
-        <a href="../" class="footer-link">Overview</a>
-        <a href="../get-started/" class="footer-link">Get Started</a>
-        <a href="./" class="footer-link">Help Center</a>
-        <a href="../changelog/" class="footer-link">Changelog</a>
-      </div>
-      <div>
-        <div class="footer-heading">Qualiphy</div>
-        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
-        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
-        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
-        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
-      </div>
-      <div>
-        <div class="footer-heading">Resources</div>
-        <a href="./" class="footer-link">Help Center</a>
-        <a href="./troubleshooting/" class="footer-link">Troubleshooting</a>
-        <a href="../faq/" class="footer-link">FAQ</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
-      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
-      <div class="footer-socials">
-        <a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-        <a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-        <a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-      </div>
-    </div>
-  </div></footer>
+<script>
+var cats = [
+  { icon: "⚡", iconClass: "setup", title: "Setup & Installation", desc: "Prerequisites, installing, and the setup wizard", articles: [
+    { q: "System requirements", a: "WordPress 5.0+, WooCommerce 4.0+, PHP 7.2+, SSL certificate (HTTPS), a publicly accessible site, and an active Qualiphy clinic account with API key." },
+    { q: "How to install the plugin", a: "Go to <strong>Plugins → Add New → Upload Plugin</strong> in WordPress admin. Upload the <code>qualiphy.zip</code> file, click Install Now, then Activate. The setup wizard launches automatically." },
+    { q: "What does the setup wizard do?", a: "Walks you through: accepting terms, verifying requirements (SSL, WooCommerce), uploading branding, connecting your API key, selecting your service area, importing consultations as WooCommerce products, and configuring settings like refunds, emails, and redirects." },
+    { q: "How to get your API key", a: "Log in to <a href='https://app.qualiphy.me' target='_blank'>app.qualiphy.me</a> → <strong>Settings → API Key</strong> (under your default clinic). Click Copy. If you have multiple locations, each has its own key. Don't have an account? <a href='https://app.qualiphy.me/signup' target='_blank'>Sign up here</a> or <a href='https://calendly.com/caitlin-qualiphy/30min' target='_blank'>book a demo</a>." },
+    { q: "Do I need WooCommerce Subscriptions?", a: "Only if you plan to offer recurring monthly consultations (like GLP-1 weight loss plans). It's optional — the plugin works without it for one-time consultations and GFE exams." },
+    { q: "Payment gateway required?", a: "Yes for paid consultations. Stripe, PayPal, or Authorize.net must be configured in <strong>WooCommerce → Settings → Payments</strong>. Exam invites fire on payment confirmation — without a gateway, paid consultations won't trigger. Free consultations work without one." },
+  ]},
+  { icon: "⚙️", iconClass: "settings", title: "Settings & Configuration", desc: "General, checkout, pricing, branding, and more", articles: [
+    { q: "Auto Send Exams", a: "Default: Enabled. Automatically sends exam invites when checkout completes. Disable to manually trigger from the order page." },
+    { q: "Auto Launch Exams", a: "Default: Enabled. Shows the exam launch modal (or redirect) on the thank-you page. When disabled, patients get the link via email only." },
+    { q: "Exam Launch Mode: Popup vs Redirect", a: "<strong>Popup</strong> shows a modal with the meeting link, QR code, and dismiss option. <strong>Redirect</strong> starts a countdown then sends the patient directly to the meeting URL. Configure under <code>Qualiphy → Settings → General</code>." },
+    { q: "Auto Refund & Return Fee", a: "When enabled, deferred consultations auto-refund the order total minus a return fee (default $30). The fee is overridable per product in the product editor. Per-item fees are summed across all Qualiphy line items at checkout." },
+    { q: "Default Price Margin", a: "Auto-fills patient-facing price during consultation import. Set to 10% by default — if Qualiphy cost is $28, patient price auto-fills to $30.80. Adjust before importing exams." },
+    { q: "Checkout fields", a: "The plugin adds Gender, Date of Birth, and Phone automatically when a Qualiphy product is in the cart. Guest checkout is disabled — accounts are created automatically." },
+    { q: "Age restrictions", a: "Rx consultations require 18+. Non-Rx (GFE) consultations require 13+. Validated from the DOB fields at checkout." },
+    { q: "Service area states", a: "48 states + D.C. available (Alabama and Mississippi excluded). Configure under <code>Qualiphy → Settings → Service Area</code>. Creates a WooCommerce shipping zone automatically." },
+    { q: "Branding (logo & colors)", a: "Upload light/dark logo variants and set accent colors under <code>Qualiphy → Settings → Branding</code>. These appear on the exam launch modal and patient emails. PNG with transparent background recommended." },
+    { q: "Language & text customization", a: "All patient-facing text is editable: product messages, button labels, modal copy, questionnaire questions, dose labels, and the consultation disclaimer. Under <code>Qualiphy → Settings → Language</code>." },
+    { q: "Clinical Access controls", a: "Only users with clinical access can view patient order data. The setup admin gets access automatically. Non-clinical users see 'Patient Order Access Required.' Manage under <code>Qualiphy → Settings</code>." },
+    { q: "Email notifications", a: "Admin emails for invite failures (with error details and retry instructions). Separate from patient emails which are automatic. Configure under <code>Qualiphy → Settings → Emails</code>." },
+  ]},
+  { icon: "🔧", iconClass: "trouble", title: "Troubleshooting", desc: "Common issues and how to fix them", articles: [
+    { q: "Exam invite never sends after checkout", a: "<div class='help-sub'><div class='help-sub-title'>No payment gateway</div><div class='help-sub-fix'>Invites fire on payment confirmation. Verify gateway is active in WooCommerce → Settings → Payments.</div></div><div class='help-sub'><div class='help-sub-title'>Caching interference</div><div class='help-sub-fix'>Exclude /checkout/ and /my-account/ from cache. Disable object cache for logged-in users.</div></div><div class='help-sub'><div class='help-sub-title'>Free exam misconfigured</div><div class='help-sub-fix'>Free consultations must be imported with 'Free Instant Checkout' enabled. They fire on order creation, not payment.</div></div>" },
+    { q: "'Please log in to view this order' on thank-you page", a: "<div class='help-sub'><div class='help-sub-title'>Account creation disabled</div><div class='help-sub-fix'>WooCommerce → Settings → Accounts & Privacy → enable 'Allow customers to create an account during checkout.'</div></div><div class='help-sub'><div class='help-sub-title'>Stale page cache</div><div class='help-sub-fix'>Clear your entire site cache after installing the plugin.</div></div>" },
+    { q: "Exam popup doesn't appear after checkout", a: "<div class='help-sub'><div class='help-sub-title'>Auto-launch disabled</div><div class='help-sub-fix'>Qualiphy → Settings → enable Auto Launch Exams. Check launch mode (Popup vs Redirect).</div></div><div class='help-sub'><div class='help-sub-title'>Missing meeting URL</div><div class='help-sub-fix'>Check the order's Qualiphy section for invite status. If it shows 'error', the error message explains why.</div></div>" },
+    { q: "'Not available in your area' for all customers", a: "<div class='help-sub'><div class='help-sub-title'>Service area too narrow</div><div class='help-sub-fix'>Check selected states under Qualiphy → Settings → Service Area.</div></div><div class='help-sub'><div class='help-sub-title'>Shipping zone deleted</div><div class='help-sub-fix'>Re-save service area settings to regenerate the Qualiphy shipping zone.</div></div>" },
+    { q: "Prescription not created after consultation approved", a: "<div class='help-sub'><div class='help-sub-title'>Pharmacy routing gap</div><div class='help-sub-fix'>Verify the exam has a pharmacy assigned for the patient's state under Qualiphy → Pharmacies.</div></div><div class='help-sub'><div class='help-sub-title'>Webhook blocked</div><div class='help-sub-fix'>Check if Wordfence, Sucuri, or another WAF is blocking incoming POST requests.</div></div>" },
+    { q: "WP 6.7+ 'Translation loading triggered too early' notice", a: "This is a known compatibility issue fixed in plugin v1.1.0. Update to the latest version. If you can't update yet, the notice is cosmetic and doesn't affect functionality." },
+  ]},
+  { icon: "❓", iconClass: "faq", title: "Common Questions", desc: "Frequently asked questions about the plugin", articles: [
+    { q: "Why can't patients skip checkout?", a: "WooCommerce checkout collects required patient data (name, gender, DOB, phone, state) that providers need. The plugin auto-redirects to checkout and auto-creates accounts to minimize friction. For in-clinic use, create a direct URL: <code>yoursite.com/checkout/?add-to-cart=PRODUCT_ID</code>" },
+    { q: "Can I rename products after importing?", a: "Yes. The Qualiphy link is stored as metadata, not tied to the title or slug. Rename freely. Clear your site cache if anything breaks after renaming." },
+    { q: "Which states does Qualiphy cover?", a: "48 states plus Washington D.C. Alabama and Mississippi are currently excluded." },
+    { q: "Can I offer multiple consultations in one cart?", a: "Only one Rx consultation per cart (to ensure proper exam delivery). Multiple non-Rx/GFE exams are allowed in a single session." },
+    { q: "How do subscriptions work?", a: "Requires WooCommerce Subscriptions. When enabled during import, products are created as subscription products. Renewals auto-send new exam invites. Deferred renewals can cancel or pause the subscription based on your settings." },
+    { q: "How do I reset the plugin?", a: "Go to the plugin page → click Uninstall → reactivate. This returns you to the setup wizard. Your Qualiphy account data is unaffected — only the local WordPress configuration resets." },
+    { q: "What is Sandbox vs Live mode?", a: "<strong>Sandbox</strong> simulates the system without processing real exams or charges — use during setup and testing. <strong>Live</strong> processes actual patient exams. Switch to Live after completing setup and running a successful test order." },
+  ]},
+];
 
-  <!-- Scripts -->
-  <script src="../assets/js/main.js" defer></script>
-  <script defer>
-    // ─── Help Center Search Functionality ───
-    document.addEventListener('DOMContentLoaded', () => {
-      const searchInput = document.getElementById('searchInput');
-      const categoriesGrid = document.getElementById('categoriesGrid');
-      const categoryCards = categoriesGrid.querySelectorAll('.q-category-card');
+// Render categories
+var container = document.getElementById('helpCats');
+container.innerHTML = cats.map(function(cat, ci) {
+  var articles = cat.articles.map(function(a) {
+    return '<div class="help-article" data-search="' + (a.q + ' ' + a.a).toLowerCase().replace(/(<[^>]+>)/g,'').replace(/"/g,'') + '">' +
+      '<button class="help-article-q" onclick="this.parentElement.classList.toggle(\'open\')">' +
+        '<span>' + a.q + '</span><span class="help-article-toggle">+</span>' +
+      '</button>' +
+      '<div class="help-article-body">' + a.a + '</div>' +
+    '</div>';
+  }).join('');
+  return '<div class="help-cat" id="cat-' + ci + '">' +
+    '<button class="help-cat-header" onclick="this.parentElement.classList.toggle(\'open\')">' +
+      '<div class="help-cat-icon help-cat-icon--' + cat.iconClass + '">' + cat.icon + '</div>' +
+      '<div class="help-cat-info"><div class="help-cat-title">' + cat.title + '</div><div class="help-cat-desc">' + cat.desc + '</div></div>' +
+      '<span class="help-cat-count">' + cat.articles.length + '</span>' +
+      '<span class="help-cat-chevron">▾</span>' +
+    '</button>' +
+    '<div class="help-cat-body"><div class="help-cat-articles">' + articles + '</div></div>' +
+  '</div>';
+}).join('');
 
-      if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-          const query = e.target.value.toLowerCase().trim();
-          let visibleCount = 0;
-
-          categoryCards.forEach(card => {
-            const searchableText = card.getAttribute('data-searchable') || '';
-            const titleText = card.querySelector('.q-category-title').textContent.toLowerCase();
-            const descText = card.querySelector('.q-category-desc').textContent.toLowerCase();
-
-            const matches =
-              searchableText.includes(query) ||
-              titleText.includes(query) ||
-              descText.includes(query);
-
-            if (query === '' || matches) {
-              card.classList.remove('hidden');
-              visibleCount++;
-            } else {
-              card.classList.add('hidden');
-            }
-          });
-
-          // Show no results message if needed
-          let noResultsMsg = categoriesGrid.querySelector('.q-no-results');
-          if (visibleCount === 0 && query !== '') {
-            if (!noResultsMsg) {
-              noResultsMsg = document.createElement('div');
-              noResultsMsg.className = 'q-no-results';
-              noResultsMsg.innerHTML = `
-                <h3>No results found</h3>
-                <p>Try different keywords or browse all categories below.</p>
-              `;
-              categoriesGrid.appendChild(noResultsMsg);
-            }
-            noResultsMsg.classList.remove('hidden');
-          } else if (noResultsMsg) {
-            noResultsMsg.classList.add('hidden');
-          }
-        });
-      }
-
-      // ─── Popular Pill Links ───
-      const popularPills = document.querySelectorAll('.q-popular-pill');
-      popularPills.forEach(pill => {
-        pill.addEventListener('click', (e) => {
-          const href = pill.getAttribute('href');
-          if (href && href.startsWith('#')) {
-            const categoryId = href.substring(1);
-            // Clear search and highlight category
-            searchInput.value = '';
-            categoryCards.forEach(card => card.classList.remove('hidden'));
-            // Smooth scroll to category if it exists
-            const targetCard = document.querySelector(`[data-category="${categoryId}"]`);
-            if (targetCard) {
-              targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-          }
-        });
-      });
-    });
-
-    // ─── Nav beam (mouse-relative, matches homepage) ───
-    var nav = document.querySelector('.nav');
-    if (nav) nav.addEventListener('mousemove', function(e) {
-      nav.style.setProperty('--mx', (e.clientX - nav.getBoundingClientRect().left - 60) + 'px');
-    });
-
-    // ─── Footer shimmer (mouse-relative, matches homepage) ───
-    var footer = document.querySelector('.footer');
-    if (footer) footer.addEventListener('mousemove', function(e) {
-      var r = footer.getBoundingClientRect();
-      footer.style.setProperty('--fx', ((e.clientX - r.left) / r.width * 100) + '%');
-    });
-  </script>
+// Search filter
+var searchInput = document.getElementById('helpSearch');
+searchInput.addEventListener('input', function() {
+  var q = this.value.toLowerCase().trim();
+  var allArticles = document.querySelectorAll('.help-article');
+  var allCats = document.querySelectorAll('.help-cat');
+  if (!q) {
+    allArticles.forEach(function(a) { a.style.display = ''; a.classList.remove('open'); });
+    allCats.forEach(function(c) { c.style.display = ''; c.classList.remove('open'); });
+    return;
+  }
+  allCats.forEach(function(c) { c.classList.add('open'); });
+  var anyVisible = {};
+  allArticles.forEach(function(a) {
+    var match = a.getAttribute('data-search').indexOf(q) !== -1;
+    a.style.display = match ? '' : 'none';
+    if (match) {
+      var catEl = a.closest('.help-cat');
+      if (catEl) anyVisible[catEl.id] = true;
+    }
+  });
+  allCats.forEach(function(c) {
+    c.style.display = anyVisible[c.id] ? '' : 'none';
+  });
+});
+</script>
+<script src="../assets/js/main.js" defer></script>
 </body>
 </html>
