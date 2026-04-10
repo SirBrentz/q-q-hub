@@ -80,29 +80,78 @@
 
 <!-- INTERACTIVE DEMO — tabbed mockups -->
 <section class="section q-demo"><div class="wrap">
-  <div class="section-header animate-in"><div class="badge">See it in action</div><h2>What the experience looks like</h2><p>From patient checkout to provider connection to admin management — three views of the same automated flow.</p></div>
-  <div class="q-demo-tabs" id="demoTabs">
-    <button class="q-demo-tab q-demo-tab--active" data-tab="checkout">Patient Checkout</button>
-    <button class="q-demo-tab" data-tab="exam">Exam Launch</button>
-    <button class="q-demo-tab" data-tab="admin">Admin Dashboard</button>
-  </div>
-  <div class="q-demo-frame animate-in">
-    <!-- Panel: Patient Checkout -->
-    <div class="q-demo-panel q-demo-panel--active" id="panel-checkout">
-      <div style="background:var(--surface-alt);border-radius:var(--r-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-lt);font-family:var(--font-h);font-size:14px;font-weight:500">
-        <div style="text-align:center"><div style="font-size:36px;margin-bottom:8px;opacity:.3">🛒</div>Patient Checkout Screenshot<br><span style="font-size:12px;color:var(--text-lt);opacity:.6">Replace with: checkout page showing Qualiphy fields</span></div>
+  <div class="section-header animate-in"><div class="badge">See it in action</div><h2>Inside the WordPress admin</h2><p>An interactive preview of the Quidget plugin dashboard — built from the actual plugin interface.</p></div>
+  <div class="animate-in" style="max-width:900px;margin:0 auto;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh-xl)">
+    <!-- WP Admin Chrome -->
+    <div style="display:flex;min-height:420px;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px">
+      <!-- WP Sidebar -->
+      <div style="width:180px;background:#1d2327;color:#f0f0f1;flex-shrink:0;padding:12px 0">
+        <div style="padding:10px 16px 16px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">Q</div><span style="font-size:13px;font-weight:600;color:#fff">Qualiphy</span></div>
+        <div id="mockNav" style="display:flex;flex-direction:column;gap:1px">
+          <button onclick="showMock('dash')" class="mn mn--active" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:#f0f0f1;background:rgba(255,255,255,.07);border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Dashboard</button>
+          <button onclick="showMock('exams')" class="mn" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:rgba(240,240,241,.6);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Consultations</button>
+          <button onclick="showMock('settings')" class="mn" style="display:flex;align-items:center;gap:8px;padding:8px 16px;color:rgba(240,240,241,.6);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s">Settings</button>
+        </div>
+        <div style="margin:12px 16px;height:1px;background:rgba(255,255,255,.06)"></div>
+        <div style="padding:4px 16px;font-size:11px;color:rgba(240,240,241,.25)">Pharmacies</div>
       </div>
-    </div>
-    <!-- Panel: Exam Launch -->
-    <div class="q-demo-panel" id="panel-exam">
-      <div style="background:var(--surface-alt);border-radius:var(--r-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-lt);font-family:var(--font-h);font-size:14px;font-weight:500">
-        <div style="text-align:center"><div style="font-size:36px;margin-bottom:8px;opacity:.3">📡</div>Exam Launch Screenshot<br><span style="font-size:12px;color:var(--text-lt);opacity:.6">Replace with: exam popup or redirect on thank-you page</span></div>
-      </div>
-    </div>
-    <!-- Panel: Admin Dashboard -->
-    <div class="q-demo-panel" id="panel-admin">
-      <div style="background:var(--surface-alt);border-radius:var(--r-lg);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--text-lt);font-family:var(--font-h);font-size:14px;font-weight:500">
-        <div style="text-align:center"><div style="font-size:36px;margin-bottom:8px;opacity:.3">⚙️</div>Admin Dashboard Screenshot<br><span style="font-size:12px;color:var(--text-lt);opacity:.6">Replace with: Qualiphy consultation grid in WordPress</span></div>
+      <!-- Content Area -->
+      <div style="flex:1;overflow:hidden">
+        <!-- Header -->
+        <div style="padding:10px 20px;background:#fff;border-bottom:1px solid #ddd;display:flex;align-items:center;justify-content:space-between">
+          <span id="mockTitle" style="font-size:14px;font-weight:600;color:#1d2327">Dashboard</span>
+          <div style="display:flex;gap:6px"><span style="padding:3px 8px;border-radius:4px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">LIVE</span><span style="font-size:12px;color:#646970">v1.1.0</span></div>
+        </div>
+        <!-- Mock Views -->
+        <div style="padding:20px;overflow-y:auto;max-height:360px">
+          <!-- Dashboard -->
+          <div id="mock-dash">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:#3d2b64">4</div><div style="font-size:11px;color:#646970">Linked Exams</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:#3d2b64">12</div><div style="font-size:11px;color:#646970">Available</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:#3d2b64">3</div><div style="font-size:11px;color:#646970">Pharmacies</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;text-align:center"><div style="font-size:20px;font-weight:700;color:#3d2b64">38</div><div style="font-size:11px;color:#646970">States</div></div>
+            </div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px">
+              <div style="font-size:14px;font-weight:600;color:#1d2327;margin-bottom:4px">Welcome to Quidget</div>
+              <div style="font-size:12px;color:#646970;margin-bottom:14px;line-height:1.5">Your telehealth consultations are live. Patients can purchase and complete exams through your store.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:12px;font-weight:500;cursor:pointer">View Consultations</span>
+                <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:12px;font-weight:500;cursor:pointer">Plugin Settings</span>
+                <span style="padding:6px 12px;border-radius:6px;background:rgba(61,43,100,.06);color:#3d2b64;font-size:12px;font-weight:500;cursor:pointer">Watch Tutorial</span>
+              </div>
+            </div>
+          </div>
+          <!-- Consultations -->
+          <div id="mock-exams" style="display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><span style="font-size:14px;font-weight:600;color:#1d2327">Manage Consultations</span><span style="padding:5px 12px;border-radius:4px;border:1px solid #3d2b64;color:#3d2b64;font-size:11px;font-weight:500;cursor:pointer">↻ Refresh</span></div>
+            <div style="display:flex;gap:6px;margin-bottom:14px"><span style="padding:4px 10px;border-radius:4px;background:#3d2b64;color:#fff;font-size:11px;font-weight:500">All</span><span style="padding:4px 10px;border-radius:4px;background:#f0f0f1;color:#50575e;font-size:11px">Rx</span><span style="padding:4px 10px;border-radius:4px;background:#f0f0f1;color:#50575e;font-size:11px">GFE</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#1d2327">Weight Loss — 3 Mo</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:11px;color:#646970;margin-bottom:8px">Semaglutide · $27.99 cost</div><div style="font-size:11px;color:#28a745;font-weight:500">✓ Linked to product</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#1d2327">Botox GFE</span><span style="padding:2px 8px;border-radius:10px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">GFE</span></div><div style="font-size:11px;color:#646970;margin-bottom:8px">Good Faith Exam · $27.99</div><div style="font-size:11px;color:#28a745;font-weight:500">✓ Linked to product</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#1d2327">Tirzepatide — 1 Mo</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:11px;color:#646970;margin-bottom:8px">Monthly Rx · $27.99 cost</div><div style="font-size:11px;color:#28a745;font-weight:500">✓ Linked to product</div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px;border-style:dashed"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;font-weight:600;color:#1d2327">Testosterone HRT</span><span style="padding:2px 8px;border-radius:10px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:10px;font-weight:600">Rx</span></div><div style="font-size:11px;color:#646970;margin-bottom:8px">Monthly HRT · $27.99 cost</div><div style="font-size:11px;color:#a4424b;font-weight:500">Not linked</div></div>
+            </div>
+          </div>
+          <!-- Settings -->
+          <div id="mock-settings" style="display:none">
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px;margin-bottom:10px">
+              <div style="font-size:14px;font-weight:600;color:#1d2327;margin-bottom:14px">General Settings</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:13px;font-weight:500;color:#1d2327">Auto Send Exams</span><br><span style="font-size:11px;color:#646970">Send invite on payment</span></span><div style="width:36px;height:20px;background:#3d2b64;border-radius:10px;position:relative"><div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:13px;font-weight:500;color:#1d2327">Auto Launch Exams</span><br><span style="font-size:11px;color:#646970">Popup on thank-you page</span></span><div style="width:36px;height:20px;background:#3d2b64;border-radius:10px;position:relative"><div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+                <label style="display:flex;align-items:center;justify-content:space-between;cursor:pointer"><span><span style="font-size:13px;font-weight:500;color:#1d2327">Auto Refund Deferred</span><br><span style="font-size:11px;color:#646970">Refund minus return fee</span></span><div style="width:36px;height:20px;background:#3d2b64;border-radius:10px;position:relative"><div style="width:16px;height:16px;background:#fff;border-radius:50%;position:absolute;top:2px;right:2px"></div></div></label>
+              </div>
+            </div>
+            <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px">
+              <div style="font-size:14px;font-weight:600;color:#1d2327;margin-bottom:14px">Pricing</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <div><div style="font-size:11px;color:#646970;margin-bottom:4px">Return Fee</div><div style="padding:8px 12px;border:1px solid #ddd;border-radius:4px;font-size:13px;color:#1d2327;background:#fff">$30.00</div></div>
+                <div><div style="font-size:11px;color:#646970;margin-bottom:4px">Default Margin</div><div style="padding:8px 12px;border:1px solid #ddd;border-radius:4px;font-size:13px;color:#1d2327;background:#fff">10%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -248,18 +297,13 @@ document.getElementById('features').innerHTML=features.map(function(c,i){return 
 var pricing=[{n:"$0",l:"Signup Fee"},{n:"$0",l:"Monthly Fee"},{n:"None",l:"Contracts"},{n:"Per visit",l:"Pay as you go"}];
 document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<div class="q-pricing-cell"><strong>'+p.n+'</strong><span>'+p.l+'</span></div>'}).join('');
 
-// ─── Demo tabs ───
-var tabs=document.querySelectorAll('.q-demo-tab');
-var panels=document.querySelectorAll('.q-demo-panel');
-tabs.forEach(function(tab){
-  tab.addEventListener('click',function(){
-    tabs.forEach(function(t){t.classList.remove('q-demo-tab--active')});
-    tab.classList.add('q-demo-tab--active');
-    var target=tab.getAttribute('data-tab');
-    panels.forEach(function(p){p.classList.remove('q-demo-panel--active')});
-    document.getElementById('panel-'+target).classList.add('q-demo-panel--active');
-  });
-});
+// ─── Mockup tab switching ───
+window.showMock=function(id){
+  ['dash','exams','settings'].forEach(function(v){document.getElementById('mock-'+v).style.display=v===id?'block':'none'});
+  document.querySelectorAll('.mn').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,241,.6)';b.classList.remove('mn--active')});
+  event.target.style.background='rgba(255,255,255,.07)';event.target.style.color='#f0f0f1';
+  document.getElementById('mockTitle').textContent={dash:'Dashboard',exams:'Consultations',settings:'Settings'}[id];
+};
 
 // ─── Animated counters ───
 var counters=document.querySelectorAll('.q-counter');
