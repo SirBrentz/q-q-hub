@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../assets/css/quidget.css">
 </head>
 <body>
-<nav class="nav q-glow-track"><div class="q-glow"></div><div class="nav-inner">
+<nav class="nav q-glow-track"><div class="nav-inner">
   <a href="../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
   <div class="nav-links">
     <a href="../" class="nav-link">Overview</a>
@@ -25,7 +25,7 @@
 </div></nav>
 
 <main style="padding-top:68px">
-  <section class="section-sm q-glow-track" style="background:var(--navy);color:#fff;text-align:center"><div class="q-glow"></div>
+  <section class="section-sm q-glow-track" style="background:var(--navy);color:#fff;text-align:center;position:relative;overflow:hidden">
     <div class="wrap">
       <div class="badge badge-white" style="margin-bottom:16px">Release history</div>
       <h1 style="color:#fff;margin-bottom:8px">Changelog</h1>
@@ -35,7 +35,7 @@
   <div class="q-changelog" id="cl"></div>
 </main>
 
-<footer class="footer q-glow-track"><div class="q-glow"></div><div class="wrap">
+<footer class="footer"><div class="wrap">
   <div class="footer-grid" style="margin-bottom:32px">
     <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth for WooCommerce. By Qualiphy PC.</p></div>
     <div><div class="footer-heading">Product</div><a href="../" class="footer-link">Overview</a><a href="../get-started/" class="footer-link">Get Started</a><a href="./" class="footer-link">Changelog</a></div>
@@ -54,7 +54,7 @@ function ri(t,type){return '<div class="q-cl-item"><div class="q-cl-dot q-cl-dot
 function rg(title,items,type){if(!items||!items.length)return '';return '<div class="q-group"><div class="q-group-title q-group-title--'+type+'">'+title+'</div>'+items.map(function(i){return ri(i,type)}).join('')+'</div>'}
 document.getElementById('cl').innerHTML=cl.map(function(v){return '<div class="q-version"><div class="q-version-header"><span class="q-version-num">v'+v.v+'</span><span class="q-version-date">'+v.d+'</span></div>'+rg('Added',v.a,'added')+rg('Updated',v.u,'updated')+rg('Fixed',v.f,'fixed')+'</div>'}).join('');
 </script>
-<script>document.querySelectorAll(".q-glow-track").forEach(function(el){var g=el.querySelector(".q-glow");if(!g)return;el.addEventListener("mousemove",function(e){var r=el.getBoundingClientRect();g.style.left=(e.clientX-r.left)+"px";g.style.top=(e.clientY-r.top)+"px"})});</script>
+<script>var n=document.querySelector(".nav"),f=document.querySelector(".footer");if(n)n.addEventListener("mousemove",function(e){var r=n.getBoundingClientRect();n.style.setProperty("--mx",(e.clientX-r.left-60)+"px")});if(f)f.addEventListener("mousemove",function(e){var r=f.getBoundingClientRect();f.style.setProperty("--fx",((e.clientX-r.left)/r.width*100)+"%")});</script>
 <script src="../assets/js/main.js" defer></script>
 </body>
 </html>

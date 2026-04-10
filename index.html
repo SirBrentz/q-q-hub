@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="assets/css/quidget.css">
 </head>
 <body>
-<nav class="nav q-glow-track"><div class="q-glow"></div><div class="nav-inner">
+<nav class="nav q-glow-track"><div class="nav-inner">
   <a href="./" class="logo"><div class="logo-mark">Q</div>Quidget</a>
   <div class="nav-links">
     <a href="./" class="nav-link nav-link--active">Overview</a>
@@ -27,7 +27,13 @@
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
 
-<section class="q-hero q-glow-track"><div class="q-glow"></div><div class="wrap"><div class="q-hero-grid">
+<section class="q-hero q-glow-track">
+  <div class="q-particle q-particle--1"></div>
+  <div class="q-particle q-particle--2"></div>
+  <div class="q-particle q-particle--3"></div>
+  <div class="q-particle q-particle--4"></div>
+  <div class="q-particle q-particle--5"></div>
+  <div class="wrap"><div class="q-hero-grid">
   <div>
     <div class="badge badge-white">WordPress Plugin for WooCommerce</div>
     <h1><span style="white-space:nowrap">Sell <span class="q-rotate-wrap"><span class="q-rotate-inner"><span>telehealth exams</span><span>GFE consultations</span><span>Rx prescriptions</span><span>weight loss plans</span><span>telehealth exams</span></span></span></span> directly from your store</h1>
@@ -43,7 +49,7 @@
       <span><span class="check">✓</span> Live in under 10 min</span>
     </div>
   </div>
-  <div class="q-flow-card">
+  <div class="q-flow-card q-tilt" id="heroCard">
     <div class="q-flow-label">How it works</div>
     <div class="q-flow-step"><div class="q-flow-num">1</div><div><strong>Patient purchases consultation</strong><span>WooCommerce product with Qualiphy metadata</span></div></div>
     <div class="q-flow-step"><div class="q-flow-num">2</div><div><strong>Checkout collects patient info</strong><span>Gender, DOB, phone — required for the exam</span></div></div>
@@ -80,7 +86,7 @@
 </div></section>
 
 <section class="section-sm"><div class="wrap" style="max-width:760px">
-  <div class="q-cta q-glow-track animate-in"><div class="q-glow"></div>
+  <div class="q-cta animate-in">
     <h2>Ready to add telehealth to your store?</h2>
     <p>Walk through our setup guide — it takes less than 10 minutes to go live.</p>
     <div class="q-cta-actions">
@@ -90,7 +96,7 @@
   </div>
 </div></section>
 
-<footer class="footer q-glow-track"><div class="q-glow"></div><div class="wrap">
+<footer class="footer"><div class="wrap">
   <div class="footer-trust-strip"><span>HIPAA Compliant</span><span class="ft-sep">&middot;</span><span>LegitScript Certified</span><span class="ft-sep">&middot;</span><span>48 States + D.C.</span><span class="ft-sep">&middot;</span><span>350+ Providers</span><span class="ft-sep">&middot;</span><span>7/365 Availability</span></div>
   <div class="footer-grid">
     <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth consultations built into WooCommerce. By Qualiphy PC.</p><div class="footer-contact-info"><a href="mailto:support@qualiphy.me">support@qualiphy.me</a><a href="tel:+14243209958">(424) 320-9958</a><span>7 days · 6AM–7PM PST · 365 days/year</span></div></div>
@@ -111,16 +117,55 @@ var pricing=[{n:"$0",l:"Signup Fee"},{n:"$0",l:"Monthly Fee"},{n:"None",l:"Contr
 document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<div class="q-pricing-cell"><strong>'+p.n+'</strong><span>'+p.l+'</span></div>'}).join('');
 </script>
 <script>
-// Mouse-follow glow on dark sections
-document.querySelectorAll('.q-glow-track').forEach(function(el) {
-  var glow = el.querySelector('.q-glow');
-  if (!glow) return;
-  el.addEventListener('mousemove', function(e) {
-    var rect = el.getBoundingClientRect();
-    glow.style.left = (e.clientX - rect.left) + 'px';
-    glow.style.top = (e.clientY - rect.top) + 'px';
+(function() {
+  // Nav beam — thin light line follows cursor X along bottom of nav
+  var nav = document.querySelector('.nav');
+  if (nav) {
+    nav.addEventListener('mousemove', function(e) {
+      var rect = nav.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      nav.style.setProperty('--mx', (x - 60) + 'px');
+    });
+  }
+
+  // Hero card parallax tilt — card shifts subtly opposite to mouse
+  var hero = document.querySelector('.q-hero');
+  var card = document.getElementById('heroCard');
+  if (hero && card) {
+    hero.addEventListener('mousemove', function(e) {
+      var rect = hero.getBoundingClientRect();
+      var cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+      var cy = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = 'translate(' + (cx * -12) + 'px, ' + (cy * -8) + 'px) rotateY(' + (cx * 3) + 'deg) rotateX(' + (cy * -2) + 'deg)';
+    });
+    hero.addEventListener('mouseleave', function() {
+      card.style.transform = 'translate(0,0) rotateY(0) rotateX(0)';
+    });
+  }
+
+  // Footer shimmer — gradient line at top follows cursor X
+  var footer = document.querySelector('.footer');
+  if (footer) {
+    footer.addEventListener('mousemove', function(e) {
+      var rect = footer.getBoundingClientRect();
+      var pct = ((e.clientX - rect.left) / rect.width * 100);
+      footer.style.setProperty('--fx', pct + '%');
+    });
+  }
+
+  // Card hover tilt — subtle 3D tilt on feature/vertical cards
+  document.querySelectorAll('.card').forEach(function(c) {
+    c.addEventListener('mousemove', function(e) {
+      var rect = c.getBoundingClientRect();
+      var cx = (e.clientX - rect.left) / rect.width - 0.5;
+      var cy = (e.clientY - rect.top) / rect.height - 0.5;
+      c.style.transform = 'translateY(-3px) perspective(600px) rotateY(' + (cx * 4) + 'deg) rotateX(' + (cy * -3) + 'deg)';
+    });
+    c.addEventListener('mouseleave', function() {
+      c.style.transform = '';
+    });
   });
-});
+})();
 </script>
 <script src="assets/js/main.js" defer></script>
 </body>

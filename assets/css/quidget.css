@@ -42,29 +42,102 @@
   color: #fff;
 }
 
-/* ─── Mouse-follow glow on dark sections ─── */
+/* ─── Mouse-reactive effects on dark sections ─── */
+
+/* Gradient shift — background subtly warms/cools based on cursor X position */
 .q-glow-track {
   position: relative;
   overflow: hidden;
 }
-.q-glow-track .q-glow {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(91,80,255,.12) 0%, transparent 70%);
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 0;
-}
-.q-glow-track:hover .q-glow {
-  opacity: 1;
-}
 .q-glow-track > * {
   position: relative;
   z-index: 1;
+}
+
+/* Nav bottom beam — thin light line that follows cursor horizontally */
+.nav::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 120px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(91,80,255,.5), transparent);
+  transform: translateX(var(--mx, 50%));
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.nav:hover::after {
+  opacity: 1;
+}
+
+/* Hero flow card — subtle depth parallax on mouse move */
+.q-flow-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--r-xl);
+  padding: 32px;
+  backdrop-filter: blur(8px);
+  transition: transform 0.4s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+/* Cards tilt toward mouse on hover */
+.q-tilt {
+  transition: transform 0.35s cubic-bezier(.16,1,.3,1);
+  will-change: transform;
+}
+
+/* Hero floating particles */
+.q-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(91,80,255,.08);
+  pointer-events: none;
+  z-index: 0;
+}
+.q-particle--1 {
+  width: 6px; height: 6px; top: 20%; left: 15%;
+  animation: q-float 6s ease-in-out infinite;
+}
+.q-particle--2 {
+  width: 4px; height: 4px; top: 60%; left: 75%;
+  animation: q-float 8s ease-in-out infinite 1s;
+}
+.q-particle--3 {
+  width: 8px; height: 8px; top: 35%; right: 20%;
+  animation: q-float 7s ease-in-out infinite 2s;
+}
+.q-particle--4 {
+  width: 3px; height: 3px; top: 75%; left: 35%;
+  animation: q-float 9s ease-in-out infinite 0.5s;
+}
+.q-particle--5 {
+  width: 5px; height: 5px; top: 15%; right: 40%;
+  animation: q-float 7.5s ease-in-out infinite 3s;
+}
+@keyframes q-float {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  25% { transform: translateY(-12px) translateX(6px); opacity: 0.8; }
+  50% { transform: translateY(-6px) translateX(-4px); opacity: 0.5; }
+  75% { transform: translateY(-18px) translateX(8px); opacity: 0.7; }
+}
+
+/* Footer shimmer line */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(91,80,255,.3) var(--fx, 50%),
+    transparent 100%
+  );
+  pointer-events: none;
+  transition: none;
+}
+.footer {
+  position: relative;
 }
 
 /* ─── Scroll-reveal animations ─── */
@@ -154,14 +227,7 @@
   100%      { transform: translateY(0); }
 }
 
-/* Flow card in hero */
-.q-flow-card {
-  background: rgba(255,255,255,.04);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--r-xl);
-  padding: 32px;
-  backdrop-filter: blur(8px);
-}
+/* Flow card label & steps */
 .q-flow-label {
   font-family: var(--font-h); font-size: 11px; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em;

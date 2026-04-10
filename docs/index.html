@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="../assets/css/quidget.css">
 </head>
 <body>
-<nav class="nav q-glow-track"><div class="q-glow"></div><div class="nav-inner">
+<nav class="nav q-glow-track"><div class="nav-inner">
   <a href="../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
   <div class="nav-links">
     <a href="../" class="nav-link">Overview</a>
@@ -127,7 +127,7 @@ window.addEventListener('scroll', function() {
 }, { passive: true });
 </script>
 <script>window.addEventListener("load",function(){window.scrollTo(0,0)})</script>
-<script>document.querySelectorAll(".q-glow-track").forEach(function(el){var g=el.querySelector(".q-glow");if(!g)return;el.addEventListener("mousemove",function(e){var r=el.getBoundingClientRect();g.style.left=(e.clientX-r.left)+"px";g.style.top=(e.clientY-r.top)+"px"})});</script>
+<script>var n=document.querySelector(".nav");if(n)n.addEventListener("mousemove",function(e){var r=n.getBoundingClientRect();n.style.setProperty("--mx",(e.clientX-r.left-60)+"px")});</script>
 <script src="../assets/js/main.js" defer></script>
 </body>
 </html>
