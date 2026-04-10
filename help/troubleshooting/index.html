@@ -17,7 +17,6 @@
       <a href="../../get-started/" class="nav-link">Get Started</a>
       <a href="../" class="nav-link nav-link--active">Help Center</a>
       <a href="../../changelog/" class="nav-link">Changelog</a>
-      <a href="../../api/" class="nav-link">API</a>
     </div>
     <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -35,6 +34,7 @@
           <li><a href="#exam-popup-not-appearing" class="sidebar-link">Exam Popup Not Appearing</a></li>
           <li><a href="#not-available-in-area" class="sidebar-link">Not Available in Your Area</a></li>
           <li><a href="#prescription-not-created" class="sidebar-link">Prescription Not Created</a></li>
+          <li><a href="#webhook-issues" class="sidebar-link">Webhook Issues</a></li>
         </ul>
       </div>
     </aside>
@@ -59,8 +59,8 @@
 
         <h3>Root Causes & Fixes</h3>
 
-        <h4>1. No Payment Gateway Active</h4>
-        <p>Quidget exam invites are triggered when payment is confirmed. If no payment gateway is configured, the trigger never fires.</p>
+        <h4>1. No Payment Gateway Active (Stripe 3D Secure / PayPal)</h4>
+        <p>Exam invites fire on payment_complete, which is triggered after Stripe 3D Secure or PayPal authorization. If no payment gateway is configured, the trigger never fires.</p>
         <p><strong>Fix:</strong></p>
         <ol>
           <li>Go to <strong>WooCommerce → Settings → Payments</strong></li>
@@ -76,77 +76,58 @@
           <li>Test a new order to verify invites are now being sent</li>
         </ol>
 
-        <h4>2. Full-Page Caching Interfering</h4>
-        <p>Caching plugins can prevent the post-purchase webhook from firing properly. Cached pages may not execute the hooks that trigger exam invites.</p>
+        <h4>2. Caching Interference</h4>
+        <p>Caching plugins can prevent invites from firing. Exclude checkout and my-account pages from cache.</p>
         <p><strong>Fix:</strong></p>
         <ol>
-          <li>Go to your caching plugin settings (WP Super Cache, WP Fastest Cache, etc.)</li>
+          <li>Go to your caching plugin settings</li>
           <li>Add these pages to the <strong>Cache Exclude List</strong>:
             <ul>
               <li><code>/checkout/</code></li>
               <li><code>/my-account/</code></li>
-              <li><code>/cart/</code></li>
             </ul>
           </li>
-          <li>If available, disable object caching for logged-in users</li>
-          <li>Clear all caches manually</li>
-          <li>Test a new order</li>
-        </ol>
-        <p><strong>Note:</strong> If you're using CloudFlare, ensure caching rules don't interfere with dynamic checkout content.</p>
-
-        <h4>3. Auto Send Exams Disabled</h4>
-        <p>You may have disabled automatic exam sending in the settings.</p>
-        <p><strong>Fix:</strong></p>
-        <ol>
-          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
-          <li>Find the <strong>Auto Send Exams</strong> setting</li>
-          <li>If it's OFF, toggle it to ON</li>
-          <li>Click <strong>Save Changes</strong></li>
+          <li>Clear all caches</li>
           <li>Test a new order</li>
         </ol>
 
-        <h4>4. Free Orders Not Triggering Hook</h4>
-        <p>When an order has a total of $0 (free consultations), WooCommerce uses a different order completion hook. Some plugins interfere with this.</p>
-        <p><strong>Fix:</strong></p>
-        <ol>
-          <li>If you're offering free consultations, go to <strong>Qualiphy → Settings → General</strong></li>
-          <li>Ensure <strong>Auto Send Exams</strong> is enabled (it should catch all order statuses)</li>
-          <li>Disable other plugins one by one (especially those that modify checkout or order completion) and test again</li>
-          <li>The culprit is usually a payment gateway, coupon, or subscription plugin</li>
-        </ol>
-
-        <h4>5. Invalid or Disconnected API Key</h4>
-        <p>If your API key is invalid or the connection to Qualiphy is broken, invites cannot be sent.</p>
+        <h4>3. Auto Send Disabled</h4>
+        <p>Auto Send Consultations may be disabled in settings.</p>
         <p><strong>Fix:</strong></p>
         <ol>
           <li>Go to <strong>Qualiphy → Settings → General</strong></li>
-          <li>Look at your API Key field — it should show a green checkmark</li>
-          <li>If it shows a red X or error message:
-            <ul>
-              <li>Log into your Qualiphy clinic account at <strong>app.qualiphy.me</strong></li>
-              <li>Go to <strong>Settings → API</strong></li>
-              <li>Copy your API key again (it may have expired or been regenerated)</li>
-              <li>Paste it into Quidget's API Key field</li>
-              <li>Click <strong>Verify & Save</strong></li>
-            </ul>
-          </li>
+          <li>Enable <strong>Auto Send Consultations</strong></li>
+          <li>Save changes and test a new order</li>
+        </ol>
+
+        <h4>4. Free Order Hook Conflict</h4>
+        <p>Free orders (total $0) use woocommerce_order_status_completed hook instead of payment_complete. A plugin may be interfering.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Ensure <strong>Auto Send Consultations</strong> is enabled</li>
+          <li>Disable other plugins temporarily and test</li>
+          <li>The culprit is usually a payment gateway or subscription plugin</li>
+        </ol>
+
+        <h4>5. Invalid API Key</h4>
+        <p>If your API key is invalid, invites cannot be sent.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Your API Key should show a green checkmark</li>
+          <li>If not, log into <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → API</strong> and copy your API key</li>
+          <li>Paste it into Quidget and verify</li>
           <li>Test a new order</li>
         </ol>
 
         <h3>Diagnostic Steps</h3>
-        <p>If the above fixes don't resolve the issue, gather this information:</p>
+        <p>Check the order's Qualiphy section for error messages:</p>
         <ul>
-          <li>Open a test order in <strong>WooCommerce → Orders</strong></li>
-          <li>Check the <strong>Qualiphy</strong> section of the order — is there an error message?</li>
-          <li>Open your server error logs (ask your hosting provider or check <strong>Qualiphy → Tools → Error Log</strong>)</li>
-          <li>Contact support at <strong>support@qualiphy.me</strong> with:
-            <ul>
-              <li>Order ID</li>
-              <li>Exact timestamp of the order</li>
-              <li>Any error messages shown</li>
-              <li>A screenshot of your API key verification status</li>
-            </ul>
-          </li>
+          <li>Open the order in <strong>WooCommerce → Orders</strong></li>
+          <li>Look for the <strong>Qualiphy</strong> section — any errors?</li>
+          <li>Check _qualiphy_invite_status meta on the order</li>
+          <li>Contact support with order ID and timestamp if still stuck</li>
         </ul>
       </article>
 
@@ -323,84 +304,99 @@
           <li>The product should be available and purchasable</li>
           <li>Try a state where you don't serve — it should show "not available"</li>
         </ol>
+
+        <h3>Permanently Excluded States</h3>
+        <p>Alabama and Mississippi are currently permanently excluded from Qualiphy's network. Customers in these states will always see "not available in your area" regardless of your service area settings.</p>
       </article>
 
       <!-- Article 5: Prescription Not Created -->
       <article id="prescription-not-created" class="docs-article">
         <h2>Prescription Not Created After Approval</h2>
-        <p><strong>Symptom:</strong> Provider approves the consultation in the exam, but no prescription appears in the system or pharmacy gets no order.</p>
+        <p><strong>Symptom:</strong> Provider approves the consultation, but no prescription appears in the system or pharmacy gets no order.</p>
 
         <h3>Root Causes & Fixes</h3>
 
-        <h4>1. Pharmacy Not Assigned for State</h4>
-        <p>Prescriptions can only be routed to a pharmacy if one is configured for the patient's state.</p>
+        <h4>1. GFE Exam Type (Not Rx)</h4>
+        <p>GFE (Good Faith Exam) exams (rx_type 1) don't create prescriptions — they're for clearance/approval only.</p>
         <p><strong>Fix:</strong></p>
         <ol>
-          <li>Log into your Qualiphy clinic account at <strong>app.qualiphy.me</strong></li>
+          <li>Check the consultation type — is it GFE or Rx?</li>
+          <li>GFE types don't create prescriptions. This is expected behavior.</li>
+          <li>If you need prescriptions, use an Rx consultation type instead</li>
+        </ol>
+
+        <h4>2. Pharmacy Routing Gap</h4>
+        <p>Prescriptions can only be routed if a pharmacy is configured for the patient's state.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Log into <strong>app.qualiphy.me</strong></li>
           <li>Go to <strong>Settings → Pharmacies</strong></li>
-          <li>Check your <strong>Pharmacy Routing Table</strong></li>
-          <li>For the patient's state, verify a pharmacy is assigned</li>
-          <li>If not, add a pharmacy:
-            <ul>
-              <li>Click <strong>Add Pharmacy</strong></li>
-              <li>Enter pharmacy details (name, NCPDP, address)</li>
-              <li>Assign it to the patient's state</li>
-              <li>Save</li>
-            </ul>
-          </li>
-          <li>Have the provider re-approve the consultation (or have them approve it again if it's pending)</li>
+          <li>Check the routing table for the patient's state</li>
+          <li>If no pharmacy is assigned, add one for that state</li>
         </ol>
 
-        <h4>2. Webhook Blocked by Security Plugin</h4>
-        <p>When Qualiphy approves a prescription, it sends a webhook (a notification) to your site. Security plugins sometimes block these POST requests.</p>
+        <h4>3. Webhook Blocked by Security Plugin</h4>
+        <p>Security plugins may block POST requests to /wp-json/qualiphy/v1/webhook.</p>
         <p><strong>Fix:</strong></p>
         <ol>
-          <li>Check if you have a security plugin (Wordfence, Sucuri, iThemes Security, etc.)</li>
-          <li>In the plugin settings, find <strong>Whitelist</strong>, <strong>IP Whitelist</strong>, or <strong>API Exceptions</strong></li>
-          <li>Add the Qualiphy webhook URL to the whitelist:
-            <ul>
-              <li><strong>URL pattern:</strong> <code>/wp-json/qualiphy/</code> or similar</li>
-              <li>Contact <strong>support@qualiphy.me</strong> if you need the exact webhook URL</li>
-            </ul>
-          </li>
-          <li>Disable the plugin temporarily, have the provider re-approve, and test</li>
-          <li>If prescriptions now appear, re-enable the plugin with the webhook URL whitelisted</li>
-        </ol>
-
-        <h4>3. GFE Exam Type (Not Prescription Type)</h4>
-        <p>Some consultation types are set as GFE (General Free Exam) and don't issue prescriptions — they're for clearance/approval only.</p>
-        <p><strong>Fix:</strong></p>
-        <ol>
-          <li>Go to <strong>Qualiphy → Consultations</strong></li>
-          <li>Find the exam type the patient completed</li>
-          <li>Check the <strong>Exam Type</strong> field — is it marked as GFE or Rx?</li>
-          <li>If it's GFE, that's expected — no prescription should be created</li>
-          <li>If it should be Rx but is marked as GFE, contact support or edit the consultation type</li>
+          <li>Check for security plugins (Wordfence, Sucuri, etc.)</li>
+          <li>Whitelist POST to <code>/wp-json/qualiphy/v1/webhook</code></li>
+          <li>Test prescription creation again</li>
         </ol>
 
         <h4>4. API Sync Delay</h4>
-        <p>Sometimes there's a brief delay in syncing between Qualiphy and your WooCommerce site.</p>
+        <p>Sometimes there's a brief delay in syncing between Qualiphy and WooCommerce.</p>
         <p><strong>Fix:</strong></p>
         <ul>
-          <li>Wait 5 minutes and refresh the order page in WooCommerce</li>
-          <li>Check the order's <strong>Qualiphy</strong> section — prescription status should update</li>
-          <li>If still no prescription after 5 minutes:
-            <ul>
-              <li>Verify your API key is still valid (check <strong>Qualiphy → Settings → General</strong>)</li>
-              <li>Check for error messages in the order details</li>
-              <li>Contact support with the order ID and timestamp</li>
-            </ul>
-          </li>
+          <li>Wait 5 minutes and refresh the order page</li>
+          <li>Check the order's <strong>Qualiphy</strong> section</li>
+          <li>If still no prescription after 5 minutes, contact support with order ID and timestamp</li>
+        </ul>
+      </article>
+
+      <!-- Article 6: Webhook Issues -->
+      <article id="webhook-issues" class="docs-article">
+        <h2>Webhook Issues</h2>
+        <p>Webhooks are how Qualiphy notifies your site of important events like prescription approvals, exam completions, and renewals.</p>
+
+        <h3>Webhook Requirements</h3>
+        <p>For webhooks to work, your site must have:</p>
+        <ul>
+          <li><strong>Public accessibility:</strong> Not behind HTTP auth or IP restrictions</li>
+          <li><strong>SSL certificate:</strong> HTTPS enabled (webhooks won't send to HTTP)</li>
+          <li><strong>Correct webhook token/secret:</strong> Configured in your Qualiphy account</li>
         </ul>
 
-        <h3>Manual Prescription Creation</h3>
-        <p>If a prescription should have been created but wasn't, you can manually issue a prescription:</p>
+        <h3>Security & Verification</h3>
+        <p>Webhooks use HMAC-SHA256 signature verification. Each webhook request includes a signature that Quidget verifies to ensure it came from Qualiphy.</p>
+
+        <h3>Rate Limiting</h3>
+        <p>Webhooks are rate-limited to 60 requests per 60 seconds per IP. If you exceed this, requests will be queued or delayed.</p>
+
+        <h3>Webhook Delivery & Cleanup</h3>
+        <p><strong>Auto-cleanup:</strong> Unprocessed webhooks are automatically deleted after 30 days. If a webhook fails repeatedly, it will eventually be discarded.</p>
+
+        <h3>Common Webhook Problems</h3>
+
+        <h4>Webhook URL Cached</h4>
+        <p>If your site uses page caching, the webhook endpoint may be cached, preventing successful delivery.</p>
+        <p><strong>Fix:</strong> Exclude the webhook URL from caching in your caching plugin</p>
+
+        <h4>Security Plugin Blocking POST</h4>
+        <p>Security plugins may block POST requests to your webhook endpoint.</p>
+        <p><strong>Fix:</strong> Whitelist the webhook URL in your security plugin</p>
+
+        <h4>Site Behind HTTP Auth</h4>
+        <p>If your site requires HTTP authentication (basic auth), webhooks cannot connect.</p>
+        <p><strong>Fix:</strong> Disable HTTP auth or whitelist the Qualiphy IP range</p>
+
+        <h3>Testing Webhooks</h3>
+        <p>To test if webhooks are working:</p>
         <ol>
-          <li>Log into your Qualiphy clinic account</li>
-          <li>Find the patient and approved consultation</li>
-          <li>Click <strong>Issue Prescription</strong></li>
-          <li>Enter prescription details (drug, dosage, refills, etc.)</li>
-          <li>Route to pharmacy and submit</li>
+          <li>Complete a consultation and have the provider approve it</li>
+          <li>Check the order page in WooCommerce within 5 minutes</li>
+          <li>If prescription/status updates appear, webhooks are working</li>
+          <li>If nothing updates after 5 minutes, webhooks may be blocked</li>
         </ol>
       </article>
 

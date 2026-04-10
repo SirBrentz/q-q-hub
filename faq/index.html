@@ -18,7 +18,7 @@
         "name": "What is Quidget?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Quidget is a WordPress plugin that turns your WooCommerce store into a telehealth platform. It integrates with the Qualiphy provider network to offer automated exam invites, provider connections, prescriptions, and pharmacy fulfillment."
+          "text": "WordPress plugin that integrates Qualiphy's telehealth provider network into your WooCommerce store."
         }
       },
       {
@@ -27,7 +27,7 @@
         "name": "Do I need a Qualiphy account?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Quidget connects to the Qualiphy API. Sign up free at app.qualiphy.me/signup. No signup fees or contracts."
+          "text": "Yes. Sign up free at app.qualiphy.me/signup. No signup fees or contracts."
         }
       },
       {
@@ -36,7 +36,7 @@
         "name": "What states does Qualiphy cover?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "48 states + D.C. Alabama and Mississippi are currently excluded."
+          "text": "48 states + D.C. Alabama and Mississippi currently excluded."
         }
       },
       {
@@ -45,142 +45,196 @@
         "name": "Is Quidget HIPAA compliant?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Qualiphy is HIPAA compliant and LegitScript certified. Patient data is encrypted in transit and at rest."
+          "text": "Yes. Qualiphy is HIPAA compliant and LegitScript certified. All data encrypted."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-5",
-        "name": "How much does Quidget cost?",
+        "name": "What are the system requirements?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The plugin itself is free. You pay per consultation — $27.99 per consultation (may vary by exam type). No signup fees, no monthly fees, no contracts."
+          "text": "WordPress 5.0+, WooCommerce 5.0+, PHP 7.4+, SSL certificate, publicly accessible site for webhooks."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-6",
-        "name": "Can I set my own patient-facing prices?",
+        "name": "How much does Quidget cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. You set any price on your WooCommerce products. The difference between your price and Qualiphy's per-consultation cost is your margin."
+          "text": "Plugin is free to install. Pay per consultation ($27.99 base, varies by type). No signup fees, no monthly fees, no contracts."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-7",
-        "name": "How do refunds work?",
+        "name": "Can I set my own patient-facing prices?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "If a consultation is deferred, an automatic partial refund is issued (order total minus the return fee). Return fee defaults to $30 and is configurable per product."
+          "text": "Yes. Set any price on your WooCommerce products. Difference is your margin. Default margin: 10%."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-8",
-        "name": "How long does setup take?",
+        "name": "How do refunds work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most stores are live within 30 minutes. The setup wizard guides you through branding, service area, and consultation import."
+          "text": "Deferred consultations trigger automatic partial refund (order total minus return fee). Return fee default $30, configurable per product."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-9",
-        "name": "Do I need WooCommerce Subscriptions?",
+        "name": "How long does setup take?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Only if you want recurring monthly consultations (e.g., monthly medication refills). For one-time consultations, the base WooCommerce plugin is enough."
+          "text": "Most stores live within 30 minutes using the guided setup wizard (11 steps)."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-10",
-        "name": "Can I use my own branding?",
+        "name": "Do I need WooPayments?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The plugin supports white-label branding — your logo, colors, and copy on the exam modal, emails, and checkout."
+          "text": "Only for paid consultations. Free consultations don't require any payment gateway."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-11",
-        "name": "Can I rename imported products?",
+        "name": "Do I need WooCommerce Subscriptions?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The Qualiphy link is metadata, not tied to the product title. Clear cache after renaming."
+          "text": "Only for recurring monthly consultations (medication refills). One-time consultations don't need it."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-12",
-        "name": "What's the difference between GFE and Rx?",
+        "name": "Can I customize the branding?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "GFE (Good Faith Exam) is provider clearance for procedures like Botox or fillers. Rx is a full prescription consultation with pharmacy fulfillment."
+          "text": "Yes. Upload clinic logos (light/dark variants) and set custom accent colors in Branding settings."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-13",
-        "name": "How do exam invites work?",
+        "name": "What's the difference between GFE and Rx?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Invites fire automatically when payment is confirmed. The patient receives an email and/or sees a popup on the thank-you page to connect with a provider."
+          "text": "GFE (Good Faith Exam) is provider clearance for procedures. Rx is full prescription with pharmacy fulfillment."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-14",
-        "name": "What if a patient misses their exam?",
+        "name": "How do exam invites work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can resend the exam link from the order page: Order Actions → \"Resend Consultation Link Email.\""
+          "text": "Fire automatically on payment confirmation. Patient gets email + thank-you page popup/redirect to connect with provider."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-15",
-        "name": "Are providers available 24/7?",
+        "name": "Why can customers only buy one Rx consultation per order?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Providers are available 7 days a week, 365 days a year, 6AM–7PM PST."
+          "text": "Plugin enforces 1 Rx limit per order for proper delivery and billing. Non-Rx (GFE) has no limit."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-16",
-        "name": "What are the requirements?",
+        "name": "What does Auto-Send Consultations do?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "WordPress 6.0+, WooCommerce 8.0+, PHP 7.4+. Compatible with most themes and page builders."
+          "text": "When enabled, consultations automatically sent to patients on order completion. Disable for manual control from order page."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-17",
-        "name": "Will it conflict with other plugins?",
+        "name": "What does Auto-Launch do?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Quidget is designed to work alongside standard WooCommerce plugins. Occasionally caching or security plugins need minor configuration (see Troubleshooting)."
+          "text": "Prompts patient to begin consultation immediately after checkout via popup or redirect. Configurable delay 1-10 seconds."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-18",
-        "name": "How do I reset the plugin?",
+        "name": "Can I rename imported products?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Plugin page → Uninstall → reactivate. This returns to the setup wizard. Your Qualiphy account data is unaffected."
+          "text": "Yes. Qualiphy link is metadata, not tied to product title. Clear cache after renaming."
         }
       },
       {
         "@type": "Question",
         "@id": "#faq-19",
-        "name": "Does it support multisite?",
+        "name": "What is the 'Speak to a Doctor' feature?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Currently designed for single-site WordPress installs. Multi-site support is on the roadmap."
+          "text": "Allows patients to request follow-up consultations from My Account. 3-month supply exams: 3 requests in 90 days. Others: 1 in 30 days."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-20",
+        "name": "What's the difference between Sync and Deep Sync?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sync: quick single API call for basic data. Deep Sync: thorough, fetches detailed availability per consultation per state."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-21",
+        "name": "What is the Qualiphy Service Area shipping zone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Auto-created shipping zone with free shipping for supported states. Protected — auto-recreates if deleted."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-22",
+        "name": "What is the Qualiphy Consultation shipping class?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Auto-assigned to linked products. Separates Qualiphy products from regular store products. Protected."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-23",
+        "name": "How do I reset the plugin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plugin page → Uninstall → reactivate. Returns to setup wizard. Qualiphy account data unaffected."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-24",
+        "name": "Can I use Sandbox mode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Toggle in Environment settings (wizard step 4) or advanced settings. Uses separate staging API endpoint."
+        }
+      },
+      {
+        "@type": "Question",
+        "@id": "#faq-25",
+        "name": "What checkout fields are collected?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gender and Date of Birth (month/day/year). Only appear when Qualiphy products in cart. Works with Classic and Block checkout."
         }
       }
     ]
@@ -196,7 +250,6 @@
       <a href="../get-started/" class="nav-link">Get Started</a>
       <a href="../help/" class="nav-link nav-link--active">Help Center</a>
       <a href="../changelog/" class="nav-link">Changelog</a>
-      <a href="../api/" class="nav-link">API</a>
     </div>
     <div class="nav-actions"><a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -228,7 +281,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Quidget is a WordPress plugin that turns your WooCommerce store into a telehealth platform. It integrates with the Qualiphy provider network to offer automated exam invites, provider connections, prescriptions, and pharmacy fulfillment.</p>
+              <p>WordPress plugin that integrates Qualiphy's telehealth provider network into your WooCommerce store.</p>
             </div>
           </div>
 
@@ -238,7 +291,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Yes. Quidget connects to the Qualiphy API. Sign up free at <a href="https://app.qualiphy.me/signup" target="_blank">app.qualiphy.me/signup</a>. No signup fees or contracts.</p>
+              <p>Yes. Sign up free at <a href="https://app.qualiphy.me/signup" target="_blank">app.qualiphy.me/signup</a>. No signup fees or contracts.</p>
             </div>
           </div>
 
@@ -258,7 +311,17 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Yes. Qualiphy is HIPAA compliant and LegitScript certified. Patient data is encrypted in transit and at rest.</p>
+              <p>Yes. Qualiphy is HIPAA compliant and LegitScript certified. All data encrypted.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What are the system requirements?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>WordPress 5.0+, WooCommerce 5.0+, PHP 7.4+, SSL certificate, publicly accessible site for webhooks.</p>
             </div>
           </div>
         </div>
@@ -274,7 +337,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>The plugin itself is free. You pay per consultation — $27.99 per consultation (may vary by exam type). No signup fees, no monthly fees, no contracts.</p>
+              <p>Plugin is free to install. Pay per consultation ($27.99 base, varies by type). No signup fees, no monthly fees, no contracts.</p>
             </div>
           </div>
 
@@ -284,7 +347,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Yes. You set any price on your WooCommerce products. The difference between your price and Qualiphy's per-consultation cost is your margin.</p>
+              <p>Yes. Set any price on your WooCommerce products. Difference is your margin. Default margin: 10%.</p>
             </div>
           </div>
 
@@ -294,7 +357,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>If a consultation is deferred, an automatic partial refund is issued (order total minus the return fee). Return fee defaults to $30 and is configurable per product.</p>
+              <p>Deferred consultations trigger automatic partial refund (order total minus return fee). Return fee default $30, configurable per product.</p>
             </div>
           </div>
         </div>
@@ -310,7 +373,17 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Most stores are live within 30 minutes. The setup wizard guides you through branding, service area, and consultation import.</p>
+              <p>Most stores live within 30 minutes using the guided setup wizard (11 steps).</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">Do I need WooPayments?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Only for paid consultations. Free consultations don't require any payment gateway.</p>
             </div>
           </div>
 
@@ -320,27 +393,17 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Only if you want recurring monthly consultations (e.g., monthly medication refills). For one-time consultations, the base WooCommerce plugin is enough.</p>
+              <p>Only for recurring monthly consultations (medication refills). One-time consultations don't need it.</p>
             </div>
           </div>
 
           <div class="q-ts-item">
             <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">Can I use my own branding?</span>
+              <span class="q-ts-label">Can I customize the branding?</span>
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Yes. The plugin supports white-label branding — your logo, colors, and copy on the exam modal, emails, and checkout.</p>
-            </div>
-          </div>
-
-          <div class="q-ts-item">
-            <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">Can I rename imported products?</span>
-              <span class="q-ts-icon">+</span>
-            </button>
-            <div class="q-ts-content">
-              <p>Yes. The Qualiphy link is metadata, not tied to the product title. Clear cache after renaming.</p>
+              <p>Yes. Upload clinic logos (light/dark variants) and set custom accent colors in Branding settings.</p>
             </div>
           </div>
         </div>
@@ -356,7 +419,7 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>GFE (Good Faith Exam) is provider clearance for procedures like Botox or fillers. Rx is a full prescription consultation with pharmacy fulfillment.</p>
+              <p>GFE (Good Faith Exam) is provider clearance for procedures. Rx is full prescription with pharmacy fulfillment.</p>
             </div>
           </div>
 
@@ -366,27 +429,93 @@
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Invites fire automatically when payment is confirmed. The patient receives an email and/or sees a popup on the thank-you page to connect with a provider.</p>
+              <p>Fire automatically on payment confirmation. Patient gets email + thank-you page popup/redirect to connect with provider.</p>
             </div>
           </div>
 
           <div class="q-ts-item">
             <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">What if a patient misses their exam?</span>
+              <span class="q-ts-label">Why can customers only buy one Rx consultation per order?</span>
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>You can resend the exam link from the order page: <strong>Order Actions → "Resend Consultation Link Email."</strong></p>
+              <p>Plugin enforces 1 Rx limit per order for proper delivery and billing. Non-Rx (GFE) has no limit.</p>
             </div>
           </div>
 
           <div class="q-ts-item">
             <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">Are providers available 24/7?</span>
+              <span class="q-ts-label">What does Auto-Send Consultations do?</span>
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Providers are available 7 days a week, 365 days a year, 6AM–7PM PST.</p>
+              <p>When enabled, consultations automatically sent to patients on order completion. Disable for manual control from order page.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What does Auto-Launch do?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Prompts patient to begin consultation immediately after checkout via popup or redirect. Configurable delay 1-10 seconds.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">Can I rename imported products?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Yes. Qualiphy link is metadata, not tied to product title. Clear cache after renaming.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What is the "Speak to a Doctor" feature?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Allows patients to request follow-up consultations from My Account. 3-month supply exams: 3 requests in 90 days. Others: 1 in 30 days.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pharmacy & Shipping Section -->
+      <section class="faq-section">
+        <h2 class="faq-section-title">Pharmacy & Shipping</h2>
+        <div class="accordion">
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What's the difference between Sync and Deep Sync?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Sync: quick single API call for basic data. Deep Sync: thorough, fetches detailed availability per consultation per state.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What is the Qualiphy Service Area shipping zone?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Auto-created shipping zone with free shipping for supported states. Protected — auto-recreates if deleted.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What is the Qualiphy Consultation shipping class?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Auto-assigned to linked products. Separates Qualiphy products from regular store products. Protected.</p>
             </div>
           </div>
         </div>
@@ -398,41 +527,31 @@
         <div class="accordion">
           <div class="q-ts-item">
             <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">What are the requirements?</span>
-              <span class="q-ts-icon">+</span>
-            </button>
-            <div class="q-ts-content">
-              <p>WordPress 6.0+, WooCommerce 8.0+, PHP 7.4+. Compatible with most themes and page builders.</p>
-            </div>
-          </div>
-
-          <div class="q-ts-item">
-            <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">Will it conflict with other plugins?</span>
-              <span class="q-ts-icon">+</span>
-            </button>
-            <div class="q-ts-content">
-              <p>Quidget is designed to work alongside standard WooCommerce plugins. Occasionally caching or security plugins need minor configuration (see Troubleshooting).</p>
-            </div>
-          </div>
-
-          <div class="q-ts-item">
-            <button class="q-ts-trigger" aria-expanded="false">
               <span class="q-ts-label">How do I reset the plugin?</span>
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Plugin page → Uninstall → reactivate. This returns to the setup wizard. Your Qualiphy account data is unaffected.</p>
+              <p>Plugin page → Uninstall → reactivate. Returns to setup wizard. Qualiphy account data unaffected.</p>
             </div>
           </div>
 
           <div class="q-ts-item">
             <button class="q-ts-trigger" aria-expanded="false">
-              <span class="q-ts-label">Does it support multisite?</span>
+              <span class="q-ts-label">Can I use Sandbox mode?</span>
               <span class="q-ts-icon">+</span>
             </button>
             <div class="q-ts-content">
-              <p>Currently designed for single-site WordPress installs. Multi-site support is on the roadmap.</p>
+              <p>Yes. Toggle in Environment settings (wizard step 4) or advanced settings. Uses separate staging API endpoint.</p>
+            </div>
+          </div>
+
+          <div class="q-ts-item">
+            <button class="q-ts-trigger" aria-expanded="false">
+              <span class="q-ts-label">What checkout fields are collected?</span>
+              <span class="q-ts-icon">+</span>
+            </button>
+            <div class="q-ts-content">
+              <p>Gender and Date of Birth (month/day/year). Only appear when Qualiphy products in cart. Works with Classic and Block checkout.</p>
             </div>
           </div>
         </div>
@@ -448,7 +567,7 @@
         <p>Can't find the answer you're looking for? Visit our Help Center or contact our support team.</p>
         <div class="cta-links">
           <a href="../help/" class="btn btn-primary">Visit Help Center</a>
-          <a href="mailto:support@quidget.io" class="btn btn-secondary">Contact Support</a>
+          <a href="mailto:support@qualiphy.me" class="btn btn-secondary">Contact Support</a>
         </div>
       </div>
     </div>
@@ -486,17 +605,16 @@
             <ul class="footer-links">
               <li><a href="../">Overview</a></li>
               <li><a href="../get-started/">Get Started</a></li>
+              <li><a href="../help/">Help Center</a></li>
               <li><a href="../changelog/">Changelog</a></li>
-              <li><a href="../pricing/">Pricing</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4 class="footer-heading">Resources</h4>
             <ul class="footer-links">
               <li><a href="../help/">Help Center</a></li>
-              <li><a href="../faq/">FAQ</a></li>
-              <li><a href="../api/">API</a></li>
-              <li><a href="../docs/">Documentation</a></li>
+              <li><a href="../help/troubleshooting/">Troubleshooting</a></li>
+              <li><a href="./">FAQ</a></li>
             </ul>
           </div>
           <div class="footer-col">

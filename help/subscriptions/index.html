@@ -17,7 +17,6 @@
       <a href="../../get-started/" class="nav-link">Get Started</a>
       <a href="../" class="nav-link nav-link--active">Help Center</a>
       <a href="../../changelog/" class="nav-link">Changelog</a>
-      <a href="../../api/" class="nav-link">API</a>
     </div>
     <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
     <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -31,6 +30,7 @@
         <h3 class="sidebar-title">Subscriptions & Renewals</h3>
         <ul class="sidebar-list">
           <li><a href="#setting-up-subscriptions" class="sidebar-link active">Setting Up Subscriptions</a></li>
+          <li><a href="#subscription-settings" class="sidebar-link">Subscription Settings</a></li>
           <li><a href="#renewal-behavior" class="sidebar-link">Renewal Behavior</a></li>
           <li><a href="#handling-deferrals" class="sidebar-link">Handling Deferrals</a></li>
         </ul>
@@ -57,12 +57,6 @@
 
         <h3>Prerequisites</h3>
         <p>Before you can set up subscriptions, you'll need to install and activate the <strong>WooCommerce Subscriptions</strong> extension. This is a paid add-on available from WooCommerce.com and is required for all subscription functionality.</p>
-        <ul>
-          <li>Visit <strong>WooCommerce.com → Products → WooCommerce Subscriptions</strong></li>
-          <li>Purchase a license for your site</li>
-          <li>Download the plugin ZIP file</li>
-          <li>Upload and activate it in your WordPress admin (Plugins → Add New → Upload Plugin)</li>
-        </ul>
 
         <h3>Creating a Subscription Product</h3>
         <p>Once WooCommerce Subscriptions is installed, you can set up recurring consultation products:</p>
@@ -72,68 +66,58 @@
           <li>In the <strong>Product Data</strong> section, select <strong>Subscription</strong> as the product type</li>
           <li>Configure the subscription details:
             <ul>
-              <li><strong>Billing Period:</strong> Choose monthly, quarterly, yearly, etc. (monthly is most common for medication refills)</li>
-              <li><strong>Billing Interval:</strong> How many periods between charges (e.g., 1 month, 3 months)</li>
-              <li><strong>Subscription Price:</strong> The amount charged per billing cycle</li>
+              <li><strong>Billing Period:</strong> Choose monthly, quarterly, yearly, etc.</li>
+              <li><strong>Set the billing period</strong> during product creation</li>
             </ul>
           </li>
-          <li>In the <strong>Qualiphy</strong> section, link the subscription to a Qualiphy consultation type:
-            <ul>
-              <li>Select <strong>Consultation Type</strong> (e.g., "Medication Refill Exam")</li>
-              <li>Choose the <strong>Service Duration</strong></li>
-            </ul>
-          </li>
-          <li>Publish the product</li>
+          <li>You can add a <strong>sign-up fee</strong> during the pricing step if needed</li>
+          <li>Link to a Qualiphy consultation and publish the product</li>
         </ol>
 
         <h3>Importing via Consultation Wizard</h3>
-        <p>You can also create subscription products during the Quidget setup wizard or using the <strong>Import Consultations</strong> tool. When importing a consultation type:</p>
-        <ol>
-          <li>Go to <strong>Qualiphy → Consultations → Import</strong></li>
-          <li>Select your consultation type from Qualiphy</li>
-          <li>On the product type step, choose <strong>Create Subscription Product</strong></li>
-          <li>Set the billing period and price as described above</li>
-          <li>Complete the import wizard</li>
-        </ol>
-
-        <h3>How Subscription Billing Works</h3>
-        <p>After a patient purchases a subscription:</p>
-        <ul>
-          <li>The first consultation exam is triggered immediately</li>
-          <li>Payment is processed automatically on the recurring schedule (monthly, quarterly, etc.)</li>
-          <li>Each renewal payment triggers a new consultation exam invite sent to the patient</li>
-          <li>The subscription continues until the patient cancels or the subscription is paused/cancelled by the merchant</li>
-        </ul>
-
-        <p>For example, a patient purchases a "Monthly Medication Refill" subscription on March 15th. They're charged $49.99 immediately and receive an exam invite. On April 15th, they're automatically charged again, and a new exam invite is sent. This cycle repeats each month until the subscription ends.</p>
+        <p>You can also create subscription products during the Quidget setup wizard. When importing a consultation type, choose "Subscription" as the product type, set the billing period, and complete the import.</p>
       </article>
 
-      <!-- Article 2: Renewal Behavior -->
+      <!-- Article 2: Subscription Settings -->
+      <article id="subscription-settings" class="docs-article">
+        <h2>Subscription Settings</h2>
+        <p>Quidget provides three key subscription settings to control exam delivery and renewal behavior. All settings are found in <strong>Qualiphy → Settings → Subscriptions</strong> (advanced tab).</p>
+
+        <h3>Send Exam on Activation</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When a customer purchases a subscription, this setting controls whether an exam invite is automatically sent when the subscription begins. With this enabled (recommended), the patient receives their initial exam immediately upon subscription start.</p>
+
+        <h3>Send Exam on Renewal</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>When enabled, a new exam invite is automatically sent to the patient each time the subscription renews (each billing cycle). This ensures the provider reviews the patient before each renewal. Disable this only if you want manual control over renewal exams.</p>
+
+        <h3>Subscription Deferral Action</h3>
+        <p><strong>Default:</strong> Enabled</p>
+        <p>This setting determines what happens when a provider defers a renewal exam. Two options are available:</p>
+        <ul>
+          <li><strong>Cancelled:</strong> The subscription ends immediately when a deferral occurs</li>
+          <li><strong>On Hold:</strong> The subscription pauses until you manually reactivate it</li>
+        </ul>
+        <p>Auto-refund can also be configured to issue partial refunds when deferrals occur, protecting patients from being charged for unapproved renewals.</p>
+      </article>
+
+      <!-- Article 3: Renewal Behavior -->
       <article id="renewal-behavior" class="docs-article">
         <h2>Renewal Behavior</h2>
         <p>When a subscription renews, Quidget automatically handles the exam workflow. Understanding how renewals work helps you manage patient expectations and provider workflows.</p>
-
-        <h3>Send Exam on Renewal Setting</h3>
-        <p>By default, Quidget sends a new exam invite each time a subscription renews (each billing cycle). This setting is enabled by default and ensures that the provider reviews the patient each cycle before the prescription or treatment is renewed.</p>
-        <p>To disable this (not recommended):</p>
-        <ol>
-          <li>Go to <strong>Qualiphy → Settings → Subscriptions</strong></li>
-          <li>Toggle <strong>Send Exam on Renewal</strong> to OFF</li>
-          <li>Click <strong>Save Changes</strong></li>
-        </ol>
 
         <h3>What Happens During Renewal</h3>
         <p>When a subscription renews and "Send Exam on Renewal" is enabled:</p>
         <ol>
           <li><strong>Payment Processed:</strong> WooCommerce Subscriptions charges the customer on the scheduled renewal date</li>
           <li><strong>Exam Invite Sent:</strong> Quidget automatically sends a new exam invite to the patient's email address</li>
-          <li><strong>Patient Information Reused:</strong> The exam uses the same patient demographic information from the original subscription order (name, date of birth, contact details, etc.)</li>
-          <li><strong>Provider Reviews:</strong> Your clinic provider reviews the patient during the renewal exam, just like the initial purchase</li>
+          <li><strong>Patient Information Reused:</strong> The exam uses the same patient demographic information from the original subscription order</li>
+          <li><strong>Provider Reviews:</strong> Your clinic provider reviews the patient during the renewal exam</li>
           <li><strong>Provider Decision:</strong> The provider approves, defers, or rejects the renewal consultation
             <ul>
               <li><strong>Approved:</strong> The prescription is renewed or treatment continues, and the pharmacy (if applicable) fulfills it</li>
-              <li><strong>Deferred:</strong> The renewal is held pending review — see "Handling Deferrals" below</li>
-              <li><strong>Rejected:</strong> The consultation is declined; the patient is notified and no prescription is issued</li>
+              <li><strong>Deferred:</strong> The renewal is held pending review</li>
+              <li><strong>Rejected:</strong> The consultation is declined; the patient is notified</li>
             </ul>
           </li>
         </ol>
@@ -142,39 +126,26 @@
         <p>From the patient's perspective:</p>
         <ul>
           <li>They receive an exam invite email at each renewal date</li>
-          <li>They complete a quick follow-up questionnaire (similar to the initial exam)</li>
-          <li>They wait for provider approval, just like the first time</li>
+          <li>They complete a quick follow-up questionnaire</li>
+          <li>They wait for provider approval</li>
           <li>Once approved, the new prescription/treatment is available</li>
         </ul>
 
         <p>This creates a consistent, compliant workflow where each renewal is independently reviewed by a provider.</p>
-
-        <h3>Modifying Renewal Settings</h3>
-        <p>All subscription renewal settings are managed in <strong>Qualiphy → Settings → Subscriptions</strong>:</p>
-        <ul>
-          <li><strong>Send Exam on Renewal:</strong> Enabled by default. When OFF, no new exam is sent on renewal (not recommended for compliance reasons)</li>
-          <li><strong>Exam Type on Renewal:</strong> The consultation type that's triggered (usually matches the original consultation type)</li>
-        </ul>
       </article>
 
-      <!-- Article 3: Handling Deferrals -->
+      <!-- Article 4: Handling Deferrals -->
       <article id="handling-deferrals" class="docs-article">
         <h2>Handling Deferrals</h2>
-        <p>A deferral occurs when a provider reviews a renewal consultation and decides to hold (defer) the decision rather than approve or reject it immediately. Quidget provides flexible options for managing deferrals automatically.</p>
+        <p>A deferral occurs when a provider reviews a renewal consultation and decides to hold the decision rather than approve or reject it immediately. Quidget provides flexible options for managing deferrals automatically.</p>
 
         <h3>What is a Deferral?</h3>
-        <p>When a provider defers a consultation, they're saying "I need more information or time before I can approve this renewal." This might happen if:</p>
-        <ul>
-          <li>The patient's medical history has changed and requires further investigation</li>
-          <li>Lab results or additional documentation are needed</li>
-          <li>The provider needs to consult with another specialist</li>
-          <li>The patient's condition requires in-person evaluation</li>
-        </ul>
+        <p>When a provider defers a consultation, they're saying "I need more information or time before I can approve this renewal." This might happen if the patient's medical history has changed, lab results are needed, or further investigation is required.</p>
 
-        <h3>Deferral Actions</h3>
-        <p>When a consultation is deferred on renewal, Quidget can automatically trigger one of two actions:</p>
+        <h3>Deferral Status Options</h3>
+        <p>When a consultation is deferred, Quidget can automatically trigger one of two actions:</p>
 
-        <h4>Option 1: Cancel Subscription (Default)</h4>
+        <h4>Cancelled (Default)</h4>
         <p>The subscription is ended immediately when a deferral occurs:</p>
         <ul>
           <li>No further renewal charges</li>
@@ -182,12 +153,12 @@
           <li>Provides a hard stop to allow for medical review</li>
         </ul>
 
-        <h4>Option 2: Hold Subscription</h4>
-        <p>The subscription is paused (suspended) when a deferral occurs:</p>
+        <h4>On Hold</h4>
+        <p>The subscription is paused when a deferral occurs:</p>
         <ul>
           <li>No further renewal charges until reactivated</li>
           <li>The subscription retains all settings and history</li>
-          <li>Merchant can manually reactivate the subscription in WooCommerce when ready</li>
+          <li>You can manually reactivate the subscription in WooCommerce when ready</li>
           <li>Patient is notified that their subscription is on hold</li>
         </ul>
 
@@ -195,12 +166,7 @@
         <p>To set your deferral action preference:</p>
         <ol>
           <li>Go to <strong>Qualiphy → Settings → Subscriptions</strong></li>
-          <li>Under <strong>Deferral Action</strong>, select either:
-            <ul>
-              <li><strong>Cancel Subscription</strong> (default)</li>
-              <li><strong>Hold Subscription</strong></li>
-            </ul>
-          </li>
+          <li>Under <strong>Subscription Deferral Action</strong>, select either <strong>Cancelled</strong> or <strong>On Hold</strong></li>
           <li>Click <strong>Save Changes</strong></li>
         </ol>
 
@@ -228,25 +194,10 @@
           <li>In the <strong>Qualiphy</strong> section, set the <strong>Return Fee</strong> (default $30.00)</li>
           <li>Click <strong>Update</strong></li>
         </ol>
-        <p>If a customer orders multiple products with return fees, the fees are summed. For example, ordering 2 consultation products with $30 return fees each would retain $60 on deferral.</p>
+        <p>If a customer orders multiple products with return fees, the fees are summed.</p>
 
-        <h3>Manual Deferral Management</h3>
-        <p>Even with automatic deferral actions configured, you can still manually manage any deferral:</p>
-        <ol>
-          <li>Go to <strong>WooCommerce → Orders</strong></li>
-          <li>Find the renewal order with the deferred consultation</li>
-          <li>In the <strong>Qualiphy</strong> section, review the deferral status</li>
-          <li>Manually refund, cancel, or hold the subscription as needed</li>
-        </ol>
-
-        <h3>Communicating with Patients</h3>
-        <p>When a consultation is deferred, the patient automatically receives an email notification explaining that:</p>
-        <ul>
-          <li>Their consultation is under review</li>
-          <li>They will hear back from your clinic within a specific timeframe</li>
-          <li>They should contact support with questions</li>
-        </ul>
-        <p>Customize these notifications in <strong>Qualiphy → Settings → Email Templates</strong>.</p>
+        <h3>Clinical Access Control</h3>
+        <p>Deferral Status is tied to Clinical Access settings. Depending on your configuration, the visibility and status of deferred consultations may be controlled through the Clinical Access feature to ensure proper workflow management.</p>
       </article>
 
       <!-- Help CTA -->
