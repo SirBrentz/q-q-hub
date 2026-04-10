@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="assets/css/quidget.css">
 </head>
 <body>
-<nav class="nav"><div class="nav-inner">
+<nav class="nav q-glow-track"><div class="q-glow"></div><div class="nav-inner">
   <a href="./" class="logo"><div class="logo-mark">Q</div>Quidget</a>
   <div class="nav-links">
     <a href="./" class="nav-link nav-link--active">Overview</a>
@@ -27,10 +27,10 @@
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
 
-<section class="q-hero"><div class="wrap"><div class="q-hero-grid">
+<section class="q-hero q-glow-track"><div class="q-glow"></div><div class="wrap"><div class="q-hero-grid">
   <div>
     <div class="badge badge-white">WordPress Plugin for WooCommerce</div>
-    <h1>Sell <span class="q-rotate-wrap"><span class="q-rotate-inner"><span>telehealth exams</span><span>GFE consultations</span><span>Rx prescriptions</span><span>weight loss plans</span><span>telehealth exams</span></span></span><br>directly from your store</h1>
+    <h1><span style="white-space:nowrap">Sell <span class="q-rotate-wrap"><span class="q-rotate-inner"><span>telehealth exams</span><span>GFE consultations</span><span>Rx prescriptions</span><span>weight loss plans</span><span>telehealth exams</span></span></span></span> directly from your store</h1>
     <p>A WordPress plugin that turns your WooCommerce store into a telehealth platform. Patients purchase consultations as products — the plugin handles exam invites, provider connections, prescriptions, and pharmacy fulfillment automatically.</p>
     <div class="q-hero-actions">
       <a href="get-started/" class="btn btn-primary btn-lg">Get Started →</a>
@@ -80,7 +80,7 @@
 </div></section>
 
 <section class="section-sm"><div class="wrap" style="max-width:760px">
-  <div class="q-cta animate-in">
+  <div class="q-cta q-glow-track animate-in"><div class="q-glow"></div>
     <h2>Ready to add telehealth to your store?</h2>
     <p>Walk through our setup guide — it takes less than 10 minutes to go live.</p>
     <div class="q-cta-actions">
@@ -90,7 +90,7 @@
   </div>
 </div></section>
 
-<footer class="footer"><div class="wrap">
+<footer class="footer q-glow-track"><div class="q-glow"></div><div class="wrap">
   <div class="footer-trust-strip"><span>HIPAA Compliant</span><span class="ft-sep">&middot;</span><span>LegitScript Certified</span><span class="ft-sep">&middot;</span><span>48 States + D.C.</span><span class="ft-sep">&middot;</span><span>350+ Providers</span><span class="ft-sep">&middot;</span><span>7/365 Availability</span></div>
   <div class="footer-grid">
     <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth consultations built into WooCommerce. By Qualiphy PC.</p><div class="footer-contact-info"><a href="mailto:support@qualiphy.me">support@qualiphy.me</a><a href="tel:+14243209958">(424) 320-9958</a><span>7 days · 6AM–7PM PST · 365 days/year</span></div></div>
@@ -109,6 +109,18 @@ var features=[{t:"Setup Wizard",d:"Guided onboarding: API key, branding, service
 document.getElementById('features').innerHTML=features.map(function(c,i){return '<div class="card animate-in"><div class="q-feat-icon">'+icons[i]+'</div><h3>'+c.t+'</h3><p>'+c.d+'</p></div>'}).join('');
 var pricing=[{n:"$0",l:"Signup Fee"},{n:"$0",l:"Monthly Fee"},{n:"None",l:"Contracts"},{n:"Per visit",l:"Pay as you go"}];
 document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<div class="q-pricing-cell"><strong>'+p.n+'</strong><span>'+p.l+'</span></div>'}).join('');
+</script>
+<script>
+// Mouse-follow glow on dark sections
+document.querySelectorAll('.q-glow-track').forEach(function(el) {
+  var glow = el.querySelector('.q-glow');
+  if (!glow) return;
+  el.addEventListener('mousemove', function(e) {
+    var rect = el.getBoundingClientRect();
+    glow.style.left = (e.clientX - rect.left) + 'px';
+    glow.style.top = (e.clientY - rect.top) + 'px';
+  });
+});
 </script>
 <script src="assets/js/main.js" defer></script>
 </body>

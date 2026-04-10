@@ -42,6 +42,31 @@
   color: #fff;
 }
 
+/* ─── Mouse-follow glow on dark sections ─── */
+.q-glow-track {
+  position: relative;
+  overflow: hidden;
+}
+.q-glow-track .q-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91,80,255,.12) 0%, transparent 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+.q-glow-track:hover .q-glow {
+  opacity: 1;
+}
+.q-glow-track > * {
+  position: relative;
+  z-index: 1;
+}
+
 /* ─── Scroll-reveal animations ─── */
 .animate-in {
   opacity: 0;
