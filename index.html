@@ -118,19 +118,11 @@
                   <span style="padding:5px 10px;border-radius:5px;background:rgba(61,43,100,.04);color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 20 20" fill="#3d2b64"><path d="M12.5 14.5V12h-5v2.5L3 10l4.5-4.5V8h5V5.5L17 10l-4.5 4.5z"/></svg>Import Consultations</span>
                 </div>
               </div>
-              <div id="videoThumb" onclick="playVideo()" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;cursor:pointer;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 2px 8px rgba(61,43,100,.15)'" onmouseout="this.style.boxShadow='none'">
-                <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#3d2b64 0%,#6e54a7 50%,#3d2b64 100%);display:flex;align-items:center;justify-content:center;position:relative">
-                  <div style="position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:3px;background:rgba(0,0,0,.3);color:#fff;font-size:8px;font-weight:600">▶ VIDEO</div>
-                  <div style="width:36px;height:36px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.25);transition:transform .2s"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #3d2b64;margin-left:2px"></div></div>
-                  <div style="position:absolute;bottom:8px;right:8px;font-size:8px;color:rgba(255,255,255,.6)">2:45</div>
-                </div>
-                <div style="padding:8px 12px"><div style="font-size:10px;font-weight:600;color:#1d2327">Getting Started Tutorial</div><div style="font-size:9px;color:#646970">Full setup walkthrough</div></div>
-              </div>
-            </div>
-            <!-- Video overlay (hidden by default) -->
-            <div id="videoOverlay" style="display:none;position:absolute;inset:0;background:rgba(29,35,39,.95);z-index:10;padding:16px;border-radius:0 0 8px 0">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;font-weight:600;color:#fff">Getting Started Tutorial</span><button onclick="closeVideo()" style="padding:4px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.7);font-size:10px;cursor:pointer;font-family:inherit">← Back</button></div>
-              <div id="videoEmbed" style="border-radius:6px;overflow:hidden;aspect-ratio:16/9;background:#000"></div>
+              <a href="get-started/" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px 14px;transition:border-color .2s,box-shadow .2s" onmouseover="this.style.borderColor='#3d2b64';this.style.boxShadow='0 2px 8px rgba(61,43,100,.12)'" onmouseout="this.style.borderColor='#ddd';this.style.boxShadow='none'">
+                <div style="width:36px;height:36px;background:#3d2b64;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:10px;color:#fff;font-size:16px">→</div>
+                <div style="font-size:12px;font-weight:600;color:#3d2b64;margin-bottom:2px">Get Started</div>
+                <div style="font-size:9px;color:#646970">Interactive setup guide</div>
+              </a>
             </div>
             <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px">
               <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;font-weight:600;color:#1d2327">Recent Orders</span><span style="font-size:9px;color:#3d2b64;cursor:pointer">View all →</span></div>
@@ -343,20 +335,9 @@ document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<di
 // ─── Mockup tab switching ───
 window.showMock=function(id){
   ['dash','exams','pharm','settings'].forEach(function(v){var e=document.getElementById('mock-'+v);if(e)e.style.display=v===id?'block':'none'});
-  var vo=document.getElementById('videoOverlay');if(vo)vo.style.display='none';
-  var ve=document.getElementById('videoEmbed');if(ve)ve.innerHTML='';
   document.querySelectorAll('.mn').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,241,.55)'});
   if(event&&event.target){event.target.style.background='rgba(255,255,255,.07)';event.target.style.color='#f0f0f1'}
   document.getElementById('mockTitle').textContent={dash:'Dashboard',exams:'Consultations',pharm:'Pharmacies',settings:'Settings'}[id]||'';
-};
-window.playVideo=function(){
-  var o=document.getElementById('videoOverlay');
-  o.style.display='block';
-  document.getElementById('videoEmbed').innerHTML='<iframe src="https://www.youtube.com/embed/zLabf5xrUQA?autoplay=1&rel=0" style="width:100%;height:100%;border:none" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
-};
-window.closeVideo=function(){
-  document.getElementById('videoOverlay').style.display='none';
-  document.getElementById('videoEmbed').innerHTML='';
 };
 // Animated orders
 (function(){

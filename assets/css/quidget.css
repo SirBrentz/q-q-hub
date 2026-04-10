@@ -198,7 +198,7 @@
   color: var(--indigo-hover);
   white-space: nowrap;
   opacity: 0;
-  animation: q-fade 16s ease-in-out infinite;
+  animation: q-fade 16s linear infinite;
 }
 .q-rotate-wrap span:nth-child(1) { animation-delay: -0.5s; }
 .q-rotate-wrap span:nth-child(2) { animation-delay: 4s; }
@@ -206,9 +206,11 @@
 .q-rotate-wrap span:nth-child(4) { animation-delay: 12s; }
 
 @keyframes q-fade {
-  0%        { opacity: 0; transform: translateY(5px); }
-  2%, 22%   { opacity: 1; transform: translateY(0); }
-  25%, 100% { opacity: 0; transform: translateY(-5px); }
+  0%        { opacity: 0; }
+  4%        { opacity: 1; }
+  21%       { opacity: 1; }
+  25%       { opacity: 0; }
+  100%      { opacity: 0; }
 }
 
 /* Flow card label & steps */
@@ -248,7 +250,7 @@
   font-size: 1.5rem; font-weight: 800; color: var(--navy);
   letter-spacing: -.02em;
 }
-.q-proof-stat span {
+.q-proof-stat > span {
   display: block; font-size: 13px; color: var(--text-lt); margin-top: 2px;
 }
 .q-proof-divider {
