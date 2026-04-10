@@ -100,7 +100,7 @@
           <div style="display:flex;gap:6px;align-items:center"><span style="padding:2px 8px;border-radius:4px;background:#d4edda;color:#155724;font-size:10px;font-weight:600">LIVE</span><span style="font-size:11px;color:#3d2b64;cursor:pointer">Help</span><span style="font-size:11px;color:#3d2b64;cursor:pointer">Support</span></div>
         </div>
         <!-- Views -->
-        <div id="mockContent" style="padding:16px 18px;background:#f0f0f1">
+        <div id="mockContent" style="padding:16px 18px;background:#f0f0f1;height:340px;overflow:hidden;position:relative">
           <!-- Dashboard -->
           <div id="mock-dash">
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px">
@@ -118,14 +118,23 @@
                   <span style="padding:5px 10px;border-radius:5px;background:rgba(61,43,100,.04);color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 20 20" fill="#3d2b64"><path d="M12.5 14.5V12h-5v2.5L3 10l4.5-4.5V8h5V5.5L17 10l-4.5 4.5z"/></svg>Import Consultations</span>
                 </div>
               </div>
-              <div id="videoThumb" onclick="playVideo()" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;cursor:pointer">
-                <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#3d2b64,#6e54a7);display:flex;align-items:center;justify-content:center;position:relative"><div style="width:36px;height:36px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.2)"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #3d2b64;margin-left:2px"></div></div></div>
-                <div style="padding:8px 12px"><div style="font-size:10px;font-weight:600;color:#1d2327">Getting Started Tutorial</div><div style="font-size:9px;color:#646970">Watch the walkthrough</div></div>
+              <div id="videoThumb" onclick="playVideo()" style="background:#fff;border:1px solid #ddd;border-radius:8px;overflow:hidden;cursor:pointer;transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 2px 8px rgba(61,43,100,.15)'" onmouseout="this.style.boxShadow='none'">
+                <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#3d2b64 0%,#6e54a7 50%,#3d2b64 100%);display:flex;align-items:center;justify-content:center;position:relative">
+                  <div style="position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:3px;background:rgba(0,0,0,.3);color:#fff;font-size:8px;font-weight:600">▶ VIDEO</div>
+                  <div style="width:36px;height:36px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.25);transition:transform .2s"><div style="width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #3d2b64;margin-left:2px"></div></div>
+                  <div style="position:absolute;bottom:8px;right:8px;font-size:8px;color:rgba(255,255,255,.6)">2:45</div>
+                </div>
+                <div style="padding:8px 12px"><div style="font-size:10px;font-weight:600;color:#1d2327">Getting Started Tutorial</div><div style="font-size:9px;color:#646970">Full setup walkthrough</div></div>
               </div>
+            </div>
+            <!-- Video overlay (hidden by default) -->
+            <div id="videoOverlay" style="display:none;position:absolute;inset:0;background:rgba(29,35,39,.95);z-index:10;padding:16px;border-radius:0 0 8px 0">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:12px;font-weight:600;color:#fff">Getting Started Tutorial</span><button onclick="closeVideo()" style="padding:4px 12px;border-radius:4px;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.7);font-size:10px;cursor:pointer;font-family:inherit">← Back</button></div>
+              <div id="videoEmbed" style="border-radius:6px;overflow:hidden;aspect-ratio:16/9;background:#000"></div>
             </div>
             <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px">
               <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:11px;font-weight:600;color:#1d2327">Recent Orders</span><span style="font-size:9px;color:#3d2b64;cursor:pointer">View all →</span></div>
-              <div style="font-size:10px;color:#646970">
+              <div class="mock-orders" style="font-size:10px;color:#646970">
                 <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f1"><span><strong style="color:#1d2327">#1042</strong> Sarah J. — Semaglutide 3-Mo</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:8px;font-weight:600">Completed</span></div>
                 <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f1"><span><strong style="color:#1d2327">#1041</strong> Mark R. — Botox GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:8px;font-weight:600">Completed</span></div>
                 <div style="display:flex;justify-content:space-between;padding:5px 0"><span><strong style="color:#1d2327">#1040</strong> Amy L. — Tirzepatide</span><span style="padding:1px 6px;border-radius:8px;background:#fff3cd;color:#856404;font-size:8px;font-weight:600">In Progress</span></div>
@@ -135,13 +144,13 @@
           <!-- Consultations -->
           <div id="mock-exams" style="display:none">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span style="font-size:13px;font-weight:600;color:#1d2327">Manage Consultations</span><span style="padding:4px 10px;border-radius:4px;border:1px solid #3d2b64;color:#3d2b64;font-size:10px;font-weight:500;cursor:pointer">↻ Refresh</span></div>
-            <div style="display:flex;gap:4px;margin-bottom:10px"><span style="padding:3px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:10px;font-weight:500">All (12)</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Weight Loss</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Aesthetics</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Men's Health</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Wellness</span></div>
+            <div style="display:flex;gap:4px;margin-bottom:10px"><span style="padding:3px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:10px;font-weight:500">All (12)</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Weight Loss</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Aesthetics</span><span style="padding:3px 8px;border-radius:4px;background:#e8e8e8;color:#50575e;font-size:10px;cursor:pointer">Wellness</span></div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
               <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Semaglutide 3-Mo</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$349</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
               <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Botox GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">GFE</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$75</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
               <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Tirzepatide 1-Mo</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$299</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
               <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Filler GFE</span><span style="padding:1px 6px;border-radius:8px;background:#d4edda;color:#155724;font-size:9px;font-weight:600">GFE</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost · <strong style="color:#1d2327">$75</strong></div><div style="font-size:9px;color:#28a745;font-weight:500">✓ Linked</div></div>
-              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-style:dashed;opacity:.65"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Testosterone HRT</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost</div><div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:#a4424b">Not linked</span><span style="padding:2px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:8px;font-weight:500;cursor:pointer">Import</span></div></div>
+              <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-style:dashed;opacity:.65"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">NAD+ Wellness</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost</div><div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:#a4424b">Not linked</span><span style="padding:2px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:8px;font-weight:500;cursor:pointer">Import</span></div></div>
               <div style="background:#fff;border:1px solid #ddd;border-radius:8px;padding:12px;border-style:dashed;opacity:.65"><div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11px;font-weight:600;color:#1d2327">Hair Loss Rx</span><span style="padding:1px 6px;border-radius:8px;background:rgba(61,43,100,.08);color:#3d2b64;font-size:9px;font-weight:600">Rx</span></div><div style="font-size:9px;color:#646970;margin-bottom:4px">$27.99 cost</div><div style="display:flex;justify-content:space-between"><span style="font-size:9px;color:#a4424b">Not linked</span><span style="padding:2px 8px;border-radius:4px;background:#3d2b64;color:#fff;font-size:8px;font-weight:500;cursor:pointer">Import</span></div></div>
             </div>
           </div>
@@ -188,7 +197,7 @@
       </div>
     </div>
   </div>
-  <p style="text-align:center;font-size:12px;color:var(--text-lt);margin-top:14px">This is a visual preview for reference only — not the actual plugin. <a href="get-started/" style="color:var(--indigo)">Get started</a> to see the real thing.</p>
+  <div style="text-align:center;margin-top:14px"><span style="font-size:12px;color:var(--text-lt)">This is a visual preview for reference only — not the actual plugin. <a href="get-started/" style="color:var(--indigo)">Get started</a> to see the real thing.</span></div>
 </div></section>
 
 <!-- FEATURES -->
@@ -334,18 +343,43 @@ document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<di
 // ─── Mockup tab switching ───
 window.showMock=function(id){
   ['dash','exams','pharm','settings'].forEach(function(v){var e=document.getElementById('mock-'+v);if(e)e.style.display=v===id?'block':'none'});
+  var vo=document.getElementById('videoOverlay');if(vo)vo.style.display='none';
+  var ve=document.getElementById('videoEmbed');if(ve)ve.innerHTML='';
   document.querySelectorAll('.mn').forEach(function(b){b.style.background='transparent';b.style.color='rgba(240,240,241,.55)'});
   if(event&&event.target){event.target.style.background='rgba(255,255,255,.07)';event.target.style.color='#f0f0f1'}
   document.getElementById('mockTitle').textContent={dash:'Dashboard',exams:'Consultations',pharm:'Pharmacies',settings:'Settings'}[id]||'';
 };
 window.playVideo=function(){
-  var c=document.getElementById('mockContent');
-  c.innerHTML='<div style="position:relative;padding-bottom:56.25%;height:0"><iframe src="https://www.youtube.com/embed/zLabf5xrUQA?autoplay=1&rel=0" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;border-radius:6px" allow="autoplay;encrypted-media" allowfullscreen></iframe></div><div style="text-align:center;margin-top:10px"><button onclick="exitVideo()" style="padding:4px 14px;border-radius:4px;border:1px solid #ddd;background:#fff;color:#1d2327;font-size:11px;cursor:pointer;font-family:inherit">← Back to Dashboard</button></div>';
-  document.getElementById('mockTitle').textContent='Getting Started Tutorial';
+  var o=document.getElementById('videoOverlay');
+  o.style.display='block';
+  document.getElementById('videoEmbed').innerHTML='<iframe src="https://www.youtube.com/embed/zLabf5xrUQA?autoplay=1&rel=0" style="width:100%;height:100%;border:none" allow="autoplay;encrypted-media" allowfullscreen></iframe>';
 };
-window.exitVideo=function(){
-  location.reload();
+window.closeVideo=function(){
+  document.getElementById('videoOverlay').style.display='none';
+  document.getElementById('videoEmbed').innerHTML='';
 };
+// Animated orders
+(function(){
+  var ords=[
+    {id:'#1043',n:'Lisa M.',e:'Filler GFE',s:'Completed',bg:'#d4edda',c:'#155724'},
+    {id:'#1044',n:'James K.',e:'Semaglutide',s:'In Progress',bg:'#fff3cd',c:'#856404'},
+    {id:'#1045',n:'Priya R.',e:'Botox GFE',s:'Completed',bg:'#d4edda',c:'#155724'},
+    {id:'#1046',n:'David C.',e:'Tirzepatide',s:'Shipped',bg:'#e0d1f1',c:'#3d2b64'},
+    {id:'#1047',n:'Emma W.',e:'NAD+ Wellness',s:'Completed',bg:'#d4edda',c:'#155724'},
+  ];
+  var i=0;
+  setInterval(function(){
+    var list=document.querySelector('.mock-orders');
+    if(!list||list.closest('[style*="display: none"]')||list.closest('[style*="display:none"]'))return;
+    var o=ords[i%ords.length];i++;
+    var row=document.createElement('div');
+    row.style.cssText='display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f0f0f1;opacity:0;transform:translateY(-4px);transition:all .3s ease';
+    row.innerHTML='<span><strong style="color:#1d2327">'+o.id+'</strong> '+o.n+' — '+o.e+'</span><span style="padding:1px 6px;border-radius:8px;background:'+o.bg+';color:'+o.c+';font-size:8px;font-weight:600">'+o.s+'</span>';
+    if(list.children.length>=4)list.removeChild(list.lastChild);
+    list.insertBefore(row,list.firstChild);
+    setTimeout(function(){row.style.opacity='1';row.style.transform='translateY(0)'},30);
+  },3500);
+})();
 
 // ─── Animated counters ───
 var counters=document.querySelectorAll('.q-counter');
