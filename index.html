@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="assets/css/quidget.css">
 </head>
 <body>
-<nav class="nav q-glow-track"><div class="nav-inner">
+<nav class="nav"><div class="nav-inner">
   <a href="./" class="logo"><div class="logo-mark">Q</div>Quidget</a>
   <div class="nav-links">
     <a href="./" class="nav-link nav-link--active">Overview</a>
@@ -27,7 +27,7 @@
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </div></nav>
 
-<section class="q-hero q-glow-track">
+<section class="q-hero">
   <div class="q-particle q-particle--1"></div>
   <div class="q-particle q-particle--2"></div>
   <div class="q-particle q-particle--3"></div>
@@ -36,7 +36,7 @@
   <div class="wrap"><div class="q-hero-grid">
   <div>
     <div class="badge badge-white">WordPress Plugin for WooCommerce</div>
-    <h1><span style="white-space:nowrap">Sell <span class="q-rotate-wrap"><span class="q-rotate-inner"><span>telehealth exams</span><span>GFE consultations</span><span>Rx prescriptions</span><span>weight loss plans</span><span>telehealth exams</span></span></span></span> directly from your store</h1>
+    <h1><span style="white-space:nowrap">Sell <span class="q-rotate-wrap"><span>telehealth exams</span><span>GFE consultations</span><span>Rx prescriptions</span><span>weight loss plans</span></span></span> directly from your store</h1>
     <p>A WordPress plugin that turns your WooCommerce store into a telehealth platform. Patients purchase consultations as products — the plugin handles exam invites, provider connections, prescriptions, and pharmacy fulfillment automatically.</p>
     <div class="q-hero-actions">
       <a href="get-started/" class="btn btn-primary btn-lg">Get Started →</a>
@@ -118,53 +118,38 @@ document.getElementById('pricing').innerHTML=pricing.map(function(p){return '<di
 </script>
 <script>
 (function() {
-  // Nav beam — thin light line follows cursor X along bottom of nav
+  // Nav beam — thin light tracks cursor along bottom edge
   var nav = document.querySelector('.nav');
   if (nav) {
     nav.addEventListener('mousemove', function(e) {
       var rect = nav.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      nav.style.setProperty('--mx', (x - 60) + 'px');
+      nav.style.setProperty('--mx', (e.clientX - rect.left - 60) + 'px');
     });
   }
 
-  // Hero card parallax tilt — card shifts subtly opposite to mouse
+  // Hero card parallax — subtle depth shift opposite to mouse
   var hero = document.querySelector('.q-hero');
   var card = document.getElementById('heroCard');
   if (hero && card) {
     hero.addEventListener('mousemove', function(e) {
       var rect = hero.getBoundingClientRect();
-      var cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
+      var cx = (e.clientX - rect.left) / rect.width - 0.5;
       var cy = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = 'translate(' + (cx * -12) + 'px, ' + (cy * -8) + 'px) rotateY(' + (cx * 3) + 'deg) rotateX(' + (cy * -2) + 'deg)';
+      card.style.transform = 'translate(' + (cx * -10) + 'px, ' + (cy * -6) + 'px)';
     });
     hero.addEventListener('mouseleave', function() {
-      card.style.transform = 'translate(0,0) rotateY(0) rotateX(0)';
+      card.style.transform = '';
     });
   }
 
-  // Footer shimmer — gradient line at top follows cursor X
+  // Footer shimmer line tracks cursor X
   var footer = document.querySelector('.footer');
   if (footer) {
     footer.addEventListener('mousemove', function(e) {
       var rect = footer.getBoundingClientRect();
-      var pct = ((e.clientX - rect.left) / rect.width * 100);
-      footer.style.setProperty('--fx', pct + '%');
+      footer.style.setProperty('--fx', ((e.clientX - rect.left) / rect.width * 100) + '%');
     });
   }
-
-  // Card hover tilt — subtle 3D tilt on feature/vertical cards
-  document.querySelectorAll('.card').forEach(function(c) {
-    c.addEventListener('mousemove', function(e) {
-      var rect = c.getBoundingClientRect();
-      var cx = (e.clientX - rect.left) / rect.width - 0.5;
-      var cy = (e.clientY - rect.top) / rect.height - 0.5;
-      c.style.transform = 'translateY(-3px) perspective(600px) rotateY(' + (cx * 4) + 'deg) rotateX(' + (cy * -3) + 'deg)';
-    });
-    c.addEventListener('mouseleave', function() {
-      c.style.transform = '';
-    });
-  });
 })();
 </script>
 <script src="assets/js/main.js" defer></script>
