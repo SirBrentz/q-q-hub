@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troubleshooting — Quidget Help Center</title>
+  <meta name="description" content="Common issues, error messages, and step-by-step fixes for the Quidget WooCommerce telehealth plugin.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav (MUST BE EXACTLY THIS) -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Troubleshooting</span>
+        </div>
+        <h1 class="hc-category-title">Troubleshooting</h1>
+        <p class="hc-category-desc">Step-by-step solutions for common Quidget issues. Most problems can be resolved quickly by following these guides.</p>
+        <div class="hc-article-nav">
+          <a href="#exam-invite-not-sending" class="active">Exam Invites</a>
+          <a href="#please-log-in">Login Issues</a>
+          <a href="#exam-popup-not-appearing">Exam Popup</a>
+          <a href="#not-available-in-area">Service Area</a>
+          <a href="#prescription-not-created">Prescriptions</a>
+          <a href="#webhook-issues">Webhooks</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hc-body">
+      <article id="exam-invite-not-sending" class="hc-article">
+        <h2>Exam Invite Not Sending</h2>
+        <p><strong>Symptom:</strong> Patient completes checkout and payment processes successfully, but no exam invite email is sent.</p>
+
+        <h3>Root Causes & Fixes</h3>
+
+        <h4>1. No Payment Gateway Active (Stripe 3D Secure / PayPal)</h4>
+        <p>Exam invites fire on payment_complete, which is triggered after Stripe 3D Secure or PayPal authorization. If no payment gateway is configured, the trigger never fires.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Settings → Payments</strong></li>
+          <li>Verify at least one payment gateway is listed and marked as "Active"</li>
+          <li>If none are active, enable one (Stripe is recommended):
+            <ul>
+              <li>Click on <strong>Stripe</strong> (or your preferred gateway)</li>
+              <li>Enable the payment method</li>
+              <li>Enter your API credentials</li>
+              <li>Click <strong>Save Changes</strong></li>
+            </ul>
+          </li>
+          <li>Test a new order to verify invites are now being sent</li>
+        </ol>
+
+        <h4>2. Caching Interference</h4>
+        <p>Caching plugins can prevent invites from firing. Exclude checkout and my-account pages from cache.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to your caching plugin settings</li>
+          <li>Add these pages to the <strong>Cache Exclude List</strong>:
+            <ul>
+              <li><code>/checkout/</code></li>
+              <li><code>/my-account/</code></li>
+            </ul>
+          </li>
+          <li>Clear all caches</li>
+          <li>Test a new order</li>
+        </ol>
+
+        <h4>3. Auto Send Disabled</h4>
+        <p>Auto Send Consultations may be disabled in settings.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Enable <strong>Auto Send Consultations</strong></li>
+          <li>Save changes and test a new order</li>
+        </ol>
+
+        <h4>4. Free Order Hook Conflict</h4>
+        <p>Free orders (total $0) use woocommerce_order_status_completed hook instead of payment_complete. A plugin may be interfering.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Ensure <strong>Auto Send Consultations</strong> is enabled</li>
+          <li>Disable other plugins temporarily and test</li>
+          <li>The culprit is usually a payment gateway or subscription plugin</li>
+        </ol>
+
+        <h4>5. Invalid API Key</h4>
+        <p>If your API key is invalid, invites cannot be sent.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Your API Key should show a green checkmark</li>
+          <li>If not, log into <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → API</strong> and copy your API key</li>
+          <li>Paste it into Quidget and verify</li>
+          <li>Test a new order</li>
+        </ol>
+
+        <h3>Diagnostic Steps</h3>
+        <p>Check the order's Qualiphy section for error messages:</p>
+        <ul>
+          <li>Open the order in <strong>WooCommerce → Orders</strong></li>
+          <li>Look for the <strong>Qualiphy</strong> section — any errors?</li>
+          <li>Check _qualiphy_invite_status meta on the order</li>
+          <li>Contact support with order ID and timestamp if still stuck</li>
+        </ul>
+      </article>
+
+      <article id="please-log-in" class="hc-article">
+        <h2>"Please Log In to View This Order"</h2>
+        <p><strong>Symptom:</strong> After checkout, patient sees a login prompt instead of the order details page, exam invite, or thank-you message.</p>
+
+        <h3>Root Causes & Fixes</h3>
+
+        <h4>1. Account Creation Not Enabled</h4>
+        <p>WooCommerce has an option to allow guests to checkout without creating an account. Quidget requires customers to have accounts so they can access their orders.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Settings → Accounts & Privacy</strong></li>
+          <li>Find <strong>Allow customers to create an account during checkout</strong></li>
+          <li>Ensure this is <strong>CHECKED</strong></li>
+          <li>Also check that <strong>Allow customers to have a guest account</strong> is <strong>UNCHECKED</strong></li>
+          <li>Click <strong>Save Changes</strong></li>
+          <li>Clear all caches</li>
+          <li>Test a new order as a guest</li>
+        </ol>
+
+        <h4>2. Stale Page Cache After Plugin Install</h4>
+        <p>If you enabled Quidget after customers had already checked out as guests, cached pages may still show the old behavior.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to your caching plugin (WP Super Cache, W3 Total Cache, etc.)</li>
+          <li>Click <strong>Purge All Caches</strong> or <strong>Empty All Cache</strong></li>
+          <li>Go to <strong>WooCommerce → Settings → Accounts & Privacy</strong> and re-save the settings (this clears WooCommerce caches)</li>
+          <li>Clear your browser cache (hard refresh: Ctrl+Shift+Delete)</li>
+          <li>Test a new order</li>
+        </ol>
+
+        <h4>3. Session Expired</h4>
+        <p>If significant time passes between checkout and viewing the order (hours or days), the customer's session may have expired.</p>
+        <p><strong>Fix:</strong></p>
+        <p>This is normal behavior. Customers can log back in using the email and password they created at checkout:</p>
+        <ol>
+          <li>Direct them to <strong>My Account → Login</strong></li>
+          <li>They enter their email and password</li>
+          <li>They can now view their order and access the exam invite</li>
+        </ol>
+
+        <h3>Prevent This Issue</h3>
+        <ul>
+          <li>Add a notice to your checkout page: <strong>"A login account is required to proceed. You'll use this to access your consultation exam."</strong></li>
+          <li>Send a welcome email immediately after account creation with login details</li>
+          <li>Send a separate email with the exam invite link (this is automatic from Quidget)</li>
+        </ul>
+      </article>
+
+      <article id="exam-popup-not-appearing" class="hc-article">
+        <h2>Exam Popup Not Appearing</h2>
+        <p><strong>Symptom:</strong> Patient reaches the thank-you page after checkout, but no exam popup or modal appears. They don't see a way to start the exam.</p>
+
+        <h3>Root Causes & Fixes</h3>
+
+        <h4>1. Auto Launch Exams Disabled</h4>
+        <p>By default, Quidget automatically opens an exam modal on the thank-you page. You may have disabled this.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Find <strong>Auto Launch Exams</strong></li>
+          <li>Ensure it's toggled ON</li>
+          <li>Click <strong>Save Changes</strong></li>
+          <li>Test a new order — the popup should now appear</li>
+        </ol>
+
+        <h4>2. No Meeting URL Generated</h4>
+        <p>If the exam invite email didn't send properly, no meeting URL would be generated, so there's nothing to display.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Check the order in <strong>WooCommerce → Orders</strong></li>
+          <li>Look at the <strong>Qualiphy</strong> section</li>
+          <li>If you see an error message, note it and contact support</li>
+          <li>If there's no meeting URL listed, go back to the "Exam Invite Not Sending" section above</li>
+        </ol>
+
+        <h4>3. JavaScript Error or Conflict</h4>
+        <p>A conflicting plugin or malformed theme code might be blocking the popup script.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Open the thank-you page in your browser</li>
+          <li>Press F12 to open Developer Tools</li>
+          <li>Go to the <strong>Console</strong> tab</li>
+          <li>Check for red error messages — note them</li>
+          <li>If there are errors, they often mention a specific plugin</li>
+          <li>Disable that plugin and test again</li>
+          <li>If you can't identify the culprit:
+            <ul>
+              <li>Go to <strong>Plugins</strong></li>
+              <li>Deactivate all plugins except WooCommerce and Quidget</li>
+              <li>Test again — does the popup appear?</li>
+              <li>If yes, re-enable plugins one by one until the issue reappears</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h4>4. Exam Launch Mode Set to Redirect</h4>
+        <p>You may have configured Quidget to redirect instead of showing a popup.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → General</strong></li>
+          <li>Find <strong>Exam Launch Mode</strong></li>
+          <li>If it says <strong>"Redirect"</strong>, change it to <strong>"Modal"</strong></li>
+          <li>Click <strong>Save Changes</strong></li>
+          <li>Test a new order — the popup should now appear instead of redirecting</li>
+        </ol>
+        <p>Note: In Redirect mode, patients are sent to an external page instead of seeing a modal. This is intentional for some designs, but the default is Modal.</p>
+
+        <h3>User Workaround</h3>
+        <p>Even if the popup doesn't appear, patients can still access the exam by:</p>
+        <ul>
+          <li>Checking their email for the exam invite</li>
+          <li>Going to <strong>My Account → Orders</strong> and clicking the order to see the exam link</li>
+          <li>Accessing the meeting URL directly if provided</li>
+        </ul>
+      </article>
+
+      <article id="not-available-in-area" class="hc-article">
+        <h2>"Not Available in Your Area"</h2>
+        <p><strong>Symptom:</strong> All customers see a "not available in your area" message on the store, regardless of their location. Consultation products can't be purchased.</p>
+
+        <h3>Root Causes & Fixes</h3>
+
+        <h4>1. Service Area Not Configured</h4>
+        <p>You may not have set up your service area, so Quidget has no states to allow.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Service Area</strong></li>
+          <li>Check the list of states — are any highlighted or selected?</li>
+          <li>If not, click each state where you're licensed to practice</li>
+          <li>Click <strong>Save Changes</strong></li>
+          <li>Refresh your storefront — customers should now see products in those states</li>
+        </ol>
+
+        <h4>2. Shipping Zone Deleted</h4>
+        <p>Quidget uses WooCommerce shipping zones to determine service area. If the zone was accidentally deleted, availability breaks.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Settings → Shipping → Zones</strong></li>
+          <li>Look for a zone called <strong>"Qualiphy Service Area"</strong> or similar</li>
+          <li>If it's missing, go back to <strong>Qualiphy → Settings → Service Area</strong></li>
+          <li>Re-save your service area selection (even if it hasn't changed)</li>
+          <li>This will regenerate the shipping zone</li>
+          <li>Check <strong>WooCommerce → Settings → Shipping → Zones</strong> again — the zone should now be present</li>
+        </ol>
+
+        <h4>3. WooCommerce Shipping Settings Misconfigured</h4>
+        <p>Shipping rates or zone rules might be preventing the service area from working correctly.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Settings → Shipping → Zones</strong></li>
+          <li>Click on the <strong>Qualiphy Service Area</strong> zone</li>
+          <li>Verify:
+            <ul>
+              <li><strong>Zone Regions:</strong> Your states are listed</li>
+              <li><strong>Shipping Methods:</strong> At least one method is enabled (Flat rate, Free shipping, etc.)</li>
+            </ul>
+          </li>
+          <li>If the zone looks empty or misconfigured, delete it and re-save your service area in Quidget (this recreates it)</li>
+          <li>Refresh your storefront and test</li>
+        </ol>
+
+        <h3>Testing Service Area</h3>
+        <p>To verify your service area is working:</p>
+        <ol>
+          <li>Go to your storefront as a guest (not logged in)</li>
+          <li>Add a consultation to your cart</li>
+          <li>Enter a shipping address in a state you serve</li>
+          <li>The product should be available and purchasable</li>
+          <li>Try a state where you don't serve — it should show "not available"</li>
+        </ol>
+
+        <h3>Permanently Excluded States</h3>
+        <p>Alabama and Mississippi are currently permanently excluded from Qualiphy's network. Customers in these states will always see "not available in your area" regardless of your service area settings.</p>
+      </article>
+
+      <article id="prescription-not-created" class="hc-article">
+        <h2>Prescription Not Created After Approval</h2>
+        <p><strong>Symptom:</strong> Provider approves the consultation, but no prescription appears in the system or pharmacy gets no order.</p>
+
+        <h3>Root Causes & Fixes</h3>
+
+        <h4>1. GFE Exam Type (Not Rx)</h4>
+        <p>GFE (Good Faith Exam) exams (rx_type 1) don't create prescriptions — they're for clearance/approval only.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Check the consultation type — is it GFE or Rx?</li>
+          <li>GFE types don't create prescriptions. This is expected behavior.</li>
+          <li>If you need prescriptions, use an Rx consultation type instead</li>
+        </ol>
+
+        <h4>2. Pharmacy Routing Gap</h4>
+        <p>Prescriptions can only be routed if a pharmacy is configured for the patient's state.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Log into <strong>app.qualiphy.me</strong></li>
+          <li>Go to <strong>Settings → Pharmacies</strong></li>
+          <li>Check the routing table for the patient's state</li>
+          <li>If no pharmacy is assigned, add one for that state</li>
+        </ol>
+
+        <h4>3. Webhook Blocked by Security Plugin</h4>
+        <p>Security plugins may block POST requests to /wp-json/qualiphy/v1/webhook.</p>
+        <p><strong>Fix:</strong></p>
+        <ol>
+          <li>Check for security plugins (Wordfence, Sucuri, etc.)</li>
+          <li>Whitelist POST to <code>/wp-json/qualiphy/v1/webhook</code></li>
+          <li>Test prescription creation again</li>
+        </ol>
+
+        <h4>4. API Sync Delay</h4>
+        <p>Sometimes there's a brief delay in syncing between Qualiphy and WooCommerce.</p>
+        <p><strong>Fix:</strong></p>
+        <ul>
+          <li>Wait 5 minutes and refresh the order page</li>
+          <li>Check the order's <strong>Qualiphy</strong> section</li>
+          <li>If still no prescription after 5 minutes, contact support with order ID and timestamp</li>
+        </ul>
+      </article>
+
+      <article id="webhook-issues" class="hc-article">
+        <h2>Webhook Issues</h2>
+        <p>Webhooks are how Qualiphy notifies your site of important events like prescription approvals, exam completions, and renewals.</p>
+
+        <h3>Webhook Requirements</h3>
+        <p>For webhooks to work, your site must have:</p>
+        <ul>
+          <li><strong>Public accessibility:</strong> Not behind HTTP auth or IP restrictions</li>
+          <li><strong>SSL certificate:</strong> HTTPS enabled (webhooks won't send to HTTP)</li>
+          <li><strong>Correct webhook token/secret:</strong> Configured in your Qualiphy account</li>
+        </ul>
+
+        <h3>Security & Verification</h3>
+        <p>Webhooks use HMAC-SHA256 signature verification. Each webhook request includes a signature that Quidget verifies to ensure it came from Qualiphy.</p>
+
+        <h3>Rate Limiting</h3>
+        <p>Webhooks are rate-limited to 60 requests per 60 seconds per IP. If you exceed this, requests will be queued or delayed.</p>
+
+        <h3>Webhook Delivery & Cleanup</h3>
+        <p><strong>Auto-cleanup:</strong> Unprocessed webhooks are automatically deleted after 30 days. If a webhook fails repeatedly, it will eventually be discarded.</p>
+
+        <h3>Common Webhook Problems</h3>
+
+        <h4>Webhook URL Cached</h4>
+        <p>If your site uses page caching, the webhook endpoint may be cached, preventing successful delivery.</p>
+        <p><strong>Fix:</strong> Exclude the webhook URL from caching in your caching plugin</p>
+
+        <h4>Security Plugin Blocking POST</h4>
+        <p>Security plugins may block POST requests to your webhook endpoint.</p>
+        <p><strong>Fix:</strong> Whitelist the webhook URL in your security plugin</p>
+
+        <h4>Site Behind HTTP Auth</h4>
+        <p>If your site requires HTTP authentication (basic auth), webhooks cannot connect.</p>
+        <p><strong>Fix:</strong> Disable HTTP auth or whitelist the Qualiphy IP range</p>
+
+        <h3>Testing Webhooks</h3>
+        <p>To test if webhooks are working:</p>
+        <ol>
+          <li>Complete a consultation and have the provider approve it</li>
+          <li>Check the order page in WooCommerce within 5 minutes</li>
+          <li>If prescription/status updates appear, webhooks are working</li>
+          <li>If nothing updates after 5 minutes, webhooks may be blocked</li>
+        </ol>
+      </article>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../subscriptions/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Subscriptions
+          </a>
+          <a href="../billing/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Billing & Pricing
+          </a>
+          <a href="../../get-started/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+    </div>
+  </div></footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.hc-article-nav a');
+    const articles = document.querySelectorAll('.hc-article');
+    function updateNav() {
+      let current = '';
+      articles.forEach(a => { if (window.scrollY >= a.offsetTop - 120) current = a.id; });
+      navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    navLinks.forEach(l => l.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(l.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>

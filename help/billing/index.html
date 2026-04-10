@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Billing & Pricing — Quidget Help Center</title>
+  <meta name="description" content="Understanding Quidget costs, price margins, refund logic, and return fee configuration for your WooCommerce store.">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/quidget.css">
+</head>
+<body>
+  <!-- Nav (MUST BE EXACTLY THIS) -->
+  <nav class="nav"><div class="nav-inner">
+    <a href="../../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+    <div class="nav-links">
+      <a href="../../" class="nav-link">Overview</a>
+      <a href="../../get-started/" class="nav-link">Get Started</a>
+      <a href="../" class="nav-link nav-link--active">Help Center</a>
+      <a href="../../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div></nav>
+
+  <div class="hc-page">
+    <div class="hc-header">
+      <div class="wrap">
+        <div class="hc-breadcrumb">
+          <a href="../">Help Center</a>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <span class="hc-breadcrumb-current">Billing & Pricing</span>
+        </div>
+        <h1 class="hc-category-title">Billing & Pricing</h1>
+        <p class="hc-category-desc">Learn how Quidget charges work, how to set your own prices, configure refunds, and maximize your profit margins.</p>
+        <div class="hc-article-nav">
+          <a href="#how-pricing-works" class="active">How It Works</a>
+          <a href="#setting-price-margins">Margins</a>
+          <a href="#auto-refund-logic">Refunds</a>
+          <a href="#return-fee-configuration">Return Fees</a>
+          <a href="#understanding-your-costs">Your Costs</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hc-body">
+      <article id="how-pricing-works" class="hc-article">
+        <h2>How Pricing Works</h2>
+        <p>Quidget uses a simple, transparent pay-as-you-go pricing model. You set the patient-facing price on your WooCommerce products, and Qualiphy charges you per consultation on our end. The difference is your profit.</p>
+
+        <h3>The Payment Flow</h3>
+        <ol>
+          <li>Patient purchases a consultation product on your WooCommerce store at <strong>your price</strong></li>
+          <li>You collect payment from the patient via WooCommerce</li>
+          <li>When the consultation is approved (patient completes exam, provider signs off), Qualiphy charges <strong>your account</strong> the per-consultation cost</li>
+          <li>Your margin = Patient price minus Qualiphy per-consultation cost</li>
+        </ol>
+
+        <h3>Pricing Structure</h3>
+        <ul>
+          <li><strong>No signup fees</strong> — Start immediately with no onboarding costs</li>
+          <li><strong>No monthly fees</strong> — Never pay a recurring platform fee</li>
+          <li><strong>No contracts</strong> — Cancel anytime with no penalties</li>
+          <li><strong>Pay per consultation</strong> — Only pay when a consultation actually happens</li>
+          <li><strong>Default cost:</strong> $27.99 per consultation (varies by exam type)</li>
+        </ul>
+
+        <h3>Setting Up Pricing During Import</h3>
+        <p>When you use the Import Consultation Wizard, the pricing step shows:</p>
+        <ul>
+          <li>The default Qualiphy per-consultation cost (varies by type)</li>
+          <li>A suggested patient-facing price (cost + default 10% margin)</li>
+          <li>The ability to override with your own price</li>
+        </ul>
+        <p>You're in full control — set any price you want for your patients.</p>
+      </article>
+
+      <article id="setting-price-margins" class="hc-article">
+        <h2>Setting Price Margins</h2>
+        <p>Your price margin is the profit you keep for each consultation. Quidget makes it easy to see and control your margins.</p>
+
+        <h3>Default Price Margin</h3>
+        <p>The default price margin is <strong>10%</strong>, but you can configure it to any percentage from <strong>0% to 500%</strong> in <strong>Qualiphy → Settings → Product</strong>.</p>
+
+        <h3>How Margins Work During Import</h3>
+        <p>When you import a consultation using the wizard:</p>
+        <ol>
+          <li>The system shows the Qualiphy per-consultation cost</li>
+          <li>It auto-calculates a suggested price = Cost + margin percentage</li>
+          <li>You can accept the suggested price or enter your own</li>
+          <li>The margin is displayed so you always see exactly what you're earning</li>
+        </ol>
+
+        <h3>Example Margin Calculation</h3>
+        <p>Suppose a consultation type costs $27.99 from Qualiphy:</p>
+        <ul>
+          <li>With 10% margin: Patient price = $30.79 (you keep $2.80 per consultation)</li>
+          <li>With 25% margin: Patient price = $34.99 (you keep $7.00 per consultation)</li>
+          <li>With 50% margin: Patient price = $41.99 (you keep $14.00 per consultation)</li>
+        </ul>
+
+        <h3>Adjusting Margins Per Product</h3>
+        <p>You can set different prices and margins for different consultation types:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit the product</li>
+          <li>Set your desired <strong>Regular Price</strong> in the pricing section</li>
+          <li>Update the product</li>
+        </ol>
+        <p>The cost is always displayed alongside your price so you know your exact margin for each product.</p>
+      </article>
+
+      <article id="auto-refund-logic" class="hc-article">
+        <h2>Auto-Refund Logic</h2>
+        <p>When a provider defers a consultation, Quidget can automatically issue a partial refund to protect your patient. Here's how it works.</p>
+
+        <h3>When Auto-Refund Triggers</h3>
+        <p><strong>Auto Refund Rejected</strong> is enabled by default. When enabled, a refund is automatically issued whenever a provider defers (or rejects) a consultation.</p>
+        <ul>
+          <li>The patient is refunded: Order total minus the configured Return Fee</li>
+          <li>The refund is issued via WooCommerce refund system (original payment method)</li>
+          <li>A detailed breakdown note is added to the refund for your records</li>
+        </ul>
+
+        <h3>Multiple Line Items</h3>
+        <p>If a customer purchases multiple consultation products in one order and a deferral occurs:</p>
+        <ul>
+          <li>Return fees are summed across all line items</li>
+          <li>For example: 2 products with $30 return fees each = $60 total retained</li>
+          <li>Refund = Total order amount minus $60</li>
+        </ul>
+
+        <h3>Example Auto-Refund Scenario</h3>
+        <p><strong>Order Details:</strong></p>
+        <ul>
+          <li>Customer purchases 1 consultation at $49.99</li>
+          <li>Payment processed and exam sent</li>
+          <li>Provider defers the consultation</li>
+        </ul>
+        <p><strong>Auto-Refund Calculation (with $30 return fee):</strong></p>
+        <ul>
+          <li>Order total: $49.99</li>
+          <li>Return fee retained: $30.00</li>
+          <li>Refund issued to patient: $19.99</li>
+        </ul>
+
+        <h3>Refund Note Details</h3>
+        <p>When a refund is created, WooCommerce automatically adds a note like:</p>
+        <p><em>"Partial refund issued for deferred consultation. Retained $30.00 telehealth visit fee."</em></p>
+        <p>This keeps your team and customers informed about why they received a partial refund.</p>
+
+        <h3>Disabling Auto-Refund</h3>
+        <p>To disable auto-refunds (not recommended):</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Checkout Settings</strong></li>
+          <li>Toggle <strong>Auto Refund Rejected</strong> to OFF</li>
+          <li>Save changes</li>
+        </ol>
+      </article>
+
+      <article id="return-fee-configuration" class="hc-article">
+        <h2>Return Fee Configuration</h2>
+        <p>Return fees are the amount you retain when a consultation is deferred. This compensates you for the service interaction while protecting the patient with a partial refund.</p>
+
+        <h3>Default Return Fee</h3>
+        <p>The default return fee is <strong>$30.00</strong> per consultation, set globally in <strong>Qualiphy → Settings → Checkout Settings</strong>.</p>
+
+        <h3>Setting Global Return Fee</h3>
+        <p>To change the default return fee that applies to all new products:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Checkout Settings</strong></li>
+          <li>Find <strong>Default Exam Price Retained</strong></li>
+          <li>Enter your desired fee amount (e.g., $25.00 or $50.00)</li>
+          <li>Save changes</li>
+        </ol>
+
+        <h3>Overriding Per Product</h3>
+        <p>You can set different return fees for different consultation types:</p>
+        <ol>
+          <li>Go to <strong>WooCommerce → Products</strong></li>
+          <li>Edit the product</li>
+          <li>In the <strong>Qualiphy</strong> section, set the <strong>Exam Price Retained</strong> (override the default)</li>
+          <li>Update the product</li>
+        </ol>
+        <p>This is useful if different exam types have different service costs to compensate for.</p>
+
+        <h3>Return Fee Messaging</h3>
+        <p>You can optionally display a disclaimer to patients about the return fee:</p>
+        <ol>
+          <li>Go to <strong>Qualiphy → Settings → Checkout Settings</strong></li>
+          <li>Toggle <strong>Show Exam Refund Message</strong> to ON</li>
+          <li>The product page will display: <em>"If your consultation is not approved, you will receive a refund minus the telehealth visit fee."</em></li>
+        </ol>
+        <p>This sets customer expectations upfront about partial refunds.</p>
+
+        <h3>When Return Fees Apply</h3>
+        <p>Return fees are applied and retained when:</p>
+        <ul>
+          <li>A provider defers a consultation (pending review)</li>
+          <li>A provider rejects a consultation</li>
+          <li>A subscription renewal is deferred</li>
+        </ul>
+        <p>Return fees are <strong>not</strong> applied if a consultation is approved, as the full service was completed.</p>
+      </article>
+
+      <article id="understanding-your-costs" class="hc-article">
+        <h2>Understanding Your Costs</h2>
+        <p>Quidget's cost structure is transparent and simple. You only pay Qualiphy when a consultation actually happens.</p>
+
+        <h3>What You Pay</h3>
+        <ul>
+          <li><strong>Per consultation charge:</strong> $27.99 (varies by exam type)</li>
+          <li><strong>When:</strong> Only when a provider approves the exam and it's completed</li>
+          <li><strong>Frequency:</strong> Varies based on your sales and renewals</li>
+        </ul>
+
+        <h3>What You Don't Pay</h3>
+        <ul>
+          <li>No plugin installation fee</li>
+          <li>No monthly subscription to use Quidget</li>
+          <li>No setup or onboarding fees</li>
+          <li>No contract or long-term commitments</li>
+          <li>No payment processing fees (WooCommerce charges those separately)</li>
+          <li>No charges for deferred or rejected consultations</li>
+        </ul>
+
+        <h3>Viewing Your Costs</h3>
+        <p>During product setup (import wizard pricing step):</p>
+        <ol>
+          <li>The Qualiphy per-consultation cost is displayed</li>
+          <li>Your customer-facing price is shown</li>
+          <li>Your margin is calculated and displayed</li>
+          <li>You can see exactly what you'll earn per consultation</li>
+        </ol>
+
+        <h3>Margin Example</h3>
+        <p>If a consultation costs Qualiphy $27.99 and you set your patient-facing price at $49.99:</p>
+        <ul>
+          <li>You collect: $49.99 from the patient</li>
+          <li>You pay Qualiphy: $27.99 per approved consultation</li>
+          <li>Your profit per consultation: $22.00</li>
+          <li>Your margin: 44% (very reasonable for telehealth)</li>
+        </ul>
+
+        <h3>Maximizing Your Margin</h3>
+        <ul>
+          <li>Keep per-consultation costs steady at Qualiphy's standard rate</li>
+          <li>Set competitive patient-facing prices (research your market)</li>
+          <li>Higher prices = higher margins, but may reduce conversion</li>
+          <li>Lower prices = more sales volume, but lower per-consultation profit</li>
+          <li>Offer bundles or packages to encourage higher order values</li>
+        </ul>
+      </article>
+
+      <div class="hc-related">
+        <h3>Related Topics</h3>
+        <div class="hc-related-grid">
+          <a href="../subscriptions/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Subscriptions
+          </a>
+          <a href="../troubleshooting/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Troubleshooting
+          </a>
+          <a href="../../get-started/" class="hc-related-card">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <div class="hc-cta">
+        <h3>Still need help?</h3>
+        <p>Contact our support team at <a href="mailto:support@qualiphy.me">support@qualiphy.me</a> — available 7 days a week.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer"><div class="wrap">
+    <div class="footer-trust-strip">
+      <span>HIPAA Compliant</span><span class="ft-sep">&middot;</span>
+      <span>LegitScript Certified</span><span class="ft-sep">&middot;</span>
+      <span>350+ Providers</span><span class="ft-sep">&middot;</span>
+      <span>48 States + D.C.</span><span class="ft-sep">&middot;</span>
+      <span>7/365 Availability</span>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+        <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+        <div class="footer-contact-info">
+          <a href="mailto:support@qualiphy.me">support@qualiphy.me</a>
+          <span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Product</div>
+        <a href="../../" class="footer-link">Overview</a>
+        <a href="../../get-started/" class="footer-link">Get Started</a>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../../changelog/" class="footer-link">Changelog</a>
+      </div>
+      <div>
+        <div class="footer-heading">Qualiphy</div>
+        <a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a>
+        <a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a>
+        <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" class="footer-link">Book a Demo</a>
+        <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a>
+      </div>
+      <div>
+        <div class="footer-heading">Resources</div>
+        <a href="../" class="footer-link">Help Center</a>
+        <a href="../troubleshooting/" class="footer-link">Troubleshooting</a>
+        <a href="../../faq/" class="footer-link">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Qualiphy PC. All rights reserved.</span>
+      <div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div>
+    </div>
+  </div></footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.hc-article-nav a');
+    const articles = document.querySelectorAll('.hc-article');
+    function updateNav() {
+      let current = '';
+      articles.forEach(a => { if (window.scrollY >= a.offsetTop - 120) current = a.id; });
+      navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    navLinks.forEach(l => l.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(l.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }));
+  </script>
+  <script src="../../assets/js/main.js" defer></script>
+</body>
+</html>
