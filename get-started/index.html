@@ -359,15 +359,14 @@ function IntakeScreen({ onComplete }) {
   };
 
   const passGate = () => {
-    // User confirmed they have their key — update answer to the passing value and advance
     const passingVal = q.options.find(o => {
       const b = q.blocking;
       return !(Array.isArray(b) ? b.includes(o.value) : b === o.value);
     });
-    setAnswers(prev => ({ ...prev, [q.id]: passingVal ? passingVal.value : "ready" }));
+    setAnswers(prev => ({ ...prev, [q.id]: passingVal ? passingVal.value : "yes" }));
     setShowGate(false);
     if (currentQ < QUESTIONS.length - 1) {
-      setTimeout(() => setCurrentQ(currentQ + 1), 150);
+      setCurrentQ(currentQ + 1);
     }
   };
 
@@ -556,7 +555,16 @@ function GuideScreen({ answers, onRestart }) {
   // 1 — Install
   steps.push({ id: "install", title: "Install & Activate", render: () => (
     <>
-      <p>Upload the Qualiphy plugin to your WordPress site. The setup wizard launches automatically on activation.</p>
+      <p>Download the plugin file, then upload it to your WordPress site. The setup wizard launches automatically on activation.</p>
+      <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener" style={{
+        display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+        padding: "14px 24px", borderRadius: 10, marginBottom: 16,
+        background: C.accent, color: "#fff", fontFamily: "inherit",
+        fontSize: 15, fontWeight: 600, textDecoration: "none",
+        boxShadow: "0 2px 8px rgba(91,80,255,.25)",
+      }}>
+        Download Quidget Plugin ↓
+      </a>
       <Card>
         <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 12 }}>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>
