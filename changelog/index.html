@@ -1,199 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Changelog — Quidget</title>
-<meta name="description" content="Quidget plugin changelog. Track every update, new feature, and fix to the Qualiphy WooCommerce telehealth plugin.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css">
-<style>
-  .changelog { max-width: 740px; margin: 0 auto; padding: 40px 24px 80px; }
-  .version { margin-bottom: 56px; }
-  .version__header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
-  .version__number { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); }
-  .version__date { font-size: 13px; font-weight: 600; color: var(--primary); background: var(--accent-bg); padding: 4px 12px; border-radius: 99px; }
-  .version__group { margin-bottom: 24px; }
-  .version__group-title {
-    font-size: 12px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.06em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-  }
-  .version__group-title--added { color: var(--green); }
-  .version__group-title--updated { color: var(--primary-light); }
-  .version__group-title--fixed { color: var(--amber); }
-  .version__item {
-    display: flex; gap: 10px; align-items: flex-start;
-    padding: 8px 0; font-size: 14px; color: var(--text-body); line-height: 1.6;
-  }
-  .version__dot {
-    width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 8px;
-  }
-  .version__dot--added { background: var(--green); }
-  .version__dot--updated { background: var(--primary-light); }
-  .version__dot--fixed { background: var(--amber); }
-  .timeline-line {
-    position: absolute; left: 20px; top: 0; bottom: 0; width: 2px;
-    background: linear-gradient(180deg, var(--primary) 0%, var(--border) 100%);
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Quidget</title>
+  <meta name="description" content="Quidget plugin changelog. Track every update to the Qualiphy WooCommerce plugin.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@0,400;0,500;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/quidget.css">
 </head>
 <body>
-
-<!-- Nav -->
-<header class="site-nav">
-  <div class="site-nav__inner">
-    <a href="../" class="site-nav__logo">
-      <svg width="24" height="24" viewBox="0 0 800 800" fill="#3d2b64" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg>
-      <span class="site-nav__logo-text">Quidget</span>
-      <span class="site-nav__logo-sub">by Qualiphy</span>
-    </a>
-    <nav class="site-nav__links">
-      <a href="../" class="site-nav__link">Overview</a>
-      <a href="../get-started/" class="site-nav__link">Get Started</a>
-      <a href="../docs/" class="site-nav__link">Docs</a>
-      <a href="./" class="site-nav__link site-nav__link--active">Changelog</a>
-      <a href="../get-started/" class="site-nav__cta">Get Started →</a>
-    </nav>
+<nav class="nav"><div class="nav-inner">
+  <a href="../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+  <div class="nav-links">
+    <a href="../" class="nav-link">Overview</a>
+    <a href="../get-started/" class="nav-link">Get Started</a>
+    <a href="../docs/" class="nav-link">Docs</a>
+    <a href="./" class="nav-link" style="color:#fff;background:rgba(255,255,255,.08)">Changelog</a>
   </div>
-</header>
+  <div class="nav-actions"><a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
 
-<main style="padding-top: 64px;">
-  <div class="changelog">
-    <div style="margin-bottom: 48px;">
-      <h1 style="font-size: 32px; font-weight: 800; letter-spacing: -0.03em;">Changelog</h1>
-      <p style="font-size: 15px; color: var(--text-muted); margin-top: 8px;">Every update to the Quidget plugin.</p>
+<main style="padding-top:68px">
+  <section class="section-sm" style="background:var(--navy);color:#fff;text-align:center">
+    <div class="wrap">
+      <div class="badge badge-white" style="margin-bottom:16px">Release history</div>
+      <h1 style="color:#fff;margin-bottom:8px">Changelog</h1>
+      <p style="color:rgba(255,255,255,.55);margin:0 auto">Every update to the Quidget plugin.</p>
     </div>
-
-    <div id="changelog-content"></div>
-  </div>
+  </section>
+  <div class="q-changelog" id="cl"></div>
 </main>
 
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <div>
-      <div class="site-footer__brand">
-        <svg width="20" height="20" viewBox="0 0 800 800" fill="#fff" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg>
-        <span class="site-footer__brand-name">Quidget</span>
-      </div>
-      <p class="site-footer__desc">Telehealth consultations built into WooCommerce. By Qualiphy PC.</p>
-      <p class="site-footer__copy">© 2026 Qualiphy PC. All rights reserved.</p>
-    </div>
-    <div><h4>Product</h4><div class="site-footer__links"><a href="../">Overview</a><a href="../get-started/">Get Started</a><a href="./">Changelog</a></div></div>
-    <div><h4>Resources</h4><div class="site-footer__links"><a href="../docs/">Documentation</a><a href="../docs/#troubleshooting">Troubleshooting</a></div></div>
-    <div><h4>Support</h4><div class="site-footer__links"><span>support@qualiphy.me</span><span>(424) 320-9958</span><a href="https://qualiphy.me" target="_blank">qualiphy.me</a></div></div>
+<footer class="footer"><div class="wrap">
+  <div class="footer-grid" style="margin-bottom:32px">
+    <div class="footer-brand"><div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div><p>Telehealth for WooCommerce. By Qualiphy PC.</p></div>
+    <div><div class="footer-heading">Product</div><a href="../" class="footer-link">Overview</a><a href="../get-started/" class="footer-link">Get Started</a><a href="./" class="footer-link">Changelog</a></div>
+    <div><div class="footer-heading">Resources</div><a href="../docs/" class="footer-link">Documentation</a><a href="../docs/#troubleshooting" class="footer-link">Troubleshooting</a></div>
+    <div><div class="footer-heading">Support</div><span style="font-size:14px;color:rgba(241,245,249,.65)">support@qualiphy.me</span><span style="font-size:14px;color:rgba(241,245,249,.65)">(424) 320-9958</span></div>
   </div>
-</footer>
+  <div class="footer-bottom"><span>&copy; 2026 Qualiphy PC.</span></div>
+</div></footer>
 
 <script>
-const changelog = [
-  {
-    version: "1.1.0",
-    date: "April 8, 2026",
-    added: [
-      "Speak to a Doctor My Account page with product cards and follow-up consultation request flow",
-      "Patient Request system: 3 follow-ups within 90 days for 3-month supply exams, 1 within 30 days for other Rx exams",
-      "Webhook integration to mark patient requests complete when consultation is attended",
-      "Signed HMAC token on follow-up request buttons to prevent tampering",
-      "Exam launch popup reused on My Account page for follow-up consultations",
-      "Fallback consultation message on thank-you page when invite hasn't been created or failed",
-      "Import wizard Link Existing Product path with full wizard step configuration",
-      "Style Settings section with bottle color pickers and live SVG preview for the questionnaire",
-      "Questionnaire language settings: all questions, labels, dose adjustments, disclaimer editable",
-      "Auto Redirect to Checkout setting for Qualiphy product pages",
-      "Per-product return fee stored on order line items and used during refund calculations",
-      "Return fee total displayed on cart and checkout consultation refund disclaimer",
-      "Auto-complete non-Rx orders when initial consultation webhook is approved",
-      "Admin Invite Failed email sent when exam invite fails during checkout",
-      "Order action: Resend Consultation Link Email for orders with meeting URL",
-    ],
-    updated: [
-      "Exam invite moved from order processed to payment complete to support Stripe 3D Secure",
-      "Free orders ($0 total) still send invites immediately via order-created hooks",
-      "Pharmacies page hides routing and video sections; Available Pharmacies moved to main column",
-      "Pricing step layout: all fields on a single row with cost displayed under price input",
-      "Questionnaire bottle SVGs built dynamically from configurable colors",
-      "Variations created during link/import sorted with lowest dose first",
-    ],
-    fixed: [
-      "WP 6.7+ Translation loading triggered too early notices",
-      "WooCommerce Blocks register_checkout_fields defer to wp_loaded to avoid early textdomain loading",
-      "Exam list checkmark not removed after deleting all linked products",
-      "Unlink not setting product to draft due to subsequent save overwrites",
-      "Patient request count not detecting existing requests due to date filter scope",
-      "Manual Create Qualiphy Invite returning Unknown error when exam class not loaded",
-      "process_invite() silent early returns now report descriptive errors",
-      "Return Fee display label double colon rendering",
-      "Stock status not set to In Stock when linking existing product",
-      "Standard Pricing card on Free Checkout step not advancing to pricing page",
-    ],
-  },
-  {
-    version: "1.0.0",
-    date: "March 10, 2026",
-    added: [
-      "Complete Setup Wizard with guided configuration flow",
-      "Branding upload (logo and accent colors) in Setup Wizard and settings",
-      "Plugin Dashboard with Roadmap, configuration video, and Quick Links",
-      "Auto-update functionality for stable releases",
-      "Price input and free exam configuration in Exam Import module",
-      "WooCommerce Subscriptions integration in Exam Import with subscription updates for deferred exams",
-      "Pill-style controls for Rx, GFE, and Urgent Care exam filtering",
-      "Age restriction enforcement: Rx 18+, GFE 13+ with Guardian Disclaimer",
-      "Guest checkout disabled for all Qualiphy orders",
-      "Automatic order status updates via return webhooks",
-      "Shipment Tracking for WooCommerce integration",
-      "Clinical Access controls for patient data protection",
-      "Hide Qualiphy Orders filter on WooCommerce Orders page",
-      "Email Notification Settings panel",
-      "Elementor compatibility support",
-    ],
-    updated: [
-      "Exam categories (Rx, GFE, Urgent Care) visually segmented throughout interface",
-      "Standardized Rx capitalization across the entire plugin",
-      "Replaced Karma font with Gilroy Semi for improved visual consistency",
-      "Clinic Dashboard routes to Results page",
-      "Patient Exam ID surfaced on WooCommerce Order detail page",
-    ],
-    fixed: [
-      "Not Available Redirect renamed to Not Applicable",
-      "Load More pagination on Notifications table",
-      "Mini cart item removal not updating Add to Cart button states",
-      "Service Area Select All button not functioning in Setup Wizard",
-      "Pharmacies failing to sync during Setup Wizard flow",
-      "Wizard redirect configuration unable to save pre-existing pages",
-      "Uninstall process no longer deletes pages that existed prior to installation",
-    ],
-  },
+var cl=[
+{v:"1.1.0",d:"April 8, 2026",a:["Speak to a Doctor My Account page with follow-up consultation requests","Patient Request system: configurable follow-up limits per exam type","Webhook integration for patient request completion tracking","Import wizard Link Existing Product path with full wizard steps","Questionnaire language settings and style customization","Auto Redirect to Checkout for Qualiphy product pages","Per-product return fees with qty-aware refund calculations","Auto-complete non-Rx orders on consultation approval","Admin Invite Failed email notifications","Order action: Resend Consultation Link Email"],u:["Exam invite fires on payment complete (supports Stripe 3D Secure)","Free orders send invites immediately via order-created hooks","Pricing step: all fields on single row with cost display","Questionnaire bottles built dynamically from configurable colors","Variations sorted lowest dose first on product page"],f:["WP 6.7+ translation loading notices","WooCommerce Blocks early textdomain loading","Exam checkmark not removed after unlinking all products","Unlink not clearing wc_product_id on exams table","Patient request count scope for future-dated orders","Return Fee double colon display","Stock status not set when linking existing product"]},
+{v:"1.0.0",d:"March 10, 2026",a:["Complete Setup Wizard with guided configuration","Branding upload (logo + accent colors)","Auto-update functionality","Plugin Dashboard with Quick Links and videos","WooCommerce Subscriptions integration","Age restriction enforcement (Rx 18+, GFE 13+)","Guest checkout disabled for Qualiphy orders","Automatic order status updates via webhooks","Shipment Tracking integration","Clinical Access controls","Email Notification Settings"],u:["Exam categories visually segmented throughout","Standardized Rx capitalization","Replaced Karma font with Gilroy Semi"],f:["Service Area Select All button","Pharmacies sync during Setup Wizard","Wizard redirect save for pre-existing pages","Uninstall no longer deletes pre-existing pages"]}
 ];
-
-function renderItem(text, type) {
-  return `<div class="version__item"><div class="version__dot version__dot--${type}"></div><span>${text}</span></div>`;
-}
-
-function renderGroup(title, items, type) {
-  if (!items || items.length === 0) return '';
-  return `
-    <div class="version__group">
-      <div class="version__group-title version__group-title--${type}">${title}</div>
-      ${items.map(i => renderItem(i, type)).join('')}
-    </div>
-  `;
-}
-
-document.getElementById('changelog-content').innerHTML = changelog.map(v => `
-  <div class="version">
-    <div class="version__header">
-      <span class="version__number">v${v.version}</span>
-      <span class="version__date">${v.date}</span>
-    </div>
-    ${renderGroup('Added', v.added, 'added')}
-    ${renderGroup('Updated', v.updated, 'updated')}
-    ${renderGroup('Fixed', v.fixed, 'fixed')}
-  </div>
-`).join('');
+function ri(t,type){return '<div class="q-cl-item"><div class="q-cl-dot q-cl-dot--'+type+'"></div><span>'+t+'</span></div>'}
+function rg(title,items,type){if(!items||!items.length)return '';return '<div class="q-group"><div class="q-group-title q-group-title--'+type+'">'+title+'</div>'+items.map(function(i){return ri(i,type)}).join('')+'</div>'}
+document.getElementById('cl').innerHTML=cl.map(function(v){return '<div class="q-version"><div class="q-version-header"><span class="q-version-num">v'+v.v+'</span><span class="q-version-date">'+v.d+'</span></div>'+rg('Added',v.a,'added')+rg('Updated',v.u,'updated')+rg('Fixed',v.f,'fixed')+'</div>'}).join('');
 </script>
+<script src="../assets/js/main.js" defer></script>
 </body>
 </html>

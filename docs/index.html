@@ -1,83 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documentation — Quidget</title>
-<meta name="description" content="Quidget plugin documentation. Settings reference, troubleshooting, and configuration guides for the Qualiphy WooCommerce telehealth plugin.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/style.css">
-<style>
-  .docs-layout { display: flex; min-height: calc(100vh - 64px); margin-top: 64px; }
-  .docs-sidebar {
-    width: 240px; flex-shrink: 0; background: var(--bg-white);
-    border-right: 1px solid var(--border); padding: 24px 16px;
-    position: sticky; top: 64px; height: calc(100vh - 64px); overflow-y: auto;
-  }
-  .docs-sidebar__title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 16px; }
-  .docs-sidebar a {
-    display: block; padding: 8px 12px; border-radius: 6px;
-    font-size: 13px; font-weight: 500; color: var(--text-muted);
-    text-decoration: none; margin-bottom: 2px; transition: all .15s ease;
-  }
-  .docs-sidebar a:hover { background: var(--accent-bg); color: var(--primary); text-decoration: none; }
-  .docs-sidebar a.active { background: var(--accent-bg); color: var(--primary); font-weight: 600; }
-  .docs-sidebar__divider { height: 1px; background: var(--border-light); margin: 12px 0; }
-  .docs-main { flex: 1; max-width: 720px; padding: 40px 40px 80px; }
-  .docs-main h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin: 48px 0 12px; padding-top: 24px; border-top: 1px solid var(--border-light); }
-  .docs-main h2:first-child { margin-top: 0; border-top: none; padding-top: 0; }
-  .docs-main h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 24px 0 8px; }
-  .docs-main p { font-size: 14px; color: var(--text-body); line-height: 1.7; margin-bottom: 12px; }
-  .docs-main .setting { margin-bottom: 20px; }
-  .docs-main .setting__name { font-size: 14px; font-weight: 600; color: var(--text); }
-  .docs-main .setting__default { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
-  .docs-main .setting__desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-top: 4px; }
-  .troubleshoot-item { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; overflow: hidden; }
-  .troubleshoot-item__header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 14px 18px; cursor: pointer; background: var(--bg-white);
-    border: none; width: 100%; font-family: inherit; text-align: left;
-  }
-  .troubleshoot-item__header:hover { background: var(--bg-muted); }
-  .troubleshoot-item__symptom { font-size: 14px; font-weight: 600; color: var(--text); }
-  .troubleshoot-item__toggle { font-size: 18px; color: var(--text-dim); transition: transform .2s ease; }
-  .troubleshoot-item__body { padding: 0 18px 16px; }
-  .troubleshoot-item__cause { padding-left: 12px; border-left: 2px solid var(--amber-bg); margin-bottom: 10px; }
-  .troubleshoot-item__cause-title { font-size: 13px; font-weight: 600; color: var(--amber); }
-  .troubleshoot-item__cause-fix { font-size: 13px; color: var(--text-body); line-height: 1.6; margin-top: 2px; }
-  @media(max-width:768px){
-    .docs-layout{flex-direction:column}
-    .docs-sidebar{width:100%;position:relative;top:0;height:auto;border-right:none;border-bottom:1px solid var(--border)}
-    .docs-main{padding:24px 16px 60px}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation — Quidget</title>
+  <meta name="description" content="Quidget plugin documentation. Settings reference, troubleshooting, and configuration guides.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@0,400;0,500;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/quidget.css">
 </head>
 <body>
-
-<!-- Nav -->
-<header class="site-nav">
-  <div class="site-nav__inner">
-    <a href="../" class="site-nav__logo">
-      <svg width="24" height="24" viewBox="0 0 800 800" fill="#3d2b64" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg>
-      <span class="site-nav__logo-text">Quidget</span>
-      <span class="site-nav__logo-sub">by Qualiphy</span>
-    </a>
-    <nav class="site-nav__links">
-      <a href="../" class="site-nav__link">Overview</a>
-      <a href="../get-started/" class="site-nav__link">Get Started</a>
-      <a href="./" class="site-nav__link site-nav__link--active">Docs</a>
-      <a href="../changelog/" class="site-nav__link">Changelog</a>
-      <a href="../get-started/" class="site-nav__cta">Get Started →</a>
-    </nav>
+<nav class="nav"><div class="nav-inner">
+  <a href="../" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+  <div class="nav-links">
+    <a href="../" class="nav-link">Overview</a>
+    <a href="../get-started/" class="nav-link">Get Started</a>
+    <a href="./" class="nav-link" style="color:#fff;background:rgba(255,255,255,.08)">Docs</a>
+    <a href="../changelog/" class="nav-link">Changelog</a>
   </div>
-</header>
+  <div class="nav-actions"><a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div></nav>
 
-<div class="docs-layout">
-  <!-- Sidebar -->
-  <aside class="docs-sidebar">
-    <div class="docs-sidebar__title">Documentation</div>
+<div class="q-docs-layout">
+  <aside class="q-docs-sidebar">
+    <div class="q-docs-sidebar-title">Documentation</div>
     <a href="#general" class="active">General Settings</a>
     <a href="#checkout">Checkout</a>
     <a href="#exams">Consultations</a>
@@ -86,334 +35,97 @@
     <a href="#emails">Email Notifications</a>
     <a href="#branding">Branding</a>
     <a href="#service-area">Service Area</a>
-    <a href="#language">Language Settings</a>
+    <a href="#language">Language</a>
     <a href="#clinical-access">Clinical Access</a>
-    <div class="docs-sidebar__divider"></div>
+    <div class="divider"></div>
     <a href="#troubleshooting">Troubleshooting</a>
     <a href="#faq">FAQ</a>
   </aside>
-
-  <!-- Content -->
-  <main class="docs-main">
-    <h1 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px;">Documentation</h1>
-    <p style="color: var(--text-muted); margin-bottom: 0;">Settings reference and troubleshooting for the Quidget WordPress plugin.</p>
+  <main class="q-docs-main">
+    <h1 style="font-size:1.6rem;margin-bottom:6px">Documentation</h1>
+    <p style="color:var(--text-lt);margin-bottom:0">Settings reference and troubleshooting for the Quidget WordPress plugin.</p>
 
     <h2 id="general">General Settings</h2>
-    <p>Found under <code>Qualiphy → Settings → General</code>. Controls the core plugin behavior.</p>
-
-    <div class="setting">
-      <div class="setting__name">Auto Send Exams</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">Automatically sends exam invites to the Qualiphy API when a patient completes checkout. Disable if you want to manually trigger invites from the order page.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Auto Launch Exams</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">Shows the exam launch modal (or redirect) on the WooCommerce thank-you page after checkout. When disabled, patients receive the exam link via email only.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Exam Launch Mode</div>
-      <div class="setting__default">Default: Popup</div>
-      <div class="setting__desc">Choose between Popup (modal with meeting link, QR code, and dismiss option) or Redirect (countdown timer that sends the patient directly to the meeting URL).</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Checkout Redirect Delay</div>
-      <div class="setting__default">Default: 3 seconds</div>
-      <div class="setting__desc">Countdown duration before the exam launch modal opens or the redirect fires on the thank-you page.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Auto Refund Rejected</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">Automatically issues a partial refund when a consultation is deferred (not approved). The refund amount is the order total minus the return fee.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Exam Price Retained (Return Fee)</div>
-      <div class="setting__default">Default: $30.00</div>
-      <div class="setting__desc">The default amount retained by the clinic when a consultation is deferred. Can be overridden per-product in the product editor. Per-item return fees are summed across all Qualiphy line items at checkout.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Default Price Margin</div>
-      <div class="setting__default">Default: 10%</div>
-      <div class="setting__desc">Auto-fills the patient-facing price during consultation import based on the Qualiphy cost plus this margin percentage.</div>
-    </div>
+    <p>Found under <code>Qualiphy → Settings → General</code>.</p>
+    <div class="q-setting"><div class="q-setting__name">Auto Send Exams</div><div class="q-setting__default">Default: Enabled</div><div class="q-setting__desc">Automatically sends exam invites when a patient completes checkout. Disable to manually trigger from the order page.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Auto Launch Exams</div><div class="q-setting__default">Default: Enabled</div><div class="q-setting__desc">Shows the exam launch modal on the thank-you page. When disabled, patients receive the link via email only.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Exam Launch Mode</div><div class="q-setting__default">Default: Popup</div><div class="q-setting__desc">Popup (modal with meeting link + QR code) or Redirect (countdown that sends patient to meeting URL).</div></div>
+    <div class="q-setting"><div class="q-setting__name">Auto Refund Rejected</div><div class="q-setting__default">Default: Enabled</div><div class="q-setting__desc">Automatically refunds when a consultation is deferred. Refund = order total minus return fee.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Return Fee</div><div class="q-setting__default">Default: $30.00</div><div class="q-setting__desc">Amount retained when deferred. Overridable per product. Summed across line items at checkout.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Default Price Margin</div><div class="q-setting__default">Default: 10%</div><div class="q-setting__desc">Auto-fills patient-facing price during import based on Qualiphy cost + this margin.</div></div>
 
     <h2 id="checkout">Checkout</h2>
-    <p>The plugin automatically adds required fields to WooCommerce checkout for Qualiphy orders.</p>
-    <div class="setting">
-      <div class="setting__name">Additional Checkout Fields</div>
-      <div class="setting__desc">Gender (select), Date of Birth (month/day/year selects), and phone number are added automatically when the cart contains a Qualiphy product. Phone is forced required.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Age Restriction</div>
-      <div class="setting__desc">Rx consultations require the patient to be 18+. Non-Rx (GFE) consultations require 13+. Validated at checkout based on the DOB fields.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Account Creation</div>
-      <div class="setting__desc">Guest checkout is disabled for all Qualiphy orders. The plugin forces WooCommerce account creation at checkout so patients can track their consultation status.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Auto Redirect to Checkout</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">Sends patients directly to checkout when they add a Qualiphy product to cart, skipping the cart page.</div>
-    </div>
+    <p>The plugin adds required fields automatically for Qualiphy orders.</p>
+    <div class="q-setting"><div class="q-setting__name">Additional Fields</div><div class="q-setting__desc">Gender, Date of Birth (month/day/year), phone. Phone forced required. Added when cart has a Qualiphy product.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Age Restriction</div><div class="q-setting__desc">Rx: 18+. Non-Rx (GFE): 13+. Validated from DOB fields.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Account Creation</div><div class="q-setting__desc">Guest checkout disabled. Plugin forces account creation so patients can track consultation status.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Auto Redirect to Checkout</div><div class="q-setting__default">Default: Enabled</div><div class="q-setting__desc">Skips cart page when adding a Qualiphy product.</div></div>
 
     <h2 id="exams">Consultations</h2>
-    <p>Managed under <code>Qualiphy → Consultations</code>. This is where you import exams from Qualiphy and create WooCommerce products.</p>
-    <div class="setting">
-      <div class="setting__name">Consultation Types</div>
-      <div class="setting__desc"><strong>GFE (rx_type 1):</strong> Good Faith Exam — provider clearance, no prescription. Order auto-completes on approval. <strong>Rx (rx_type 2):</strong> Full prescription consultation with pharmacy fulfillment and tracking.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Import Wizard</div>
-      <div class="setting__desc">Creates or links WooCommerce products from Qualiphy consultations. Steps include: product type (simple/subscription), free/paid checkout, pharmacy selection (Rx only), variant configuration, pricing, and review.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Sync</div>
-      <div class="setting__desc">Click the refresh button to re-sync consultations from the Qualiphy API. Syncs exam data, pharmacy information, and availability. 5-minute cooldown between manual syncs.</div>
-    </div>
+    <p>Managed under <code>Qualiphy → Consultations</code>.</p>
+    <div class="q-setting"><div class="q-setting__name">Types</div><div class="q-setting__desc"><strong>GFE (rx_type 1):</strong> Provider clearance, no Rx. Auto-completes on approval. <strong>Rx (rx_type 2):</strong> Full prescription with pharmacy fulfillment.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Import Wizard</div><div class="q-setting__desc">Creates or links WooCommerce products. Steps: product type, free/paid, pharmacy (Rx), variants, pricing, review.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Sync</div><div class="q-setting__desc">Refresh button re-syncs from API. 5-minute cooldown between manual syncs.</div></div>
 
     <h2 id="pharmacy">Pharmacy Routing</h2>
-    <p>Found under <code>Qualiphy → Pharmacies</code>. Controls which pharmacy fulfills Rx prescriptions by state.</p>
-    <div class="setting">
-      <div class="setting__name">Routing Table</div>
-      <div class="setting__desc">Maps exam IDs to pharmacy IDs by state code. When a patient checks out with an Rx consultation, the plugin looks up the correct pharmacy based on their billing state. If no routing rule exists, it falls back to any pharmacy that serves that state and exam.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Deep Sync</div>
-      <div class="setting__desc">Fetches detailed pharmacy data from the Qualiphy API including state coverage and exam assignments. Runs automatically during setup and can be triggered manually.</div>
-    </div>
+    <p><code>Qualiphy → Pharmacies</code>. Controls Rx fulfillment by state.</p>
+    <div class="q-setting"><div class="q-setting__name">Routing Table</div><div class="q-setting__desc">Maps exam IDs to pharmacy IDs by state. Falls back to any serving pharmacy if no rule exists.</div></div>
 
     <h2 id="subscriptions">Subscriptions</h2>
-    <p>Requires the WooCommerce Subscriptions extension.</p>
-    <div class="setting">
-      <div class="setting__name">Send Exam on Renewal</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">Automatically sends a new exam invite when a subscription renews.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Subscription Deferral Action</div>
-      <div class="setting__default">Default: Enabled</div>
-      <div class="setting__desc">When a consultation is deferred on a renewal order, automatically update the subscription status.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Subscription Deferral Status</div>
-      <div class="setting__default">Default: Cancelled</div>
-      <div class="setting__desc">Choose whether to cancel or put on hold the subscription when a renewal consultation is deferred.</div>
-    </div>
+    <p>Requires WooCommerce Subscriptions.</p>
+    <div class="q-setting"><div class="q-setting__name">Send Exam on Renewal</div><div class="q-setting__default">Default: Enabled</div><div class="q-setting__desc">New exam invite on subscription renewal.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Deferral Action</div><div class="q-setting__default">Default: Cancel</div><div class="q-setting__desc">Cancel or hold the subscription when a renewal consultation is deferred.</div></div>
 
     <h2 id="emails">Email Notifications</h2>
-    <p>Configure admin email notifications under <code>Qualiphy → Settings → Emails</code>.</p>
-    <div class="setting">
-      <div class="setting__name">Notification Recipients</div>
-      <div class="setting__desc">Email addresses that receive admin notifications such as exam invite failures. Separate from patient-facing emails which are sent automatically by the Qualiphy platform.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Invite Failed Email</div>
-      <div class="setting__desc">Sent to notification recipients when an exam invite fails during checkout. Includes the order number, error message, and retry instructions.</div>
-    </div>
+    <div class="q-setting"><div class="q-setting__name">Recipients</div><div class="q-setting__desc">Admin emails for invite failures. Separate from patient emails (automatic).</div></div>
 
     <h2 id="branding">Branding</h2>
-    <p>Configured under <code>Qualiphy → Settings → Branding</code> or during the setup wizard.</p>
-    <div class="setting">
-      <div class="setting__name">Clinic Logo</div>
-      <div class="setting__desc">Separate uploads for light and dark backgrounds. PNG with transparent background recommended. Appears on the exam launch modal and patient emails.</div>
-    </div>
-    <div class="setting">
-      <div class="setting__name">Accent Colors</div>
-      <div class="setting__default">Default: Primary #CFC9FF, Secondary #6e54a7</div>
-      <div class="setting__desc">Primary and secondary accent colors used for buttons, highlights, and the patient-facing consultation UI.</div>
-    </div>
+    <div class="q-setting"><div class="q-setting__name">Clinic Logo</div><div class="q-setting__desc">Light/dark variants. PNG transparent recommended. Shows on exam modal and emails.</div></div>
+    <div class="q-setting"><div class="q-setting__name">Accent Colors</div><div class="q-setting__default">Primary #CFC9FF, Secondary #6e54a7</div><div class="q-setting__desc">Buttons, highlights, consultation UI.</div></div>
 
     <h2 id="service-area">Service Area</h2>
-    <p>Configured under <code>Qualiphy → Settings → Service Area</code>.</p>
-    <div class="setting">
-      <div class="setting__name">Supported States</div>
-      <div class="setting__desc">48 U.S. states plus Washington D.C. are available. Alabama and Mississippi are currently excluded. The plugin creates a WooCommerce shipping zone ("Qualiphy Service Area") with free shipping for selected states. Patients in unselected states see a "not available in your area" message.</div>
-    </div>
+    <div class="q-setting"><div class="q-setting__name">Supported States</div><div class="q-setting__desc">48 states + D.C. AL and MS excluded. Auto-creates WooCommerce shipping zone. Unselected states show "not available."</div></div>
 
-    <h2 id="language">Language Settings</h2>
-    <p>Customize all patient-facing text under <code>Qualiphy → Settings → Language</code>.</p>
-    <div class="setting">
-      <div class="setting__name">Customizable Text</div>
-      <div class="setting__desc">Includes: Rx/non-Rx product messages, add-to-cart button text, already-in-cart messages, exam launch modal headings and descriptions, QR code text, email notes, free exam text, disabled exam messages, questionnaire questions, dose labels, and the consultation disclaimer.</div>
-    </div>
+    <h2 id="language">Language</h2>
+    <div class="q-setting"><div class="q-setting__name">Customizable Text</div><div class="q-setting__desc">Rx/non-Rx messages, button text, cart messages, exam launch modal, questionnaire questions, dose labels, disclaimer.</div></div>
 
     <h2 id="clinical-access">Clinical Access</h2>
-    <p>Controls who can view patient data in the WordPress admin.</p>
-    <div class="setting">
-      <div class="setting__name">Clinical Access Users</div>
-      <div class="setting__desc">Only users with clinical access can view Qualiphy order details, patient exam IDs, and consultation results. Non-clinical users (marketing, development) see a "Patient Order Access Required" message instead. The admin who completes setup gets access automatically.</div>
-    </div>
+    <div class="q-setting"><div class="q-setting__name">Access Control</div><div class="q-setting__desc">Only designated users see patient order data. Setup admin gets access automatically. Others see "Patient Order Access Required."</div></div>
 
-    <!-- ═══ TROUBLESHOOTING ═══ -->
     <h2 id="troubleshooting">Troubleshooting</h2>
-    <p>Common issues and fixes. Find your symptom below.</p>
+    <p>Common issues and fixes.</p>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Exam invite never sends after checkout</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><div class="q-ts-cause"><strong>No payment gateway</strong><p>Invites fire on payment confirmation. Verify gateway is active in WooCommerce → Settings → Payments.</p></div><div class="q-ts-cause"><strong>Caching interference</strong><p>Exclude /checkout/ and /my-account/ from cache. Disable object cache for logged-in users.</p></div></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>"Please log in to view this order"</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><div class="q-ts-cause"><strong>Account creation setting</strong><p>WooCommerce → Settings → Accounts & Privacy → enable account creation during checkout.</p></div><div class="q-ts-cause"><strong>Stale page cache</strong><p>Clear entire site cache after plugin install.</p></div></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Exam popup doesn't appear</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><div class="q-ts-cause"><strong>Auto-launch disabled</strong><p>Qualiphy → Settings → enable Auto Launch Exams.</p></div><div class="q-ts-cause"><strong>Missing meeting URL</strong><p>Check order Qualiphy section for error message.</p></div></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>"Not available in your area" for all customers</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><div class="q-ts-cause"><strong>Service area</strong><p>Check selected states under Qualiphy → Settings → Service Area.</p></div><div class="q-ts-cause"><strong>Shipping zone deleted</strong><p>Re-save service area to regenerate the Qualiphy shipping zone.</p></div></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Prescription not created after approval</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><div class="q-ts-cause"><strong>Pharmacy routing gap</strong><p>Verify exam has a pharmacy for the patient's state under Qualiphy → Pharmacies.</p></div><div class="q-ts-cause"><strong>Webhook blocked</strong><p>Check if security plugin blocks POST requests to the webhook endpoint.</p></div></div></div>
 
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Exam invite never sends after checkout</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">No payment gateway</div>
-          <div class="troubleshoot-item__cause-fix">Invites fire on payment confirmation, not order creation. Verify your gateway is active in WooCommerce → Settings → Payments and processing test orders successfully.</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Caching interference</div>
-          <div class="troubleshoot-item__cause-fix">Exclude /checkout/ and /my-account/ from your cache plugin. If using W3 Total Cache, disable page cache for logged-in users.</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Free exam misconfigured</div>
-          <div class="troubleshoot-item__cause-fix">For $0 consultations, ensure the product was imported with "Free Instant Checkout" in the import wizard. Free exams fire on order creation, not payment.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">"Please log in to view this order" on thank-you page</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Account creation setting</div>
-          <div class="troubleshoot-item__cause-fix">Go to WooCommerce → Settings → Accounts & Privacy → enable "Allow customers to create an account during checkout."</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Stale page cache</div>
-          <div class="troubleshoot-item__cause-fix">Clear your entire site cache after installing the plugin. Some caching plugins serve the thank-you page before the order session is established.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Exam popup doesn't appear after checkout</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Auto-launch disabled</div>
-          <div class="troubleshoot-item__cause-fix">Qualiphy → Settings → General → enable "Auto Launch Exams." Also check launch mode (Popup vs Redirect).</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Missing meeting URL</div>
-          <div class="troubleshoot-item__cause-fix">Check the WooCommerce order's Qualiphy section for invite status. If it says "error," the error message explains why (wrong state, pharmacy routing failed, etc).</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">"Not available in your area" for all customers</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Service area too narrow</div>
-          <div class="troubleshoot-item__cause-fix">Qualiphy → Settings → Service Area — check your selected states.</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Shipping zone deleted</div>
-          <div class="troubleshoot-item__cause-fix">The plugin auto-creates a "Qualiphy Service Area" zone. If deleted, re-save your service area in Qualiphy settings to regenerate it.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Prescription not created after consultation approved</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Pharmacy routing gap</div>
-          <div class="troubleshoot-item__cause-fix">Qualiphy → Pharmacies — verify the exam has a pharmacy assigned for the patient's state.</div>
-        </div>
-        <div class="troubleshoot-item__cause">
-          <div class="troubleshoot-item__cause-title">Webhook blocked</div>
-          <div class="troubleshoot-item__cause-fix">Check if Wordfence, Sucuri, or a WAF is blocking incoming POST requests to the Qualiphy webhook endpoint.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ FAQ ═══ -->
     <h2 id="faq">FAQ</h2>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Why can't patients skip checkout?</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><p style="font-size:14px;line-height:1.7;color:var(--text-mid)">Checkout collects required patient data (name, gender, DOB, phone, state). The plugin auto-redirects and auto-creates accounts. For staff use: <code>yoursite.com/checkout/?add-to-cart=PRODUCT_ID</code></p></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Can I rename products after importing?</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><p style="font-size:14px;line-height:1.7;color:var(--text-mid)">Yes. The Qualiphy link is metadata, not tied to the title. Clear cache if anything breaks.</p></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>Which states does Qualiphy cover?</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><p style="font-size:14px;line-height:1.7;color:var(--text-mid)">48 states + D.C. Alabama and Mississippi excluded.</p></div></div>
+    <div class="q-ts-item"><button class="q-ts-header" onclick="this.parentElement.classList.toggle('open')"><span>How do I reset the plugin?</span><span class="q-ts-toggle">+</span></button><div class="q-ts-body"><p style="font-size:14px;line-height:1.7;color:var(--text-mid)">Plugin page → Uninstall → reactivate. Returns to setup wizard. Qualiphy account data unaffected.</p></div></div>
 
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Why can't patients skip the checkout cart?</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <p>WooCommerce checkout collects required patient data (name, gender, date of birth, phone, billing state) that the provider needs for the consultation. The plugin auto-redirects to checkout and auto-creates accounts to minimize friction. You can also create a direct-to-checkout URL for staff use: <code>yoursite.com/checkout/?add-to-cart=PRODUCT_ID</code>.</p>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Can I rename the product after importing?</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <p>Yes. The Qualiphy link is stored as metadata on the product, not tied to the title or URL slug. Rename freely. If something breaks after renaming, clear your site cache.</p>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">Which states does Qualiphy cover?</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <p>48 U.S. states plus Washington D.C. Alabama and Mississippi are currently excluded.</p>
-      </div>
-    </div>
-
-    <div class="troubleshoot-item">
-      <button class="troubleshoot-item__header" onclick="this.parentElement.classList.toggle('open')">
-        <span class="troubleshoot-item__symptom">How do I reset the plugin?</span>
-        <span class="troubleshoot-item__toggle">+</span>
-      </button>
-      <div class="troubleshoot-item__body" style="display:none">
-        <p>Go to the plugin page → click Uninstall → once uninstalled, reactivate the plugin. This returns you to the setup wizard. Your Qualiphy account data is not affected — only the local WordPress configuration resets.</p>
-      </div>
-    </div>
-
-    <div style="margin-top: 40px; padding: 24px; background: var(--accent-bg); border-radius: 8px;">
-      <h4 style="font-size: 14px; color: var(--primary); margin: 0 0 6px;">Need more help?</h4>
-      <p style="font-size: 13px; color: var(--text-body); line-height: 1.6; margin: 0;">
-        Contact <strong>support@qualiphy.me</strong> or <strong>(424) 320-9958</strong>. Include your site URL, which step you're on, and screenshots of any error messages.
-      </p>
+    <div class="q-callout q-callout--tip" style="margin-top:32px">
+      <span class="q-callout-icon">💡</span>
+      <div><strong>Need more help?</strong> Contact support@qualiphy.me or (424) 320-9958. Include your site URL, step, and screenshots.</div>
     </div>
   </main>
 </div>
 
 <script>
-// Toggle troubleshooting items
-document.querySelectorAll('.troubleshoot-item__header').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const body = item.querySelector('.troubleshoot-item__body');
-    const toggle = btn.querySelector('.troubleshoot-item__toggle');
-    const isOpen = item.classList.contains('open');
-    body.style.display = isOpen ? 'none' : 'block';
-    toggle.style.transform = isOpen ? 'none' : 'rotate(45deg)';
-  });
-});
-
-// Sidebar active state on scroll
-const sections = document.querySelectorAll('.docs-main h2[id]');
-const links = document.querySelectorAll('.docs-sidebar a');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
-  links.forEach(l => {
+// Sidebar scroll tracking
+var sections = document.querySelectorAll('.q-docs-main h2[id]');
+var links = document.querySelectorAll('.q-docs-sidebar a');
+window.addEventListener('scroll', function() {
+  var current = '';
+  sections.forEach(function(s) { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  links.forEach(function(l) {
     l.classList.remove('active');
     if (l.getAttribute('href') === '#' + current) l.classList.add('active');
   });
-});
+}, { passive: true });
 </script>
+<script src="../assets/js/main.js" defer></script>
 </body>
 </html>
