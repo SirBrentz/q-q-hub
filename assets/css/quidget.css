@@ -3,45 +3,44 @@
    Extends the base Qualiphy design system (styles.css)
    =========================================================== */
 
-/* ─── Nav overrides for dark Quidget nav ─── */
-/* Must override base styles.css which sets white background */
+/* ─── Nav overrides ─── */
 .nav {
-  background: #141216 !important;
-  border-bottom: 1px solid rgba(255,255,255,.06) !important;
+  background: #fff !important;
+  border-bottom: 1px solid var(--border) !important;
 }
 .nav.scrolled {
-  background: #141216 !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,.15);
+  background: #fff !important;
+  box-shadow: 0 2px 16px rgba(20,18,22,.08);
 }
 .nav .nav-links .nav-link {
-  color: rgba(255,255,255,.65);
+  color: var(--text-mid);
   font-weight: 500;
 }
 .nav .nav-links .nav-link:hover {
-  color: #fff;
-  background: rgba(255,255,255,.1);
+  color: var(--navy);
+  background: var(--surface);
 }
 .nav .nav-links .nav-link--active,
 .nav .nav-links .nav-link--active:hover {
-  color: #fff;
-  background: rgba(77,61,113,.4);
+  color: #4D3D71;
+  background: #E4DFEF;
   font-weight: 600;
 }
-.nav .nav-inner .logo { color: #fff; }
-.nav .hamburger span { background: #fff; }
+.nav .nav-inner .logo { color: var(--navy); }
+.nav .hamburger span { background: var(--navy); }
 .nav .nav-actions .btn-primary {
-  background: #fff;
-  color: #4D3D71;
+  background: #4D3D71;
+  color: #fff;
 }
 .nav .nav-actions .btn-primary:hover {
-  background: #E4DFEF;
-  color: #4D3D71;
+  background: #725F9D;
+  color: #fff;
 }
 .nav .nav-login {
-  color: rgba(255,255,255,.7);
+  color: var(--text-mid);
 }
 .nav .nav-login:hover {
-  color: #fff;
+  color: var(--navy);
 }
 
 /* ─── Mouse-reactive effects on dark sections ─── */
@@ -52,7 +51,7 @@
   position: absolute;
   bottom: 0; left: 0;
   width: 120px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(77,61,113,.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(77,61,113,.3), transparent);
   transform: translateX(var(--mx, 50%));
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
@@ -145,7 +144,7 @@
 /* ─── Hero ─── */
 .q-hero {
   padding: 140px 0 96px;
-  background: #141216;
+  background: #4D3D71;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -164,7 +163,7 @@
   position: absolute;
   top: -300px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(77,61,113,.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(206,200,254,.08) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero::after {
@@ -172,7 +171,7 @@
   position: absolute;
   bottom: -200px; left: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(77,61,113,.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(206,200,254,.05) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero-grid {
