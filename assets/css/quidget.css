@@ -170,7 +170,7 @@
   gap: 64px;
   align-items: center;
 }
-.q-hero h1 { color: #fff; margin-bottom: 18px; font-size: clamp(2rem, 3.5vw, 2.75rem); }
+.q-hero h1 { color: #fff; margin-bottom: 18px; }
 .q-hero p { color: rgba(255,255,255,.65); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
 .q-hero .badge-white { margin-bottom: 20px; }
 .q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
@@ -187,7 +187,7 @@
   position: relative;
   vertical-align: bottom;
   height: 1.15em;
-  min-width: 260px;
+  min-width: 280px;
 }
 .q-rotate-wrap span {
   position: absolute;
@@ -198,19 +198,17 @@
   color: var(--indigo-hover);
   white-space: nowrap;
   opacity: 0;
-  animation: q-fade 16s linear infinite;
+  animation: q-fade 12s ease-in-out infinite;
 }
-.q-rotate-wrap span:nth-child(1) { animation-delay: -0.5s; }
-.q-rotate-wrap span:nth-child(2) { animation-delay: 4s; }
-.q-rotate-wrap span:nth-child(3) { animation-delay: 8s; }
-.q-rotate-wrap span:nth-child(4) { animation-delay: 12s; }
+.q-rotate-wrap span:nth-child(1) { animation-delay: 0s; }
+.q-rotate-wrap span:nth-child(2) { animation-delay: 3s; }
+.q-rotate-wrap span:nth-child(3) { animation-delay: 6s; }
+.q-rotate-wrap span:nth-child(4) { animation-delay: 9s; }
 
 @keyframes q-fade {
-  0%        { opacity: 0; }
-  4%        { opacity: 1; }
-  21%       { opacity: 1; }
-  25%       { opacity: 0; }
-  100%      { opacity: 0; }
+  0%, 5%   { opacity: 0; transform: translateY(8px); }
+  8%, 22%  { opacity: 1; transform: translateY(0); }
+  25%, 100% { opacity: 0; transform: translateY(-8px); }
 }
 
 /* Flow card label & steps */
@@ -250,7 +248,7 @@
   font-size: 1.5rem; font-weight: 800; color: var(--navy);
   letter-spacing: -.02em;
 }
-.q-proof-stat > span {
+.q-proof-stat span {
   display: block; font-size: 13px; color: var(--text-lt); margin-top: 2px;
 }
 .q-proof-divider {

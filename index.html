@@ -18,7 +18,7 @@
 
 <!-- NAV -->
 <nav class="nav"><div class="nav-inner">
-  <a href="./" class="logo"><div class="logo-mark">Q</div>Quidget</a>
+  <a href="./" class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 800 800" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div>Quidget</a>
   <div class="nav-links">
     <a href="./" class="nav-link nav-link--active">Overview</a>
     <a href="help/" class="nav-link">Help Center</a>
@@ -76,6 +76,33 @@
   <div class="grid-3" id="verticals"></div>
 </div></section>
 
+<!-- VISUAL BREAK — image with quote overlay -->
+<section class="section" style="padding:0;overflow:hidden">
+  <div class="wrap animate-in">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--r-xl);overflow:hidden;min-height:380px">
+      <!-- Image side -->
+      <div style="position:relative;background:#e8e4f0;overflow:hidden">
+        <img src="assets/img/video-welcome.jpg" alt="Telehealth consultation" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block">
+      </div>
+      <!-- Content side -->
+      <div style="background:#3d2b64;padding:48px 44px;display:flex;flex-direction:column;justify-content:center;position:relative">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#CFC9FF;margin-bottom:16px">Powered by Qualiphy</div>
+        <div style="font-family:var(--font-h);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:700;color:#fff;line-height:1.3;margin-bottom:20px">Your patients. Your brand.<br>Our providers.</div>
+        <div style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:28px">Qualiphy connects your store to a licensed provider network across 48 states. Patients never leave your site — consultations, prescriptions, and pharmacy fulfillment all happen under your brand.</div>
+        <div style="display:flex;gap:10px">
+          <a href="get-started/" style="padding:10px 22px;border-radius:8px;background:#fff;color:#3d2b64;font-family:var(--font-h);font-size:13px;font-weight:600;text-decoration:none">Get Started →</a>
+          <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style="padding:10px 22px;border-radius:8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-family:var(--font-h);font-size:13px;font-weight:600;text-decoration:none">Book a Demo</a>
+        </div>
+        <!-- Quote card -->
+        <div style="position:absolute;bottom:28px;right:-20px;max-width:220px;padding:16px 18px;background:rgba(207,201,255,.12);border:1px solid rgba(207,201,255,.15);border-radius:12px;backdrop-filter:blur(8px)">
+          <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:#fff;line-height:1.5;margin-bottom:6px">"Setup took one afternoon. Our patients don't even know it's not built in-house."</div>
+          <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Practice Administrator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- INTERACTIVE DEMO — tabbed mockups -->
 <section class="section q-demo"><div class="wrap">
   <div class="section-header animate-in"><div class="badge">See it in action</div><h2>Inside the WordPress admin</h2><p>An interactive look at how the Quidget plugin appears in your WordPress dashboard.</p></div>
@@ -83,7 +110,7 @@
     <div style="display:flex;background:#f0f0f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:13px">
       <!-- Sidebar -->
       <div style="width:190px;background:#1d2327;color:#f0f0f1;flex-shrink:0;padding:10px 0">
-        <div style="padding:10px 14px 14px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">Q</div><span style="font-size:13px;font-weight:600;color:#fff">Qualiphy</span><span style="margin-left:auto;padding:2px 6px;border-radius:3px;background:rgba(61,43,100,.4);color:#CFC9FF;font-size:9px;font-weight:600">v1.1</span></div>
+        <div style="padding:10px 14px 14px;display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;background:#3d2b64;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff"><svg width="14" height="14" viewBox="0 0 800 800" fill="currentColor"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div><span style="font-size:13px;font-weight:600;color:#fff">Qualiphy</span><span style="margin-left:auto;padding:2px 6px;border-radius:3px;background:rgba(61,43,100,.4);color:#CFC9FF;font-size:9px;font-weight:600">v1.1</span></div>
         <div id="mockNav" style="display:flex;flex-direction:column">
           <button onclick="showMock('dash')" class="mn mn--active" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:#f0f0f1;background:rgba(255,255,255,.07);border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.6;flex-shrink:0"><path d="M4 15v-3h2v3H4zm4 0V5h2v10H8zm4 0V8h2v7h-2z"/></svg>Dashboard</button>
           <button onclick="showMock('exams')" class="mn" style="display:flex;align-items:center;gap:10px;padding:9px 14px;color:rgba(240,240,241,.55);background:transparent;border:none;cursor:pointer;font:inherit;text-align:left;width:100%;transition:background .15s;font-size:12px"><svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" style="opacity:.5;flex-shrink:0"><path d="M2 3h16v2H2V3zm0 4h16v2H2V7zm0 4h12v2H2v-2zm0 4h16v2H2v-2z"/></svg>Consultations</button>
@@ -261,7 +288,7 @@
   </div>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="logo" style="color:#fff"><div class="logo-mark">Q</div>Quidget</div>
+      <div class="logo" style="color:#fff"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 800 800" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div>Quidget</div>
       <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
       <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google">
         <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg>
