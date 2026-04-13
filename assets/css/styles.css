@@ -16,8 +16,8 @@ input,textarea,select{font-family:inherit;font-size:inherit}
 /* === TOKENS === */
 :root{
   /* Brand */
-  --navy:#0f1729;
-  --navy-lt:#1a2540;
+  --navy:#1B1B1B;
+  --navy-lt:#2a2a2a;
   --indigo:#3d2b64;
   --indigo-hover:#6e54a7;
   --violet:#8b5cf6;
