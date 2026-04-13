@@ -340,6 +340,7 @@ function TroubleshootItem({ symptom, causes }) {
 function IntakeScreen({ onComplete }) {
   const [answers, setAnswers] = useState({});
   const [currentQ, setCurrentQ] = useState(0);
+  const [showCalendly, setShowCalendly] = useState(false);
 
   const q = QUESTIONS[currentQ];
   const allDone = Object.keys(answers).length === QUESTIONS.length;
@@ -413,9 +414,15 @@ function IntakeScreen({ onComplete }) {
                   <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
                     Create Account ↗
                   </a>
-                  <a href="https://calendly.com/caitlin-qualiphy/30min" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 22px", borderRadius: 10, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
-                    Not sure yet? Book a demo
-                  </a>
+                  {!showCalendly ? (
+                    <button onClick={() => setShowCalendly(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 22px", borderRadius: 10, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", width: "100%", transition: "background .15s" }}>
+                      Not sure yet? Book a demo
+                    </button>
+                  ) : (
+                    <div style={{ borderRadius: 10, overflow: "hidden", border: "1px solid " + C.border }}>
+                      <iframe src="https://calendly.com/caitlin-qualiphy/30min" style={{ width: "100%", height: 660, border: "none" }} />
+                    </div>
+                  )}
                 </div>
               </div>
             ) : q.id === "hasApiKey" ? (
