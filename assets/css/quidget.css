@@ -24,7 +24,7 @@
 .nav .nav-links .nav-link--active,
 .nav .nav-links .nav-link--active:hover {
   color: #fff;
-  background: rgba(91,80,255,.4);
+  background: rgba(61,43,100,.4);
   font-weight: 600;
 }
 .nav .nav-inner .logo { color: #fff; }
@@ -50,7 +50,7 @@
   position: absolute;
   bottom: 0; left: 0;
   width: 120px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(91,80,255,.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(61,43,100,.5), transparent);
   transform: translateX(var(--mx, 50%));
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
@@ -75,7 +75,7 @@
 .q-particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(91,80,255,.08);
+  background: rgba(61,43,100,.08);
   pointer-events: none;
   z-index: 0;
 }
@@ -114,7 +114,7 @@
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(91,80,255,.3) var(--fx, 50%),
+    rgba(61,43,100,.3) var(--fx, 50%),
     transparent 100%
   );
   pointer-events: none;
@@ -153,7 +153,7 @@
   position: absolute;
   top: -300px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(91,80,255,.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(61,43,100,.12) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero::after {
@@ -161,7 +161,7 @@
   position: absolute;
   bottom: -200px; left: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(91,80,255,.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(61,43,100,.06) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero-grid {
@@ -170,7 +170,7 @@
   gap: 64px;
   align-items: center;
 }
-.q-hero h1 { color: #fff; margin-bottom: 18px; }
+.q-hero h1 { color: #fff; margin-bottom: 18px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
 .q-hero p { color: rgba(255,255,255,.65); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
 .q-hero .badge-white { margin-bottom: 20px; }
 .q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
@@ -187,7 +187,7 @@
   position: relative;
   vertical-align: bottom;
   height: 1.15em;
-  min-width: 280px;
+  min-width: 260px;
 }
 .q-rotate-wrap span {
   position: absolute;
@@ -195,20 +195,22 @@
   display: block;
   height: 1.15em;
   line-height: 1.15;
-  color: var(--indigo-hover);
+  color: #CFC9FF;
   white-space: nowrap;
   opacity: 0;
-  animation: q-fade 12s ease-in-out infinite;
+  animation: q-fade 16s linear infinite;
 }
-.q-rotate-wrap span:nth-child(1) { animation-delay: 0s; }
-.q-rotate-wrap span:nth-child(2) { animation-delay: 3s; }
-.q-rotate-wrap span:nth-child(3) { animation-delay: 6s; }
-.q-rotate-wrap span:nth-child(4) { animation-delay: 9s; }
+.q-rotate-wrap span:nth-child(1) { animation-delay: -0.5s; }
+.q-rotate-wrap span:nth-child(2) { animation-delay: 4s; }
+.q-rotate-wrap span:nth-child(3) { animation-delay: 8s; }
+.q-rotate-wrap span:nth-child(4) { animation-delay: 12s; }
 
 @keyframes q-fade {
-  0%, 5%   { opacity: 0; transform: translateY(8px); }
-  8%, 22%  { opacity: 1; transform: translateY(0); }
-  25%, 100% { opacity: 0; transform: translateY(-8px); }
+  0%        { opacity: 0; }
+  4%        { opacity: 1; }
+  21%       { opacity: 1; }
+  25%       { opacity: 0; }
+  100%      { opacity: 0; }
 }
 
 /* Flow card label & steps */
@@ -224,7 +226,7 @@
 .q-flow-step:last-child { border-bottom: none; }
 .q-flow-num {
   width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(91,80,255,.2); display: flex; align-items: center;
+  background: rgba(61,43,100,.2); display: flex; align-items: center;
   justify-content: center; font-family: var(--font-h);
   font-size: 12px; font-weight: 700; color: var(--indigo-hover);
 }
@@ -248,7 +250,7 @@
   font-size: 1.5rem; font-weight: 800; color: var(--navy);
   letter-spacing: -.02em;
 }
-.q-proof-stat span {
+.q-proof-stat > span {
   display: block; font-size: 13px; color: var(--text-lt); margin-top: 2px;
 }
 .q-proof-divider {
@@ -269,7 +271,7 @@
   width: 40px; height: 40px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 16px; font-size: 18px;
-  background: rgba(91,80,255,.08); color: var(--indigo);
+  background: rgba(61,43,100,.08); color: var(--indigo);
 }
 
 /* ─── Pricing strip ─── */
@@ -323,7 +325,7 @@
   color: var(--text-mid); transition: all 150ms;
 }
 .q-docs-sidebar a:hover { color: var(--navy); background: var(--surface-alt); }
-.q-docs-sidebar a.active { color: var(--indigo); background: rgba(91,80,255,.06); font-weight: 600; }
+.q-docs-sidebar a.active { color: var(--indigo); background: rgba(61,43,100,.06); font-weight: 600; }
 .q-docs-sidebar .divider {
   height: 1px; background: var(--border-lt); margin: 12px 0;
 }
@@ -374,7 +376,7 @@
 .q-version { margin-bottom: 56px; }
 .q-version-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
 .q-version-num { font-family: var(--font-h); font-size: 1.6rem; font-weight: 800; color: var(--navy); }
-.q-version-date { font-family: var(--font-h); font-size: 13px; font-weight: 600; color: var(--indigo); background: rgba(91,80,255,.08); padding: 4px 12px; border-radius: var(--r-full); }
+.q-version-date { font-family: var(--font-h); font-size: 13px; font-weight: 600; color: var(--indigo); background: rgba(61,43,100,.08); padding: 4px 12px; border-radius: var(--r-full); }
 .q-group { margin-bottom: 24px; }
 .q-group-title {
   font-family: var(--font-h); font-size: 11px; font-weight: 700;
@@ -401,7 +403,7 @@
   margin: 14px 0;
 }
 .q-callout--info { background: rgba(37,99,235,.06); }
-.q-callout--tip { background: rgba(91,80,255,.06); }
+.q-callout--tip { background: rgba(61,43,100,.06); }
 .q-callout--warning { background: var(--amber-bg); }
 .q-callout--success { background: var(--emerald-bg); }
 .q-callout-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
@@ -447,8 +449,8 @@
 }
 .q-demo-tab:hover { color: var(--navy); background: var(--surface-alt); }
 .q-demo-tab--active {
-  color: var(--indigo); background: rgba(91,80,255,.08);
-  border-color: rgba(91,80,255,.15);
+  color: var(--indigo); background: rgba(61,43,100,.08);
+  border-color: rgba(61,43,100,.15);
 }
 .q-demo-frame {
   max-width: 900px; margin: 0 auto;
@@ -490,7 +492,7 @@
   padding: 3px 10px; border-radius: var(--r-full);
   font-size: 11px; font-weight: 600;
 }
-.q-mock-badge--rx { background: rgba(91,80,255,.08); color: var(--indigo); }
+.q-mock-badge--rx { background: rgba(61,43,100,.08); color: var(--indigo); }
 .q-mock-badge--gfe { background: var(--emerald-bg); color: var(--emerald); }
 .q-mock-badge--active { background: var(--emerald-bg); color: var(--emerald); }
 .q-mock-grid {
@@ -520,7 +522,7 @@
 .q-mock-timer {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border-radius: var(--r-full);
-  background: rgba(91,80,255,.06); color: var(--indigo);
+  background: rgba(61,43,100,.06); color: var(--indigo);
   font-family: var(--font-h); font-size: 13px; font-weight: 600;
 }
 .q-mock-sidebar {
@@ -533,7 +535,7 @@
   margin-bottom: 2px;
 }
 .q-mock-sidebar-item--active {
-  background: rgba(91,80,255,.06); color: var(--indigo); font-weight: 600;
+  background: rgba(61,43,100,.06); color: var(--indigo); font-weight: 600;
 }
 .q-mock-table { width: 100%; border-collapse: collapse; }
 .q-mock-table th {
@@ -561,8 +563,8 @@
   opacity: 0.85;
 }
 .q-compare-col--after {
-  border-color: rgba(91,80,255,.2);
-  box-shadow: 0 0 0 1px rgba(91,80,255,.05);
+  border-color: rgba(61,43,100,.2);
+  box-shadow: 0 0 0 1px rgba(61,43,100,.05);
 }
 .q-compare-title {
   font-family: var(--font-h); font-size: 14px; font-weight: 700;
@@ -614,7 +616,7 @@
   font-size: 16px;
 }
 .q-trust-icon--hipaa { background: rgba(5,150,105,.08); color: var(--emerald); }
-.q-trust-icon--legit { background: rgba(91,80,255,.08); color: var(--indigo); }
+.q-trust-icon--legit { background: rgba(61,43,100,.08); color: var(--indigo); }
 .q-trust-icon--ssl { background: rgba(37,99,235,.08); color: #2563eb; }
 .q-trust-icon--woo { background: rgba(126,84,191,.08); color: #7c3aed; }
 .q-trust-icon--wp { background: rgba(0,115,170,.08); color: #0073aa; }

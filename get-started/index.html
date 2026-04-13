@@ -19,8 +19,8 @@
   }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   .fade-in { animation: fadeSlide 0.3s ease; }
-  code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(91,80,255,.06); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #5b50ff; }
-  ol li::marker { font-weight: 600; color: #5b50ff; }
+  code { font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; background: rgba(61,43,100,.06); padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #3d2b64; }
+  ol li::marker { font-weight: 600; color: #3d2b64; }
 
   /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
@@ -66,9 +66,9 @@ const { useState, useEffect, useRef, useCallback } = React;
    ═══════════════════════════════════════════════════════════════════════════ */
 const C = {
   bg: "#f7f8fc", bgWhite: "#ffffff", bgMuted: "#f5f3f0", bgDark: "#1c1917",
-  border: "#e7e5e4", borderFocus: "#5b50ff",
+  border: "#e7e5e4", borderFocus: "#3d2b64",
   text: "#0f1729", textBody: "#44403c", textMuted: "#78716c", textDim: "#a8a29e",
-  accent: "#5b50ff", accentLight: "rgba(91,80,255,.06)", accentMid: "#7b73ff",
+  accent: "#3d2b64", accentLight: "rgba(61,43,100,.06)", accentMid: "#6e54a7",
   green: "#059669", greenLight: "#d1fae5",
   amber: "#d97706", amberLight: "#fff3cd",
   blue: "#2563eb", blueLight: "#dbeafe",
@@ -340,38 +340,32 @@ function TroubleshootItem({ symptom, causes }) {
 function IntakeScreen({ onComplete }) {
   const [answers, setAnswers] = useState({});
   const [currentQ, setCurrentQ] = useState(0);
-  const [showGate, setShowGate] = useState(false);
 
   const q = QUESTIONS[currentQ];
   const allDone = Object.keys(answers).length === QUESTIONS.length;
 
+  // Gate is derived — no separate state, no intermediate render
+  const currentAnswer = answers[q.id];
+  const isBlocked = q.blocking && currentAnswer && (Array.isArray(q.blocking) ? q.blocking.includes(currentAnswer) : q.blocking === currentAnswer);
+
   const answer = (val) => {
     setAnswers(prev => ({ ...prev, [q.id]: val }));
-    // Check if this answer triggers a blocking gate
     const b = q.blocking;
-    if (b && (Array.isArray(b) ? b.includes(val) : b === val)) {
-      setShowGate(true);
-      return; // don't advance
-    }
+    if (b && (Array.isArray(b) ? b.includes(val) : b === val)) return;
     if (currentQ < QUESTIONS.length - 1) {
       setTimeout(() => setCurrentQ(currentQ + 1), 150);
     }
   };
 
   const passGate = () => {
-    const passingVal = q.options.find(o => {
-      const b = q.blocking;
-      return !(Array.isArray(b) ? b.includes(o.value) : b === o.value);
-    });
+    const passingVal = q.options.find(o => !(Array.isArray(q.blocking) ? q.blocking.includes(o.value) : q.blocking === o.value));
+    // Set answer + advance in one update cycle
     setAnswers(prev => ({ ...prev, [q.id]: passingVal ? passingVal.value : "yes" }));
-    setShowGate(false);
-    if (currentQ < QUESTIONS.length - 1) {
-      setCurrentQ(currentQ + 1);
-    }
+    setTimeout(() => setCurrentQ(prev => Math.min(prev + 1, QUESTIONS.length - 1)), 10);
   };
 
   const goBack = () => {
-    if (showGate) { setShowGate(false); return; }
+    if (isBlocked) { setAnswers(prev => { const n = { ...prev }; delete n[q.id]; return n; }); return; }
     if (currentQ > 0) setCurrentQ(currentQ - 1);
   };
 
@@ -404,12 +398,12 @@ function IntakeScreen({ onComplete }) {
         </div>
 
         {/* Blocking gate — context changes based on which question we're on */}
-        {showGate ? (
+        {isBlocked ? (
           <div key="gate" className="fade-in">
             {q.id === "hasAccount" ? (
               /* ── NO ACCOUNT ── */
-              <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
-                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
+              <div style={{ borderRadius: 12, border: "1px solid rgba(61,43,100,.12)", overflow: "hidden" }}>
+                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(61,43,100,.06) 0%, rgba(61,43,100,.1) 100%)" }}>
                   <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>Let's get you set up</div>
                   <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
                     Create a free Qualiphy account — no signup fees, no monthly charges. The registration process walks you through everything. Once you're done, come back here and continue.
@@ -426,8 +420,8 @@ function IntakeScreen({ onComplete }) {
               </div>
             ) : q.id === "hasApiKey" ? (
               /* ── NEEDS API KEY ── */
-              <div style={{ borderRadius: 12, border: "1px solid rgba(91,80,255,.12)", overflow: "hidden" }}>
-                <div style={{ padding: "24px 24px 16px", background: "linear-gradient(135deg, rgba(91,80,255,.06) 0%, rgba(91,80,255,.1) 100%)" }}>
+              <div style={{ borderRadius: 12, border: "1px solid rgba(61,43,100,.12)", overflow: "hidden" }}>
+                <div style={{ padding: "24px 24px 16px", background: "linear-gradient(135deg, rgba(61,43,100,.06) 0%, rgba(61,43,100,.1) 100%)" }}>
                   <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>How to find your API key</div>
                   <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
                     It takes about 30 seconds. Open your Qualiphy dashboard and follow these steps:
@@ -440,7 +434,7 @@ function IntakeScreen({ onComplete }) {
                     { n: "3", t: "Your API key is at the top — click Copy" },
                   ].map((s, i) => (
                     <div key={i} style={{ display: "flex", gap: 12, marginBottom: 10 }}>
-                      <div style={{ width: 24, height: 24, borderRadius: "50%", flexShrink: 0, background: "rgba(91,80,255,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>{s.n}</div>
+                      <div style={{ width: 24, height: 24, borderRadius: "50%", flexShrink: 0, background: "rgba(61,43,100,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 700, color: C.accent }}>{s.n}</div>
                       <div style={{ fontSize: 14, color: C.text, lineHeight: 1.5, paddingTop: 2 }}>{s.t}</div>
                     </div>
                   ))}
@@ -561,7 +555,7 @@ function GuideScreen({ answers, onRestart }) {
         padding: "14px 24px", borderRadius: 10, marginBottom: 16,
         background: C.accent, color: "#fff", fontFamily: "inherit",
         fontSize: 15, fontWeight: 600, textDecoration: "none",
-        boxShadow: "0 2px 8px rgba(91,80,255,.25)",
+        boxShadow: "0 2px 8px rgba(61,43,100,.25)",
       }}>
         Download Quidget Plugin ↓
       </a>
