@@ -208,19 +208,19 @@
   color: #CEC8FE;
   white-space: nowrap;
   opacity: 0;
-  animation: q-fade 12s linear infinite;
+  animation: q-fade 12s ease infinite;
 }
-.q-rotate-wrap span:nth-child(1) { animation-delay: -0.5s; }
+.q-rotate-wrap span:nth-child(1) { animation-delay: -0.2s; }
 .q-rotate-wrap span:nth-child(2) { animation-delay: 3s; }
 .q-rotate-wrap span:nth-child(3) { animation-delay: 6s; }
 .q-rotate-wrap span:nth-child(4) { animation-delay: 9s; }
 
 @keyframes q-fade {
-  0%        { opacity: 0; }
-  4%        { opacity: 1; }
-  21%       { opacity: 1; }
-  25%       { opacity: 0; }
-  100%      { opacity: 0; }
+  0%         { opacity: 0; transform: translateY(10px); }
+  1.5%       { opacity: 1; transform: translateY(0); }
+  23.5%      { opacity: 1; transform: translateY(0); }
+  25%        { opacity: 0; transform: translateY(-10px); }
+  100%       { opacity: 0; transform: translateY(-10px); }
 }
 
 /* Flow card label & steps */
