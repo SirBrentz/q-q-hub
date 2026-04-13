@@ -238,7 +238,7 @@
   width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
   background: rgba(77,61,113,.2); display: flex; align-items: center;
   justify-content: center; font-family: var(--font-h);
-  font-size: 12px; font-weight: 700; color: var(--indigo-hover);
+  font-size: 12px; font-weight: 700; color: #fff;
 }
 .q-flow-step strong { display: block; font-size: 15px; font-weight: 700; color: #fff; }
 .q-flow-step span { display: block; font-size: 13px; color: rgba(255,255,255,.6); margin-top: 2px; }
