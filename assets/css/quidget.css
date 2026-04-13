@@ -6,11 +6,11 @@
 /* ─── Nav overrides for dark Quidget nav ─── */
 /* Must override base styles.css which sets white background */
 .nav {
-  background: #3d2b64 !important;
+  background: #232323 !important;
   border-bottom: 1px solid rgba(255,255,255,.06) !important;
 }
 .nav.scrolled {
-  background: #3d2b64 !important;
+  background: #232323 !important;
   box-shadow: 0 2px 16px rgba(0,0,0,.15);
 }
 .nav .nav-links .nav-link {
@@ -24,7 +24,7 @@
 .nav .nav-links .nav-link--active,
 .nav .nav-links .nav-link--active:hover {
   color: #fff;
-  background: rgba(61,43,100,.4);
+  background: rgba(79,53,116,.4);
   font-weight: 600;
 }
 .nav .nav-inner .logo { color: #fff; }
@@ -50,7 +50,7 @@
   position: absolute;
   bottom: 0; left: 0;
   width: 120px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(61,43,100,.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(79,53,116,.5), transparent);
   transform: translateX(var(--mx, 50%));
   transition: transform 0.3s ease, opacity 0.3s ease;
   opacity: 0;
@@ -75,7 +75,7 @@
 .q-particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(61,43,100,.08);
+  background: rgba(79,53,116,.08);
   pointer-events: none;
   z-index: 0;
 }
@@ -114,7 +114,7 @@
   height: 1px;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(61,43,100,.3) var(--fx, 50%),
+    rgba(79,53,116,.3) var(--fx, 50%),
     transparent 100%
   );
   pointer-events: none;
@@ -143,7 +143,7 @@
 /* ─── Hero ─── */
 .q-hero {
   padding: 140px 0 96px;
-  background: #3d2b64;
+  background: #4F3574;
   color: #fff;
   position: relative;
   overflow: hidden;
@@ -153,7 +153,7 @@
   position: absolute;
   top: -300px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(61,43,100,.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79,53,116,.12) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero::after {
@@ -161,7 +161,7 @@
   position: absolute;
   bottom: -200px; left: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(61,43,100,.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(79,53,116,.06) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero-grid {
@@ -195,7 +195,7 @@
   display: block;
   height: 1.15em;
   line-height: 1.15;
-  color: #CFC9FF;
+  color: #A08DC0;
   white-space: nowrap;
   opacity: 0;
   animation: q-fade 16s linear infinite;
@@ -226,7 +226,7 @@
 .q-flow-step:last-child { border-bottom: none; }
 .q-flow-num {
   width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(61,43,100,.2); display: flex; align-items: center;
+  background: rgba(79,53,116,.2); display: flex; align-items: center;
   justify-content: center; font-family: var(--font-h);
   font-size: 12px; font-weight: 700; color: var(--indigo-hover);
 }
@@ -271,7 +271,7 @@
   width: 40px; height: 40px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 16px; font-size: 18px;
-  background: rgba(61,43,100,.08); color: var(--indigo);
+  background: rgba(79,53,116,.08); color: var(--indigo);
 }
 
 /* ─── Pricing strip ─── */
@@ -294,7 +294,7 @@
 
 /* ─── CTA Banner ─── */
 .q-cta {
-  background: #3d2b64; border-radius: var(--r-xl);
+  background: #4F3574; border-radius: var(--r-xl);
   padding: 56px 48px; text-align: center; color: #fff;
 }
 .q-cta h2 { color: #fff; margin-bottom: 10px; }
@@ -325,7 +325,7 @@
   color: var(--text-mid); transition: all 150ms;
 }
 .q-docs-sidebar a:hover { color: var(--navy); background: var(--surface-alt); }
-.q-docs-sidebar a.active { color: var(--indigo); background: rgba(61,43,100,.06); font-weight: 600; }
+.q-docs-sidebar a.active { color: var(--indigo); background: rgba(79,53,116,.06); font-weight: 600; }
 .q-docs-sidebar .divider {
   height: 1px; background: var(--border-lt); margin: 12px 0;
 }
@@ -376,7 +376,7 @@
 .q-version { margin-bottom: 56px; }
 .q-version-header { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
 .q-version-num { font-family: var(--font-h); font-size: 1.6rem; font-weight: 800; color: var(--navy); }
-.q-version-date { font-family: var(--font-h); font-size: 13px; font-weight: 600; color: var(--indigo); background: rgba(61,43,100,.08); padding: 4px 12px; border-radius: var(--r-full); }
+.q-version-date { font-family: var(--font-h); font-size: 13px; font-weight: 600; color: var(--indigo); background: rgba(79,53,116,.08); padding: 4px 12px; border-radius: var(--r-full); }
 .q-group { margin-bottom: 24px; }
 .q-group-title {
   font-family: var(--font-h); font-size: 11px; font-weight: 700;
@@ -403,7 +403,7 @@
   margin: 14px 0;
 }
 .q-callout--info { background: rgba(37,99,235,.06); }
-.q-callout--tip { background: rgba(61,43,100,.06); }
+.q-callout--tip { background: rgba(79,53,116,.06); }
 .q-callout--warning { background: var(--amber-bg); }
 .q-callout--success { background: var(--emerald-bg); }
 .q-callout-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
@@ -449,8 +449,8 @@
 }
 .q-demo-tab:hover { color: var(--navy); background: var(--surface-alt); }
 .q-demo-tab--active {
-  color: var(--indigo); background: rgba(61,43,100,.08);
-  border-color: rgba(61,43,100,.15);
+  color: var(--indigo); background: rgba(79,53,116,.08);
+  border-color: rgba(79,53,116,.15);
 }
 .q-demo-frame {
   max-width: 900px; margin: 0 auto;
@@ -492,7 +492,7 @@
   padding: 3px 10px; border-radius: var(--r-full);
   font-size: 11px; font-weight: 600;
 }
-.q-mock-badge--rx { background: rgba(61,43,100,.08); color: var(--indigo); }
+.q-mock-badge--rx { background: rgba(79,53,116,.08); color: var(--indigo); }
 .q-mock-badge--gfe { background: var(--emerald-bg); color: var(--emerald); }
 .q-mock-badge--active { background: var(--emerald-bg); color: var(--emerald); }
 .q-mock-grid {
@@ -522,7 +522,7 @@
 .q-mock-timer {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 6px 14px; border-radius: var(--r-full);
-  background: rgba(61,43,100,.06); color: var(--indigo);
+  background: rgba(79,53,116,.06); color: var(--indigo);
   font-family: var(--font-h); font-size: 13px; font-weight: 600;
 }
 .q-mock-sidebar {
@@ -535,7 +535,7 @@
   margin-bottom: 2px;
 }
 .q-mock-sidebar-item--active {
-  background: rgba(61,43,100,.06); color: var(--indigo); font-weight: 600;
+  background: rgba(79,53,116,.06); color: var(--indigo); font-weight: 600;
 }
 .q-mock-table { width: 100%; border-collapse: collapse; }
 .q-mock-table th {
@@ -563,8 +563,8 @@
   opacity: 0.85;
 }
 .q-compare-col--after {
-  border-color: rgba(61,43,100,.2);
-  box-shadow: 0 0 0 1px rgba(61,43,100,.05);
+  border-color: rgba(79,53,116,.2);
+  box-shadow: 0 0 0 1px rgba(79,53,116,.05);
 }
 .q-compare-title {
   font-family: var(--font-h); font-size: 14px; font-weight: 700;
@@ -616,7 +616,7 @@
   font-size: 16px;
 }
 .q-trust-icon--hipaa { background: rgba(5,150,105,.08); color: var(--emerald); }
-.q-trust-icon--legit { background: rgba(61,43,100,.08); color: var(--indigo); }
+.q-trust-icon--legit { background: rgba(79,53,116,.08); color: var(--indigo); }
 .q-trust-icon--ssl { background: rgba(37,99,235,.08); color: #2563eb; }
 .q-trust-icon--woo { background: rgba(126,84,191,.08); color: #7c3aed; }
 .q-trust-icon--wp { background: rgba(0,115,170,.08); color: #0073aa; }
