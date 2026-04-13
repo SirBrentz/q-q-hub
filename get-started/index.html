@@ -375,7 +375,7 @@ function IntakeScreen({ onComplete }) {
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center", padding: "40px 20px",
     }}>
-      <div style={{ maxWidth: showCalendly ? 1000 : 480, width: "100%", transition: "max-width 0.3s ease" }}>
+      <div style={{ maxWidth: showCalendly ? 1100 : 480, width: "100%", transition: "max-width 0.3s ease" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <Logo size={36} />
@@ -414,17 +414,16 @@ function IntakeScreen({ onComplete }) {
                   <a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
                     Create Account ↗
                   </a>
-                  {!showCalendly ? (
-                    <button onClick={() => setShowCalendly(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 22px", borderRadius: 10, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", width: "100%", transition: "background .15s" }}>
+                  <button onClick={() => setShowCalendly(true)} style={{ display: showCalendly ? "none" : "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "12px 22px", borderRadius: 10, background: C.bgMuted, color: C.textMuted, fontFamily: "inherit", fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", width: "100%", transition: "background .15s" }}>
                       Not sure yet? Book a demo
                     </button>
-                  ) : (
-                    <div style={{ borderRadius: 10, overflow: "hidden", border: "1px solid " + C.border }}>
-                      <iframe src="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution?embed_type=Inline&hide_gdpr_banner=1" style={{ width: "100%", height: 700, border: "none" }} />
-                    </div>
-                  )}
                 </div>
               </div>
+              {showCalendly && (
+                <div style={{ marginTop: 16, borderRadius: 12, overflow: "hidden", border: "1px solid " + C.border, background: "#fff" }}>
+                  <iframe src="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution?embed_type=Inline&hide_gdpr_banner=1" style={{ width: "100%", height: 700, border: "none", display: "block" }} />
+                </div>
+              )}
             ) : q.id === "hasApiKey" ? (
               /* ── NEEDS API KEY ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
