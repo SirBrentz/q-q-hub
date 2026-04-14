@@ -183,7 +183,17 @@
 .q-hero h1 { color: #fff; margin-bottom: 18px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
 .q-hero p { color: rgba(255,255,255,.65); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
 .q-hero .badge-white { margin-bottom: 20px; }
-.q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+.q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+.q-hero-google {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 8px 16px 8px 10px; border-radius: 999px;
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.08);
+  text-decoration: none; margin-bottom: 24px; transition: background .15s;
+}
+.q-hero-google:hover { background: rgba(255,255,255,.12); }
+.q-hero-google svg { flex-shrink: 0; }
+.q-hero-google span { font-family: var(--font-h); font-size: 12px; font-weight: 600; color: rgba(255,255,255,.7); }
+.q-hero-stars { color: #f5c518 !important; font-size: 14px !important; letter-spacing: 1px; }
 .q-hero-trust { display: flex; gap: 20px; flex-wrap: wrap; }
 .q-hero-trust span {
   font-family: var(--font-h); font-size: 13px; font-weight: 600;
@@ -461,6 +471,7 @@
   .q-hero { padding: 120px 0 64px; text-align: center; }
   .q-hero p { margin-left: auto; margin-right: auto; }
   .q-hero-actions { justify-content: center; }
+  .q-hero-google { margin-left: auto; margin-right: auto; }
   .q-hero-trust { justify-content: center; }
   .q-pricing-strip { grid-template-columns: 1fr 1fr; }
   .q-docs-layout { flex-direction: column; }
