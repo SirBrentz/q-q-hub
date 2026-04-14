@@ -143,7 +143,7 @@
 
 /* ─── Hero ─── */
 .q-hero {
-  padding: 140px 0 96px;
+  padding: 140px 0 120px;
   background: #4D3D71;
   color: #fff;
   position: relative;
@@ -205,15 +205,20 @@
   display: block;
   height: 1.15em;
   line-height: 1.15;
-  color: #CEC8FE;
   white-space: nowrap;
   opacity: 0;
   animation: q-fade 12s ease infinite;
+  background: linear-gradient(90deg, #CEC8FE 0%, #CEC8FE 40%, #fff 50%, #CEC8FE 60%, #CEC8FE 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: q-fade 12s ease infinite, q-shimmer 6s ease-in-out infinite;
 }
-.q-rotate-wrap span:nth-child(1) { animation-delay: -0.2s; }
-.q-rotate-wrap span:nth-child(2) { animation-delay: 3s; }
-.q-rotate-wrap span:nth-child(3) { animation-delay: 6s; }
-.q-rotate-wrap span:nth-child(4) { animation-delay: 9s; }
+.q-rotate-wrap span:nth-child(1) { animation-delay: -0.2s, 0s; }
+.q-rotate-wrap span:nth-child(2) { animation-delay: 3s, 0s; }
+.q-rotate-wrap span:nth-child(3) { animation-delay: 6s, 0s; }
+.q-rotate-wrap span:nth-child(4) { animation-delay: 9s, 0s; }
 
 @keyframes q-fade {
   0%         { opacity: 0; transform: translateY(10px); }
@@ -222,6 +227,18 @@
   25%        { opacity: 0; transform: translateY(-10px); }
   100%       { opacity: 0; transform: translateY(-10px); }
 }
+@keyframes q-shimmer {
+  0%, 100% { background-position: 150% 0; }
+  50% { background-position: -50% 0; }
+}
+
+/* ─── Hero wave dividers ─── */
+.q-hero-waves {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 120px;
+  z-index: 1; pointer-events: none;
+}
+.q-hero-waves svg { width: 100%; height: 100%; display: block; }
+.q-hero-waves--2 { bottom: -2px; opacity: .5; }
 
 /* Flow card label & steps */
 .q-flow-label {
