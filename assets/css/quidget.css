@@ -144,26 +144,26 @@
 /* ─── Hero ─── */
 .q-hero {
   padding: 140px 0 96px;
-  background: #4D3D71;
-  color: #fff;
+  background: #CFC9FF;
+  color: #141216;
   position: relative;
   overflow: hidden;
 }
 .q-hero .btn-primary {
-  background: #fff;
-  color: #4D3D71;
-  box-shadow: 0 2px 12px rgba(255,255,255,.15);
+  background: #4D3D71;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(77,61,113,.25);
 }
 .q-hero .btn-primary:hover {
-  background: #E4DFEF;
-  color: #4D3D71;
+  background: #725F9D;
+  color: #fff;
 }
 .q-hero::before {
   content: '';
   position: absolute;
   top: -300px; right: -200px;
   width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(206,200,254,.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(77,61,113,.06) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero::after {
@@ -171,7 +171,7 @@
   position: absolute;
   bottom: -200px; left: -100px;
   width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(206,200,254,.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(77,61,113,.04) 0%, transparent 70%);
   pointer-events: none;
 }
 .q-hero-grid {
@@ -180,14 +180,14 @@
   gap: 64px;
   align-items: center;
 }
-.q-hero h1 { color: #fff; margin-bottom: 18px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
-.q-hero p { color: rgba(255,255,255,.65); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
-.q-hero .badge-white { margin-bottom: 20px; }
+.q-hero h1 { color: #141216; margin-bottom: 18px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.q-hero p { color: rgba(20,18,22,.6); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
+.q-hero .badge-white { margin-bottom: 20px; background: rgba(77,61,113,.1); color: #4D3D71; }
 .q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
 .q-hero-trust { display: flex; gap: 20px; flex-wrap: wrap; }
 .q-hero-trust span {
   font-family: var(--font-h); font-size: 13px; font-weight: 600;
-  color: rgba(255,255,255,.5); display: flex; align-items: center; gap: 6px;
+  color: rgba(20,18,22,.5); display: flex; align-items: center; gap: 6px;
 }
 .q-hero-trust .check { color: var(--emerald); }
 
@@ -205,7 +205,7 @@
   display: block;
   height: 1.15em;
   line-height: 1.15;
-  color: #CEC8FE;
+  color: #4D3D71;
   white-space: nowrap;
   opacity: 0;
   animation: q-fade 12s ease infinite;
@@ -272,7 +272,7 @@
 .q-verticals .card p { font-size: 14px; color: var(--text-mid); }
 
 /* ─── Features with icon accent ─── */
-.q-features { background: var(--surface); }
+.q-features { background: #CFC9FF; }
 .q-features .card { padding: 28px; }
 .q-features .card h3 {
   font-size: 15px; color: var(--indigo); margin-bottom: 8px;
