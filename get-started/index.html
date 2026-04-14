@@ -89,6 +89,16 @@ const QUESTIONS = [
     blocking: ["no"],
   },
   {
+    id: "hasMedDirector",
+    q: "Does your practice have a Medical Director?",
+    hint: "A Medical Director is required for practices offering medical procedures. If you're unsure or need help with compliance, we can connect you with our compliance team.",
+    options: [
+      { value: "yes", label: "Yes, we have a Medical Director" },
+      { value: "no", label: "No, not yet" },
+    ],
+    blocking: ["no"],
+  },
+  {
     id: "hasApiKey",
     q: "Do you have your API key ready?",
     hint: "Your API key is what connects the plugin to your Qualiphy account. You can find it in your Qualiphy dashboard under Settings.",
@@ -109,11 +119,11 @@ const QUESTIONS = [
   {
     id: "examType",
     q: "What type of consultations will you offer?",
-    hint: "This determines how the plugin handles pharmacy routing and order flow.",
+    hint: "Select all that apply. This determines how the plugin handles pharmacy routing and order flow.",
+    multiSelect: true,
     options: [
       { value: "rx", label: "Rx Consultations", desc: "Consultations with pharmacy fulfillment" },
       { value: "gfe", label: "Good Faith Exams", desc: "Provider clearance for treatments" },
-      { value: "both", label: "Both", desc: "Rx consultations and Good Faith Exams" },
     ],
   },
   {
@@ -350,6 +360,15 @@ function IntakeScreen({ onComplete }) {
   const isBlocked = q.blocking && currentAnswer && (Array.isArray(q.blocking) ? q.blocking.includes(currentAnswer) : q.blocking === currentAnswer);
 
   const answer = (val) => {
+    if (q.multiSelect) {
+      // Toggle checkbox values, store as comma-separated
+      setAnswers(prev => {
+        const current = (prev[q.id] || "").split(",").filter(Boolean);
+        const next = current.includes(val) ? current.filter(v => v !== val) : [...current, val];
+        return { ...prev, [q.id]: next.join(",") };
+      });
+      return; // Don't auto-advance on multi-select
+    }
     setAnswers(prev => ({ ...prev, [q.id]: val }));
     const b = q.blocking;
     if (b && (Array.isArray(b) ? b.includes(val) : b === val)) return;
@@ -424,6 +443,24 @@ function IntakeScreen({ onComplete }) {
                     )}
                 </div>
               </div>
+            ) : q.id === "hasMedDirector" ? (
+              /* ── NO MEDICAL DIRECTOR ── */
+              <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
+                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>You'll need a Medical Director first</div>
+                  <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
+                    A Medical Director is required for practices that perform or advertise medical procedures. They provide oversight, sign treatment protocols, and ensure compliance with state regulations.
+                  </p>
+                </div>
+                <div style={{ padding: "20px 24px", background: "#fff" }}>
+                  <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 14px" }}>
+                    Our Chief Compliance Officer can help you understand the requirements and get set up. Reach out to discuss your situation:
+                  </p>
+                  <a href="mailto:andy@qualiphy.me?subject=Medical Director Inquiry" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
+                    Email Andy — Compliance Team ↗
+                  </a>
+                </div>
+              </div>
             ) : q.id === "hasApiKey" ? (
               /* ── NEEDS API KEY ── */
               <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
@@ -455,7 +492,7 @@ function IntakeScreen({ onComplete }) {
 
             {/* Continue */}
             <div style={{ marginTop: 20, padding: "16px 20px", borderRadius: 10, background: C.bgMuted, textAlign: "center" }}>
-              <Btn onClick={passGate}>{q.id === "hasAccount" ? "I've created my account — continue →" : "I have my API key — continue →"}</Btn>
+              <Btn onClick={passGate}>{q.id === "hasAccount" ? "I've created my account — continue →" : q.id === "hasMedDirector" ? "I have a Medical Director — continue →" : "I have my API key — continue →"}</Btn>
             </div>
             <div style={{ marginTop: 14 }}>
               <Btn variant="ghost" onClick={goBack} small>← Back</Btn>
@@ -477,11 +514,27 @@ function IntakeScreen({ onComplete }) {
               {!q.hint && <div style={{ height: 14 }} />}
 
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {q.options.map(opt => (
-                  <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
-                    {opt.label}
-                  </OptionBtn>
-                ))}
+                {q.multiSelect ? (
+                  q.options.map(opt => {
+                    const selected = (answers[q.id] || "").split(",").includes(opt.value);
+                    return (
+                      <OptionBtn key={opt.value} selected={selected} onClick={() => answer(opt.value)} desc={opt.desc}>
+                        <span style={{ display: "inline-flex", alignItems: "center", gap: 8 }}>
+                          <span style={{ width: 18, height: 18, borderRadius: 4, border: selected ? "none" : "2px solid " + C.border, background: selected ? C.accent : "transparent", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all .15s" }}>
+                            {selected && <span style={{ color: "#fff", fontSize: 12, fontWeight: 700 }}>✓</span>}
+                          </span>
+                          {opt.label}
+                        </span>
+                      </OptionBtn>
+                    );
+                  })
+                ) : (
+                  q.options.map(opt => (
+                    <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
+                      {opt.label}
+                    </OptionBtn>
+                  ))
+                )}
               </div>
             </div>
 
@@ -494,6 +547,8 @@ function IntakeScreen({ onComplete }) {
               )}
               {allDone ? (
                 <Btn onClick={() => onComplete(answers)}>Show my setup guide →</Btn>
+              ) : q.multiSelect && answers[q.id] ? (
+                <Btn variant="secondary" onClick={() => setCurrentQ(currentQ + 1)} small>Next →</Btn>
               ) : currentQ < QUESTIONS.length - 1 && answers[q.id] ? (
                 <Btn variant="secondary" onClick={() => setCurrentQ(currentQ + 1)} small>Next →</Btn>
               ) : null}
@@ -513,8 +568,9 @@ function GuideScreen({ answers, onRestart }) {
   const [activeStep, setActiveStep] = useState(0);
   const contentRef = useRef(null);
 
-  const needsRx   = answers.examType === "rx" || answers.examType === "both";
-  const needsGfe  = answers.examType === "gfe" || answers.examType === "both";
+  const examTypes = (answers.examType || "").split(",");
+  const needsRx   = examTypes.includes("rx");
+  const needsGfe  = examTypes.includes("gfe");
   const needsSubs = answers.hasSubscriptions === "yes";
   const hasProds  = answers.hasProducts === "yes";
   const needsWoo  = answers.hasWoo === "no";
@@ -531,26 +587,38 @@ function GuideScreen({ answers, onRestart }) {
   if (needsWoo) {
     steps.push({ id: "prereqs", title: "Install Prerequisites", render: () => (
       <>
-        <p>Before installing the Qualiphy plugin, you need WooCommerce running on your WordPress site.</p>
+        <p>The Quidget plugin runs on top of WooCommerce — the free e-commerce plugin for WordPress. Here's what you need before installing.</p>
         <Card>
           <h4 style={{ margin: "0 0 12px", fontSize: 14 }}>Required</h4>
           <CheckItem done={false}>
-            <strong>WooCommerce</strong> — Go to Plugins → Add New, search for "WooCommerce", install and activate it. Run the WooCommerce setup wizard to configure basic store settings.
+            <strong>WooCommerce</strong> — Free e-commerce plugin for WordPress. If you don't have it yet, install it from within your WordPress admin (Plugins → Add New → search "WooCommerce") or download it from the link below.
           </CheckItem>
-          <CheckItem done={false} style={{ marginTop: 10 }}>
-            <strong>SSL Certificate</strong> — Your site must use HTTPS. Most hosts provide free SSL. The plugin checks this during setup.
+          <a href="https://wordpress.org/plugins/woocommerce/" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, background: C.accentLight, color: C.accent, fontFamily: "inherit", fontSize: 13, fontWeight: 600, textDecoration: "none", margin: "10px 0 4px" }}>
+            Learn more about WooCommerce ↗
+          </a>
+          <CheckItem done={false} style={{ marginTop: 14 }}>
+            <strong>SSL Certificate (HTTPS)</strong> — Your site must use HTTPS. Most hosting providers include free SSL. The plugin checks this during setup.
           </CheckItem>
-          {needsSubs && (
-            <>
-              <h4 style={{ margin: "16px 0 12px", fontSize: 14 }}>Recommended</h4>
-              <CheckItem done={false}>
-                <strong>WooCommerce Subscriptions</strong> — Required for recurring consultations. Purchase from the WooCommerce marketplace and install it.
-              </CheckItem>
-            </>
-          )}
+          <CheckItem done={false} style={{ marginTop: 14 }}>
+            <strong>Payment Gateway</strong> — For paid consultations, you'll need Stripe, PayPal, or another WooCommerce-compatible gateway configured in WooCommerce → Settings → Payments. Free consultations don't require this.
+          </CheckItem>
         </Card>
-        <Callout type="warning">
-          <strong>You need a payment gateway to test paid consultations.</strong> If you don't have Stripe, PayPal, or another gateway configured in WooCommerce, the exam won't fire after checkout — the order never completes. Set up your payment gateway <em>before</em> running through the Qualiphy setup wizard. Free (non-paid) consultations are not affected.
+        {needsSubs && (
+          <Card style={{ marginTop: 12 }}>
+            <h4 style={{ margin: "0 0 12px", fontSize: 14 }}>Required for Subscriptions</h4>
+            <CheckItem done={false}>
+              <strong>WooCommerce Subscriptions</strong> — Paid extension required for recurring monthly consultations (e.g., weight loss refills). Purchase from the <a href="https://woocommerce.com/products/woocommerce-subscriptions/" target="_blank" rel="noopener" style={{ color: C.accent }}>WooCommerce marketplace</a>.
+            </CheckItem>
+          </Card>
+        )}
+        <Card style={{ marginTop: 12 }}>
+          <h4 style={{ margin: "0 0 12px", fontSize: 14 }}>Optional</h4>
+          <CheckItem done={false}>
+            <strong>WooCommerce Product Bundles</strong> — If you want to offer bundled packages (e.g., consultation + lab kit), this extension lets you group products. Not required for standard consultations.
+          </CheckItem>
+        </Card>
+        <Callout type="info">
+          Qualiphy does not provide support for WooCommerce itself. For WooCommerce setup help, refer to the <a href="https://woocommerce.com/documentation/" target="_blank" rel="noopener" style={{ color: C.accent }}>official WooCommerce documentation</a>.
         </Callout>
       </>
     )});
@@ -569,6 +637,9 @@ function GuideScreen({ answers, onRestart }) {
       }}>
         Download Quidget Plugin ↓
       </a>
+      <div style={{ borderRadius: 10, overflow: "hidden", marginBottom: 16, border: "1px solid " + C.border }}>
+        <iframe src="https://www.youtube.com/embed/Q5061KhEnIU" style={{ width: "100%", aspectRatio: "16/9", border: "none", display: "block" }} allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowFullScreen />
+      </div>
       <Card>
         <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 12 }}>
           <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>
@@ -591,188 +662,57 @@ function GuideScreen({ answers, onRestart }) {
     </>
   )});
 
-  // 2 — Terms & Requirements
-  steps.push({ id: "terms", title: "Terms & Requirements", render: () => (
+  // 2 — Quidget Plugin Wizard (consolidated)
+  steps.push({ id: "wizard", title: "Quidget Plugin Wizard", render: () => (
     <>
-      <p>The first two wizard screens verify your environment and ask you to accept the terms of service.</p>
+      <p>Once the plugin is activated, the setup wizard walks you through everything. Here's what to expect at each step:</p>
+
       <Card>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Welcome Screen</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 16px" }}>
-          Scroll through the terms and conditions to the bottom, then click <strong>I Accept Terms</strong>.
-        </p>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Requirements Check</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-          The wizard verifies SSL and WooCommerce are active. It also shows the status of optional plugins (WooCommerce Subscriptions and WooPayments). Green checkmarks mean you're good — click <strong>Continue</strong>.
-        </p>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>1</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Accept Terms</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Review and accept the terms of service. The wizard also verifies SSL and WooCommerce are active.</p></div>
+          </div>
+
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>2</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Upload Branding</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Add your logo (light and dark versions) and set accent colors. These appear on the exam launch modal, emails, and checkout. You can refine these later under Qualiphy → Settings → Branding.</p></div>
+          </div>
+
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>3</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Connect API Key</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Paste your API key and click Verify. The plugin connects to Qualiphy and syncs your consultations, pharmacies, and exam data automatically.</p></div>
+          </div>
+
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>4</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Set Service Area</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Select which U.S. states you serve. This creates a WooCommerce shipping zone automatically. 48 states + D.C. available (Alabama and Mississippi excluded).{needsRx ? " For Rx consultations, only select states where your pharmacies can fulfill." : ""}</p></div>
+          </div>
+
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>5</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Import Consultations</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Your available consultations appear as cards. Click any card to import it as a WooCommerce product — the import wizard guides you through {hasProds ? "linking to an existing product or creating a new one, " : ""}pricing, {needsRx ? "pharmacy selection, " : ""}and publishing. Repeat for each consultation you want to offer.</p></div>
+          </div>
+
+          <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ width: 26, height: 26, borderRadius: "50%", flexShrink: 0, background: "rgba(77,61,113,.08)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: C.accent }}>6</div>
+            <div><strong style={{ fontSize: 14, color: C.text }}>Configure Settings</strong><p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "2px 0 0" }}>Set clinical access controls (who can view patient data), email notifications, and auto-refund settings.{needsRx ? " Default return fee is $30 — the amount retained if a consultation is deferred." : ""}</p></div>
+          </div>
+        </div>
       </Card>
+
       {needsSubs && (
         <Callout type="warning">
-          Since you want recurring consultations, make sure WooCommerce Subscriptions shows a green checkmark on the requirements screen. If it shows as optional/inactive, install it before continuing.
+          Make sure WooCommerce Subscriptions is active before running the wizard. The requirements screen checks for it — you need a green checkmark to import subscription-based consultations.
         </Callout>
       )}
-    </>
-  )});
 
-  // 3 — Branding
-  steps.push({ id: "branding", title: "Upload Branding", render: () => (
-    <>
-      <p>Add your clinic's logo and brand colors. These appear on patient-facing screens — the exam launch modal, consultation emails, and product pages.</p>
-      <Card>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Logo</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 16px" }}>
-          Upload a PNG or JPEG. You can set separate versions for light and dark backgrounds. PNG with transparent background works best.
-        </p>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Accent Colors</h4>
+      <Card style={{ marginTop: 4 }}>
+        <h4 style={{ margin: "0 0 8px", fontSize: 14 }}>Working with a developer?</h4>
         <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-          Pick a <strong>primary</strong> and <strong>secondary</strong> color for buttons, highlights, and the consultation UI. Use your existing brand colors.
+          Share this page with them — it contains everything they need to complete setup without a call.
         </p>
       </Card>
-      <Callout type="tip">
-        You can change these later under <strong>Qualiphy → Settings → Branding</strong>. Pick something close now and refine after launch.
-      </Callout>
-    </>
-  )});
-
-  // 4 — Connect API Key (user already has key — confirmed in intake)
-  steps.push({ id: "connect", title: "Connect API Key", render: () => (
-    <>
-      <p>This links your WordPress store to the Qualiphy platform. Your API key authenticates all communication between the plugin and Qualiphy's provider and pharmacy network.</p>
-      <Callout type="success">
-        You confirmed you have your API key — paste it in and the plugin verifies the connection automatically.
-      </Callout>
-      <Card>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>In the Quidget plugin setup wizard</h4>
-        <ol style={{ margin: 0, paddingLeft: 20, display: "flex", flexDirection: "column", gap: 10 }}>
-          <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Paste your API key into the field</li>
-          <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>Click <strong>Verify & Continue</strong></li>
-          <li style={{ fontSize: 14, lineHeight: 1.6, color: C.textBody }}>The plugin syncs your consultations, pharmacies, and exam data automatically</li>
-        </ol>
-      </Card>
-      <Callout type="info">
-        Your key is encrypted with AES-256 and stored securely. It cannot be viewed after saving — only replaced.
-      </Callout>
-    </>
-  )});
-
-  // 5 — Service Area
-  steps.push({ id: "states", title: "Set Service Area", render: () => (
-    <>
-      <p>Select which U.S. states you accept consultations from. This controls the states available at checkout and creates a WooCommerce shipping zone automatically.</p>
-      <Card>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 12px" }}>
-          Click the checkbox next to each state, or use <strong>Select All</strong> to enable all 48 available states. Alabama and Mississippi are currently unavailable.
-        </p>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-          Patients in unselected states see a <em>"not available in your area"</em> message at checkout.
-        </p>
-      </Card>
-      {needsRx && (
-        <Callout type="tip">
-          For Rx consultations, your pharmacy coverage may not span all states. Only select states where your pharmacies can fulfill. Check coverage on the <strong>Pharmacies</strong> page after setup.
-        </Callout>
-      )}
-    </>
-  )});
-
-  // 6 — Import Consultations
-  steps.push({ id: "exams", title: "Import Consultations", render: () => {
-    let wizStepNum = 1;
-    return (
-      <>
-        <p>This is the most important step. Your Qualiphy consultations appear as a grid. You'll create WooCommerce products from them using the import wizard.</p>
-        <Card>
-          <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>The Consultation Grid</h4>
-          <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 12px" }}>
-            Each card shows a consultation name, its type ({needsRx && needsGfe ? "Rx or GFE" : needsRx ? "Rx" : "GFE"}), and the Qualiphy cost. A checkmark appears on consultations that already have a linked product.
-          </p>
-          <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-            Click any card to open it, then click the import button to launch the product wizard.
-          </p>
-        </Card>
-
-        <Card style={{ marginTop: 12 }}>
-          <h4 style={{ margin: "0 0 12px", fontSize: 14 }}>The Import Wizard</h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-
-            {hasProds ? (
-              <WizardStep n={wizStepNum++} title="Create New or Link Existing">
-                You'll see the option to <strong>Link Existing Product</strong> — this connects your existing WooCommerce product to the consultation and reconfigures it. Or choose <strong>Create New Product</strong> to start fresh.
-              </WizardStep>
-            ) : (
-              <WizardStep n={wizStepNum++} title="Create New Product">
-                The wizard creates a new WooCommerce product linked to this consultation. Title, description, images, and metadata are set automatically.
-              </WizardStep>
-            )}
-
-            {needsSubs && (
-              <WizardStep n={wizStepNum++} title="Product Type">
-                Choose <strong>One-Time</strong> (simple product) or <strong>Subscription</strong> (recurring). For monthly refills, choose Subscription — billing intervals are configured in the pricing step.
-              </WizardStep>
-            )}
-
-            <WizardStep n={wizStepNum++} title="Free or Paid Checkout">
-              Choose whether this is <strong>free</strong> (instant checkout, no payment) or <strong>standard pricing</strong> (patient pays). Free consultations skip pricing entirely.
-            </WizardStep>
-
-            {needsRx && (
-              <WizardStep n={wizStepNum++} title="Pharmacy Selection">
-                For Rx consultations, you'll see pharmacies that can fulfill this exam. Multiple pharmacies with different packages become <strong>product variations</strong> (e.g., "Semaglutide 0.25mg", "0.5mg"). Each variation links to a specific pharmacy.
-              </WizardStep>
-            )}
-
-            <WizardStep n={wizStepNum++} title="Pricing">
-              Set the patient-facing price. The wizard shows the Qualiphy cost alongside your price so you can see margin. Set a <strong>return fee</strong> — the amount retained if a consultation is deferred.
-              {needsSubs && <span> For subscriptions, also set the <strong>billing frequency</strong> (e.g., every 1 month).</span>}
-            </WizardStep>
-
-            <WizardStep n="✓" title="Review & Publish">
-              Review everything, then <strong>Save as Draft</strong> (preview first) or <strong>Publish</strong> (live immediately).
-            </WizardStep>
-          </div>
-        </Card>
-
-        <Callout type="tip">
-          Repeat for each consultation. The grid checkmark tells you which ones already have products.
-        </Callout>
-
-        <Card style={{ marginTop: 4 }}>
-          <h4 style={{ margin: "0 0 8px", fontSize: 14 }}>Working with a developer?</h4>
-          <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-            If someone else is handling your WordPress site, send them this guide directly — it contains everything they need to complete setup without a call. Share this URL with your developer and they can answer the intake questions for your specific setup.
-          </p>
-        </Card>
-      </>
-    );
-  }});
-
-  // 7 — Settings
-  steps.push({ id: "settings", title: "Configure Settings", render: () => (
-    <>
-      <p>The final wizard screen configures operational settings. Here's what matters for your setup:</p>
-      <Card>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Clinical Access</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 16px" }}>
-          Choose which WordPress users can view patient order data. The admin running setup gets access automatically. Add clinical staff — non-clinical users won't see patient details on orders.
-        </p>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Email Notifications</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 16px" }}>
-          Configure which email addresses receive admin notifications (e.g., exam invite failures). Separate from patient-facing emails which go out automatically.
-        </p>
-        <h4 style={{ margin: "0 0 10px", fontSize: 14 }}>Auto Refund Settings</h4>
-        <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-          When a consultation is deferred, the plugin can automatically refund minus a return fee. The <strong>default return fee</strong> is the amount your clinic keeps for the telehealth visit.
-        </p>
-      </Card>
-      {needsRx && (
-        <Callout type="info">
-          Default return fee is $30. A deferred $150 Rx consultation refunds $120 to the patient and retains $30. Override per-product later.
-        </Callout>
-      )}
-      {needsGfe && !needsRx && (
-        <Callout type="info">
-          Deferred GFE consultations are less common since the provider is clearing the patient for your treatment. The auto-refund is still there as a safety net.
-        </Callout>
-      )}
     </>
   )});
 
@@ -996,7 +936,7 @@ function GuideScreen({ answers, onRestart }) {
             <span style={{ fontSize: 12, color: C.textDim }}>Step {activeStep + 1} of {steps.length}</span>
           </div>
           <div className="topbar-pills" style={{ display: "flex", gap: 4 }}>
-            <SummaryPill label="Type" value={answers.examType === "both" ? "Rx + GFE" : answers.examType?.toUpperCase()} />
+            <SummaryPill label="Type" value={needsRx && needsGfe ? "Rx + GFE" : needsRx ? "Rx" : "GFE"} />
             {needsSubs && <SummaryPill label="Subscriptions" value="Yes" />}
           </div>
         </div>
