@@ -62,7 +62,10 @@
     <div class="q-flow-step"><div class="q-flow-num">4</div><div><strong>Patient connects with provider</strong><span>Popup modal or redirect on thank-you page</span></div></div>
     <div class="q-flow-step"><div class="q-flow-num">5</div><div><strong>Order updates in real-time</strong><span>Webhooks sync status, Rx, and tracking</span></div></div>
   </div>
-</div></div></section>
+</div></div>
+  <div class="q-hero-waves"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,80 C360,20 720,120 1080,60 S1440,80 1440,80 L1440,120 L0,120 Z" fill="rgba(255,255,255,.06)"/></svg></div>
+  <div class="q-hero-waves q-hero-waves--2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,60 C240,100 480,20 720,80 S1200,30 1440,70 L1440,120 L0,120 Z" fill="rgba(207,201,255,.04)"/></svg></div>
+</section>
 
 <!-- WHO IT'S FOR -->
 <section class="section q-verticals"><div class="wrap">
@@ -85,9 +88,23 @@
           <a href="get-started/" style="padding:10px 22px;border-radius:8px;background:#fff;color:#4D3D71;font-family:var(--font-h);font-size:13px;font-weight:600;text-decoration:none">Get Started →</a>
           <a href="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution" target="_blank" rel="noopener" style="padding:10px 22px;border-radius:8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-family:var(--font-h);font-size:13px;font-weight:600;text-decoration:none">Book a Demo</a>
         </div>
-        <div style="padding:14px 16px;background:rgba(207,201,255,.1);border:1px solid rgba(207,201,255,.12);border-radius:10px">
-          <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"Setup took one afternoon. Our patients don't even know it's not built in-house."</div>
-          <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Practice Administrator</div>
+        <div id="testimonialRotator" style="padding:14px 16px;background:rgba(207,201,255,.1);border:1px solid rgba(207,201,255,.12);border-radius:10px;min-height:72px;position:relative;overflow:hidden">
+          <div class="q-testimonial q-testimonial--active" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"As a Medical spa Owner, Qualiphy Has been an amazing strategic partner That has added tremendous value for us. Highly recommend!"</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Clinic Operator</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"Love Qualiphy! It's fast and I'm able to get clients seen same day. I suggest this to every clinic that needs GFE exams. Very efficient."</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Clinic Operator</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"I'm a nurse and I have been using Qualiphy to see my patients before their visits. I am going to say that I have never been happier..."</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Healthcare Provider</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"Appreciate the encouragement and support of the staff at Qualiphy. Each encounter has been very positive and helpful. Highly recommend them!"</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">— Clinic Operator</div>
+          </div>
         </div>
       </div>
     </div>
@@ -423,6 +440,18 @@ if(nav)nav.addEventListener('mousemove',function(e){nav.style.setProperty('--mx'
 // ─── Footer shimmer ───
 var footer=document.querySelector('.footer');
 if(footer)footer.addEventListener('mousemove',function(e){var r=footer.getBoundingClientRect();footer.style.setProperty('--fx',((e.clientX-r.left)/r.width*100)+'%')});
+
+// ─── Testimonial rotator ───
+(function(){
+  var items=document.querySelectorAll('.q-testimonial');
+  if(items.length<2)return;
+  var current=0;
+  setInterval(function(){
+    items[current].classList.remove('q-testimonial--active');
+    current=(current+1)%items.length;
+    items[current].classList.add('q-testimonial--active');
+  },5000);
+})();
 </script>
 <script src="assets/js/main.js" defer></script>
 </body>
