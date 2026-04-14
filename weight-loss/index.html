@@ -32,26 +32,30 @@
       position: relative; display: flex; align-items: center; justify-content: center;
     }
     .wl-hero-duo {
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: flex-end; gap: 20px; position: relative;
     }
     .wl-hero-duo-card {
       border-radius: var(--r-lg); overflow: hidden; position: relative;
-      border: 2px solid rgba(255,255,255,.1);
-      box-shadow: 0 8px 32px rgba(0,0,0,.2);
+      border: 2px solid rgba(255,255,255,.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
+      transition: transform .3s ease, box-shadow .3s ease;
     }
-    .wl-hero-duo-patient { width: 200px; }
-    .wl-hero-duo-provider { width: 260px; }
+    .wl-hero-duo-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.3); }
+    .wl-hero-duo-patient { width: 240px; }
+    .wl-hero-duo-provider { width: 280px; position: relative; top: -24px; }
     .wl-hero-duo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .wl-hero-duo-patient img { aspect-ratio: 3/4; }
-    .wl-hero-duo-provider img { aspect-ratio: 16/10; }
+    .wl-hero-duo-provider img { aspect-ratio: 1/1; }
     .wl-hero-duo-label {
-      position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
       font-family: var(--font-h); font-size: 11px; font-weight: 600;
-      color: #fff; background: rgba(0,0,0,.5); backdrop-filter: blur(6px);
-      padding: 4px 12px; border-radius: 999px; letter-spacing: .03em;
+      color: #fff; background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
+      padding: 5px 14px; border-radius: 999px; letter-spacing: .03em;
+      white-space: nowrap;
     }
     .wl-hero-duo-connector {
-      flex-shrink: 0; width: 24px; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; width: 32px; display: flex; align-items: center; justify-content: center;
+      align-self: center; position: relative; top: -12px;
     }
     .q-hero-google {
       display: inline-flex; align-items: center; gap: 10px;
@@ -232,7 +236,7 @@
           <div class="wl-hero-duo-label">Patient</div>
         </div>
         <div class="wl-hero-duo-connector">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#CEC8FE" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CEC8FE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </div>
         <div class="wl-hero-duo-card wl-hero-duo-provider">
           <img src="img/provider.png" alt="Licensed healthcare provider on video call">
