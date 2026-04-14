@@ -600,8 +600,16 @@ function GuideScreen({ answers, onRestart }) {
             <strong>SSL Certificate (HTTPS)</strong> — Your site must use HTTPS. Most hosting providers include free SSL. The plugin checks this during setup.
           </CheckItem>
           <CheckItem done={false} style={{ marginTop: 14 }}>
-            <strong>Payment Gateway</strong> — For paid consultations, you'll need Stripe, PayPal, or another WooCommerce-compatible gateway configured in WooCommerce → Settings → Payments. Free consultations don't require this.
+            <strong>Payment Gateway</strong> — Required for paid consultations. Two recommended options:
           </CheckItem>
+          <div style={{ paddingLeft: 28, display: "flex", flexDirection: "column", gap: 6, marginTop: 4 }}>
+            <a href="https://woocommerce.com/document/woopayments/startup-guide/" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, background: C.accentLight, color: C.accent, fontFamily: "inherit", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+              WooPayments (Free) — powered by Stripe ↗
+            </a>
+            <a href="https://woocommerce.com/products/authorize-net/" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, background: C.accentLight, color: C.accent, fontFamily: "inherit", fontSize: 13, fontWeight: 600, textDecoration: "none" }}>
+              Authorize.net (Paid) — recommended for telehealth ↗
+            </a>
+          </div>
         </Card>
         {needsSubs && (
           <Card style={{ marginTop: 12 }}>
@@ -616,6 +624,9 @@ function GuideScreen({ answers, onRestart }) {
           <CheckItem done={false}>
             <strong>WooCommerce Product Bundles</strong> — If you want to offer bundled packages (e.g., consultation + lab kit), this extension lets you group products. Not required for standard consultations.
           </CheckItem>
+          <a href="https://woocommerce.com/products/product-bundles/" target="_blank" rel="noopener" style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "8px 16px", borderRadius: 8, background: C.accentLight, color: C.accent, fontFamily: "inherit", fontSize: 13, fontWeight: 600, textDecoration: "none", margin: "6px 0 0 28px" }}>
+            WooCommerce Product Bundles ↗
+          </a>
         </Card>
         <Callout type="info">
           Qualiphy does not provide support for WooCommerce itself. For WooCommerce setup help, refer to the <a href="https://woocommerce.com/documentation/" target="_blank" rel="noopener" style={{ color: C.accent }}>official WooCommerce documentation</a>.
