@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>GLP-1 &amp; Weight Loss Telehealth for WooCommerce — Quidget by Qualiphy</title>
+  <meta name="description" content="Launch GLP-1 weight loss consultations from your WooCommerce store. Semaglutide and tirzepatide programs with licensed providers, pharmacy fulfillment, and medication delivery. No signup fees.">
+  <meta name="keywords" content="GLP-1 telehealth plugin, weight loss WooCommerce, semaglutide clinic WordPress, tirzepatide telehealth, medical weight loss plugin, weight loss ecommerce, GLP-1 pharmacy fulfillment">
+  <link rel="icon" href="../assets/img/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/quidget.css">
+  <style>
+    /* ─── Page-specific styles ─── */
+    .wl-hero { padding: 140px 0 130px; background: #4D3D71; color: #fff; position: relative; overflow: hidden; }
+    .wl-hero::before { content: ''; position: absolute; top: -300px; right: -200px; width: 700px; height: 700px; background: radial-gradient(circle, rgba(206,200,254,.08) 0%, transparent 70%); pointer-events: none; }
+    .wl-hero::after { content: ''; position: absolute; bottom: -200px; left: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(206,200,254,.05) 0%, transparent 70%); pointer-events: none; }
+    .wl-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .wl-hero h1 { color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.5rem); margin-bottom: 18px; line-height: 1.15; }
+    .wl-hero h1 em { font-style: normal; color: #CEC8FE; }
+    .wl-hero p { color: rgba(255,255,255,.6); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; line-height: 1.65; }
+    .wl-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 28px; }
+    .wl-hero .btn-primary { background: #fff; color: #4D3D71; box-shadow: 0 2px 12px rgba(255,255,255,.15); }
+    .wl-hero .btn-primary:hover { background: #E4DFEF; color: #4D3D71; }
+    .wl-hero .btn-ghost-light { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.15); padding: 14px 28px; border-radius: 10px; font-family: var(--font-h); font-weight: 600; font-size: 15px; }
+    .wl-hero .badge-white { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-h); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); margin-bottom: 20px; }
+
+    /* Hero image placeholder */
+    .wl-hero-visual {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--r-xl); padding: 0; overflow: hidden; position: relative;
+      aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+    }
+    .wl-hero-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .wl-placeholder {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+      color: rgba(255,255,255,.25); font-family: var(--font-h); font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .05em;
+    }
+    .wl-placeholder svg { width: 40px; height: 40px; opacity: .3; }
+
+    /* Trust strip */
+    .wl-trust-strip {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      padding: 32px 0; border-bottom: 1px solid var(--border-lt);
+    }
+    .wl-trust-strip span {
+      font-family: var(--font-h); font-size: 13px; font-weight: 600;
+      color: var(--text-lt); display: flex; align-items: center; gap: 6px;
+    }
+    .wl-trust-strip .ck { color: var(--emerald); }
+
+    /* Steps section */
+    .wl-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 48px; counter-reset: step; }
+    .wl-step { position: relative; text-align: center; }
+    .wl-step-num {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(77,61,113,.08); color: var(--indigo);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-h); font-size: 18px; font-weight: 800;
+      margin: 0 auto 16px;
+    }
+    .wl-step h3 { font-size: 17px; margin-bottom: 8px; }
+    .wl-step p { font-size: 14px; color: var(--text-lt); line-height: 1.6; }
+    .wl-step-connector {
+      position: absolute; top: 24px; left: calc(50% + 32px); width: calc(100% - 64px);
+      height: 1px; background: var(--border); z-index: 0;
+    }
+
+    /* Pillars section */
+    .wl-pillars { background: var(--surface); }
+    .wl-pillar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .wl-pillar {
+      background: #fff; border-radius: var(--r-lg); padding: 32px;
+      border: 1px solid var(--border-lt); position: relative; overflow: hidden;
+      transition: all var(--dur) var(--ease);
+    }
+    .wl-pillar:hover { border-color: var(--border); box-shadow: var(--sh-md); transform: translateY(-3px); }
+    .wl-pillar::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--indigo); transform: scaleX(0); transform-origin: left; transition: transform var(--dur) var(--ease); }
+    .wl-pillar:hover::after { transform: scaleX(1); }
+    .wl-pillar-icon {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: rgba(77,61,113,.06); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 20px; color: var(--indigo);
+    }
+    .wl-pillar h3 { font-size: 17px; margin-bottom: 8px; }
+    .wl-pillar p { font-size: 14px; color: var(--text-lt); line-height: 1.6; }
+    .wl-pillar-img {
+      width: 100%; aspect-ratio: 16/10; border-radius: var(--r);
+      background: var(--surface-alt); margin-top: 20px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wl-pillar-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Provider section */
+    .wl-provider-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .wl-provider-img {
+      border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4/3;
+      background: var(--surface-alt);
+    }
+    .wl-provider-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .wl-provider-list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+    .wl-provider-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 15px; color: var(--text-mid); line-height: 1.5;
+    }
+    .wl-provider-check {
+      width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0;
+      background: rgba(77,61,113,.06); color: var(--indigo);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; margin-top: 1px;
+    }
+
+    /* Bottom CTA */
+    .wl-cta {
+      background: #4D3D71; border-radius: var(--r-xl);
+      padding: 56px 48px; text-align: center; color: #fff; position: relative; overflow: hidden;
+    }
+    .wl-cta::before { content: ''; position: absolute; top: -200px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(206,200,254,.08) 0%, transparent 70%); }
+    .wl-cta h2 { color: #fff; margin-bottom: 12px; position: relative; }
+    .wl-cta p { color: rgba(255,255,255,.6); margin: 0 auto 28px; max-width: 500px; position: relative; }
+    .wl-cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .wl-cta .btn-primary { background: #fff; color: #4D3D71; }
+    .wl-cta .btn-primary:hover { background: #E4DFEF; }
+
+    /* FAQ */
+    .wl-faq { max-width: 720px; margin: 0 auto; }
+    .wl-faq-item { border-bottom: 1px solid var(--border-lt); }
+    .wl-faq-q {
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 20px 0; cursor: pointer; font-family: var(--font-h);
+      font-size: 15px; font-weight: 600; color: var(--navy);
+      transition: color .15s;
+    }
+    .wl-faq-q:hover { color: var(--indigo); }
+    .wl-faq-q::after {
+      content: '+'; font-size: 20px; font-weight: 400; color: var(--text-lt);
+      transition: transform .2s; flex-shrink: 0;
+    }
+    .wl-faq-item.open .wl-faq-q::after { transform: rotate(45deg); }
+    .wl-faq-a {
+      max-height: 0; overflow: hidden; transition: max-height .3s ease;
+      font-size: 14px; color: var(--text-lt); line-height: 1.7;
+    }
+    .wl-faq-item.open .wl-faq-a { max-height: 300px; }
+    .wl-faq-a-inner { padding: 0 0 20px; }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .wl-hero-grid { grid-template-columns: 1fr; }
+      .wl-hero-visual { display: none; }
+      .wl-pillar-grid { grid-template-columns: 1fr; }
+      .wl-provider-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .wl-hero { padding: 120px 0 100px; text-align: center; }
+      .wl-hero p { margin-left: auto; margin-right: auto; }
+      .wl-hero-actions { justify-content: center; }
+      .wl-steps-grid { grid-template-columns: 1fr; gap: 32px; }
+      .wl-step-connector { display: none; }
+      .wl-trust-strip { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="../" class="logo"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 800 800" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div><span style="display:flex;flex-direction:column;line-height:1.1">Quidget<span class="logo-sub">by Qualiphy</span></span></a>
+    <div class="nav-links">
+      <a href="../" class="nav-link">Overview</a>
+      <a href="../help/" class="nav-link">Help Center</a>
+      <a href="../changelog/" class="nav-link">Changelog</a>
+    </div>
+    <div class="nav-actions"><a href="../get-started/" class="btn btn-primary btn-sm">Get Started →</a></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="wl-hero">
+  <div class="wrap"><div class="wl-hero-grid">
+    <div>
+      <div class="wl-hero badge-white">WordPress Plugin for WooCommerce</div>
+      <h1>Launch <em>GLP-1 weight loss</em> programs from your WooCommerce store</h1>
+      <p>Scale Semaglutide and Tirzepatide consultations nationwide. Licensed providers, pharmacy fulfillment, and medication delivery — all automated through your existing WordPress site.</p>
+      <div class="wl-hero-actions">
+        <a href="../get-started/" class="btn btn-primary btn-lg">Start Setup Guide →</a>
+        <a href="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution" target="_blank" rel="noopener" class="btn-ghost-light">Schedule a Demo</a>
+      </div>
+    </div>
+    <div class="wl-hero-visual">
+      <!-- Replace with hero image: weight loss consultation, patient on video call, or medication packaging -->
+      <div class="wl-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        Hero Image
+      </div>
+    </div>
+  </div></div>
+  <div class="q-hero-waves"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,80 C360,20 720,120 1080,60 S1440,80 1440,80 L1440,120 L0,120 Z" fill="rgba(255,255,255,.06)"/></svg></div>
+  <div class="q-hero-waves q-hero-waves--2"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,60 C240,100 480,20 720,80 S1200,30 1440,70 L1440,120 L0,120 Z" fill="rgba(207,201,255,.04)"/></svg></div>
+</section>
+
+<!-- TRUST STRIP -->
+<section><div class="wrap">
+  <div class="wl-trust-strip">
+    <span><span class="ck">✓</span> No signup fees</span>
+    <span><span class="ck">✓</span> Medication delivery</span>
+    <span><span class="ck">✓</span> No contracts</span>
+    <span><span class="ck">✓</span> Pay as you go</span>
+    <span><span class="ck">✓</span> Self-serve setup</span>
+    <span><span class="ck">✓</span> 48 states + D.C.</span>
+  </div>
+</div></section>
+
+<!-- HOW IT WORKS — Click to Treatment -->
+<section class="section"><div class="wrap">
+  <div class="section-header animate-in">
+    <div class="badge">From click to treatment</div>
+    <h2>Three steps. Fully automated.</h2>
+    <p>From the moment a patient visits your site to medication arriving at their door — nothing requires manual intervention.</p>
+  </div>
+  <div class="wl-steps-grid animate-in">
+    <div class="wl-step">
+      <div class="wl-step-num">1</div>
+      <h3>Patient selects a program</h3>
+      <p>Weight loss consultations appear as WooCommerce products on your store. Patients choose their program, complete checkout, and provide basic health info.</p>
+      <div class="wl-step-connector"></div>
+    </div>
+    <div class="wl-step">
+      <div class="wl-step-num">2</div>
+      <h3>Instant provider connection</h3>
+      <p>A licensed provider connects with the patient via video in seconds. The consultation is structured, compliant, and reviewed in real time.</p>
+      <div class="wl-step-connector"></div>
+    </div>
+    <div class="wl-step">
+      <div class="wl-step-num">3</div>
+      <h3>Medication delivered</h3>
+      <p>If the provider determines treatment is appropriate, the prescription is routed to a partner pharmacy and shipped directly to the patient.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- END-TO-END SYSTEM -->
+<section class="section wl-pillars"><div class="wrap">
+  <div class="section-header animate-in">
+    <div class="badge">End-to-end system</div>
+    <h2>Consultation. Fulfillment. Delivery.</h2>
+    <p>Everything from the provider consultation to the patient receiving their medication — handled automatically through the plugin.</p>
+  </div>
+  <div class="wl-pillar-grid animate-in">
+    <div class="wl-pillar">
+      <div class="wl-pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 12l2 2 4-4"/><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg></div>
+      <h3>Rx Fulfillment</h3>
+      <p>When a provider prescribes, the order routes to the correct partner pharmacy based on patient state and medication type. No manual coordination.</p>
+      <div class="wl-pillar-img">
+        <!-- Replace: pharmacy/fulfillment imagery -->
+        <div class="wl-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Image</div>
+      </div>
+    </div>
+    <div class="wl-pillar">
+      <div class="wl-pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+      <h3>Medication Delivery</h3>
+      <p>Medications ship directly to the patient. Tracking numbers sync to the WooCommerce order automatically via webhook so both you and the patient stay informed.</p>
+      <div class="wl-pillar-img">
+        <!-- Replace: delivery/shipping imagery -->
+        <div class="wl-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Image</div>
+      </div>
+    </div>
+    <div class="wl-pillar">
+      <div class="wl-pillar-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+      <h3>Patient Portal</h3>
+      <p>Patients can reconnect with a provider for follow-up questions about their treatment through a secure portal — no scheduling calls or back-and-forth emails.</p>
+      <div class="wl-pillar-img">
+        <!-- Replace: patient portal/app imagery -->
+        <div class="wl-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Image</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- BACKED BY PROVIDERS -->
+<section class="section"><div class="wrap">
+  <div class="wl-provider-grid animate-in">
+    <div>
+      <div class="badge">Licensed provider network</div>
+      <h2 style="margin-top:16px">Backed by licensed providers across 48 states</h2>
+      <p style="color:var(--text-lt);margin-top:12px;line-height:1.7">Every weight loss consultation is conducted by a licensed healthcare provider through Qualiphy's network. Your patients get real clinical oversight — your clinic gets compliant, scalable telehealth.</p>
+      <div class="wl-provider-list">
+        <div class="wl-provider-item"><div class="wl-provider-check">✓</div> Provider-reviewed consultations for every patient</div>
+        <div class="wl-provider-item"><div class="wl-provider-check">✓</div> Structured, compliant clinical workflows</div>
+        <div class="wl-provider-item"><div class="wl-provider-check">✓</div> Multi-state licensing for nationwide reach</div>
+        <div class="wl-provider-item"><div class="wl-provider-check">✓</div> On-demand video consultations — 7 days a week</div>
+      </div>
+    </div>
+    <div class="wl-provider-img">
+      <!-- Replace: provider on video call, professional healthcare setting -->
+      <div class="wl-placeholder" style="height:100%;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;border-radius:var(--r-xl)">
+        <div style="text-align:center;color:var(--text-lt)">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.3"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div style="font-family:var(--font-h);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:8px;opacity:.4">Provider Image</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section" style="background:var(--surface)"><div class="wrap">
+  <div class="section-header animate-in">
+    <div class="badge">Plugin features</div>
+    <h2>Built for weight loss programs</h2>
+    <p>Every feature you need to run GLP-1 consultations through your WooCommerce store.</p>
+  </div>
+  <div class="grid-3 animate-in" id="wlFeatures"></div>
+</div></section>
+
+<!-- PRICING -->
+<section class="section" style="max-width:860px;margin:0 auto"><div class="wrap" style="text-align:center">
+  <div class="section-header animate-in">
+    <div class="badge badge-green">Transparent pricing</div>
+    <h2>Simple, predictable costs</h2>
+    <p>No tiers, no gates. You set the patient-facing price, Qualiphy charges per consultation.</p>
+  </div>
+  <div class="animate-in" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px" id="wlPricing"></div>
+  <p class="animate-in" style="font-size:14px;color:var(--text-lt);max-width:560px;margin:0 auto">You control the patient price. The default margin is configurable per product in the plugin.</p>
+</div></section>
+
+<!-- TRUST BADGES -->
+<section class="q-trust animate-in"><div class="wrap">
+  <div class="q-trust-grid" id="wlTrust"></div>
+</div></section>
+
+<!-- FAQ -->
+<section class="section"><div class="wrap">
+  <div class="section-header animate-in">
+    <div class="badge">Common questions</div>
+    <h2>GLP-1 program FAQ</h2>
+  </div>
+  <div class="wl-faq animate-in" id="wlFaq"></div>
+</div></section>
+
+<!-- CTA -->
+<section class="section-sm"><div class="wrap" style="max-width:760px">
+  <div class="wl-cta animate-in">
+    <h2>Ready to launch weight loss consultations?</h2>
+    <p>Walk through our guided setup — no onboarding call required.</p>
+    <div class="wl-cta-actions">
+      <a href="../get-started/" class="btn btn-primary btn-lg">Start Setup Guide →</a>
+      <a href="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution" target="_blank" rel="noopener" class="btn btn-ghost" style="color:rgba(255,255,255,.7)">Book a Demo</a>
+    </div>
+  </div>
+</div></section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="color:#fff"><div class="logo-mark"><svg width="18" height="18" viewBox="0 0 800 800" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div>Quidget</div>
+      <p>Telehealth consultations built into WooCommerce. Powered by Qualiphy PC.</p>
+      <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" class="footer-google"><svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0124 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 01-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span><strong>4.9</strong> &middot; 5,000+ reviews</span></a>
+      <div class="footer-contact-info"><a href="mailto:support@qualiphy.me">support@qualiphy.me</a><span>7 days &middot; 6AM–7PM PST &middot; 365 days/year</span></div>
+    </div>
+    <div><div class="footer-heading">Product</div><a href="../" class="footer-link">Overview</a><a href="../get-started/" class="footer-link">Get Started</a><a href="../help/" class="footer-link">Help Center</a><a href="../changelog/" class="footer-link">Changelog</a><a href="./" class="footer-link">GLP-1 &amp; Weight Loss</a></div>
+    <div><div class="footer-heading">Qualiphy</div><a href="https://qualiphy.me" target="_blank" rel="noopener" class="footer-link">qualiphy.me</a><a href="https://app.qualiphy.me" target="_blank" rel="noopener" class="footer-link">Clinic Dashboard</a><a href="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution" target="_blank" rel="noopener" class="footer-link">Book a Demo</a><a href="https://app.qualiphy.me/signup" target="_blank" rel="noopener" class="footer-link">Sign Up Free</a></div>
+    <div><div class="footer-heading">Resources</div><a href="../help/" class="footer-link">Help Center</a><a href="../get-started/" class="footer-link">Setup Guide</a><a href="../changelog/" class="footer-link">Changelog</a></div>
+  </div>
+  <div class="footer-bottom"><span>&copy; 2026 Qualiphy PC. All rights reserved.</span><div class="footer-legal"><a href="https://qualiphy.me/privacy">Privacy Policy</a><a href="https://qualiphy.me/terms">Terms of Use</a></div><div class="footer-socials"><a href="https://www.facebook.com/qualiphyme26" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.linkedin.com/company/qualiphy-pc" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://www.instagram.com/qualiphy.me/" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a></div></div>
+</div></footer>
+
+<script>
+// ─── Features grid ───
+var features = [
+  { t: "Subscription Billing", d: "WooCommerce Subscriptions for monthly GLP-1 refills with auto-renewal exam invites. Patients stay on protocol without re-enrolling." },
+  { t: "Pharmacy Routing", d: "When prescribed, fulfillment routes to the correct partner pharmacy by patient state. Semaglutide, Tirzepatide, and other medications covered." },
+  { t: "Automated Exam Invites", d: "Invites fire on payment confirmation. Patients connect with a provider immediately — no scheduling delays." },
+  { t: "Dose Questionnaire", d: "Returning patients answer a 3-step flow: previous use, current dose, and adjustment preference. Providers see this before the consultation." },
+  { t: "Webhook Automation", d: "Consultation status, Rx details, and tracking updates sync to WooCommerce orders automatically. No manual data entry." },
+  { t: "White-Label Branding", d: "Your logo, colors, and copy on the exam launch modal, emails, and checkout. Patients see your brand, not ours." },
+  { t: "Auto Refunds", d: "Deferred consultations trigger automatic partial refunds with configurable return fees per product." },
+  { t: "Clinical Access Controls", d: "Only designated staff can view patient consultation data in the WordPress admin. Protect patient privacy." },
+  { t: "Multi-State Coverage", d: "Licensed providers across 48 states + D.C. Select your service area in the setup wizard and the plugin handles state routing." },
+];
+var fg = document.getElementById('wlFeatures');
+features.forEach(function(f) {
+  fg.innerHTML += '<div class="card animate-in"><h3>' + f.t + '</h3><p>' + f.d + '</p></div>';
+});
+
+// ─── Pricing ───
+var pricing = [
+  { n: "$0", l: "signup fee" },
+  { n: "$0", l: "monthly fee" },
+  { n: "None", l: "contracts" },
+  { n: "Per visit", l: "per consultation" },
+];
+var pg = document.getElementById('wlPricing');
+pricing.forEach(function(p) {
+  pg.innerHTML += '<div style="background:var(--white);border:1px solid var(--border-lt);border-radius:var(--r-lg);padding:28px 20px;text-align:center"><div style="font-family:var(--font-h);font-size:28px;font-weight:800;color:var(--navy)">' + p.n + '</div><div style="font-size:13px;color:var(--text-lt);margin-top:6px">' + p.l + '</div></div>';
+});
+
+// ─── Trust badges ───
+var trust = [
+  { icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>', t: "SSL Encrypted" },
+  { icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>', t: "WooCommerce Native" },
+  { icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>', t: "WordPress Plugin" },
+  { icon: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>', t: "Pay As You Go" },
+];
+var tg = document.getElementById('wlTrust');
+trust.forEach(function(b) {
+  tg.innerHTML += '<div class="q-trust-badge">' + b.icon + b.t + '</div>';
+});
+
+// ─── FAQ ───
+var faqs = [
+  { q: "Do I need a medical director to offer GLP-1 consultations?", a: "Yes. A Medical Director is required for practices offering medical procedures. If you don't have one, our compliance team can help you understand the requirements and get set up through the onboarding flow." },
+  { q: "Which GLP-1 medications can be prescribed through Qualiphy?", a: "Providers can prescribe Semaglutide, Tirzepatide, and other compounded weight loss medications through partner pharmacies. The specific medications available depend on pharmacy coverage in the patient's state." },
+  { q: "Can patients get recurring monthly refills?", a: "Yes. With WooCommerce Subscriptions installed, you can offer monthly subscription products that automatically trigger a new consultation each billing cycle. Patients stay on their treatment protocol without re-enrolling." },
+  { q: "How does pharmacy routing work for weight loss medications?", a: "When a provider determines treatment is appropriate, the plugin routes the order to a partner pharmacy based on the patient's state and the specific medication. Each consultation product is mapped to pharmacies during setup." },
+  { q: "What does the patient experience look like?", a: "The patient purchases a consultation on your WooCommerce store, fills in basic health info at checkout, and connects with a licensed provider via video on the confirmation page. If treatment is prescribed, medication ships to their door. The entire experience is branded to your clinic." },
+  { q: "How much does Qualiphy charge per consultation?", a: "Qualiphy charges a flat per-consultation fee. There are no signup fees, monthly fees, or contracts. You set the patient-facing price and keep the margin. Pricing details are visible during product setup in the plugin." },
+  { q: "Is this plugin only for weight loss?", a: "No. Quidget supports any consultation type — Good Faith Exams for aesthetic procedures, Rx consultations, wellness exams, and more. This page focuses on weight loss, but the plugin is flexible enough for any telehealth use case." },
+];
+var faqEl = document.getElementById('wlFaq');
+faqs.forEach(function(f) {
+  var item = document.createElement('div');
+  item.className = 'wl-faq-item';
+  item.innerHTML = '<div class="wl-faq-q">' + f.q + '</div><div class="wl-faq-a"><div class="wl-faq-a-inner">' + f.a + '</div></div>';
+  item.querySelector('.wl-faq-q').addEventListener('click', function() {
+    item.classList.toggle('open');
+  });
+  faqEl.appendChild(item);
+});
+</script>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

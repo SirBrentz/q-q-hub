@@ -352,6 +352,7 @@ function IntakeScreen({ onComplete }) {
   const [answers, setAnswers] = useState({});
   const [currentQ, setCurrentQ] = useState(0);
   const [showCalendly, setShowCalendly] = useState(false);
+  const [showComplianceCal, setShowComplianceCal] = useState(false);
 
   const q = QUESTIONS[currentQ];
   const allDone = Object.keys(answers).length === QUESTIONS.length;
@@ -395,7 +396,7 @@ function IntakeScreen({ onComplete }) {
       minHeight: "100vh", display: "flex", flexDirection: "column",
       alignItems: "center", justifyContent: "center", padding: "40px 20px",
     }}>
-      <div style={{ maxWidth: showCalendly ? 680 : 480, width: "100%", transition: "max-width 0.3s ease" }}>
+      <div style={{ maxWidth: (showCalendly || showComplianceCal) ? 680 : 480, width: "100%", transition: "max-width 0.3s ease" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 40 }}>
           <Logo size={36} />
@@ -453,13 +454,19 @@ function IntakeScreen({ onComplete }) {
                     A Medical Director is required for practices that perform or advertise medical procedures. They provide oversight, sign treatment protocols, and ensure compliance with state regulations.
                   </p>
                 </div>
-                <div style={{ padding: "20px 24px", background: "#fff" }}>
-                  <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: "0 0 14px" }}>
-                    Our Chief Compliance Officer can help you understand the requirements and get set up. Reach out to discuss your situation:
+                <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
+                    Schedule a free compliance consultation to discuss your requirements and next steps.
                   </p>
-                  <a href="mailto:andy@qualiphy.me?subject=Medical Director Inquiry" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
-                    Email Andy — Compliance Team ↗
-                  </a>
+                  {!showComplianceCal ? (
+                    <button onClick={() => setShowComplianceCal(true)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, border: "none", cursor: "pointer", width: "100%", transition: "background .15s" }}>
+                      Schedule Compliance Consultation
+                    </button>
+                  ) : (
+                    <div style={{ borderRadius: 10, overflow: "hidden", border: "1px solid " + C.border, background: "#fff" }}>
+                      <iframe src="https://calendly.com/admin-unparalleled/30min?embed_type=Inline&hide_gdpr_banner=1" style={{ width: "100%", height: 680, border: "none", display: "block" }} />
+                    </div>
+                  )}
                 </div>
               </div>
             ) : q.id === "hasApiKey" ? (
