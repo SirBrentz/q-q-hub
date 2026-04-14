@@ -27,36 +27,40 @@
     .wl-hero .btn-ghost-light { background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); border: 1px solid rgba(255,255,255,.15); padding: 14px 28px; border-radius: 10px; font-family: var(--font-h); font-weight: 600; font-size: 15px; }
     .wl-hero .badge-white { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-h); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; padding: 6px 16px; border-radius: 999px; background: rgba(255,255,255,.1); color: rgba(255,255,255,.85); margin-bottom: 20px; }
 
-    /* Hero image - dual layout */
-    .wl-hero-visual {
-      position: relative; display: flex; align-items: center; justify-content: center;
+    /* Hero steps - compact flow */
+    .wl-hero-visual { position: relative; }
+    .wl-hero-steps { display: flex; flex-direction: column; gap: 12px; }
+    .wl-hero-steps-title {
+      font-family: var(--font-h); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .06em; color: rgba(255,255,255,.4);
+      margin-bottom: 4px;
     }
-    .wl-hero-duo {
-      display: flex; align-items: flex-end; gap: 20px; position: relative;
+    .wl-hero-step {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 12px; padding: 16px 18px;
+      transition: background .2s, border-color .2s;
     }
-    .wl-hero-duo-card {
-      border-radius: var(--r-lg); overflow: hidden; position: relative;
-      border: 2px solid rgba(255,255,255,.12);
-      box-shadow: 0 12px 40px rgba(0,0,0,.25);
-      transition: transform .3s ease, box-shadow .3s ease;
+    .wl-hero-step:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.14); }
+    .wl-hero-step-num {
+      width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+      background: rgba(206,200,254,.15); color: #CEC8FE;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-h); font-size: 12px; font-weight: 700;
+      margin-top: 1px;
     }
-    .wl-hero-duo-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,.3); }
-    .wl-hero-duo-patient { width: 240px; }
-    .wl-hero-duo-provider { width: 280px; position: relative; top: -24px; }
-    .wl-hero-duo-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .wl-hero-duo-patient img { aspect-ratio: 3/4; }
-    .wl-hero-duo-provider img { aspect-ratio: 1/1; }
-    .wl-hero-duo-label {
-      position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-      font-family: var(--font-h); font-size: 11px; font-weight: 600;
-      color: #fff; background: rgba(0,0,0,.45); backdrop-filter: blur(8px);
-      padding: 5px 14px; border-radius: 999px; letter-spacing: .03em;
-      white-space: nowrap;
+    .wl-hero-step h4 {
+      font-family: var(--font-h); font-size: 14px; font-weight: 700;
+      color: #fff; margin: 0 0 3px;
     }
-    .wl-hero-duo-connector {
-      flex-shrink: 0; width: 32px; display: flex; align-items: center; justify-content: center;
-      align-self: center; position: relative; top: -12px;
+    .wl-hero-step p {
+      font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.5;
+      margin: 0; max-width: none;
     }
+    .wl-hero-step-connector {
+      display: flex; justify-content: center; padding-left: 22px;
+    }
+    .wl-hero-step-connector svg { opacity: .25; }
     .q-hero-google {
       display: inline-flex; align-items: center; gap: 10px;
       padding: 8px 16px 8px 10px; border-radius: 999px;
@@ -78,46 +82,6 @@
       color: var(--text-lt); display: flex; align-items: center; gap: 6px;
     }
     .wl-trust-strip .ck { color: var(--emerald); }
-
-    /* Steps timeline - vertical */
-    .wl-timeline { max-width: 640px; margin: 48px auto 0; position: relative; }
-    .wl-timeline::before {
-      content: ''; position: absolute; left: 80px; top: 24px; bottom: 24px;
-      width: 2px; background: var(--border);
-    }
-    .wl-timeline-step {
-      display: grid; grid-template-columns: 80px 24px 1fr; gap: 20px;
-      align-items: start; margin-bottom: 40px; position: relative;
-    }
-    .wl-timeline-step:last-child { margin-bottom: 0; }
-    .wl-timeline-label {
-      font-family: var(--font-h); font-size: 14px; font-weight: 700;
-      color: var(--text-lt); text-align: right; padding-top: 18px;
-    }
-    .wl-timeline-dot {
-      width: 24px; height: 24px; border-radius: 50%;
-      background: var(--indigo); border: 3px solid #fff;
-      box-shadow: 0 0 0 2px var(--border);
-      margin-top: 16px; z-index: 1;
-    }
-    .wl-timeline-card {
-      background: #fff; border: 1px solid var(--border-lt); border-radius: var(--r-lg);
-      padding: 24px 28px; transition: all var(--dur) var(--ease);
-      box-shadow: var(--sh-sm);
-    }
-    .wl-timeline-card:hover { box-shadow: var(--sh-md); transform: translateY(-2px); }
-    .wl-timeline-card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 6px; }
-    .wl-timeline-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      background: rgba(77,61,113,.06); color: var(--indigo);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .wl-timeline-step-label {
-      font-family: var(--font-h); font-size: 11px; font-weight: 600;
-      color: var(--indigo); text-transform: uppercase; letter-spacing: .04em;
-    }
-    .wl-timeline-card h3 { font-size: 17px; font-weight: 700; margin: 2px 0 0; }
-    .wl-timeline-card p { font-size: 14px; color: var(--text-lt); line-height: 1.6; margin: 8px 0 0; }
 
     /* Pillars section */
     .wl-pillars { background: var(--surface); }
@@ -181,7 +145,8 @@
     /* Responsive */
     @media (max-width: 1024px) {
       .wl-hero-grid { grid-template-columns: 1fr; }
-      .wl-hero-visual { display: none; }
+      .wl-hero-visual { margin-top: 32px; }
+      .wl-hero-steps { max-width: 520px; }
       .wl-pillar-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
@@ -189,11 +154,9 @@
       .wl-hero p { margin-left: auto; margin-right: auto; }
       .wl-hero-actions { justify-content: center; }
       .q-hero-google { margin-left: auto; margin-right: auto; }
-      .wl-timeline { margin-top: 32px; }
-      .wl-timeline::before { left: 12px; }
-      .wl-timeline-step { grid-template-columns: 24px 1fr; gap: 16px; }
-      .wl-timeline-label { display: none; }
-      .wl-timeline-dot { margin-top: 20px; }
+      .wl-hero-visual { margin-top: 24px; }
+      .wl-hero-steps-title { text-align: left; }
+      .wl-hero-step { text-align: left; }
       .wl-trust-strip { gap: 16px; }
     }
   </style>
@@ -230,17 +193,30 @@
       </a>
     </div>
     <div class="wl-hero-visual">
-      <div class="wl-hero-duo">
-        <div class="wl-hero-duo-card wl-hero-duo-patient">
-          <img src="img/hero.png" alt="Patient purchasing weight loss consultation">
-          <div class="wl-hero-duo-label">Patient</div>
+      <div class="wl-hero-steps-title">From click to treatment</div>
+      <div class="wl-hero-steps">
+        <div class="wl-hero-step">
+          <div class="wl-hero-step-num">1</div>
+          <div>
+            <h4>Choose Your Program</h4>
+            <p>Patient selects their weight loss consultation, completes checkout, and provides health information.</p>
+          </div>
         </div>
-        <div class="wl-hero-duo-connector">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CEC8FE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div class="wl-hero-step-connector"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CEC8FE" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="wl-hero-step">
+          <div class="wl-hero-step-num">2</div>
+          <div>
+            <h4>Instant Provider Connection</h4>
+            <p>A licensed provider connects via video in seconds. Structured, compliant, and reviewed in real time.</p>
+          </div>
         </div>
-        <div class="wl-hero-duo-card wl-hero-duo-provider">
-          <img src="img/provider.png" alt="Licensed healthcare provider on video call">
-          <div class="wl-hero-duo-label">Provider</div>
+        <div class="wl-hero-step-connector"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CEC8FE" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
+        <div class="wl-hero-step">
+          <div class="wl-hero-step-num">3</div>
+          <div>
+            <h4>Medication Delivered</h4>
+            <p>If the provider determines treatment is appropriate, the prescription routes to a partner pharmacy and ships directly.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -257,59 +233,6 @@
     <span><span class="ck">✓</span> No contracts</span>
     <span><span class="ck">✓</span> Pay as you go</span>
     <span><span class="ck">✓</span> Self-serve setup</span>
-  </div>
-</div></section>
-
-<!-- HOW IT WORKS - Click to Treatment -->
-<section class="section"><div class="wrap">
-  <div class="section-header animate-in">
-    <div class="badge">From click to treatment</div>
-    <h2>Three steps. Fully automated.</h2>
-    <p>From the moment a patient visits your site to medication arriving at their door - nothing requires manual intervention.</p>
-  </div>
-  <div class="wl-timeline animate-in">
-    <div class="wl-timeline-step">
-      <div class="wl-timeline-label">Step 1</div>
-      <div class="wl-timeline-dot"></div>
-      <div class="wl-timeline-card">
-        <div class="wl-timeline-card-header">
-          <div class="wl-timeline-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg></div>
-          <div>
-            <div class="wl-timeline-step-label">Step 1</div>
-            <h3>Choose Your Program</h3>
-          </div>
-        </div>
-        <p>Patient selects their weight loss consultation on your WooCommerce store, completes checkout, and provides basic health information.</p>
-      </div>
-    </div>
-    <div class="wl-timeline-step">
-      <div class="wl-timeline-label">Step 2</div>
-      <div class="wl-timeline-dot"></div>
-      <div class="wl-timeline-card">
-        <div class="wl-timeline-card-header">
-          <div class="wl-timeline-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
-          <div>
-            <div class="wl-timeline-step-label">Step 2</div>
-            <h3>Instant Provider Connection</h3>
-          </div>
-        </div>
-        <p>A licensed provider connects via video in seconds. The consultation is structured, compliant, and reviewed in real time.</p>
-      </div>
-    </div>
-    <div class="wl-timeline-step">
-      <div class="wl-timeline-label">Step 3</div>
-      <div class="wl-timeline-dot"></div>
-      <div class="wl-timeline-card">
-        <div class="wl-timeline-card-header">
-          <div class="wl-timeline-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-          <div>
-            <div class="wl-timeline-step-label">Step 3</div>
-            <h3>Medication Delivered</h3>
-          </div>
-        </div>
-        <p>If the provider determines treatment is appropriate, the prescription routes to a partner pharmacy and ships directly to the patient.</p>
-      </div>
-    </div>
   </div>
 </div></section>
 
