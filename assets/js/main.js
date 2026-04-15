@@ -5,6 +5,48 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ─── Provider hours timezone conversion ───
+  // Converts 6AM-7PM Pacific to the viewer's local timezone
+  (function() {
+    try {
+      // Build a reference date in Pacific time for 6AM and 7PM
+      var now = new Date();
+      var yr = now.getFullYear(), mo = now.getMonth(), dy = now.getDate();
+      // Use Intl to find Pacific offset dynamically (handles PST/PDT)
+      var pacificOpen = new Date(new Date(yr, mo, dy, 6, 0).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+      var pacificClose = new Date(new Date(yr, mo, dy, 19, 0).toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+      // Get the UTC timestamps for 6AM and 7PM Pacific today
+      var fmt = { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
+      // Create dates at known Pacific times by working backwards from UTC
+      var openUTC = new Date(Date.UTC(yr, mo, dy, 6, 0));
+      var closeUTC = new Date(Date.UTC(yr, mo, dy, 19, 0));
+      // Get the Pacific offset in minutes for today
+      var pacificStr = new Date(yr, mo, dy, 12, 0).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', timeZoneName: 'short' });
+      var isPDT = pacificStr.indexOf('PDT') !== -1;
+      var pacificOffsetHrs = isPDT ? 7 : 8;
+      // Actual UTC times for 6AM and 7PM Pacific
+      var openActualUTC = new Date(Date.UTC(yr, mo, dy, 6 + pacificOffsetHrs, 0));
+      var closeActualUTC = new Date(Date.UTC(yr, mo, dy, 19 + pacificOffsetHrs, 0));
+      // Format in viewer's local timezone
+      var localFmt = { hour: 'numeric', minute: '2-digit' };
+      var openLocal = openActualUTC.toLocaleTimeString('en-US', localFmt).replace(':00', '');
+      var closeLocal = closeActualUTC.toLocaleTimeString('en-US', localFmt).replace(':00', '');
+      // Get viewer's timezone abbreviation
+      var tzName = Intl.DateTimeFormat('en-US', { timeZoneName: 'short' }).formatToParts(new Date()).find(function(p) { return p.type === 'timeZoneName'; });
+      var tz = tzName ? tzName.value : '';
+      var hoursStr = openLocal + '-' + closeLocal + ' ' + tz;
+      // Replace all elements with data-provider-hours attribute
+      document.querySelectorAll('[data-provider-hours]').forEach(function(el) { el.textContent = hoursStr; });
+      // Expose for JS-built content (FAQs)
+      window.PROVIDER_HOURS = hoursStr;
+      window.PROVIDER_HOURS_LONG = '7 days a week, 365 days a year, from ' + openLocal + ' to ' + closeLocal + ' ' + tz;
+    } catch(e) {
+      // Fallback to PST if anything fails
+      window.PROVIDER_HOURS = '6AM-7PM PST';
+      window.PROVIDER_HOURS_LONG = '7 days a week, 365 days a year, from 6AM to 7PM PST';
+    }
+  })();
+
   // ─── Nav scroll shadow ───
   const nav = document.querySelector('.nav');
   if (nav) {
