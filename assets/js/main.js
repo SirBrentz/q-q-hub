@@ -254,7 +254,8 @@ function buildMobileMenu() {
     ]},
   ];
 
-  const CALENDLY_BASE = 'https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution';
+  const CALENDLY_GENERAL = 'https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution';
+  const CALENDLY_QUIDGET = 'https://calendly.com/d/cxsg-tnc-5sf/qualiphy-quidget-demo';
   let demoAnswers = {};
   let demoStep = 0;
   let overlay, modal;
@@ -329,13 +330,13 @@ function buildMobileMenu() {
   }
 
   function finishDemo() {
+    var base = demoAnswers.hasAccount === 'yes' ? CALENDLY_QUIDGET : CALENDLY_GENERAL;
     var params = new URLSearchParams();
     params.set('utm_source', 'quidget_site');
     params.set('utm_medium', 'demo_modal');
     params.set('utm_content', demoAnswers.hasAccount === 'yes' ? 'quidget_demo' : 'platform_demo');
     params.set('utm_campaign', demoAnswers.practiceType || '');
-    // Prefill name fields aren't available, but pass context via UTM
-    var url = CALENDLY_BASE + '?' + params.toString();
+    var url = base + '?' + params.toString();
     window.open(url, '_blank', 'noopener');
     closeDemo();
   }
