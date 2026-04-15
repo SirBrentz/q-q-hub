@@ -708,13 +708,14 @@ function GuideScreen({ answers, onRestart }) {
     <>
       <p>Download the plugin file, then upload it to your WordPress site. The setup wizard launches automatically on activation.</p>
       <a href="https://github.com/tom-at-Quailiphy/qualiphy-woocommerce/releases/latest/download/qualiphy.zip" target="_blank" rel="noopener" style={{
-        display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
-        padding: "14px 24px", borderRadius: 10, marginBottom: 16,
-        background: C.accent, color: "#fff", fontFamily: "inherit",
-        fontSize: 15, fontWeight: 600, textDecoration: "none",
-        boxShadow: "0 2px 8px rgba(77,61,113,.25)",
+        display: "inline-flex", alignItems: "center", gap: 8,
+        padding: "10px 18px", borderRadius: 8, marginBottom: 16,
+        background: C.accentLight, color: C.accent, fontFamily: "inherit",
+        fontSize: 13, fontWeight: 600, textDecoration: "none",
+        border: "1px solid rgba(77,61,113,.1)",
       }}>
-        Download Quidget Plugin ↓
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Quidget Plugin
       </a>
       <div style={{ borderRadius: 10, overflow: "hidden", marginBottom: 16, border: "1px solid " + C.border }}>
         <iframe src="https://www.youtube.com/embed/dKiUu-NwoLc?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" style={{ width: "100%", aspectRatio: "16/9", border: "none", display: "block" }} allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowFullScreen />

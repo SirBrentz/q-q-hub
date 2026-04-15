@@ -746,3 +746,26 @@
 }
 .q-faq-item.open .q-faq-a { max-height: 500px; }
 .q-faq-a-inner { padding: 0 0 20px; }
+
+/* ─── Download button ─── */
+.btn-download {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 18px; border-radius: 8px;
+  font-family: var(--font-h); font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: all .15s; cursor: pointer; border: none;
+  background: rgba(77,61,113,.06); color: var(--indigo);
+  border: 1px solid rgba(77,61,113,.1);
+}
+.btn-download:hover {
+  background: rgba(77,61,113,.1); border-color: rgba(77,61,113,.18);
+}
+.btn-download svg { flex-shrink: 0; }
+/* Dark bg variant (for CTA blocks) */
+.btn-download-dark {
+  background: rgba(255,255,255,.08); color: rgba(255,255,255,.75);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.btn-download-dark:hover {
+  background: rgba(255,255,255,.14); color: #fff;
+  border-color: rgba(255,255,255,.18);
+}
