@@ -126,7 +126,6 @@ const QUESTIONS = [
     options: [
       { value: "yes", label: "Yes, it's on WordPress" },
       { value: "no", label: "No, it's on another platform" },
-      { value: "unsure", label: "I'm not sure" },
     ],
     blocking: ["no"],
   },
@@ -369,6 +368,219 @@ function TroubleshootItem({ symptom, causes }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   API QUICK START — shown in WordPress gate for non-WP users
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+function ApiQuickStart() {
+  const [step, setStep] = useState(0); // 0 = intro, 1 = services, 2 = result
+  const [services, setServices] = useState({ gfe: false, rx: false });
+  const [copied, setCopied] = useState(false);
+
+  const needsRx = services.rx;
+  const hasAny = services.gfe || services.rx;
+
+  const toggleSvc = (key) => setServices(prev => ({ ...prev, [key]: !prev[key] }));
+
+  const samplePayload = JSON.stringify({
+    api_key: "YOUR_API_KEY",
+    exams: ["YOUR_EXAM_ID"],
+    first_name: "John",
+    last_name: "Doe",
+    email: "patient@example.com",
+    dob: "1990-01-15",
+    phone_number: "+15551234567",
+    tele_state: "NY",
+    ...(needsRx ? { pharmacy_id: "PHARMACY_ID", exam_pos_id: "PACKAGE_ID" } : {}),
+  }, null, 2);
+
+  const testingText = `Testing without real patients:
+
+1. Use the sandbox URL:
+   https://sandbox-api.qualiphy.me/api/
+
+2. Set tele_state to "TE" (test mode)
+
+3. Control outcomes with patient names:
+   • "Test Approve" → exam approved
+   • "Test Reject" → exam rejected${needsRx ? '\n   • "Test Prescription Approve" → approved with Rx' : ''}
+
+4. Tests are reviewed by real providers (2-24hrs, excl weekends)
+
+5. Check your webhook to confirm results arrived`;
+
+  const copyPlan = () => {
+    let svcList = [];
+    if (services.gfe) svcList.push("Good Faith Exams");
+    if (services.rx) svcList.push("Rx Consultations");
+    let t = "QUALIPHY API QUICK START\n========================\n\n";
+    t += "Services: " + svcList.join(", ") + "\n";
+    t += "Pharmacy: " + (needsRx ? "Partner Pharmacy (recommended)" : "N/A") + "\n\n";
+    t += "API DOCS: https://api-docs.qualiphy.me\n";
+    t += "ENDPOINTS:\n- POST /exam_invite (create patient exam)\n- Webhook handler (receive results)\n";
+    if (needsRx) t += "- GET /partner_pharmacy_list\n- GET /partner_pharmacy_treatment_packages\n";
+    t += "\nSAMPLE CALL (POST /exam_invite):\n" + samplePayload + "\n\n";
+    t += "IMPORTANT: Use the patient's state in tele_state, not your clinic's.\n\n";
+    t += testingText + "\n\nQuestions? support@qualiphy.me";
+    navigator.clipboard.writeText(t).then(() => { setCopied(true); setTimeout(() => setCopied(false), 2500); });
+  };
+
+  // Step 0: Intro
+  if (step === 0) return (
+    <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
+      <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
+        <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>Quidget requires WordPress</div>
+        <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
+          That's okay - Qualiphy also has a full REST API that works with any platform. Your developer can integrate telehealth consultations, pharmacy fulfillment, and webhooks directly into your existing system.
+        </p>
+      </div>
+      <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 12 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+          {[
+            { icon: "🩺", t: "Good Faith Exams", d: "Patient clearance for procedures" },
+            { icon: "💊", t: "Rx Consultations", d: "Prescriptions + pharmacy fulfillment" },
+            { icon: "📡", t: "Webhooks", d: "Real-time status updates" },
+            { icon: "🏷️", t: "White-Label", d: "Your brand throughout" },
+          ].map((f, i) => (
+            <div key={i} style={{ padding: "10px 12px", borderRadius: 8, background: C.accentLight, fontSize: 12 }}>
+              <div style={{ marginBottom: 3 }}>{f.icon} <strong style={{ color: C.text }}>{f.t}</strong></div>
+              <div style={{ color: C.textMuted, fontSize: 11 }}>{f.d}</div>
+            </div>
+          ))}
+        </div>
+        <button onClick={() => setStep(1)} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, border: "none", cursor: "pointer", width: "100%", transition: "background .15s" }}>
+          Build a Quick Start Guide →
+        </button>
+        <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+          <a href="https://api-docs.qualiphy.me" target="_blank" rel="noopener" style={{ fontSize: 13, color: C.accent, fontWeight: 600, textDecoration: "none" }}>View API Docs ↗</a>
+          <span style={{ color: C.border }}>·</span>
+          <a href="mailto:support@qualiphy.me?subject=API%20Integration%20Inquiry" style={{ fontSize: 13, color: C.textMuted, textDecoration: "none" }}>Email support</a>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Step 1: Pick services
+  if (step === 1) return (
+    <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
+      <div style={{ padding: "24px 24px 16px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
+        <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>What will you offer?</div>
+        <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>Select the services you'll integrate. This determines which API endpoints and sample code we include.</p>
+      </div>
+      <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 8 }}>
+        {[
+          { key: "gfe", label: "Good Faith Exams", desc: "Provider clearance for procedures - Botox, fillers, IV therapy, laser" },
+          { key: "rx", label: "Rx Consultations", desc: "Provider evaluates and may prescribe - GLP-1, men's/women's health" },
+        ].map(svc => (
+          <button key={svc.key} onClick={() => toggleSvc(svc.key)} style={{
+            display: "flex", alignItems: "flex-start", gap: 12, padding: "14px 16px", borderRadius: 10,
+            border: `1.5px solid ${services[svc.key] ? C.accent : C.border}`,
+            background: services[svc.key] ? C.accentLight : "#fff",
+            cursor: "pointer", textAlign: "left", width: "100%", fontFamily: "inherit", transition: "all .15s",
+          }}>
+            <div style={{ width: 18, height: 18, borderRadius: 4, border: services[svc.key] ? "none" : "2px solid " + C.border, background: services[svc.key] ? C.accent : "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: 1 }}>
+              {services[svc.key] && <span style={{ color: "#fff", fontSize: 12, fontWeight: 700 }}>✓</span>}
+            </div>
+            <div>
+              <div style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{svc.label}</div>
+              <div style={{ fontSize: 12, color: C.textMuted, marginTop: 2 }}>{svc.desc}</div>
+            </div>
+          </button>
+        ))}
+        <div style={{ display: "flex", gap: 10, marginTop: 8 }}>
+          <button onClick={() => setStep(0)} style={{ padding: "10px 16px", borderRadius: 8, border: "1px solid " + C.border, background: "#fff", color: C.textMuted, fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>← Back</button>
+          <button onClick={() => setStep(2)} disabled={!hasAny} style={{ flex: 1, padding: "12px 22px", borderRadius: 10, background: hasAny ? C.accent : C.bgMuted, color: hasAny ? "#fff" : C.textDim, fontFamily: "inherit", fontSize: 14, fontWeight: 600, border: "none", cursor: hasAny ? "pointer" : "default", transition: "all .15s" }}>
+            Generate Quick Start →
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Step 2: Generated result
+  let svcLabels = [];
+  if (services.gfe) svcLabels.push("GFE");
+  if (services.rx) svcLabels.push("Rx");
+  let endpoints = ["exam_invite", "Webhook handler"];
+  if (needsRx) endpoints = ["partner_pharmacy_list", "partner_pharmacy_treatment_packages", ...endpoints];
+
+  return (
+    <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
+      <div style={{ padding: "24px 24px 16px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+          <span style={{ fontSize: 20 }}>✓</span>
+          <div style={{ fontSize: 17, fontWeight: 700, color: C.text }}>Your API Quick Start</div>
+        </div>
+        <p style={{ fontSize: 13, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>Hand this to your developer. It has the key endpoints, a sample API call, and testing instructions.</p>
+      </div>
+      <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 16 }}>
+
+        {/* Summary */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+          <div style={{ padding: "10px 14px", background: C.bgMuted, borderRadius: 8 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".04em", color: C.textDim }}>Services</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: C.text }}>{svcLabels.join(" + ")}</div>
+          </div>
+          <div style={{ padding: "10px 14px", background: C.bgMuted, borderRadius: 8 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".04em", color: C.textDim }}>Pharmacy</div>
+            <div style={{ fontSize: 13, fontWeight: 600, color: C.text }}>{needsRx ? "Partner Pharmacy" : "N/A"}</div>
+          </div>
+        </div>
+
+        {/* Endpoints */}
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: C.textMuted, marginBottom: 6 }}>API Endpoints ({endpoints.length})</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+            {endpoints.map((e, i) => <code key={i} style={{ padding: "3px 8px", background: C.accentLight, borderRadius: 4, fontSize: 11, color: C.accent }}>{e}</code>)}
+          </div>
+        </div>
+
+        {/* Sample call */}
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: C.textMuted, marginBottom: 6 }}>Sample API Call</div>
+          <div style={{ background: "#1A1D23", borderRadius: 8, overflow: "hidden" }}>
+            <div style={{ padding: "8px 12px", borderBottom: "1px solid #2A2D33", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontSize: 11, color: "#8C919A" }}>POST /exam_invite</span>
+            </div>
+            <pre style={{ padding: "12px", margin: 0, fontSize: 11, color: "#C9D1D9", lineHeight: 1.6, overflowX: "auto", whiteSpace: "pre-wrap", wordBreak: "break-all" }}>{samplePayload}</pre>
+          </div>
+          <div style={{ fontSize: 11, color: C.amber, marginTop: 6, display: "flex", gap: 6, alignItems: "flex-start" }}>
+            <span style={{ flexShrink: 0 }}>⚠</span>
+            <span>Use the <strong>patient's state</strong> in tele_state, not your clinic's.</span>
+          </div>
+        </div>
+
+        {/* Testing */}
+        <div>
+          <div style={{ fontSize: 12, fontWeight: 700, color: C.textMuted, marginBottom: 6 }}>Testing</div>
+          <div style={{ padding: "12px 14px", background: C.bgMuted, borderRadius: 8, fontSize: 12, color: C.textBody, lineHeight: 1.7 }}>
+            Sandbox URL: <code style={{ fontSize: 11 }}>sandbox-api.qualiphy.me/api/</code><br/>
+            Set <code style={{ fontSize: 11 }}>tele_state: "TE"</code> for test mode<br/>
+            Use <strong>"Test Approve"</strong> / <strong>"Test Reject"</strong> as patient names
+            {needsRx && <><br/>Use <strong>"Test Prescription Approve"</strong> to test Rx flow</>}
+          </div>
+        </div>
+
+        {/* Links */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <a href="https://api-docs.qualiphy.me" target="_blank" rel="noopener" style={{ fontSize: 13, color: C.accent, fontWeight: 600, textDecoration: "none" }}>📖 Full API Documentation ↗</a>
+          <a href="https://api-docs.qualiphy.me/docs/api/exam-invite" target="_blank" rel="noopener" style={{ fontSize: 13, color: C.accent, textDecoration: "none" }}>🔗 Exam Invite Endpoint ↗</a>
+          <a href="https://api-docs.qualiphy.me/docs/api/exam-webhook" target="_blank" rel="noopener" style={{ fontSize: 13, color: C.accent, textDecoration: "none" }}>🔔 Webhook Events ↗</a>
+          {needsRx && <a href="https://api-docs.qualiphy.me/docs/api/partner-pharmacy-list" target="_blank" rel="noopener" style={{ fontSize: 13, color: C.accent, textDecoration: "none" }}>🏥 Partner Pharmacies ↗</a>}
+        </div>
+
+        {/* Actions */}
+        <div style={{ display: "flex", gap: 10 }}>
+          <button onClick={() => setStep(1)} style={{ padding: "10px 16px", borderRadius: 8, border: "1px solid " + C.border, background: "#fff", color: C.textMuted, fontFamily: "inherit", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>← Back</button>
+          <button onClick={copyPlan} style={{ flex: 1, padding: "12px 22px", borderRadius: 10, background: copied ? C.green : C.accent, color: "#fff", fontFamily: "inherit", fontSize: 14, fontWeight: 600, border: "none", cursor: "pointer", transition: "all .15s" }}>
+            {copied ? "✓ Copied!" : "Copy for Your Developer"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    INTAKE SCREEN
    ═══════════════════════════════════════════════════════════════════════════ */
 
@@ -540,23 +752,8 @@ function IntakeScreen({ onComplete }) {
                 </div>
               </div>
             ) : q.id === "hasWordPress" ? (
-              /* ── NOT ON WORDPRESS ── */
-              <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
-                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
-                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>Quidget requires WordPress</div>
-                  <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
-                    Quidget is a WordPress plugin that integrates with WooCommerce. If your site is on Shopify, Squarespace, Wix, or another platform, it won't work directly - but we may be able to help with an alternative integration.
-                  </p>
-                </div>
-                <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
-                  <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
-                    Talk to our team about your setup and we'll walk you through your options.
-                  </p>
-                  <a href="mailto:support@qualiphy.me?subject=Non-WordPress%20Integration%20Inquiry" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
-                    Contact Support ↗
-                  </a>
-                </div>
-              </div>
+              /* ── NOT ON WORDPRESS — API PATH ── */
+              <ApiQuickStart />
             ) : null}
 
             {/* Continue */}
