@@ -221,10 +221,7 @@ function buildMobileMenu() {
   body.appendChild(div);
 
   // Footer actions
-  footer.innerHTML = `
-    <a href="https://app.qualiphy.me/signup" class="mm-btn mm-btn-primary">Sign Up Free</a>
-    <a href="https://app.qualiphy.me/login" class="mm-btn mm-btn-secondary">Log In</a>
-  `;
+  footer.style.display = 'none';
 
   // ── Toggle logic ──
   const hamburger = document.querySelector('.hamburger');
