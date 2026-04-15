@@ -50,6 +50,16 @@
     .guide-content { padding: 24px 16px 60px !important; }
     .topbar-pills { display: none !important; }
   }
+  @media print {
+    .guide-sidebar { display: none !important; }
+    .guide-main { overflow: visible !important; height: auto !important; }
+    .guide-content { max-width: 100% !important; padding: 0 !important; }
+    .guide-layout { display: block !important; height: auto !important; }
+    [style*="position: sticky"] { position: static !important; background: none !important; backdrop-filter: none !important; border: none !important; }
+    button { display: none !important; }
+    a[href]::after { content: " (" attr(href) ")"; font-size: 10px; color: #888; }
+    code { background: #f0f0f0 !important; }
+  }
 </style>
 </head>
 <body>
@@ -225,17 +235,20 @@ function Callout({ type = "info", children }) {
   );
 }
 
-function OptionBtn({ selected, onClick, children, desc }) {
+function OptionBtn({ selected, onClick, children, desc, confirmed }) {
+  const isConfirmed = confirmed === true;
   return (
     <button onClick={onClick} style={{
       display: "flex", flexDirection: "column", gap: 3,
       padding: "14px 18px", borderRadius: 10,
-      border: `1.5px solid ${selected ? C.accent : C.border}`,
-      background: selected ? C.accentLight : C.bgWhite,
+      border: `1.5px solid ${isConfirmed ? C.green : selected ? C.accent : C.border}`,
+      background: isConfirmed ? C.greenLight : selected ? C.accentLight : C.bgWhite,
       cursor: "pointer", textAlign: "left", width: "100%",
       transition: "all 0.15s ease", fontFamily: "inherit",
+      position: "relative",
     }}>
-      <span style={{ fontSize: 14, fontWeight: 600, color: C.text }}>{children}</span>
+      {isConfirmed && <span style={{ position: "absolute", right: 14, top: "50%", transform: "translateY(-50%)", fontSize: 16, color: C.green }}>✓</span>}
+      <span style={{ fontSize: 14, fontWeight: 600, color: C.text, paddingRight: isConfirmed ? 24 : 0 }}>{children}</span>
       {desc && <span style={{ fontSize: 12, color: C.textMuted }}>{desc}</span>}
     </button>
   );
@@ -365,9 +378,13 @@ function IntakeScreen({ onComplete }) {
   const [showCalendly, setShowCalendly] = useState(false);
   const [showComplianceCal, setShowComplianceCal] = useState(false);
   const [showWordPressCal, setShowWordPressCal] = useState(false);
+  const [confirmedVal, setConfirmedVal] = useState(null);
 
   const q = QUESTIONS[currentQ];
   const allDone = Object.keys(answers).length === QUESTIONS.length;
+
+  // Clear confirmed state on question change
+  useEffect(() => { setConfirmedVal(null); }, [currentQ]);
 
   // Gate is derived — no separate state, no intermediate render
   const currentAnswer = answers[q.id];
@@ -383,6 +400,7 @@ function IntakeScreen({ onComplete }) {
       });
       return; // Don't auto-advance on multi-select
     }
+    setConfirmedVal(val);
     const newAnswers = { ...answers, [q.id]: val };
     // If they already have an account, MD info was collected at signup — skip that question
     if (q.id === "hasAccount" && val === "yes") {
@@ -393,7 +411,7 @@ function IntakeScreen({ onComplete }) {
     if (b && (Array.isArray(b) ? b.includes(val) : b === val)) return;
     if (currentQ < QUESTIONS.length - 1) {
       const skip = (q.id === "hasAccount" && val === "yes") ? 2 : 1;
-      setTimeout(() => setCurrentQ(Math.min(currentQ + skip, QUESTIONS.length - 1)), 150);
+      setTimeout(() => setCurrentQ(Math.min(currentQ + skip, QUESTIONS.length - 1)), 350);
     }
   };
 
@@ -598,7 +616,7 @@ function IntakeScreen({ onComplete }) {
                   })
                 ) : (
                   q.options.map(opt => (
-                    <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
+                    <OptionBtn key={opt.value} selected={answers[q.id] === opt.value} confirmed={confirmedVal === opt.value} onClick={() => answer(opt.value)} desc={opt.desc}>
                       {opt.label}
                     </OptionBtn>
                   ))
@@ -996,7 +1014,10 @@ function GuideScreen({ answers, onRestart }) {
         </nav>
 
         <div className="sidebar-footer" style={{ padding: "12px 16px", borderTop: `1px solid ${C.border}`, display: "flex", flexDirection: "column", gap: 6 }}>
-          <Btn variant="ghost" onClick={onRestart} small>← Restart guide</Btn>
+          <div style={{ display: "flex", gap: 6 }}>
+            <Btn variant="ghost" onClick={onRestart} small>← Restart guide</Btn>
+            <Btn variant="ghost" onClick={() => window.print()} small>🖨 Print</Btn>
+          </div>
           <div style={{ fontSize: 11, color: C.textDim, lineHeight: 1.4 }}>
             Need help? <strong style={{ color: C.textMuted }}>support@qualiphy.me</strong>
           </div>

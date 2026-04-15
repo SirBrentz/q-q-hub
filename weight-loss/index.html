@@ -148,6 +148,7 @@
       .wl-hero-visual { margin-top: 32px; }
       .wl-hero-steps { max-width: 520px; }
       .wl-pillar-grid { grid-template-columns: 1fr; }
+      .wl-testimonial-grid { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 768px) {
       .wl-hero { padding: 120px 0 100px; text-align: center; }
@@ -231,7 +232,7 @@
     <span><span class="ck">✓</span> Medication delivery</span>
     <span><span class="ck">✓</span> No contracts</span>
     <span><span class="ck">✓</span> Pay as you go</span>
-    <span><span class="ck">✓</span> Providers 7 days, <span data-provider-hours>6AM-7PM PST</span></span>
+    <span><span class="ck">✓</span> Self-serve setup</span>
   </div>
 </div></section>
 
@@ -280,6 +281,44 @@
   </div>
   <div class="grid-3 animate-in" id="wlFeatures"></div>
 </div></section>
+
+<!-- TESTIMONIALS -->
+<section class="section" style="padding:0;overflow:visible">
+  <div class="wrap animate-in">
+    <div class="wl-testimonial-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:var(--r-xl);overflow:hidden;min-height:360px">
+      <div style="background:#4D3D71;padding:44px 40px;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#CFC9FF;margin-bottom:14px">Trusted by clinics</div>
+        <div style="font-family:var(--font-h);font-size:clamp(1.3rem,2.2vw,1.7rem);font-weight:700;color:#fff;line-height:1.3;margin-bottom:16px">Your patients. Your brand.<br>Our providers.</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:24px">Qualiphy connects your store to a licensed provider network. Patients never leave your site - consultations, fulfillment, and delivery all happen under your brand.</div>
+        <div id="wlTestimonialRotator" style="padding:14px 16px;background:rgba(207,201,255,.1);border:1px solid rgba(207,201,255,.12);border-radius:10px;min-height:72px;position:relative;overflow:hidden">
+          <div class="q-testimonial q-testimonial--active" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"As a Medical spa Owner, Qualiphy Has been an amazing strategic partner That has added tremendous value for us. Highly recommend!"</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">- Clinic Operator</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"Love Qualiphy! It's fast and I'm able to get clients seen same day. I suggest this to every clinic that needs GFE exams. Very efficient."</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">- Clinic Operator</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"I'm a nurse and I have been using Qualiphy to see my patients before their visits. I am going to say that I have never been happier..."</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">- Healthcare Provider</div>
+          </div>
+          <div class="q-testimonial" style="transition:opacity .5s ease,transform .5s ease">
+            <div style="font-family:var(--font-h);font-size:12px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.5;margin-bottom:4px">"Appreciate the encouragement and support of the staff at Qualiphy. Each encounter has been very positive and helpful. Highly recommend them!"</div>
+            <div style="font-size:10px;color:#CFC9FF;font-weight:600">- Clinic Operator</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--surface-alt);display:flex;align-items:center;justify-content:center;padding:40px">
+        <a href="https://g.page/r/CSe4fwK2ryAqEAE/review" target="_blank" rel="noopener" style="text-decoration:none;text-align:center">
+          <div style="font-family:var(--font-h);font-size:48px;font-weight:800;color:var(--navy);letter-spacing:-.02em">4.9</div>
+          <div style="color:#f5c518;font-size:22px;letter-spacing:2px;margin:6px 0">★★★★★</div>
+          <div style="font-size:13px;color:var(--text-lt);margin-top:4px">5,000+ Google Reviews</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- PRICING -->
 <section class="section" style="max-width:860px;margin:0 auto"><div class="wrap" style="text-align:center">
@@ -400,6 +439,18 @@ faqs.forEach(function(f) {
   });
   faqEl.appendChild(item);
 });
+
+// ─── Testimonial rotator ───
+(function(){
+  var items = document.querySelectorAll('#wlTestimonialRotator .q-testimonial');
+  if (items.length < 2) return;
+  var current = 0;
+  setInterval(function(){
+    items[current].classList.remove('q-testimonial--active');
+    current = (current + 1) % items.length;
+    items[current].classList.add('q-testimonial--active');
+  }, 5000);
+})();
 </script>
 <script src="../assets/js/main.js" defer></script>
 </body>
