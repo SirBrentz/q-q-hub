@@ -652,7 +652,16 @@ function IntakeScreen({ onComplete }) {
 
 function GuideScreen({ answers, onRestart }) {
   const [activeStep, setActiveStep] = useState(0);
+  const [printing, setPrinting] = useState(false);
   const contentRef = useRef(null);
+
+  const printAllSteps = useCallback(() => {
+    setPrinting(true);
+    setTimeout(() => {
+      window.print();
+      setPrinting(false);
+    }, 100);
+  }, []);
 
   const examTypes = (answers.examType || "").split(",");
   const needsRx   = examTypes.includes("rx");
@@ -1016,7 +1025,7 @@ function GuideScreen({ answers, onRestart }) {
         <div className="sidebar-footer" style={{ padding: "12px 16px", borderTop: `1px solid ${C.border}`, display: "flex", flexDirection: "column", gap: 6 }}>
           <div style={{ display: "flex", gap: 6 }}>
             <Btn variant="ghost" onClick={onRestart} small>← Restart guide</Btn>
-            <Btn variant="ghost" onClick={() => window.print()} small>🖨 Print</Btn>
+            <Btn variant="ghost" onClick={printAllSteps} small>🖨 Print</Btn>
           </div>
           <div style={{ fontSize: 11, color: C.textDim, lineHeight: 1.4 }}>
             Need help? <strong style={{ color: C.textMuted }}>support@qualiphy.me</strong>
@@ -1042,6 +1051,21 @@ function GuideScreen({ answers, onRestart }) {
           </div>
         </div>
 
+        {printing ? (
+          <div className="guide-content" style={{ maxWidth: 680, margin: "0 auto", padding: "32px 32px 80px" }}>
+            {steps.map((step, i) => (
+              <div key={step.id} style={{ marginBottom: 40, pageBreakInside: "avoid" }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 8px", letterSpacing: "-0.02em" }}>
+                  {step.title}
+                </h2>
+                <div style={{ fontSize: 14, color: C.textBody, lineHeight: 1.7, display: "flex", flexDirection: "column", gap: 16 }}>
+                  {step.render()}
+                </div>
+                {i < steps.length - 1 && <hr style={{ border: "none", borderTop: "1px solid " + C.border, margin: "32px 0 0" }} />}
+              </div>
+            ))}
+          </div>
+        ) : (
         <div key={activeStep} className="fade-in guide-content" style={{ maxWidth: 680, margin: "0 auto", padding: "32px 32px 80px" }}>
           <h2 style={{ fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 8px", letterSpacing: "-0.02em" }}>
             {steps[activeStep].title}
@@ -1065,6 +1089,7 @@ function GuideScreen({ answers, onRestart }) {
             )}
           </div>
         </div>
+        )}
       </main>
     </div>
   );
