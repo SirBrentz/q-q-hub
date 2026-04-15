@@ -180,7 +180,7 @@ function buildMobileMenu() {
 
   // Footer actions
   footer.innerHTML = `
-    <a href="demo.html" class="mm-btn mm-btn-primary">Book a Demo</a>
+    <button onclick="openDemoModal()" class="mm-btn mm-btn-primary demo-trigger">Book a Demo</button>
     <a href="https://app.qualiphy.me/signup" class="mm-btn mm-btn-secondary">Sign Up Free</a>
     <a href="https://app.qualiphy.me/login" class="mm-btn mm-btn-ghost">Log In</a>
   `;
@@ -221,3 +221,151 @@ function buildMobileMenu() {
     if (e.key === 'Escape' && panel.classList.contains('open')) closeMenu();
   });
 }
+
+
+/* =============================================================
+   DEMO PRE-SCREEN MODAL
+   4-question qualifier before routing to Calendly.
+   Triggered by any element with class "demo-trigger".
+   ============================================================= */
+(function() {
+  const DEMO_QUESTIONS = [
+    { id: 'hasAccount', q: 'Do you have a Qualiphy account?', options: [
+      { value: 'yes', label: 'Yes, I have an account' },
+      { value: 'no', label: 'No, not yet' },
+    ]},
+    { id: 'practiceType', q: 'What type of practice do you run?', options: [
+      { value: 'medspa', label: 'Med Spa / Aesthetics' },
+      { value: 'weightloss', label: 'Weight Loss Clinic' },
+      { value: 'wellness', label: 'Wellness / IV Therapy' },
+      { value: 'virtual', label: 'Virtual Practice' },
+      { value: 'multi', label: 'Multi-Location Group' },
+      { value: 'other', label: 'Other' },
+    ]},
+    { id: 'hasWordPress', q: 'Is your website built on WordPress?', options: [
+      { value: 'yes', label: 'Yes' },
+      { value: 'no', label: 'No' },
+      { value: 'unsure', label: 'Not sure' },
+    ]},
+    { id: 'hasDev', q: 'Do you have a web developer or technical team?', options: [
+      { value: 'yes', label: 'Yes, we have a developer' },
+      { value: 'no', label: 'No' },
+      { value: 'self', label: 'I handle it myself' },
+    ]},
+  ];
+
+  const CALENDLY_BASE = 'https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution';
+  let demoAnswers = {};
+  let demoStep = 0;
+  let overlay, modal;
+
+  function injectStyles() {
+    const s = document.createElement('style');
+    s.textContent = `
+      .dm-overlay{position:fixed;inset:0;background:rgba(15,23,41,.55);z-index:300;opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px}
+      .dm-overlay.open{opacity:1;visibility:visible}
+      .dm-modal{background:#fff;border-radius:16px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.2);transform:translateY(12px) scale(.97);transition:transform .25s ease;overflow:hidden}
+      .dm-overlay.open .dm-modal{transform:translateY(0) scale(1)}
+      .dm-header{padding:24px 24px 0;display:flex;justify-content:space-between;align-items:flex-start}
+      .dm-close{width:32px;height:32px;border-radius:8px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#78716c;transition:background .15s}
+      .dm-close:hover{background:#f5f3f0}
+      .dm-body{padding:8px 24px 24px}
+      .dm-progress{display:flex;gap:4px;margin-bottom:20px}
+      .dm-progress-bar{flex:1;height:3px;border-radius:2px;background:#e7e5e4;transition:background .3s}
+      .dm-progress-bar.active{background:#4D3D71}
+      .dm-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#a8a29e;margin-bottom:8px}
+      .dm-question{font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1B1B1B;margin:0 0 18px;line-height:1.3}
+      .dm-options{display:flex;flex-direction:column;gap:6px}
+      .dm-opt{display:block;width:100%;padding:12px 16px;border-radius:10px;border:1.5px solid #e7e5e4;background:#fff;cursor:pointer;text-align:left;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#1B1B1B;transition:all .15s}
+      .dm-opt:hover{border-color:#4D3D71;background:rgba(77,61,113,.04)}
+      .dm-back{display:inline-flex;align-items:center;gap:4px;padding:8px 10px;border:none;background:transparent;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;color:#78716c;margin-top:10px;border-radius:6px;transition:background .15s}
+      .dm-back:hover{background:#f5f3f0}
+    `;
+    document.head.appendChild(s);
+  }
+
+  function buildModal() {
+    overlay = document.createElement('div');
+    overlay.className = 'dm-overlay';
+    overlay.innerHTML = '<div class="dm-modal"><div class="dm-header"><div></div><button class="dm-close" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button></div><div class="dm-body"></div></div>';
+    document.body.appendChild(overlay);
+    modal = overlay.querySelector('.dm-modal');
+    overlay.querySelector('.dm-close').addEventListener('click', closeDemo);
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeDemo(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeDemo(); });
+  }
+
+  function renderStep() {
+    const q = DEMO_QUESTIONS[demoStep];
+    const body = overlay.querySelector('.dm-body');
+    let html = '<div class="dm-progress">';
+    for (let i = 0; i < DEMO_QUESTIONS.length; i++) {
+      html += '<div class="dm-progress-bar' + (i <= demoStep ? ' active' : '') + '"></div>';
+    }
+    html += '</div>';
+    html += '<div class="dm-label">Question ' + (demoStep + 1) + ' of ' + DEMO_QUESTIONS.length + '</div>';
+    html += '<div class="dm-question">' + q.q + '</div>';
+    html += '<div class="dm-options">';
+    q.options.forEach(function(opt) {
+      html += '<button class="dm-opt" data-value="' + opt.value + '">' + opt.label + '</button>';
+    });
+    html += '</div>';
+    if (demoStep > 0) html += '<button class="dm-back">← Back</button>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('.dm-opt').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        demoAnswers[q.id] = btn.getAttribute('data-value');
+        if (demoStep < DEMO_QUESTIONS.length - 1) {
+          demoStep++;
+          renderStep();
+        } else {
+          finishDemo();
+        }
+      });
+    });
+    var backBtn = body.querySelector('.dm-back');
+    if (backBtn) backBtn.addEventListener('click', function() { demoStep--; renderStep(); });
+  }
+
+  function finishDemo() {
+    var params = new URLSearchParams();
+    params.set('utm_source', 'quidget_site');
+    params.set('utm_medium', 'demo_modal');
+    params.set('utm_content', demoAnswers.hasAccount === 'yes' ? 'quidget_demo' : 'platform_demo');
+    params.set('utm_campaign', demoAnswers.practiceType || '');
+    // Prefill name fields aren't available, but pass context via UTM
+    var url = CALENDLY_BASE + '?' + params.toString();
+    window.open(url, '_blank', 'noopener');
+    closeDemo();
+  }
+
+  function openDemo() {
+    demoStep = 0;
+    demoAnswers = {};
+    renderStep();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDemo() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Init on DOM ready
+  document.addEventListener('DOMContentLoaded', function() {
+    injectStyles();
+    buildModal();
+    // Bind all demo triggers
+    document.querySelectorAll('.demo-trigger').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        openDemo();
+      });
+    });
+  });
+
+  // Expose globally for inline onclick if needed
+  window.openDemoModal = openDemo;
+})();

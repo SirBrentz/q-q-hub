@@ -110,6 +110,17 @@ const QUESTIONS = [
     blocking: ["no"],
   },
   {
+    id: "hasWordPress",
+    q: "Is your website built on WordPress?",
+    hint: "Quidget is a WordPress plugin that requires WooCommerce. If your site runs on a different platform, we can discuss your options.",
+    options: [
+      { value: "yes", label: "Yes, it's on WordPress" },
+      { value: "no", label: "No, it's on another platform" },
+      { value: "unsure", label: "I'm not sure" },
+    ],
+    blocking: ["no"],
+  },
+  {
     id: "hasWoo",
     q: "Do you already have WooCommerce installed on your WordPress site?",
     options: [
@@ -520,11 +531,29 @@ function IntakeScreen({ onComplete }) {
                   </p>
                 </div>
               </div>
+            ) : q.id === "hasWordPress" ? (
+              /* ── NOT ON WORDPRESS ── */
+              <div style={{ borderRadius: 12, border: "1px solid rgba(77,61,113,.12)", overflow: "hidden" }}>
+                <div style={{ padding: "24px 24px 20px", background: "linear-gradient(135deg, rgba(77,61,113,.06) 0%, rgba(77,61,113,.1) 100%)" }}>
+                  <div style={{ fontSize: 17, fontWeight: 700, color: C.text, marginBottom: 6 }}>Quidget requires WordPress</div>
+                  <p style={{ fontSize: 14, color: C.textMuted, margin: 0, lineHeight: 1.6 }}>
+                    Quidget is a WordPress plugin that integrates with WooCommerce. If your site is on Shopify, Squarespace, Wix, or another platform, it won't work directly - but we may be able to help with an alternative integration.
+                  </p>
+                </div>
+                <div style={{ padding: "20px 24px", background: "#fff", display: "flex", flexDirection: "column", gap: 10 }}>
+                  <p style={{ fontSize: 13, color: C.textBody, lineHeight: 1.6, margin: 0 }}>
+                    Talk to our team about your setup and we'll walk you through your options.
+                  </p>
+                  <a href="https://calendly.com/d/cxgt-8tr-sd5/qualiphy-gfe-rx-fulfillment-solution" target="_blank" rel="noopener" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "14px 22px", borderRadius: 10, background: C.accent, color: "#fff", fontFamily: "inherit", fontSize: 15, fontWeight: 600, textDecoration: "none" }}>
+                    Schedule a Call ↗
+                  </a>
+                </div>
+              </div>
             ) : null}
 
             {/* Continue */}
             <div style={{ marginTop: 20, padding: "16px 20px", borderRadius: 10, background: C.bgMuted, textAlign: "center" }}>
-              <Btn onClick={passGate}>{q.id === "hasAccount" ? "I've created my account — continue →" : q.id === "hasMedDirector" ? "I have a Medical Director — continue →" : "I have my API key — continue →"}</Btn>
+              <Btn onClick={passGate}>{q.id === "hasAccount" ? "I've created my account — continue →" : q.id === "hasMedDirector" ? "I have a Medical Director — continue →" : q.id === "hasWordPress" ? "Actually, my site is on WordPress — continue →" : "I have my API key — continue →"}</Btn>
             </div>
             <div style={{ marginTop: 14 }}>
               <Btn variant="ghost" onClick={goBack} small>← Back</Btn>
@@ -671,7 +700,7 @@ function GuideScreen({ answers, onRestart }) {
   steps.push({ id: "install", title: "Install & Activate", render: () => (
     <>
       <p>Download the plugin file, then upload it to your WordPress site. The setup wizard launches automatically on activation.</p>
-      <a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" rel="noopener" style={{
+      <a href="https://github.com/tom-at-Quailiphy/qualiphy-woocommerce/releases/latest/download/qualiphy.zip" target="_blank" rel="noopener" style={{
         display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
         padding: "14px 24px", borderRadius: 10, marginBottom: 16,
         background: C.accent, color: "#fff", fontFamily: "inherit",
