@@ -278,6 +278,15 @@
   </div>
 </div></section>
 
+<!-- FAQ -->
+<section class="section"><div class="wrap">
+  <div class="section-header animate-in">
+    <div class="badge">Common questions</div>
+    <h2>Frequently asked questions</h2>
+  </div>
+  <div class="q-faq animate-in" id="homeFaq"></div>
+</div></section>
+
 <!-- CTA -->
 <section class="section-sm"><div class="wrap" style="max-width:760px">
   <div class="q-cta animate-in">
@@ -460,6 +469,50 @@ if(footer)footer.addEventListener('mousemove',function(e){var r=footer.getBoundi
     items[current].classList.add('q-testimonial--active');
   },5000);
 })();
+
+// ─── Homepage FAQ ───
+var homeFaqs = [
+  {
+    q: "What is the Speak to a Doctor patient portal?",
+    a: "Every patient gets a \"Speak to a Doctor\" page in their WooCommerce My Account area. After purchasing a consultation, they can launch their initial visit directly from this page. Once completed, the page shows their consultation status and gives access to follow-up visits based on their plan - all without needing to repurchase."
+  },
+  {
+    q: "How do follow-up consultations work?",
+    a: "Follow-ups are included based on the exam type. 90-day (3-month supply) exams include 3 follow-up consultations - one per month, with optional adverse event follow-ups. 30-day (1-month supply) exams include a single follow-up. Follow-ups are tracked in the database so patients can't exceed their allotted amount. When a subscription renews or the patient repurchases, the follow-up count resets and the process starts over."
+  },
+  {
+    q: "What does the patient see after checkout?",
+    a: "After completing checkout, a branded modal appears with a \"Connect with Provider\" button to start their video consultation immediately. A QR code option lets them switch to their phone or another device, and a session link is also sent to their email. Patients can dismiss the modal and connect later from their My Account page or email."
+  },
+  {
+    q: "What if a patient uses all their follow-ups?",
+    a: "Once a patient has used all their allotted follow-ups, the Speak to a Doctor page displays a contact message directing them to reach out for assistance. Clinics can customize this message to fit their own support workflow - for example, directing patients to repurchase or contact the clinic directly."
+  },
+  {
+    q: "Can I sell consultation bundles or packages?",
+    a: "Yes. Using WooCommerce Product Bundles, you can package a Qualiphy consultation with other products - lab kits, supplements, devices, or any physical product in your store. The consultation fires on checkout just like a standalone product, while the bundled items follow your normal WooCommerce fulfillment. The setup wizard walks you through linking exams to bundle products."
+  },
+  {
+    q: "How much does Qualiphy charge per consultation?",
+    a: "Qualiphy charges $27.99 per consultation. No signup fees, no monthly fees, no contracts. You set your own patient-facing price and keep the margin. The plugin shows you the Qualiphy cost alongside your price during product setup so you always know your margin."
+  },
+  {
+    q: "Do I need a Medical Director?",
+    a: "Yes. A Medical Director is required for practices that offer or advertise medical procedures. They provide clinical oversight, sign treatment protocols, and ensure compliance with state regulations. If you don't have one yet, our compliance team can help - schedule a consultation during the setup process."
+  },
+  {
+    q: "What payment gateways are supported?",
+    a: "Quidget works with any WooCommerce-compatible payment gateway. WooPayments (powered by Stripe) is the free option. Authorize.net is recommended for telehealth practices that need more robust transaction handling. The plugin supports Stripe 3D Secure, PayPal, and free ($0) orders."
+  }
+];
+var faqEl = document.getElementById('homeFaq');
+homeFaqs.forEach(function(f) {
+  var item = document.createElement('div');
+  item.className = 'q-faq-item';
+  item.innerHTML = '<div class="q-faq-q">' + f.q + '</div><div class="q-faq-a"><div class="q-faq-a-inner">' + f.a + '</div></div>';
+  item.querySelector('.q-faq-q').addEventListener('click', function() { item.classList.toggle('open'); });
+  faqEl.appendChild(item);
+});
 </script>
 <script src="assets/js/main.js" defer></script>
 </body>
