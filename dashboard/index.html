@@ -193,7 +193,7 @@ tbody tr:hover { background: var(--surface); }
             <table>
               <thead><tr>
                 <th>When</th><th>Location</th><th>Device</th><th>Exam Types</th>
-                <th>Intake</th><th>Guide</th><th>Plugin</th><th>Gates</th><th>Duration</th>
+                <th>Intake</th><th>Guide</th><th>Plugin</th><th>Demo</th><th>Gates</th><th>Duration</th>
               </tr></thead>
               <tbody id="recentTable"></tbody>
             </table>
@@ -299,7 +299,7 @@ function render() {
   var total = s.length;
 
   // Counts
-  var intakeCompleted = 0, guideCompleted = 0, downloaded = 0, bookedDemo = 0, apiQs = 0;
+  var intakeCompleted = 0, guideCompleted = 0, downloaded = 0, bookedDemo = 0, demoScheduled = 0, apiQs = 0;
   var examTypes = {}, gates = {}, devices = {}, locations = {}, utmSources = {};
   var totalDur = 0, durCount = 0;
   var dailyCounts = {};
@@ -309,6 +309,7 @@ function render() {
     if (r['Guide Completed'] === 'Yes') guideCompleted++;
     if (r['Downloaded Plugin'] === 'Yes') downloaded++;
     if (r['Booked Demo'] === 'Yes') bookedDemo++;
+    if (r['Demo Scheduled'] === 'Yes') demoScheduled++;
     if (r['API Quickstart']) apiQs++;
 
     var et = (r['Exam Types'] || '').toString();
@@ -343,14 +344,15 @@ function render() {
   var avgSec = avgDur % 60;
   var intakeRate = total > 0 ? Math.round(intakeCompleted / total * 100) : 0;
   var guideRate = intakeCompleted > 0 ? Math.round(guideCompleted / intakeCompleted * 100) : 0;
+  var demoRate = bookedDemo > 0 ? Math.round(demoScheduled / bookedDemo * 100) : 0;
 
   // KPIs
   document.getElementById('kpis').innerHTML =
     kpi('Total Sessions', total, '', true) +
     kpi('Intake Completed', intakeCompleted, intakeRate + '% of sessions') +
     kpi('Guide Completed', guideCompleted, guideRate + '% of intake') +
-    kpi('Plugin Downloads', downloaded, '') +
-    kpi('Avg Duration', avgMin + 'm ' + avgSec + 's', '');
+    kpi('Demos Scheduled', demoScheduled, bookedDemo > 0 ? demoRate + '% of bookers' : '') +
+    kpi('Plugin Downloads', downloaded, '');
 
   // Funnel
   var funnelSteps = [
@@ -416,14 +418,15 @@ function render() {
     var intake = r['Intake Completed'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : '<span class="badge badge-no">No</span>';
     var guide = r['Guide Completed'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : r['API Quickstart'] ? '<span class="badge badge-api">API</span>' : '<span class="badge badge-no">No</span>';
     var plugin = r['Downloaded Plugin'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : '—';
+    var demo = r['Demo Scheduled'] === 'Yes' ? '<span class="badge badge-yes">Booked</span>' : r['Booked Demo'] === 'Yes' ? '<span class="badge badge-gate">Clicked</span>' : '—';
     var gateStr = r['Gates Hit'] ? '<span class="badge badge-gate">' + r['Gates Hit'].toString().replace(/,/g, '</span> <span class="badge badge-gate">') + '</span>' : '—';
     var dur = parseInt(r['Duration (sec)']) || 0;
     var durStr = dur > 0 ? Math.floor(dur/60) + 'm ' + (dur%60) + 's' : '—';
 
     tbody += '<tr><td>' + when + '</td><td>' + loc + '</td><td>' + dev + '</td><td>' + et + '</td>'
-      + '<td>' + intake + '</td><td>' + guide + '</td><td>' + plugin + '</td><td>' + gateStr + '</td><td>' + durStr + '</td></tr>';
+      + '<td>' + intake + '</td><td>' + guide + '</td><td>' + plugin + '</td><td>' + demo + '</td><td>' + gateStr + '</td><td>' + durStr + '</td></tr>';
   });
-  document.getElementById('recentTable').innerHTML = tbody || '<tr><td colspan="9" style="text-align:center;color:var(--text-dim)">No sessions yet</td></tr>';
+  document.getElementById('recentTable').innerHTML = tbody || '<tr><td colspan="10" style="text-align:center;color:var(--text-dim)">No sessions yet</td></tr>';
 }
 
 /* ═══ CHART HELPERS ═══ */

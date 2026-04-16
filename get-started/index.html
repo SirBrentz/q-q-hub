@@ -196,6 +196,16 @@ window.QTRACK_CONFIG = {
       question_times: window._qtrack_questionTimes,
     });
   });
+
+  // ─── Calendly booking listener ───
+  // Calendly fires postMessage events when users interact with the embedded iframe.
+  // We only care about the "event_scheduled" event — meaning they confirmed a booking.
+  window.addEventListener('message', function(e) {
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.event === 'calendly.event_scheduled') {
+      if (window.track) window.track('demo_scheduled');
+    }
+  });
 })();
 </script>
 
