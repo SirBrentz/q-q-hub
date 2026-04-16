@@ -99,22 +99,31 @@ window.QTRACK_CONFIG = {
     utm_campaign: params.get('utm_campaign') || '',
   };
 
-  // ─── Location capture ───
+  // ─── Location capture (tries multiple services, falls back gracefully) ───
   window._qtrack_geo = { city: '', region: '', country: '' };
-  try {
-    fetch('https://ipapi.co/json/')
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        window._qtrack_geo = {
-          city: data.city || '',
-          region: data.region || '',
-          country: data.country_name || '',
-        };
-        // Fire location event to update the session row
-        if (window.track) window.track('location_resolved', window._qtrack_geo);
-      })
-      .catch(function() {});
-  } catch(e) {}
+  (function resolveGeo() {
+    var apis = [
+      { url: 'https://get.geojs.io/v1/ip/geo.json', map: function(d) { return { city: d.city || '', region: d.region || '', country: d.country || '' }; }},
+      { url: 'https://ipapi.co/json/', map: function(d) { return { city: d.city || '', region: d.region || '', country: d.country_name || '' }; }},
+      { url: 'https://freeipapi.com/api/json', map: function(d) { return { city: d.cityName || '', region: d.regionName || '', country: d.countryName || '' }; }},
+    ];
+    function tryNext(i) {
+      if (i >= apis.length) return;
+      fetch(apis[i].url)
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          var mapped = apis[i].map(data);
+          if (mapped.city || mapped.region) {
+            window._qtrack_geo = mapped;
+            if (window.track) window.track('location_resolved', mapped);
+          } else {
+            tryNext(i + 1);
+          }
+        })
+        .catch(function() { tryNext(i + 1); });
+    }
+    tryNext(0);
+  })();
 
   // ─── Question timer ───
   window._qtrack_questionStart = null;
