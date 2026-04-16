@@ -83,11 +83,11 @@ window.QTRACK_CONFIG = {
 };
 
 (function() {
-  // Session ID (random, per browser tab)
-  var sessionId = sessionStorage.getItem('qtrack_sid');
-  if (!sessionId) {
-    sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
-    sessionStorage.setItem('qtrack_sid', sessionId);
+  // Visitor ID (persistent per browser — same person always gets same row)
+  var visitorId = localStorage.getItem('qtrack_vid');
+  if (!visitorId) {
+    visitorId = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem('qtrack_vid', visitorId);
   }
   var sessionStart = Date.now();
 
@@ -150,7 +150,7 @@ window.QTRACK_CONFIG = {
     if (!window.QTRACK_CONFIG.WEBHOOK_URL || !window.QTRACK_CONFIG.SHARED_SECRET) return;
     var payload = {
       secret: window.QTRACK_CONFIG.SHARED_SECRET,
-      session_id: sessionId,
+      session_id: visitorId,
       event: event,
       timestamp: new Date().toISOString(),
       elapsed_sec: Math.round((Date.now() - sessionStart) / 1000),
