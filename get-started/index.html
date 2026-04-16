@@ -73,6 +73,74 @@
 
 <div id="root"></div>
 
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   TRACKING MODULE — Get Started Flow
+   ═══════════════════════════════════════════════════════════════════════════
+
+   Fill in these two values to enable tracking. Until then, tracking is
+   completely disabled — track() is a no-op.
+
+   WEBHOOK_URL: Your Google Apps Script web app URL (deploy from Sheet's
+                Extensions → Apps Script → Deploy → New deployment → Web app).
+   SHARED_SECRET: Any random string. Must match the secret in the Apps Script.
+                  This prevents others from spamming your sheet.
+*/
+window.QTRACK_CONFIG = {
+  WEBHOOK_URL: "",       // e.g. "https://script.google.com/macros/s/AKfyc.../exec"
+  SHARED_SECRET: "",     // e.g. "xk9p-7h2m-quidget-v1"
+};
+
+(function() {
+  // Session ID (random, per browser tab)
+  let sessionId = sessionStorage.getItem('qtrack_sid');
+  if (!sessionId) {
+    sessionId = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+    sessionStorage.setItem('qtrack_sid', sessionId);
+  }
+  const sessionStart = Date.now();
+
+  // Fire-and-forget event sender
+  window.track = function(event, data) {
+    if (!window.QTRACK_CONFIG.WEBHOOK_URL || !window.QTRACK_CONFIG.SHARED_SECRET) return;
+    const payload = {
+      secret: window.QTRACK_CONFIG.SHARED_SECRET,
+      session_id: sessionId,
+      event: event,
+      timestamp: new Date().toISOString(),
+      elapsed_sec: Math.round((Date.now() - sessionStart) / 1000),
+      referrer: document.referrer || 'direct',
+      user_agent: navigator.userAgent,
+      viewport: window.innerWidth + 'x' + window.innerHeight,
+      path: window.location.pathname,
+      data: data || {},
+    };
+    // Use keepalive so event fires even if user navigates away
+    try {
+      fetch(window.QTRACK_CONFIG.WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+      });
+    } catch(e) { /* silent */ }
+  };
+
+  // Fire page load immediately
+  if (document.readyState !== 'loading') {
+    window.track('page_loaded');
+  } else {
+    document.addEventListener('DOMContentLoaded', () => window.track('page_loaded'));
+  }
+
+  // Fire page unload with final duration
+  window.addEventListener('beforeunload', () => {
+    window.track('page_unloaded', { total_duration_sec: Math.round((Date.now() - sessionStart) / 1000) });
+  });
+})();
+</script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
@@ -384,6 +452,15 @@ function ApiQuickStart() {
   const [services, setServices] = useState({ gfe: false, rx: false });
   const [copied, setCopied] = useState(false);
 
+  // ─── TRACKING ───
+  useEffect(() => {
+    if (window.track) window.track('api_quickstart_viewed', { step });
+  }, [step]);
+  useEffect(() => {
+    if (window.track && copied) window.track('api_quickstart_copied', { gfe: services.gfe, rx: services.rx });
+  }, [copied]);
+  // ─── END TRACKING ───
+
   const needsRx = services.rx;
   const hasAny = services.gfe || services.rx;
 
@@ -603,6 +680,41 @@ function IntakeScreen({ onComplete }) {
 
   // Clear confirmed state on question change
   useEffect(() => { setConfirmedVal(null); }, [currentQ]);
+
+  // ─── TRACKING OBSERVERS ───
+  // Track intake start once
+  useEffect(() => {
+    if (window.track) window.track('intake_started');
+  }, []);
+
+  // Track each question being viewed (by index and id)
+  useEffect(() => {
+    if (window.track) window.track('question_viewed', { question_index: currentQ, question_id: QUESTIONS[currentQ].id });
+  }, [currentQ]);
+
+  // Track each answer submission
+  useEffect(() => {
+    if (!window.track) return;
+    Object.keys(answers).forEach(key => {
+      const prev = window._qtrack_lastAnswers || {};
+      if (prev[key] !== answers[key]) {
+        window.track('answer_submitted', { question_id: key, answer: answers[key] });
+      }
+    });
+    window._qtrack_lastAnswers = { ...answers };
+  }, [answers]);
+
+  // Track blocking gate shown
+  const isBlockedForTracking = q.blocking && answers[q.id] && (Array.isArray(q.blocking) ? q.blocking.includes(answers[q.id]) : q.blocking === answers[q.id]);
+  useEffect(() => {
+    if (window.track && isBlockedForTracking) window.track('gate_shown', { question_id: q.id, answer: answers[q.id] });
+  }, [isBlockedForTracking, q.id]);
+
+  // Track Calendly embed open
+  useEffect(() => {
+    if (window.track && showCalendly) window.track('clicked_book_demo');
+  }, [showCalendly]);
+  // ─── END TRACKING ───
 
   // Gate is derived — no separate state, no intermediate render
   const currentAnswer = answers[q.id];
@@ -843,6 +955,30 @@ function GuideScreen({ answers, onRestart }) {
   const [printing, setPrinting] = useState(false);
   const contentRef = useRef(null);
 
+  // ─── TRACKING OBSERVERS ───
+  useEffect(() => {
+    if (window.track) window.track('intake_completed', {
+      exam_types: answers.examType || '',
+      has_account: answers.hasAccount || '',
+      has_med_director: answers.hasMedDirector || '',
+      has_api_key: answers.hasApiKey || '',
+      has_wordpress: answers.hasWordPress || '',
+      has_woo: answers.hasWoo || '',
+      has_subscriptions: answers.hasSubscriptions || '',
+      has_products: answers.hasProducts || '',
+    });
+  }, []);
+
+  // Track each guide step viewed
+  useEffect(() => {
+    if (window.track) window.track('guide_step_viewed', { step_index: activeStep });
+  }, [activeStep]);
+
+  useEffect(() => {
+    if (window.track && printing) window.track('clicked_print_guide');
+  }, [printing]);
+  // ─── END TRACKING ───
+
   const printAllSteps = useCallback(() => {
     setPrinting(true);
     setTimeout(() => {
@@ -925,7 +1061,7 @@ function GuideScreen({ answers, onRestart }) {
       <div style={{ borderRadius: 10, overflow: "hidden", marginBottom: 16, border: "1px solid " + C.border }}>
         <iframe src="https://www.youtube.com/embed/dKiUu-NwoLc?modestbranding=1&rel=0&showinfo=0&iv_load_policy=3" style={{ width: "100%", aspectRatio: "16/9", border: "none", display: "block" }} allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowFullScreen />
       </div>
-      <a href="https://github.com/tom-at-Quailiphy/qualiphy-woocommerce/releases/latest/download/qualiphy.zip" target="_blank" rel="noopener" style={{
+      <a href="https://github.com/tom-at-Quailiphy/qualiphy-woocommerce/releases/latest/download/qualiphy.zip" target="_blank" rel="noopener" onClick={() => { if (window.track) window.track('clicked_download_plugin'); }} style={{
         display: "inline-flex", alignItems: "center", gap: 8,
         padding: "11px 20px", borderRadius: 8, marginBottom: 16,
         background: C.accent, color: "#fff", fontFamily: "inherit",
@@ -1271,7 +1407,7 @@ function GuideScreen({ answers, onRestart }) {
                 Next: {steps[activeStep + 1].title} →
               </Btn>
             ) : (
-              <Btn onClick={() => window.open("https://app.qualiphy.me", "_blank")}>
+              <Btn onClick={() => { if (window.track) window.track('guide_completed'); window.open("https://app.qualiphy.me", "_blank"); }}>
                 Go to Qualiphy Dashboard →
               </Btn>
             )}
