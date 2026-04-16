@@ -99,6 +99,23 @@ window.QTRACK_CONFIG = {
     utm_campaign: params.get('utm_campaign') || '',
   };
 
+  // ─── Location capture ───
+  window._qtrack_geo = { city: '', region: '', country: '' };
+  try {
+    fetch('https://ipapi.co/json/')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        window._qtrack_geo = {
+          city: data.city || '',
+          region: data.region || '',
+          country: data.country_name || '',
+        };
+        // Fire location event to update the session row
+        if (window.track) window.track('location_resolved', window._qtrack_geo);
+      })
+      .catch(function() {});
+  } catch(e) {}
+
   // ─── Question timer ───
   window._qtrack_questionStart = null;
   window._qtrack_questionTimes = {};
@@ -133,6 +150,7 @@ window.QTRACK_CONFIG = {
       viewport: window.innerWidth + 'x' + window.innerHeight,
       path: window.location.pathname,
       utms: window._qtrack_utms,
+      geo: window._qtrack_geo,
       data: data || {},
     };
     try {
