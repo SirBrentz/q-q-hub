@@ -52,6 +52,8 @@ h1,h2,h3,h4 { font-family: var(--font-h); }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
 .dash-logout { font-family: var(--font-h); font-size: 12px; font-weight: 600; color: var(--text-dim); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
 .dash-logout:hover { color: var(--text); border-color: var(--text-dim); }
+.time-select { font-family: var(--font-h); font-size: 12px; font-weight: 600; color: var(--indigo); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 10px; cursor: pointer; outline: none; }
+.time-select:hover { border-color: var(--indigo); }
 
 .dash-body { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
@@ -122,6 +124,14 @@ tbody tr:hover { background: var(--surface); }
       <div><h1>Get Started Analytics</h1><span>Quidget Setup Flow Tracking</span></div>
     </div>
     <div class="dash-meta">
+      <select id="timeRange" class="time-select" onchange="render()">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+        <option value="180">Last 6 months</option>
+        <option value="365">Last 12 months</option>
+        <option value="all">All time</option>
+      </select>
       <span class="dash-live">Live — refreshes every 60s</span>
       <span id="lastUpdated"></span>
       <button class="dash-logout" id="logoutBtn">Sign Out</button>
@@ -170,7 +180,7 @@ tbody tr:hover { background: var(--surface); }
       <!-- Sessions over time -->
       <div class="chart-row">
         <div class="chart-card chart-card-full">
-          <h3>Sessions Over Time <span>(Last 30 days)</span></h3>
+          <h3>Sessions Over Time <span id="timelineLabel"></span></h3>
           <div class="chart-wrap"><canvas id="chartTimeline"></canvas></div>
         </div>
       </div>
@@ -264,7 +274,28 @@ setInterval(function() {
 
 /* ═══ RENDER ═══ */
 function render() {
-  var s = allSessions;
+  // Time range filter
+  var rangeVal = document.getElementById('timeRange').value;
+  var cutoff = null;
+  var timelineDays = 30;
+  var rangeLabel = 'All time';
+  if (rangeVal !== 'all') {
+    var days = parseInt(rangeVal);
+    cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+    timelineDays = days;
+    if (days === 7) rangeLabel = 'Last 7 days';
+    else if (days === 30) rangeLabel = 'Last 30 days';
+    else if (days === 90) rangeLabel = 'Last 90 days';
+    else if (days === 180) rangeLabel = 'Last 6 months';
+    else if (days === 365) rangeLabel = 'Last 12 months';
+  }
+
+  var s = allSessions.filter(function(r) {
+    if (!cutoff) return true;
+    var started = r['Started At'] ? new Date(r['Started At']) : null;
+    return started && started >= cutoff;
+  });
   var total = s.length;
 
   // Counts
@@ -338,7 +369,7 @@ function render() {
       + '<div class="funnel-pct">' + pct + '%</div></div>';
   });
   document.getElementById('funnel').innerHTML = funnelHtml;
-  document.getElementById('funnelPeriod').textContent = total + ' total sessions';
+  document.getElementById('funnelPeriod').textContent = total + ' sessions · ' + rangeLabel;
 
   // Exam types chart
   renderDoughnut('chartExam', examTypes, {
@@ -367,7 +398,8 @@ function render() {
   });
 
   // Timeline chart
-  renderTimeline('chartTimeline', dailyCounts);
+  document.getElementById('timelineLabel').textContent = rangeLabel;
+  renderTimeline('chartTimeline', dailyCounts, timelineDays);
 
   // Recent sessions table
   var recent = s.slice().sort(function(a, b) {
@@ -436,28 +468,49 @@ function renderBarFromPairs(id, pairs, color) {
   });
 }
 
-function renderTimeline(id, dailyCounts) {
+function renderTimeline(id, dailyCounts, numDays) {
   var days = [];
   var now = new Date();
-  for (var i = 29; i >= 0; i--) {
+  var maxDays = Math.min(numDays, 365);
+  for (var i = maxDays - 1; i >= 0; i--) {
     var d = new Date(now);
     d.setDate(d.getDate() - i);
     var key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
-    days.push({ key: key, label: (d.getMonth()+1) + '/' + d.getDate(), count: dailyCounts[key] || 0 });
+    var label = maxDays <= 30 ? (d.getMonth()+1) + '/' + d.getDate()
+      : maxDays <= 90 ? (d.getMonth()+1) + '/' + d.getDate()
+      : Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format(d);
+    days.push({ key: key, label: label, count: dailyCounts[key] || 0 });
+  }
+  // For long ranges, aggregate by week
+  var chartLabels, chartData;
+  if (maxDays > 90) {
+    var weeks = {};
+    days.forEach(function(d) {
+      var dt = new Date(d.key);
+      var weekStart = new Date(dt);
+      weekStart.setDate(weekStart.getDate() - weekStart.getDay());
+      var wk = Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' }).format(weekStart);
+      weeks[wk] = (weeks[wk] || 0) + d.count;
+    });
+    chartLabels = Object.keys(weeks);
+    chartData = Object.values(weeks);
+  } else {
+    chartLabels = days.map(function(d) { return d.label; });
+    chartData = days.map(function(d) { return d.count; });
   }
   if (charts[id]) charts[id].destroy();
   charts[id] = new Chart(document.getElementById(id), {
     type: 'line',
     data: {
-      labels: days.map(function(d) { return d.label; }),
+      labels: chartLabels,
       datasets: [{
-        data: days.map(function(d) { return d.count; }),
+        data: chartData,
         borderColor: '#4D3D71', backgroundColor: 'rgba(77,61,113,.08)',
-        fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3,
+        fill: true, tension: 0.3, borderWidth: 2, pointRadius: maxDays <= 30 ? 3 : maxDays <= 90 ? 2 : 0,
         pointBackgroundColor: '#4D3D71', pointBorderColor: '#fff', pointBorderWidth: 2,
       }]
     },
-    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { family: "'DM Sans'", size: 10 }, maxRotation: 0 }, grid: { display: false } }, y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: "'DM Sans'", size: 11 } }, grid: { color: '#f0edf5' } } } }
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { family: "'DM Sans'", size: 10 }, maxRotation: 0, maxTicksLimit: maxDays <= 30 ? 15 : maxDays <= 90 ? 12 : 10 }, grid: { display: false } }, y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: "'DM Sans'", size: 11 } }, grid: { color: '#f0edf5' } } } }
   });
 }
 
