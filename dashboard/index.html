@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Get Started Analytics — Quidget</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="../assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy: #141216; --indigo: #4D3D71; --indigo-hover: #725F9D;
+  --violet: #9F92BF; --lavender: #CEC8FE; --surface: #f8f6fb;
+  --white: #fff; --border: #E2E0E8; --text: #1B1B1B; --text-lt: #6B6578;
+  --text-dim: #9D96A8; --emerald: #059669; --emerald-soft: rgba(5,150,105,.08);
+  --amber: #d97706; --amber-soft: rgba(217,119,6,.08);
+  --blue: #2563eb; --blue-soft: rgba(37,99,235,.08);
+  --red: #dc2626; --red-soft: rgba(220,38,38,.08);
+  --font-h: 'Plus Jakarta Sans', sans-serif; --font-b: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-b); color: var(--text); background: #f4f2f7; min-height: 100vh; }
+h1,h2,h3,h4 { font-family: var(--font-h); }
+
+/* Password gate */
+.gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; background: var(--navy); }
+.gate-box { background: var(--white); border-radius: 16px; padding: 40px; max-width: 380px; width: 100%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,.2); }
+.gate-logo { width: 44px; height: 44px; background: var(--indigo); border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #fff; margin-bottom: 20px; }
+.gate-box h1 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+.gate-box p { font-size: 13px; color: var(--text-lt); margin-bottom: 20px; }
+.gate-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-family: var(--font-b); outline: none; transition: border-color .15s; }
+.gate-input:focus { border-color: var(--indigo); }
+.gate-btn { width: 100%; padding: 12px; border-radius: 10px; background: var(--indigo); color: #fff; font-family: var(--font-h); font-size: 14px; font-weight: 600; border: none; cursor: pointer; margin-top: 10px; transition: background .15s; }
+.gate-btn:hover { background: var(--indigo-hover); }
+.gate-err { font-size: 12px; color: var(--red); margin-top: 8px; display: none; }
+
+/* Dashboard layout */
+.dash { display: none; }
+.dash.active { display: block; }
+.dash-header { background: var(--white); border-bottom: 1px solid var(--border); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+.dash-title { display: flex; align-items: center; gap: 12px; }
+.dash-title-mark { width: 32px; height: 32px; background: var(--indigo); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; }
+.dash-title h1 { font-size: 16px; font-weight: 800; }
+.dash-title span { font-size: 12px; color: var(--text-dim); }
+.dash-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--text-dim); }
+.dash-live { display: inline-flex; align-items: center; gap: 6px; }
+.dash-live::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--emerald); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+.dash-logout { font-family: var(--font-h); font-size: 12px; font-weight: 600; color: var(--text-dim); background: none; border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+.dash-logout:hover { color: var(--text); border-color: var(--text-dim); }
+
+.dash-body { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* KPI cards */
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 24px; }
+.kpi { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-dim); margin-bottom: 6px; }
+.kpi-value { font-family: var(--font-h); font-size: 28px; font-weight: 800; color: var(--navy); letter-spacing: -.02em; }
+.kpi-sub { font-size: 12px; color: var(--text-lt); margin-top: 4px; }
+.kpi-highlight { border-left: 3px solid var(--indigo); }
+
+/* Chart cards */
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.chart-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+.chart-card-full { grid-column: 1 / -1; }
+.chart-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; }
+.chart-card h3 span { font-size: 11px; font-weight: 500; color: var(--text-dim); }
+.chart-wrap { position: relative; height: 240px; }
+
+/* Funnel */
+.funnel { display: flex; flex-direction: column; gap: 6px; }
+.funnel-row { display: flex; align-items: center; gap: 12px; }
+.funnel-label { width: 140px; font-size: 13px; font-weight: 500; color: var(--text-lt); text-align: right; flex-shrink: 0; }
+.funnel-bar-wrap { flex: 1; height: 32px; background: #f0edf5; border-radius: 6px; overflow: hidden; position: relative; }
+.funnel-bar { height: 100%; border-radius: 6px; transition: width .6s ease; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; }
+.funnel-bar span { font-family: var(--font-h); font-size: 12px; font-weight: 700; color: #fff; }
+.funnel-pct { width: 50px; font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-align: right; }
+
+/* Tables */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead th { text-align: left; font-family: var(--font-h); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--text-dim); padding: 8px 12px; border-bottom: 2px solid var(--border); }
+tbody td { padding: 10px 12px; border-bottom: 1px solid #f0edf5; color: var(--text-lt); }
+tbody tr:hover { background: var(--surface); }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+.badge-yes { background: var(--emerald-soft); color: var(--emerald); }
+.badge-no { background: var(--red-soft); color: var(--red); }
+.badge-gate { background: var(--amber-soft); color: var(--amber); }
+.badge-api { background: var(--blue-soft); color: var(--blue); }
+
+/* Loading */
+.loading { text-align: center; padding: 60px; color: var(--text-dim); font-size: 14px; }
+
+/* Responsive */
+@media (max-width: 900px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } .chart-row { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } .funnel-label { width: 80px; font-size: 11px; } .dash-meta { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- PASSWORD GATE -->
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <div class="gate-logo"><svg width="20" height="20" viewBox="0 0 800 800" fill="currentColor"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div>
+    <h1>Analytics Dashboard</h1>
+    <p>Enter the team password to continue.</p>
+    <input type="password" class="gate-input" id="gatePw" placeholder="Password" autofocus>
+    <button class="gate-btn" id="gateBtn">Sign In</button>
+    <div class="gate-err" id="gateErr">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+  <div class="dash-header">
+    <div class="dash-title">
+      <div class="dash-title-mark"><svg width="16" height="16" viewBox="0 0 800 800" fill="currentColor"><circle cx="420.1" cy="40.1" r="40.1"/><circle cx="207.9" cy="40.1" r="40.1"/><path d="M88.5,189.1l127.6,221.1c17,29.4,45.2,48.9,77.7,54.5v106.6c0,126.1,79.3,228.6,176.8,228.6,97.5,0,176.8-102.6,176.8-228.6v-127c45.3-9.2,79.4-49.3,79.4-97.3,0-54.8-44.5-99.3-99.3-99.3s-99.3,44.5-99.3,99.3c0,48,34.2,88.1,79.4,97.3v127c0,104.2-61.5,188.9-137.1,188.9-75.6,0-137.1-84.7-137.1-188.9v-106.6c32.5-5.7,60.7-25.1,77.7-54.5l127.6-221.1c20.4-35.3,20.4-77.4,0-112.6-20.4-35.3-56.8-56.3-97.5-56.3v39.7c26.3,0,49.9,13.6,63.1,36.4s13.2,50.1,0,72.9l-127.6,221.1c-13.2,22.8-36.8,36.4-63.1,36.4-26.3,0-49.9-13.6-63.1-36.4l-127.6-221.1c-13.2-22.8-13.2-50.1,0-72.9,13.2-22.8,36.8-36.4,63.1-36.4V20.2c-40.7,0-77.2,21-97.5,56.3-20.4,35.3-20.4,77.4,0,112.6Z"/></svg></div>
+      <div><h1>Get Started Analytics</h1><span>Quidget Setup Flow Tracking</span></div>
+    </div>
+    <div class="dash-meta">
+      <span class="dash-live">Live — refreshes every 60s</span>
+      <span id="lastUpdated"></span>
+      <button class="dash-logout" id="logoutBtn">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <div class="loading" id="loadingMsg">Loading data...</div>
+    <div id="dashContent" style="display:none">
+
+      <!-- KPIs -->
+      <div class="kpi-grid" id="kpis"></div>
+
+      <!-- Funnel -->
+      <div class="chart-row">
+        <div class="chart-card chart-card-full">
+          <h3>Conversion Funnel <span id="funnelPeriod"></span></h3>
+          <div class="funnel" id="funnel"></div>
+        </div>
+      </div>
+
+      <!-- Charts row 1 -->
+      <div class="chart-row">
+        <div class="chart-card">
+          <h3>Exam Types</h3>
+          <div class="chart-wrap"><canvas id="chartExam"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Friction Points (Gates Hit)</h3>
+          <div class="chart-wrap"><canvas id="chartGates"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Charts row 2 -->
+      <div class="chart-row">
+        <div class="chart-card">
+          <h3>Top Locations</h3>
+          <div class="chart-wrap"><canvas id="chartLocations"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Devices</h3>
+          <div class="chart-wrap"><canvas id="chartDevices"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Sessions over time -->
+      <div class="chart-row">
+        <div class="chart-card chart-card-full">
+          <h3>Sessions Over Time <span>(Last 30 days)</span></h3>
+          <div class="chart-wrap"><canvas id="chartTimeline"></canvas></div>
+        </div>
+      </div>
+
+      <!-- Recent sessions -->
+      <div class="chart-row">
+        <div class="chart-card chart-card-full">
+          <h3>Recent Sessions <span id="sessionCount"></span></h3>
+          <div class="tbl-wrap">
+            <table>
+              <thead><tr>
+                <th>When</th><th>Location</th><th>Device</th><th>Exam Types</th>
+                <th>Intake</th><th>Guide</th><th>Plugin</th><th>Gates</th><th>Duration</th>
+              </tr></thead>
+              <tbody id="recentTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ CONFIG ═══ */
+var DASH_PASSWORD = "quidget2026";
+var DATA_URL = "https://script.google.com/macros/s/AKfycbzGh0miR8ERrU2gK-NVhwaovEI6CiGp7v6FOHXopoSpEgLuEgrmf0X2YhEqLz1c12Lw/exec";
+var DATA_SECRET = "qdgt-7k9m-trk-ax42-2026";
+var REFRESH_SEC = 60;
+
+/* ═══ AUTH ═══ */
+var gate = document.getElementById('gate');
+var dash = document.getElementById('dash');
+var gatePw = document.getElementById('gatePw');
+var gateBtn = document.getElementById('gateBtn');
+var gateErr = document.getElementById('gateErr');
+var logoutBtn = document.getElementById('logoutBtn');
+
+function unlock() {
+  gate.style.display = 'none';
+  dash.classList.add('active');
+  localStorage.setItem('qdash_auth', '1');
+  loadData();
+}
+
+if (localStorage.getItem('qdash_auth') === '1') {
+  unlock();
+}
+
+gateBtn.addEventListener('click', function() {
+  if (gatePw.value === DASH_PASSWORD) { unlock(); }
+  else { gateErr.style.display = 'block'; gatePw.value = ''; gatePw.focus(); }
+});
+gatePw.addEventListener('keydown', function(e) { if (e.key === 'Enter') gateBtn.click(); });
+logoutBtn.addEventListener('click', function() {
+  localStorage.removeItem('qdash_auth');
+  location.reload();
+});
+
+/* ═══ DATA ═══ */
+var charts = {};
+var allSessions = [];
+
+function loadData() {
+  fetch(DATA_URL + '?action=data&secret=' + DATA_SECRET)
+    .then(function(r) { return r.text(); })
+    .then(function(txt) {
+      // Apps Script redirects return HTML sometimes; extract JSON
+      try {
+        var data = JSON.parse(txt);
+        allSessions = data.sessions || [];
+        render();
+        document.getElementById('loadingMsg').style.display = 'none';
+        document.getElementById('dashContent').style.display = 'block';
+        document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+      } catch(e) {
+        document.getElementById('loadingMsg').textContent = 'Error loading data. Retrying...';
+        setTimeout(loadData, 5000);
+      }
+    })
+    .catch(function() {
+      document.getElementById('loadingMsg').textContent = 'Unable to reach data source. Retrying...';
+      setTimeout(loadData, 5000);
+    });
+}
+
+setInterval(function() {
+  if (dash.classList.contains('active')) loadData();
+}, REFRESH_SEC * 1000);
+
+/* ═══ RENDER ═══ */
+function render() {
+  var s = allSessions;
+  var total = s.length;
+
+  // Counts
+  var intakeCompleted = 0, guideCompleted = 0, downloaded = 0, bookedDemo = 0, apiQs = 0;
+  var examTypes = {}, gates = {}, devices = {}, locations = {}, utmSources = {};
+  var totalDur = 0, durCount = 0;
+  var dailyCounts = {};
+
+  s.forEach(function(r) {
+    if (r['Intake Completed'] === 'Yes') intakeCompleted++;
+    if (r['Guide Completed'] === 'Yes') guideCompleted++;
+    if (r['Downloaded Plugin'] === 'Yes') downloaded++;
+    if (r['Booked Demo'] === 'Yes') bookedDemo++;
+    if (r['API Quickstart']) apiQs++;
+
+    var et = (r['Exam Types'] || '').toString();
+    if (et) et.split(',').forEach(function(t) { t = t.trim(); if (t) examTypes[t] = (examTypes[t]||0)+1; });
+
+    var g = (r['Gates Hit'] || '').toString();
+    if (g) g.split(',').forEach(function(gt) { gt = gt.trim(); if (gt) gates[gt] = (gates[gt]||0)+1; });
+
+    var dev = r['Device'] || 'Unknown';
+    devices[dev] = (devices[dev]||0)+1;
+
+    var st = r['State'] || '';
+    var ct = r['City'] || '';
+    if (st) {
+      var loc = ct ? ct + ', ' + st : st;
+      locations[loc] = (locations[loc]||0)+1;
+    }
+
+    var dur = parseInt(r['Duration (sec)']) || 0;
+    if (dur > 0) { totalDur += dur; durCount++; }
+
+    var started = r['Started At'];
+    if (started) {
+      var d = new Date(started);
+      var key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+      dailyCounts[key] = (dailyCounts[key]||0)+1;
+    }
+  });
+
+  var avgDur = durCount > 0 ? Math.round(totalDur / durCount) : 0;
+  var avgMin = Math.floor(avgDur / 60);
+  var avgSec = avgDur % 60;
+  var intakeRate = total > 0 ? Math.round(intakeCompleted / total * 100) : 0;
+  var guideRate = intakeCompleted > 0 ? Math.round(guideCompleted / intakeCompleted * 100) : 0;
+
+  // KPIs
+  document.getElementById('kpis').innerHTML =
+    kpi('Total Sessions', total, '', true) +
+    kpi('Intake Completed', intakeCompleted, intakeRate + '% of sessions') +
+    kpi('Guide Completed', guideCompleted, guideRate + '% of intake') +
+    kpi('Plugin Downloads', downloaded, '') +
+    kpi('Avg Duration', avgMin + 'm ' + avgSec + 's', '');
+
+  // Funnel
+  var funnelSteps = [
+    { label: 'Sessions', value: total, color: '#4D3D71' },
+    { label: 'Intake Done', value: intakeCompleted, color: '#725F9D' },
+    { label: 'Guide Done', value: guideCompleted, color: '#9F92BF' },
+    { label: 'Downloaded', value: downloaded, color: '#059669' },
+  ];
+  var funnelHtml = '';
+  funnelSteps.forEach(function(step) {
+    var pct = total > 0 ? Math.round(step.value / total * 100) : 0;
+    var width = total > 0 ? Math.max(pct, 3) : 0;
+    funnelHtml += '<div class="funnel-row">'
+      + '<div class="funnel-label">' + step.label + '</div>'
+      + '<div class="funnel-bar-wrap"><div class="funnel-bar" style="width:' + width + '%;background:' + step.color + '"><span>' + step.value + '</span></div></div>'
+      + '<div class="funnel-pct">' + pct + '%</div></div>';
+  });
+  document.getElementById('funnel').innerHTML = funnelHtml;
+  document.getElementById('funnelPeriod').textContent = total + ' total sessions';
+
+  // Exam types chart
+  renderDoughnut('chartExam', examTypes, {
+    gfe: { label: 'Good Faith Exam', color: '#4D3D71' },
+    rx: { label: 'Rx Consultation', color: '#059669' },
+  });
+
+  // Gates chart
+  renderBar('chartGates', gates, '#d97706', {
+    hasAccount: 'No Account',
+    hasMedDirector: 'No Med Director',
+    hasApiKey: 'No API Key',
+    hasWordPress: 'Not WordPress',
+  });
+
+  // Locations chart
+  var topLoc = sortObj(locations).slice(0, 8);
+  renderBarFromPairs('chartLocations', topLoc, '#4D3D71');
+
+  // Devices chart
+  renderDoughnut('chartDevices', devices, {
+    Desktop: { label: 'Desktop', color: '#4D3D71' },
+    Mobile: { label: 'Mobile', color: '#059669' },
+    Tablet: { label: 'Tablet', color: '#d97706' },
+    Unknown: { label: 'Unknown', color: '#9D96A8' },
+  });
+
+  // Timeline chart
+  renderTimeline('chartTimeline', dailyCounts);
+
+  // Recent sessions table
+  var recent = s.slice().sort(function(a, b) {
+    return new Date(b['Started At']) - new Date(a['Started At']);
+  }).slice(0, 25);
+  document.getElementById('sessionCount').textContent = total + ' total';
+
+  var tbody = '';
+  recent.forEach(function(r) {
+    var when = r['Started At'] ? timeAgo(new Date(r['Started At'])) : '—';
+    var loc = [r['City'], r['State']].filter(Boolean).join(', ') || '—';
+    var dev = r['Device'] || '—';
+    var et = (r['Exam Types'] || '').toString().replace('gfe', 'GFE').replace('rx', 'Rx').replace(',', ', ') || '—';
+    var intake = r['Intake Completed'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : '<span class="badge badge-no">No</span>';
+    var guide = r['Guide Completed'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : r['API Quickstart'] ? '<span class="badge badge-api">API</span>' : '<span class="badge badge-no">No</span>';
+    var plugin = r['Downloaded Plugin'] === 'Yes' ? '<span class="badge badge-yes">Yes</span>' : '—';
+    var gateStr = r['Gates Hit'] ? '<span class="badge badge-gate">' + r['Gates Hit'].toString().replace(/,/g, '</span> <span class="badge badge-gate">') + '</span>' : '—';
+    var dur = parseInt(r['Duration (sec)']) || 0;
+    var durStr = dur > 0 ? Math.floor(dur/60) + 'm ' + (dur%60) + 's' : '—';
+
+    tbody += '<tr><td>' + when + '</td><td>' + loc + '</td><td>' + dev + '</td><td>' + et + '</td>'
+      + '<td>' + intake + '</td><td>' + guide + '</td><td>' + plugin + '</td><td>' + gateStr + '</td><td>' + durStr + '</td></tr>';
+  });
+  document.getElementById('recentTable').innerHTML = tbody || '<tr><td colspan="9" style="text-align:center;color:var(--text-dim)">No sessions yet</td></tr>';
+}
+
+/* ═══ CHART HELPERS ═══ */
+function renderDoughnut(id, data, mapping) {
+  var labels = [], values = [], colors = [];
+  Object.keys(data).forEach(function(k) {
+    var m = mapping[k] || { label: k, color: '#9D96A8' };
+    labels.push(m.label);
+    values.push(data[k]);
+    colors.push(m.color);
+  });
+  if (charts[id]) charts[id].destroy();
+  if (labels.length === 0) { labels = ['No data']; values = [1]; colors = ['#E2E0E8']; }
+  charts[id] = new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: { labels: labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 0, hoverOffset: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { padding: 16, usePointStyle: true, pointStyle: 'circle', font: { family: "'DM Sans'", size: 12 } } } } }
+  });
+}
+
+function renderBar(id, data, color, labelMap) {
+  var sorted = sortObj(data);
+  var labels = sorted.map(function(p) { return (labelMap && labelMap[p[0]]) || p[0]; });
+  var values = sorted.map(function(p) { return p[1]; });
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ data: values, backgroundColor: color, borderRadius: 4, barThickness: 28 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { font: { family: "'DM Sans'", size: 11 } }, grid: { color: '#f0edf5' } }, y: { ticks: { font: { family: "'DM Sans'", size: 12 } }, grid: { display: false } } } }
+  });
+}
+
+function renderBarFromPairs(id, pairs, color) {
+  var labels = pairs.map(function(p) { return p[0]; });
+  var values = pairs.map(function(p) { return p[1]; });
+  if (charts[id]) charts[id].destroy();
+  if (labels.length === 0) { labels = ['No data']; values = [0]; }
+  charts[id] = new Chart(document.getElementById(id), {
+    type: 'bar',
+    data: { labels: labels, datasets: [{ data: values, backgroundColor: color, borderRadius: 4, barThickness: 24 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { font: { family: "'DM Sans'", size: 11 } }, grid: { color: '#f0edf5' } }, y: { ticks: { font: { family: "'DM Sans'", size: 11 } }, grid: { display: false } } } }
+  });
+}
+
+function renderTimeline(id, dailyCounts) {
+  var days = [];
+  var now = new Date();
+  for (var i = 29; i >= 0; i--) {
+    var d = new Date(now);
+    d.setDate(d.getDate() - i);
+    var key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+    days.push({ key: key, label: (d.getMonth()+1) + '/' + d.getDate(), count: dailyCounts[key] || 0 });
+  }
+  if (charts[id]) charts[id].destroy();
+  charts[id] = new Chart(document.getElementById(id), {
+    type: 'line',
+    data: {
+      labels: days.map(function(d) { return d.label; }),
+      datasets: [{
+        data: days.map(function(d) { return d.count; }),
+        borderColor: '#4D3D71', backgroundColor: 'rgba(77,61,113,.08)',
+        fill: true, tension: 0.3, borderWidth: 2, pointRadius: 3,
+        pointBackgroundColor: '#4D3D71', pointBorderColor: '#fff', pointBorderWidth: 2,
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { family: "'DM Sans'", size: 10 }, maxRotation: 0 }, grid: { display: false } }, y: { beginAtZero: true, ticks: { stepSize: 1, font: { family: "'DM Sans'", size: 11 } }, grid: { color: '#f0edf5' } } } }
+  });
+}
+
+/* ═══ UTILS ═══ */
+function kpi(label, value, sub, highlight) {
+  return '<div class="kpi' + (highlight ? ' kpi-highlight' : '') + '">'
+    + '<div class="kpi-label">' + label + '</div>'
+    + '<div class="kpi-value">' + value + '</div>'
+    + (sub ? '<div class="kpi-sub">' + sub + '</div>' : '')
+    + '</div>';
+}
+
+function sortObj(obj) {
+  return Object.keys(obj).map(function(k) { return [k, obj[k]]; }).sort(function(a, b) { return b[1] - a[1]; });
+}
+
+function timeAgo(date) {
+  var sec = Math.floor((new Date() - date) / 1000);
+  if (sec < 60) return 'Just now';
+  if (sec < 3600) return Math.floor(sec / 60) + 'm ago';
+  if (sec < 86400) return Math.floor(sec / 3600) + 'h ago';
+  if (sec < 604800) return Math.floor(sec / 86400) + 'd ago';
+  return date.toLocaleDateString();
+}
+</script>
+</body>
+</html>
