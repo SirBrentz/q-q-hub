@@ -180,7 +180,9 @@
   gap: 64px;
   align-items: center;
 }
-.q-hero h1 { color: #fff; margin-bottom: 18px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.q-hero h1 { color: #fff; margin-bottom: 12px; font-size: clamp(1.8rem, 3vw, 2.4rem); }
+.q-hero h1 em { font-style: normal; color: #CEC8FE; }
+.q-hero .q-hero-sub { color: rgba(255,255,255,.85); font-size: 1.1rem; line-height: 1.5; margin-bottom: 16px; font-weight: 500; }
 .q-hero p { color: rgba(255,255,255,.65); max-width: 480px; font-size: 1.05rem; margin-bottom: 28px; }
 .q-hero .badge-white { margin-bottom: 20px; }
 .q-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
